@@ -1,4 +1,5 @@
-﻿using Sigv.Domain;
+﻿using Sigv.Application.Util;
+using Sigv.Domain;
 using System;
 
 namespace Sigv.Application
@@ -10,8 +11,8 @@ namespace Sigv.Application
             try
             {
                 //Desencripta a senha
-                //var password = AESEncrytDecry.DecryptStringAES(senha);
-                var password = senha;
+                var password = AESEncrytDecry.DecryptStringAES(senha);
+                //var password = senha;
 
                 return new UsuarioApp().Retornar(login, password);
             }

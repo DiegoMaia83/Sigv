@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+@if (ViewBag.MensagemRetorno != null)
+{
+    @ViewBag.MensagemRetorno.Mensagem
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sis Publicidade</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/LoginPage.css">
+    <script src="~/Content/scripts/jquery-3.6.1.js"></script>
+
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="container-label">Login Page <span></span></div>
+
+            <div class="container-form">
+                <form class="form-signin" method="post" action="/Login/Index">
+                    @Html.AntiForgeryToken()
+
+                    <label for="email">E-mail</label>
+                    <input type="text" id="login" name="login" placeholder="Digite o seu e-mail" autofocus />
+
+                    <label for="password">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite a sua senha" />
+
+                    <div class="change-password">
+                        Para alterar a senha <a href="">clique aqui</a>
+                    </div>
+
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="~/Content/scripts/crypto-js.js"></script>
+<script>
+    $(function () {
+
+        $(".form-signin").submit(function () {
+
+            var key = CryptoJS.enc.Utf8.parse("ydvMmMc3I7HOje3i");
+            var iv = CryptoJS.enc.Utf8.parse("wp4zjuwGZwh593An");
+
+            //O Serverside tem uma classe para decodificar
+            var encryptedPassword = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($("#senha").val()), key,
+                {
+                    keySize: 128 / 8,
+                    iv: iv,
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                });
+
+            $("#senha").val(encryptedPassword);
+
+            // console.log($("#senha").val());
+            // return false;
+
+
+            $("#senha").attr('readonly', 'readonly');
+
+            $("#btnSubmit").text("Aguarde...");
+        });
+    })
+</script>

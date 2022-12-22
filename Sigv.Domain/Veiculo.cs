@@ -32,10 +32,10 @@ namespace Sigv.Domain
         public virtual VeiculoEspecie Condicao { get; set; }
 
         [ForeignKey("EspecieId")]
-        public virtual VeiculoCombustivel Especie { get; set; }
+        public virtual VeiculoEspecie Especie { get; set; }
 
         [ForeignKey("StatusId")]
-        public virtual VeiculoCombustivel Status { get; set; }
+        public virtual VeiculoStatus Status { get; set; }
     }
 
     [Table("veiculos_combustivel")]

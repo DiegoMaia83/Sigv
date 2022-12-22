@@ -73,6 +73,39 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+
+        // Ocorrências //
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/veiculo-ocorrencia/listar")]
+        public IEnumerable<VeiculoOcorrencia> ListarOcorrencias()
+        {
+            try
+            {
+                return _veiculoApp.ListarOcorrencias();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/veiculo-ocorrencia/salvar")]
+        public int SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
+        {
+            try
+            {
+                return _veiculoApp.SalvarOcorrencia(ocorrencia);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         [Authorize]
         [HttpGet]
         [Route("api/veiculo/listar-combustiveis")]

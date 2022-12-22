@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: '/Veiculo/ListarVeiculos',
+            method: 'get',
+            success: function (data) {
+                $('#divListarVeiculos').html(data);
+            }
+        });
+
+    });
+
+</script>
+
+<h5>Veículos</h5>
+
+<div id="divListarVeiculos">
+
+</div>
+

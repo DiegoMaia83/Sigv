@@ -3,7 +3,6 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 [assembly: OwinStartup(typeof(Sigv.ApiFullOwin.Startup))]

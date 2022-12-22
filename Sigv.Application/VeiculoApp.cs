@@ -77,6 +77,44 @@ namespace Sigv.Application
         }
 
 
+        // Ocorrências //
+
+        public IEnumerable<VeiculoOcorrencia> ListarOcorrencias()
+        {
+            try
+            {
+                using (var ocorrencias = new VeiculoOcorrenciaRepositorio())
+                {
+                    return ocorrencias.GetAll().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
+        {
+            try
+            {
+                using (var ocorrencias = new VeiculoOcorrenciaRepositorio())
+                {
+                    ocorrencias.Adicionar(ocorrencia);
+                    ocorrencias.SalvarTodos();
+
+                    return ocorrencia.OcorrenciaId;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
+
         public IEnumerable<VeiculoCombustivel> ListarCombustiveis()
         {
             try
