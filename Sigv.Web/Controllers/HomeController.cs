@@ -9,7 +9,6 @@ namespace Sigv.Web.Controllers
 {
     public class HomeController : Controller
     {
-        [Filtro(Roles = "4")]
         public ActionResult Index()
         {
             return View();

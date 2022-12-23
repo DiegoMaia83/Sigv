@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Sigv.Domain.Permissao>
+
+@{
+    Layout = null;
+}
+
+<h2>_ListarPermissoes</h2>
+
+<table class="table">
+
+    @foreach (var permissao in Model)
+    {
+        <tr>
+            <td>@permissao.PermissaoId.ToString("0000")</td>
+            <td>@permissao.Descricao</td>
+
+            <td>
+                <div class="form-check form-switch">
+
+                    <input class="form-check-input" type="checkbox" @(permissao.Grupo.Where(x => x.GrupoId == 5).FirstOrDefault() != null ? "checked" : "") onchange="atualizaPermissaoGrupo({ Id: @permissao.Grupo.Where(x => x.GrupoId == 5).Select(x => x.Id).FirstOrDefault(), PermissaoId: @permissao.PermissaoId, GrupoId: 5, Check: $(this).is(':checked') ? true : false })">
+                    <label class="form-check-label">Desenvolvedor</label>
+                </div>
+            </td>
+
+            <td>
+                <div class="form-check form-switch">
+
+                    <input class="form-check-input" type="checkbox" @(permissao.Grupo.Where(x => x.GrupoId == 4).FirstOrDefault() != null ? "checked" : "") onchange="atualizaPermissaoGrupo({ Id: @permissao.Grupo.Where(x => x.GrupoId == 4).Select(x => x.Id).FirstOrDefault(), PermissaoId: @permissao.PermissaoId, GrupoId: 4, Check: $(this).is(':checked') ? true : false })">
+                    <label class="form-check-label">Administrador</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" @(permissao.Grupo.Where(x => x.GrupoId == 3).FirstOrDefault() != null ? "checked" : "") onchange="atualizaPermissaoGrupo({ Id: @permissao.Grupo.Where(x => x.GrupoId == 3).Select(x => x.Id).FirstOrDefault(), PermissaoId: @permissao.PermissaoId, GrupoId: 3, Check: $(this).is(':checked') ? true : false })">
+                    <label class="form-check-label">Gerente</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" @(permissao.Grupo.Where(x => x.GrupoId == 2).FirstOrDefault() != null ? "checked" : "") onchange="atualizaPermissaoGrupo({ Id: @permissao.Grupo.Where(x => x.GrupoId == 2).Select(x => x.Id).FirstOrDefault(), PermissaoId: @permissao.PermissaoId, GrupoId: 2, Check: $(this).is(':checked') ? true : false })">
+                    <label class="form-check-label">Editor</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" @(permissao.Grupo.Where(x => x.GrupoId == 1).FirstOrDefault() != null ? "checked" : "") onchange="atualizaPermissaoGrupo({ Id: @permissao.Grupo.Where(x => x.GrupoId == 1).Select(x => x.Id).FirstOrDefault(), PermissaoId: @permissao.PermissaoId, GrupoId: 1, Check: $(this).is(':checked') ? true : false })">
+                    <label class="form-check-label">Comum</label>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

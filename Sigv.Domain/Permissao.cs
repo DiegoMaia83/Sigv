@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sigv.Domain
@@ -9,5 +11,7 @@ namespace Sigv.Domain
         [Key]
         public int PermissaoId { get; set; }
         public string Descricao { get; set; }
+
+        public virtual ICollection<PermissaoGrupo> Grupo { get; set; }
     }
 }

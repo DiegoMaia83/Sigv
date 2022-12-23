@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Permissoes";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        listarPermissoes();
+
+    });
+
+    var listarPermissoes = function () {
+
+        $.ajax({
+            url: "/Admin/ListarPermissoes",
+            method: "get",
+            success: function (data) {
+                $("#divListaPermissoes").html(data);
+            }
+        });
+
+    };
+
+</script>
+
+<h2>Permissoes</h2>
+
+<div id="divListaPermissoes">
+
+</div>
+

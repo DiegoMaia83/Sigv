@@ -107,6 +107,7 @@
     <Compile Include="App\TokenCookie.cs" />
     <Compile Include="App\UsuarioLogado.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\VeiculoController.cs" />
@@ -128,6 +129,8 @@
     <Content Include="Views\Veiculo\Home.cshtml" />
     <Content Include="Views\Veiculo\_ListarVeiculos.cshtml" />
     <Content Include="Views\Login\_AccessDenied.cshtml" />
+    <Content Include="Views\Admin\Permissoes.cshtml" />
+    <Content Include="Views\Admin\_ListarPermissoes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

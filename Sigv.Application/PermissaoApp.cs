@@ -12,7 +12,7 @@ namespace Sigv.Application
 {
     public class PermissaoApp
     {
-        public List<Permissao> Listar()
+        public List<Permissao> ListarPermissoes()
         {
             try
             {

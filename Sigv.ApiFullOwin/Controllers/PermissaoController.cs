@@ -15,12 +15,12 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [Authorize]
         [HttpGet]
-        [Route("api/permissao/listar")]
-        public List<Permissao> Listar()
+        [Route("api/permissao/listar-permissoes")]
+        public List<Permissao> ListarPermissoes()
         {
             try
             {
-                return _permissaoApp.Listar();
+                return _permissaoApp.ListarPermissoes();
             }
             catch (Exception ex)
             {
@@ -28,6 +28,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/permissao/listar-permissoes-usuario")]
         public string[] ListarPermissoesUsuario(string username)
