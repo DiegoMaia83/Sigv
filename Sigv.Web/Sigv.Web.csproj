@@ -99,6 +99,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\ConfigProvider.cs" />
     <Compile Include="App\MensagemApi.cs" />
     <Compile Include="App\MensagemRetorno.cs" />
     <Compile Include="App\SessionCookie.cs" />
@@ -126,6 +127,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Veiculo\Home.cshtml" />
     <Content Include="Views\Veiculo\_ListarVeiculos.cshtml" />
+    <Content Include="Views\Login\_AccessDenied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

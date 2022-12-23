@@ -1,5 +1,6 @@
 ﻿using Sigv.Web.App;
 using Sigv.Web.Services;
+using System.EnterpriseServices;
 using System.Web.Mvc;
 
 namespace Sigv.Web.Controllers
@@ -35,6 +36,11 @@ namespace Sigv.Web.Controllers
             TokenCookie.Logoff();
 
             return RedirectToAction("Index", "Login");
+        }
+
+        public ActionResult AccessDenied()
+        {
+            return View("_AccessDenied");
         }
     }
 }

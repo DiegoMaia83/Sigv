@@ -35,16 +35,16 @@
 <table width="100%">
 
     <tr class="head-veiculo">
-        <td>Veículo Id</td>
-        <td>Marca</td>
-        <td>Ano</td>
-        <td>Placa</td>
-        <td>Chassi</td>
-        <td>Cor</td>
-        <td>Combustível</td>
-        <td>Espécie</td>
-        <td>Condição</td>
-        <td>Status</td>
+        <td class="row-veiculo-1">Veículo Id</td>
+        <td class="row-veiculo-1">Marca</td>
+        <td class="row-veiculo-2">Ano</td>
+        <td class="row-veiculo-1">Placa</td>
+        <td class="row-veiculo-3">Chassi</td>
+        <td class="row-veiculo-3">Cor</td>
+        <td class="row-veiculo-3">Combustível</td>
+        <td class="row-veiculo-3">Espécie</td>
+        <td class="row-veiculo-2">Condição</td>
+        <td class="row-veiculo-2">Status</td>
     </tr>
 
     <tbody>
@@ -53,7 +53,7 @@
             <tr class="row-veiculo">
                 <td class="row-veiculo-1">@veiculo.VeiculoId.ToString("0000")</td>
                 <td class="row-veiculo-1">@veiculo.Marca @veiculo.Modelo</td>
-                <td class="row-veiculo-1">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
+                <td class="row-veiculo-2">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
                 <td class="row-veiculo-1">@veiculo.Placa</td>
                 <td class="row-veiculo-3">@veiculo.Chassi</td>
                 <td class="row-veiculo-3">Amarelo</td>

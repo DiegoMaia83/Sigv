@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Security;
 
 namespace Sigv.Web.Services
 {
@@ -119,6 +120,7 @@ namespace Sigv.Web.Services
                     if (response.IsSuccessStatusCode)
                     {
                         var usuario = JsonConvert.DeserializeObject<UsuarioLogado>(response.Content.ReadAsStringAsync().Result);
+                        FormsAuthentication.SetAuthCookie(usuario.Login, false);
                         SessionCookie.SetCookie(usuario);
                         return new MensagemRetorno { Sucesso = true, Mensagem = "Login efetuado com sucesso!" };
                     }

@@ -9,6 +9,8 @@ namespace Sigv.Domain
     {
         [Key]
         public int GrupoId { get; set; }
-        public string Nome { get; set; }        
+        public string Nome { get; set; }
+
+        public virtual ICollection<PermissaoGrupo> PermissaoGrupo { get; set; }
     }
 }

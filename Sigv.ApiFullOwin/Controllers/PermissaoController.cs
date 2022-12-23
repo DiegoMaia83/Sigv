@@ -27,5 +27,19 @@ namespace Sigv.ApiFullOwin.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        [Route("api/permissao/listar-permissoes-usuario")]
+        public string[] ListarPermissoesUsuario(string username)
+        {
+            try
+            {
+                return _permissaoApp.ListarPermissoesUsuario(username);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

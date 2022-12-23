@@ -27,6 +27,27 @@ namespace Sigv.Application
             }
         }
 
+        // Retorna um array com as permissoes do usuário para utilizar nos Roles
+        public string[] ListarPermissoesUsuario(string username)
+        {
+            try
+            {
+                using (var permissoes = new UsuarioRepositorio())
+                {
+                    var listapermissoes = permissoes.GetAll()
+                        .Where(x => x.Login == username)
+                        .FirstOrDefault()
+                        .Grupo.PermissaoGrupo.Select(x => x.PermissaoId.ToString()).ToList();
+
+                    return listapermissoes.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static bool VerificaPermissao(int permissaoId)
         {
             ClaimsPrincipal currentPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
