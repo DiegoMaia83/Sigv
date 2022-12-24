@@ -27,6 +27,44 @@ namespace Sigv.Application
             }
         }
 
+        public PermissaoGrupo InserirPermissaoGrupo(PermissaoGrupo permissao)
+        {
+            try
+            {
+                using (var permissoes = new PermissaoGrupoRepositorio())
+                {
+                    permissoes.Adicionar(permissao);
+                    permissoes.SalvarTodos();
+
+                    return permissao;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public PermissaoGrupo RemoverPermissaoGrupo(PermissaoGrupo permissao)
+        {
+            try
+            {
+                using (var permissoes = new PermissaoGrupoRepositorio())
+                {
+                    var permissaoDb = permissoes.GetAll().Where(x => x.Id == permissao.Id).FirstOrDefault();
+
+                    permissoes.Excluir(permissaoDb);
+                    permissoes.SalvarTodos();
+
+                    return permissao;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         // Retorna um array com as permissoes do usuário para utilizar nos Roles
         public string[] ListarPermissoesUsuario(string username)
         {

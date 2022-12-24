@@ -29,6 +29,36 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
         [Authorize]
+        [HttpPost]
+        [Route("api/permissao/inserir-permissao-grupo")]
+        public PermissaoGrupo InserirPermissaoGrupo(PermissaoGrupo permissao)
+        {
+            try
+            {
+                return _permissaoApp.InserirPermissaoGrupo(permissao);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/permissao/remover-permissao-grupo")]
+        public PermissaoGrupo RemoverPermissaoGrupo(PermissaoGrupo permissao)
+        {
+            try
+            {
+                return _permissaoApp.RemoverPermissaoGrupo(permissao);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
         [HttpGet]
         [Route("api/permissao/listar-permissoes-usuario")]
         public string[] ListarPermissoesUsuario(string username)

@@ -17,15 +17,71 @@
             url: "/Admin/ListarPermissoes",
             method: "get",
             success: function (data) {
+
+                if (data.Sucesso == false) {
+                    $("#divListaPermissoes").html('<span><i class="fas fa-ban small"></i> ' + data.Mensagem + '</span>');
+                    return false;
+                };
+
                 $("#divListaPermissoes").html(data);
             }
         });
 
     };
 
+    var atualizaPermissaoGrupo = function (permissao) {
+
+        if (permissao.Check) {
+            inserirPermissaoGrupo(permissao);
+        }
+        else {
+            removerPermissaoGrupo(permissao);
+        }
+    }
+
+    var inserirPermissaoGrupo = function (permissao) {
+
+        $.ajax({
+            url: "/Admin/InserirPermissaoGrupo",
+            method: "post",
+            data: permissao,
+            success: function (data) {
+
+                if (!data.Sucesso) {
+                    callAlertDanger("#server-response", data.Mensagem, function () {
+                        $("#server-response").hide("normal");
+                    });
+                };
+
+                listarPermissoes();
+            }
+        })
+
+    }
+
+    var removerPermissaoGrupo = function (permissao) {
+
+        $.ajax({
+            url: "/Admin/RemoverPermissaoGrupo",
+            method: "post",
+            data: permissao,
+            success: function (data) {
+
+                if (!data.Sucesso) {
+                    callAlertDanger("#server-response", data.Mensagem, function () {
+                        $("#server-response").hide("normal");
+                    });
+                };
+
+                listarPermissoes();
+            }
+        })
+
+    }
+
 </script>
 
-<h2>Permissoes</h2>
+<h5>Permissões</h5>
 
 <div id="divListaPermissoes">
 

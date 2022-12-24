@@ -3,6 +3,15 @@
 }
 
 
+.form-switch .form-check-input {
+    border-radius: 2px !important;
+}
+
+.form-check-input:checked {
+    background-color: #778899 !important;
+    border-color: #778899 !important;
+}
+
 @media screen and (max-width: 1280px) {
     .row-veiculo-3 {
         display: none;
