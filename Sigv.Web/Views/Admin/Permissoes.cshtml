@@ -47,10 +47,17 @@
             data: permissao,
             success: function (data) {
 
-                if (!data.Sucesso) {
+                callAlertSuccess(data.Mensagem, function () {
+                    
+                });
+
+                if (!data.Sucesso) {                    
+
+                    /*
                     callAlertDanger("#server-response", data.Mensagem, function () {
                         $("#server-response").hide("normal");
                     });
+                    */
                 };
 
                 listarPermissoes();
@@ -67,10 +74,17 @@
             data: permissao,
             success: function (data) {
 
+                callAlertError(data.Mensagem, function () {
+                    
+                });
+
                 if (!data.Sucesso) {
+
+                    /*
                     callAlertDanger("#server-response", data.Mensagem, function () {
                         $("#server-response").hide("normal");
                     });
+                    */
                 };
 
                 listarPermissoes();
@@ -81,9 +95,11 @@
 
 </script>
 
-<h5>Permissões</h5>
 
-<div id="divListaPermissoes">
+
+
+
+<div class="div-content" id="divListaPermissoes">
 
 </div>
 
