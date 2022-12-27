@@ -46,18 +46,13 @@
             method: "post",
             data: permissao,
             success: function (data) {
-
-                callAlertSuccess(data.Mensagem, function () {
-                    
+                JsAlertWarning(data.Mensagem, "server-response", true, function () {
+                    // callback function
                 });
-
-                if (!data.Sucesso) {                    
-
-                    /*
-                    callAlertDanger("#server-response", data.Mensagem, function () {
-                        $("#server-response").hide("normal");
+                if (!data.Sucesso) {
+                    JsAlertError(data.Mensagem, "server-response", true, function () {
+                        // callback function
                     });
-                    */
                 };
 
                 listarPermissoes();
@@ -74,17 +69,10 @@
             data: permissao,
             success: function (data) {
 
-                callAlertError(data.Mensagem, function () {
-                    
-                });
-
                 if (!data.Sucesso) {
-
-                    /*
-                    callAlertDanger("#server-response", data.Mensagem, function () {
-                        $("#server-response").hide("normal");
+                    JsAlertError(data.Mensagem, "server-response", true, function () {
+                        // callback function
                     });
-                    */
                 };
 
                 listarPermissoes();
@@ -94,10 +82,6 @@
     }
 
 </script>
-
-
-
-
 
 <div class="div-content" id="divListaPermissoes">
 

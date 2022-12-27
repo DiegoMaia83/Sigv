@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/styles/alerts.css" rel="stylesheet" type="text/css" />
     <script src="~/Content/scripts/jquery-3.6.1.js"></script>
     <script src="~/Content/scripts/font-awesome.js"></script>
-    <script src="~/Content/scripts/funcoes.js"></script>
+    
     <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
 
@@ -26,13 +27,19 @@
             <div class="sidebar-menu-item" id="menu-permissao" onclick="window.location.href = '/Admin/Permissoes'">
                 <i class="fa-solid fa-shield-halved"></i>&nbsp;&nbsp; Permissões
             </div>
+            <div class="sidebar-menu-item" id="menu-user" onclick="window.location.href = '/Admin/Usuarios'">
+                <i class="fa-solid fa-user"></i>&nbsp;&nbsp; Usuários
+            </div>
         </div>
         <div class="p-4" id="sidebar-sub-menu" style="display: none;">
             Sub-Menu
         </div>
         <div id="body-content" class="flex-grow-1">
 
-            <div id="server-response" class="server-response-success" style="display: none;"></div>
+            <div id="server-response" class="server-response-success" style="display: none;">
+                <i id="server-response-close" class="fa-solid fa-square-xmark"></i>
+                <span id="server-response-message"></span>
+            </div>
 
             @RenderBody()
         </div>
@@ -53,4 +60,8 @@
     });
     */
 
+
 </script>
+
+<script src="~/Content/scripts/funcoes.js"></script>
+<script src="~/Content/scripts/alerts.js"></script>
