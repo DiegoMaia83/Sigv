@@ -15,6 +15,7 @@ namespace Sigv.Dal.Database
         public DbSet<UsuarioGrupo> UsuariosGrupos { get; set; }
         public DbSet<Permissao> Permissoes { get; set; }
         public DbSet<PermissaoGrupo> PermissoesGrupos { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
         public DbSet<Veiculo> Veiculos { get; set; }
         public DbSet<VeiculoCombustivel> VeiculosCombustiveis { get; set; }

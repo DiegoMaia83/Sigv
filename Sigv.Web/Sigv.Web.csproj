@@ -92,9 +92,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\scripts\alerts.js" />
     <Content Include="Content\scripts\font-awesome.js" />
     <Content Include="Content\scripts\funcoes.js" />
     <Content Include="Content\scripts\jquery-3.6.1.js" />
+    <Content Include="Content\styles\alerts.css" />
     <Content Include="Content\styles\bootstrap.min.css" />
     <Content Include="Content\styles\Site.css" />
     <Content Include="Global.asax" />

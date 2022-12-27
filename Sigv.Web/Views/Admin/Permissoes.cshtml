@@ -46,9 +46,7 @@
             method: "post",
             data: permissao,
             success: function (data) {
-                JsAlertWarning(data.Mensagem, "server-response", true, function () {
-                    // callback function
-                });
+
                 if (!data.Sucesso) {
                     JsAlertError(data.Mensagem, "server-response", true, function () {
                         // callback function

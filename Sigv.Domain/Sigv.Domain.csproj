@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Log.cs" />
     <Compile Include="Permissao.cs" />
     <Compile Include="PermissaoGrupo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

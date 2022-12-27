@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogAplicacao.cs" />
     <Compile Include="PermissaoApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SegurancaApp.cs" />

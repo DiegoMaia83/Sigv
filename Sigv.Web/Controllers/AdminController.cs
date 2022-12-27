@@ -57,6 +57,21 @@ namespace Sigv.Web.Controllers
 
                     if (result != null)
                     {
+                        var log = new Log
+                        {
+                            CodReferencia = result.Id,
+                            Processo = "Permissao",
+                            UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                            Ip = Request.ServerVariables["REMOTE_ADDR"],
+                            DataLog = DateTime.Now,
+                            Descricao = $"Inseriu a permissão Id [{result.Id}]"
+                        };
+
+                        using (var conn = new HttpService<Log>())
+                        {
+                            conn.ExecuteService(log, "api/log/salvar");
+                        };
+
                         return Json(new MensagemRetorno { Id = result.Id, Sucesso = true, Mensagem = "Operação efetuada com sucesso!" });
                     }
                     else
@@ -83,6 +98,21 @@ namespace Sigv.Web.Controllers
 
                     if (result != null)
                     {
+                        var log = new Log
+                        {
+                            CodReferencia = result.Id,
+                            Processo = "Permissao",
+                            UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                            Ip = Request.ServerVariables["REMOTE_ADDR"],
+                            DataLog = DateTime.Now,
+                            Descricao = $"Removeu a permissão Id [{result.Id}]"
+                        };
+
+                        using (var conn = new HttpService<Log>())
+                        {
+                            conn.ExecuteService(log, "api/log/salvar");
+                        };
+
                         return Json(new MensagemRetorno { Id = result.Id, Sucesso = true, Mensagem = "Operação efetuada com sucesso!" });
                     }
                     else
