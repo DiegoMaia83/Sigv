@@ -43,7 +43,7 @@ var JsAlertError = function (mensagem, div, setTimeOut, callback) {
     var divMessage = divAlert + '-message';
 
     $(divAlert).removeClass().addClass("server-response-error");
-    var msg = '<i class="fa fa-ban"></i>&nbsp;&nbsp;' + mensagem;
+    var msg = '<i class="fa fa-xmark"></i>&nbsp;&nbsp;' + mensagem;
     $(divMessage).html(msg);
     $(divAlert).show("normal");
 

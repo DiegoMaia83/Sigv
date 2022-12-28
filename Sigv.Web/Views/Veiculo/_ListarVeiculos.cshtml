@@ -4,63 +4,37 @@
     Layout = null;
 }
 
-<style>
-
-    .row-veiculo {
-        background-color: lightslategrey;
-        margin-bottom: 5px;
-        cursor: pointer;
-        border-bottom: 5px solid #ffffff;
-        color: #ffffff;
-    }
-
-    .row-veiculo td {
-        padding: 5px 10px 5px 10px;
-    }
-
-    .head-veiculo td {
-        padding: 5px 10px 5px 10px;
-        color: lightslategrey;
-    }
-
-    .row-veiculo:hover {
-        background-color: lightsteelblue;
-        transition: 0.5s;
-    }
-
-</style>
-
 <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
 
 <table width="100%">
 
-    <tr class="head-veiculo">
-        <td class="row-veiculo-1">Veículo Id</td>
-        <td class="row-veiculo-1">Marca</td>
-        <td class="row-veiculo-2">Ano</td>
-        <td class="row-veiculo-1">Placa</td>
-        <td class="row-veiculo-3">Chassi</td>
-        <td class="row-veiculo-3">Cor</td>
-        <td class="row-veiculo-3">Combustível</td>
-        <td class="row-veiculo-3">Espécie</td>
-        <td class="row-veiculo-2">Condição</td>
-        <td class="row-veiculo-2">Status</td>
+    <tr class="head-table">
+        <td class="row-table-1">Veículo Id</td>
+        <td class="row-table-1">Marca</td>
+        <td class="row-table-2">Ano</td>
+        <td class="row-table-1">Placa</td>
+        <td class="row-table-3">Chassi</td>
+        <td class="row-table-3">Cor</td>
+        <td class="row-table-3">Combustível</td>
+        <td class="row-table-3">Espécie</td>
+        <td class="row-table-2">Condição</td>
+        <td class="row-table-2">Status</td>
     </tr>
 
     <tbody>
         @foreach (var veiculo in Model)
         {
-            <tr class="row-veiculo">
-                <td class="row-veiculo-1">@veiculo.VeiculoId.ToString("0000")</td>
-                <td class="row-veiculo-1">@veiculo.Marca @veiculo.Modelo</td>
-                <td class="row-veiculo-2">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
-                <td class="row-veiculo-1">@veiculo.Placa</td>
-                <td class="row-veiculo-3">@veiculo.Chassi</td>
-                <td class="row-veiculo-3">Amarelo</td>
-                <td class="row-veiculo-3">@veiculo.Combustivel.Nome</td>
-                <td class="row-veiculo-3">@veiculo.Especie.Nome</td>
-                <td class="row-veiculo-2">@veiculo.Condicao.Nome</td>
-                <td class="row-veiculo-2">@veiculo.Status.Nome</td>
+            <tr class="row-table">
+                <td class="row-table-1">@veiculo.VeiculoId.ToString("0000")</td>
+                <td class="row-table-1">@veiculo.Marca @veiculo.Modelo</td>
+                <td class="row-table-2">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
+                <td class="row-table-1">@veiculo.Placa</td>
+                <td class="row-table-3">@veiculo.Chassi</td>
+                <td class="row-table-3">Amarelo</td>
+                <td class="row-table-3">@veiculo.Combustivel.Nome</td>
+                <td class="row-table-3">@veiculo.Especie.Nome</td>
+                <td class="row-table-2">@veiculo.Condicao.Nome</td>
+                <td class="row-table-2">@veiculo.Status.Nome</td>
             </tr>
         }
     </tbody>

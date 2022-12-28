@@ -30,10 +30,11 @@
             <div class="sidebar-menu-item" id="menu-user" onclick="window.location.href = '/Admin/Usuarios'">
                 <i class="fa-solid fa-user"></i>&nbsp;&nbsp; Usuários
             </div>
+            <div class="sidebar-menu-item" id="menu-logoff" onclick="window.location.href = '/Login/Logoff'">
+                <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Sair
+            </div>
         </div>
-        <div class="p-4" id="sidebar-sub-menu" style="display: none;">
-            Sub-Menu
-        </div>
+
         <div id="body-content" class="flex-grow-1">
 
             <div id="server-response" class="server-response-success" style="display: none;">
@@ -47,21 +48,6 @@
 
 </body>
 </html>
-
-<script> 
-
-    /*
-    $("#menu-home").click(function () {
-        $("#sidebar-sub-menu").show("fast");
-    });
-
-    $("#menu-veiculo").click(function () {
-        $("#sidebar-sub-menu").show("fast");
-    });
-    */
-
-
-</script>
 
 <script src="~/Content/scripts/funcoes.js"></script>
 <script src="~/Content/scripts/alerts.js"></script>

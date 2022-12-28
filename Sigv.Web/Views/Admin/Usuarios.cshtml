@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: '/Admin/ListarUsuarios',
+            method: 'get',
+            success: function (data) {
+                $('#divListarUsuarios').html(data);
+            }
+        });
+
+        $("#btnPesquisarUsuarios").click(function () {
+
+            var json = {
+                nome: $("#txNome").val(),
+                email: $("#txEmail").val(),
+                grupoId: $("#txGrupoId").val()
+            };
+
+            pesquisarUsuarios(json);
+
+        });
+
+    });
+
+    var pesquisarUsuarios = function (json) {
+
+        $.ajax({
+            url: '/Admin/PesquisarUsuarios',
+            method: 'get',
+            data: json,
+            success: function (data) {
+                $('#divListarUsuarios').html(data);
+            }
+        });
+
+    }
+
+</script>
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <h5>Usuários</h5>
+        
+    </div>
+
+    <div class="col-sm-2">
+
+        <div class="menu-view">
+
+            <label>Nome</label>
+            <input class="form-control form-control-sm" id="txNome" />
+
+            <label>Email</label>
+            <input class="form-control form-control-sm" id="txEmail" />
+
+            <label>Grupo</label>
+            <select class="form-control form-control-sm" id="txGrupoId">
+                <option value="0"></option>
+                <option value="1">Comum</option>
+                <option value="2">Editor</option>
+                <option value="3">Gerente</option>
+                <option value="4">Administrador</option>
+                <option value="5">Desenvolvedor</option>
+            </select>
+
+            <hr />
+
+            <button class="btn btn-outline-dark btn-sm w-100" id="btnPesquisarUsuarios">Pesquisar</button>
+
+        </div>
+
+    </div>
+
+    <div class="col-sm-10" id="divListarUsuarios">
+
+    </div>
+
+</div>
+

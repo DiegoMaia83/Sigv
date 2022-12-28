@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Sigv.Domain.Usuario>
+
+@{
+    Layout = null;
+}
+
+<table width="100%">
+
+    <tr class="head-table">
+        <td class="row-table-1">Usuário Id</td>
+        <td class="row-table-1">Nome</td>
+        <td class="row-table-2">Login</td>
+        <td class="row-table-2">E-mail</td>
+        <td class="row-table-2">Grupo</td>
+    </tr>
+
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr class="row-table">
+                <td class="row-table-1">@usuario.UsuarioId.ToString("0000")</td>
+                <td class="row-table-1">@usuario.Nome</td>
+                <td class="row-table-2">@usuario.Login</td>
+                <td class="row-table-2">@usuario.Email</td>
+                <td class="row-table-2">@usuario.Grupo.Nome</td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+

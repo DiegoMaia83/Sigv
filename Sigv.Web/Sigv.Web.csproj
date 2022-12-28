@@ -135,6 +135,8 @@
     <Content Include="Views\Login\_AccessDenied.cshtml" />
     <Content Include="Views\Admin\Permissoes.cshtml" />
     <Content Include="Views\Admin\_ListarPermissoes.cshtml" />
+    <Content Include="Views\Admin\Usuarios.cshtml" />
+    <Content Include="Views\Admin\_ListarUsuarios.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,8 +1,8 @@
 ﻿:root {
     --color-dark-primary: #1c2933;
     --color-dark-secondary: #778899;
-
     --color-light-primary: #b0c4de;
+    --color-light-gold: #Fbd302;
 }
 
 html, body {
@@ -18,14 +18,38 @@ html, body {
     border-color: var(--color-dark-secondary) !important;
 }
 
+
+/* Início Table */
+.row-table {
+    background-color: var(--color-dark-secondary);
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-bottom: 5px solid #ffffff;
+    color: #ffffff;
+}
+
+.row-table td {
+    padding: 5px 10px 5px 10px;
+}
+
+.head-table td {
+    
+    color: var(--color-dark-secondary);
+}
+
+.row-table:hover {
+    background-color: var(--color-light-primary);
+    transition: 0.5s;
+}
+
 @media screen and (max-width: 1280px) {
-    .row-veiculo-3 {
+    .row-table-3 {
         display: none;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .row-veiculo-2 {
+    .row-table-2 {
         display: none;
     }
 }
@@ -52,5 +76,50 @@ html, body {
 }
 
 #body-content {
-    padding: 20px;
+    padding: 25px;
+    position: relative;
+}
+
+
+.menu-view {
+      
+}
+
+h5 {
+    background-color: var(--color-light-gold);
+    padding: 10px;
+    color: #ffffff;
+    margin-bottom: 30px !important;
+}
+
+
+
+/* Override Bootstrap */
+input, select, textarea {
+    border-radius: 0px !important;
+    box-shadow: 3px 3px 10px #e4e4e4;
+    border: 1px solid #d8e4e6 !important;
+    margin-bottom: 5px !important;
+}
+
+.btn {
+    border-radius: 0px !important;
+    padding: 5px 25px 5px 25px !important;
+}
+
+label {
+    margin: 0 !important;
+    color: var(--color-dark-secondary) !important;
+}
+
+.form-group {
+    margin-bottom: 10px !important;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #17a2b8 !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 }

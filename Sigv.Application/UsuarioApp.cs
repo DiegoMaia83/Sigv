@@ -3,6 +3,7 @@ using Sigv.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 
 namespace Sigv.Application
 {
@@ -51,6 +52,32 @@ namespace Sigv.Application
                 using (var usuarios = new UsuarioRepositorio())
                 {
                     return usuarios.GetAll().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Usuario> Pesquisar(string nome = "", string email = "", int grupoId = 0)
+        {
+            try
+            {
+                using (var usuarios = new UsuarioRepositorio())
+                {
+                    var listaUsuarios = usuarios.GetAll();
+
+                    if (!String.IsNullOrEmpty(nome))
+                        listaUsuarios = listaUsuarios.Where(x => x.Nome.ToLower().Contains(nome.ToLower()));
+
+                    if (!String.IsNullOrEmpty(email))
+                        listaUsuarios = listaUsuarios.Where(x => x.Email.ToLower().Contains(email.ToLower()));
+
+                    if (grupoId > 0)
+                        listaUsuarios = listaUsuarios.Where(x => x.GrupoId == grupoId);
+
+                    return listaUsuarios.ToList();
                 }
             }
             catch (Exception ex)

@@ -49,6 +49,21 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("api/usuario/pesquisar")]
+        public List<Usuario> Pesquisar(string nome = "", string email = "", int grupoId = 0)
+        {
+            try
+            {
+                return _usuarioApp.Pesquisar(nome, email, grupoId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("api/usuario/salvar")]
         public Usuario Salvar(Usuario usuario)

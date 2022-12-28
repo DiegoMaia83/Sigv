@@ -126,5 +126,52 @@ namespace Sigv.Web.Controllers
                 return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
+
+        public ActionResult Usuarios()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Filtro(Roles = "2")]
+        public ActionResult ListarUsuarios()
+        {
+            try
+            {
+                var listaUsuarios = new List<Usuario>();
+
+                using (var srv = new HttpService<List<Usuario>>())
+                {
+                    listaUsuarios = srv.ReturnService("api/usuario/listar");
+                }
+
+                return View("_ListarUsuarios", listaUsuarios);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Filtro(Roles = "2")]
+        public ActionResult PesquisarUsuarios(string nome = "", string email = "", int grupoId = 0)
+        {
+            try
+            {
+                var listaUsuarios = new List<Usuario>();
+
+                using (var srv = new HttpService<List<Usuario>>())
+                {
+                    listaUsuarios = srv.ReturnService("api/usuario/pesquisar?nome=" + nome + "&email=" + email + "&grupoId=" + grupoId);
+                }
+
+                return View("_ListarUsuarios", listaUsuarios);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
