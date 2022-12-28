@@ -1,0 +1,114 @@
+﻿@model Sigv.Domain.Usuario
+
+@{
+    ViewBag.Title = "Usuario";
+}
+
+
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <h5>Usuário</h5>
+        <hr />
+    </div>
+
+</div>
+
+<form id="formUsuario">
+
+    <div class="row">
+
+        <div class="col-sm-3">
+            <label>Id</label>
+            <input class="form-control" name="UsuarioId" id="UsuarioId" value="@Model.UsuarioId" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Nome</label>
+            <input class="form-control" name="Nome" id="Nome" value="@Model.Nome" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Login</label>
+            <input class="form-control" name="Login" id="Login" value="@Model.Login" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Email</label>
+            <input class="form-control" name="Email" id="Email" value="@Model.Email" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Data Expira</label>
+            <input class="form-control" name="DataExpira" id="DataExpira" value="@Model.DataExpira.ToShortDateString()" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Grupo</label>
+            <select class="form-control" name="GrupoId" id="GrupoId">
+                <option value=""></option>
+                <option value="1" @(Model.GrupoId == 1 ? "selected" : "")>Comum</option>
+                <option value="2" @(Model.GrupoId == 2 ? "selected" : "")>Editor</option>
+                <option value="3" @(Model.GrupoId == 3 ? "selected" : "")>Gerente</option>
+                <option value="4" @(Model.GrupoId == 4 ? "selected" : "")>Administrador</option>
+                <option value="5" @(Model.GrupoId == 5 ? "selected" : "")>Desenvolvedor</option>
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label>Bloqueado</label>
+            <input type="checkbox" name="Bloqueado" id="Bloqueado" value="true" @(Model.Bloqueado == true ? "checked" : "") />
+        </div>
+
+        <div class="col-sm-12">
+
+            <button type="button" class="btn btn-outline-dark" id="btnSalvarUsuario">Salvar</button>
+
+        </div>
+
+    </div>
+
+</form>
+
+
+<script>
+
+    $("#btnSalvarUsuario").click(function () {
+
+        var json = $("#formUsuario").serialize();
+        console.log(json);
+        //return false;
+
+        salvarUsuario(json);
+
+
+    });
+
+    var salvarUsuario = function (json) {
+
+        $.ajax({
+            url: '/Admin/SalvarUsuario',
+            method: 'post',
+            data: json,
+            success: function (data) {
+
+                if (data.Id) {
+                    JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                        window.location.href = "/Admin/Usuario?Id=" + data.Id;
+                    });
+                }
+                else
+                {
+                    JsAlertError(data.Mensagem, "server-response", false, function () {
+                        // Sem callback
+                    });
+                }
+            }
+        });
+
+    }
+
+
+</script>
+

@@ -17,7 +17,7 @@
     <tbody>
         @foreach (var usuario in Model)
         {
-            <tr class="row-table">
+            <tr class="row-table" onclick="window.location.href = '/Admin/Usuario?Id=@usuario.UsuarioId'">
                 <td class="row-table-1">@usuario.UsuarioId.ToString("0000")</td>
                 <td class="row-table-1">@usuario.Nome</td>
                 <td class="row-table-2">@usuario.Login</td>

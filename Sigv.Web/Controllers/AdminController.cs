@@ -13,12 +13,6 @@ namespace Sigv.Web.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Permissoes()
         {
             return View();
@@ -171,6 +165,104 @@ namespace Sigv.Web.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public ActionResult Usuario(int id = 0)
+        {
+            try
+            {
+                var usuario = new Usuario();
+
+                if (id > 0)
+                {
+                    using (var srv = new HttpService<Usuario>())
+                    {
+                        usuario = srv.ReturnService("api/usuario/retornar?usuarioId=" + id);
+                    }
+                }
+
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Filtro(Roles = "3")]
+        public ActionResult SalvarUsuario(Usuario usuario)
+        {
+            try
+            {
+                using (var srv = new HttpService<Usuario>())
+                {
+                    if (usuario.UsuarioId > 0)
+                    {
+                        var result = srv.ExecuteService(usuario, "api/usuario/alterar");
+
+                        if (result.UsuarioId > 0)
+                        {
+                            var log = new Log
+                            {
+                                CodReferencia = result.UsuarioId,
+                                Processo = "Usuario",
+                                UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                                Ip = Request.ServerVariables["REMOTE_ADDR"],
+                                DataLog = DateTime.Now,
+                                Descricao = "Alterou o cadastro do usuário"
+                            };
+
+                            using (var conn = new HttpService<Log>())
+                            {
+                                conn.ExecuteService(log, "api/log/salvar");
+                            };
+
+                            return Json(new MensagemRetorno { Id = result.UsuarioId, Sucesso = true, Mensagem = "Operação efetuada com sucesso!" });
+                        }
+                        else
+                        {
+                            return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao efetuar a operação!" });
+
+                        }
+                    }
+                    else
+                    {
+                        var result = srv.ExecuteService(usuario, "api/usuario/salvar");
+
+                        if (result.UsuarioId > 0)
+                        {
+                            var log = new Log
+                            {
+                                CodReferencia = result.UsuarioId,
+                                Processo = "Usuario",
+                                UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                                Ip = Request.ServerVariables["REMOTE_ADDR"],
+                                DataLog = DateTime.Now,
+                                Descricao = "Inseriu o cadastro do usuário"
+                            };
+
+                            using (var conn = new HttpService<Log>())
+                            {
+                                conn.ExecuteService(log, "api/log/salvar");
+                            };
+
+                            return Json(new MensagemRetorno { Id = result.UsuarioId, Sucesso = true, Mensagem = "Operação efetuada com sucesso!" });
+                        }
+                        else
+                        {
+                            return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao efetuar a operação!" });
+
+                        }
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
     }

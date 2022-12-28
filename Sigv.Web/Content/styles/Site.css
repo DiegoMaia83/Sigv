@@ -85,14 +85,6 @@ html, body {
       
 }
 
-h5 {
-    background-color: var(--color-light-gold);
-    padding: 10px;
-    color: #ffffff;
-    margin-bottom: 30px !important;
-}
-
-
 
 /* Override Bootstrap */
 input, select, textarea {

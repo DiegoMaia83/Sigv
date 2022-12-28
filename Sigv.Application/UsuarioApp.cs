@@ -110,7 +110,14 @@ namespace Sigv.Application
             {
                 using (var usuarios = new UsuarioRepositorio())
                 {
-                    usuarios.Atualizar(usuario);
+                    var usuarioDb = usuarios.GetAll().Where(x => x.UsuarioId == usuario.UsuarioId).FirstOrDefault();
+                    usuarioDb.Login = usuario.Login;
+                    usuarioDb.Nome = usuario.Nome;
+                    usuarioDb.Email = usuario.Email;
+                    usuarioDb.Bloqueado = usuario.Bloqueado;
+                    usuarioDb.GrupoId = usuario.GrupoId;
+
+                    usuarios.Atualizar(usuarioDb);
                     usuarios.SalvarTodos();
 
                     return usuario;
