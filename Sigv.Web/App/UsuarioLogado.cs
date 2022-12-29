@@ -5,6 +5,7 @@
         public string UsuarioId { get; set; }
         public string Nome { get; set; }
         public string Login { get; set; }
+        public string GrupoId { get; set; }
 
         //Verifica se o login não expirou
         public static bool isOk()

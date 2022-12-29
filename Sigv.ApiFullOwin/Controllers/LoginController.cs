@@ -25,12 +25,14 @@ namespace Sigv.ApiFullOwin.Controllers
                 var usuarioId = claims?.FirstOrDefault(x => x.Type.Equals("UsuarioId", StringComparison.OrdinalIgnoreCase))?.Value;
                 var nome = claims?.FirstOrDefault(x => x.Type.Equals("Nome", StringComparison.OrdinalIgnoreCase))?.Value;
                 var login = claims?.FirstOrDefault(x => x.Type.Equals("Login", StringComparison.OrdinalIgnoreCase))?.Value;
+                var grupoId = claims?.FirstOrDefault(x => x.Type.Equals("GrupoId", StringComparison.OrdinalIgnoreCase))?.Value;
 
                 var obj = new
                 {
                     usuarioId,
                     nome,
-                    login
+                    login,
+                    grupoId
                 };
 
                 return obj;

@@ -27,8 +27,9 @@ namespace Sigv.Web.App
                 if (HttpContext.Current.Request.Cookies["c-sigv"] != null)
                 {
                     usuarioLogado.UsuarioId = Decriptar(HttpContext.Current.Request.Cookies["c-sigv"]["id"], chaveCrypt);
-                    usuarioLogado.Nome = Decriptar(HttpContext.Current.Request.Cookies["c-sigv"]["n"], chaveCrypt);
-                    usuarioLogado.Login = Decriptar(HttpContext.Current.Request.Cookies["c-sigv"]["l"], chaveCrypt);
+                    usuarioLogado.Nome = Decriptar(HttpContext.Current.Request.Cookies["c-sigv"]["name"], chaveCrypt);
+                    usuarioLogado.Login = Decriptar(HttpContext.Current.Request.Cookies["c-sigv"]["usr"], chaveCrypt);
+                    usuarioLogado.GrupoId = Decriptar(HttpContext.Current.Request.Cookies["c-sigv"]["grpid"], chaveCrypt);
 
                 }
             }
@@ -45,8 +46,9 @@ namespace Sigv.Web.App
         {
 
             HttpContext.Current.Response.Cookies["c-sigv"]["id"] = Encriptar(value.UsuarioId, chaveCrypt);
-            HttpContext.Current.Response.Cookies["c-sigv"]["n"] = Encriptar(value.Nome, chaveCrypt);
-            HttpContext.Current.Response.Cookies["c-sigv"]["l"] = Encriptar(value.Login, chaveCrypt);
+            HttpContext.Current.Response.Cookies["c-sigv"]["name"] = Encriptar(value.Nome, chaveCrypt);
+            HttpContext.Current.Response.Cookies["c-sigv"]["usr"] = Encriptar(value.Login, chaveCrypt);
+            HttpContext.Current.Response.Cookies["c-sigv"]["grpid"] = Encriptar(value.GrupoId, chaveCrypt);
         }
 
 

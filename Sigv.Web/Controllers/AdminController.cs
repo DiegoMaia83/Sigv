@@ -196,6 +196,14 @@ namespace Sigv.Web.Controllers
         {
             try
             {
+                using (var srv2 = new HttpService<bool>())
+                {
+                    var verificaLoginExistente = srv2.ReturnService("api/usuario/verifica-login-existente?login=" + usuario.Login);
+
+                    if (verificaLoginExistente)
+                        return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Já existe um usuário cadastrado com esse Login" });
+                }
+
                 using (var srv = new HttpService<Usuario>())
                 {
                     if (usuario.UsuarioId > 0)

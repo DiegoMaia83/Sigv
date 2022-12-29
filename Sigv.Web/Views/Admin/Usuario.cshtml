@@ -21,27 +21,27 @@
 
         <div class="col-sm-3">
             <label>Id</label>
-            <input class="form-control" name="UsuarioId" id="UsuarioId" value="@Model.UsuarioId" />
+            <input type="text" class="form-control" name="UsuarioId" id="UsuarioId" value="@Model.UsuarioId" />
         </div>
 
         <div class="col-sm-3">
             <label>Nome</label>
-            <input class="form-control" name="Nome" id="Nome" value="@Model.Nome" />
+            <input type="text" class="form-control" name="Nome" id="Nome" value="@Model.Nome" />
         </div>
 
         <div class="col-sm-3">
             <label>Login</label>
-            <input class="form-control" name="Login" id="Login" value="@Model.Login" />
+            <input type="text" class="form-control" name="Login" id="Login" value="@Model.Login") />
         </div>
 
         <div class="col-sm-3">
             <label>Email</label>
-            <input class="form-control" name="Email" id="Email" value="@Model.Email" />
+            <input type="email" class="form-control" name="Email" id="Email" value="@Model.Email" />
         </div>
 
         <div class="col-sm-3">
             <label>Data Expira</label>
-            <input class="form-control" name="DataExpira" id="DataExpira" value="@Model.DataExpira.ToShortDateString()" />
+            <input type="text" class="form-control" name="DataExpira" id="DataExpira" value="@(Model.DataExpira.ToShortDateString().Contains("0001") ? "" : Model.DataExpira.ToShortDateString())" readonly disabled />
         </div>
 
         <div class="col-sm-3">
@@ -59,9 +59,11 @@
         <div class="col-sm-3">
             <label>Bloqueado</label>
             <input type="checkbox" name="Bloqueado" id="Bloqueado" value="true" @(Model.Bloqueado == true ? "checked" : "") />
-        </div>
+        </div>        
 
         <div class="col-sm-12">
+
+            <hr />
 
             <button type="button" class="btn btn-outline-dark" id="btnSalvarUsuario">Salvar</button>
 
@@ -74,14 +76,49 @@
 
 <script>
 
+    $(document).ready(function () {
+
+        if ($("#UsuarioId").val() > 0) {
+
+            $("#Login").attr("disabled", "disabled");
+
+        };
+
+    });
+
     $("#btnSalvarUsuario").click(function () {
 
+        if ($("#Nome").val() == "") {
+            JsAlertError("O campo nome é obrigatório!", "server-response", true, function () {
+                $("#Nome").focus();
+            });
+            return false;
+        };
+
+        if ($("#Login").val() == "") {
+            JsAlertError("O campo login é obrigatório!", "server-response", true, function () {
+                $("#Login").focus();
+            });
+            return false;
+        };
+
+        if ($("#Email").val() == "") {
+            JsAlertError("O campo e-mail é obrigatório!", "server-response", true, function () {
+                $("#Email").focus();
+            });
+            return false;
+        };
+
+        if ($("#GrupoId").val() == 0 || $("#GrupoId").val() == "") {
+            JsAlertError("Selecione um grupo de permissões.", "server-response", true, function () {
+                $("#GrupoId").focus();
+            });
+            return false;
+        };
+
         var json = $("#formUsuario").serialize();
-        console.log(json);
-        //return false;
 
         salvarUsuario(json);
-
 
     });
 

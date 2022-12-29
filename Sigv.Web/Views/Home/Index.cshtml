@@ -1,7 +1,11 @@
-﻿
+﻿@using Sigv.Web.App
+
 @{
     ViewBag.Title = "Index";
 }
 
-Teste
+@SessionCookie.Logado.UsuarioId
+@SessionCookie.Logado.Login
+@SessionCookie.Logado.Nome
+@SessionCookie.Logado.GrupoId
 

@@ -93,6 +93,21 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet]
+        [Route("api/usuario/verifica-login-existente")]
+        public bool VerificaLoginExistente(string login)
+        {
+            try
+            {
+                return _usuarioApp.VerificaLoginExistente(login);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         //  Grupos Usuários  //
 

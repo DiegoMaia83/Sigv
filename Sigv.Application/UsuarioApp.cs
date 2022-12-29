@@ -45,6 +45,21 @@ namespace Sigv.Application
             }
         }
 
+        public bool VerificaLoginExistente(string login)
+        {
+            try
+            {
+                using (var usuarios = new UsuarioRepositorio())
+                {
+                    return usuarios.GetAll().Where(x => x.Login == login).FirstOrDefault() != null;                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<Usuario> Listar()
         {
             try
@@ -110,8 +125,7 @@ namespace Sigv.Application
             {
                 using (var usuarios = new UsuarioRepositorio())
                 {
-                    var usuarioDb = usuarios.GetAll().Where(x => x.UsuarioId == usuario.UsuarioId).FirstOrDefault();
-                    usuarioDb.Login = usuario.Login;
+                    var usuarioDb = usuarios.GetAll().Where(x => x.UsuarioId == usuario.UsuarioId).FirstOrDefault();                    
                     usuarioDb.Nome = usuario.Nome;
                     usuarioDb.Email = usuario.Email;
                     usuarioDb.Bloqueado = usuario.Bloqueado;
