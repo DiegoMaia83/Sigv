@@ -13,6 +13,8 @@ namespace Sigv.Web.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly ComumApp _comumAplicacao = new ComumApp();
+
         public ActionResult Permissoes()
         {
             return View();
@@ -196,14 +198,6 @@ namespace Sigv.Web.Controllers
         {
             try
             {
-                using (var srv2 = new HttpService<bool>())
-                {
-                    var verificaLoginExistente = srv2.ReturnService("api/usuario/verifica-login-existente?login=" + usuario.Login);
-
-                    if (verificaLoginExistente)
-                        return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Já existe um usuário cadastrado com esse Login" });
-                }
-
                 using (var srv = new HttpService<Usuario>())
                 {
                     if (usuario.UsuarioId > 0)
@@ -237,6 +231,15 @@ namespace Sigv.Web.Controllers
                     }
                     else
                     {
+                        // Verifica se o Login informado já existe
+                        using (var srv2 = new HttpService<bool>())
+                        {
+                            var verificaLoginExistente = srv2.ReturnService("api/usuario/verifica-login-existente?login=" + usuario.Login);
+
+                            if (verificaLoginExistente)
+                                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Já existe um usuário cadastrado com esse Login" });
+                        }
+
                         var result = srv.ExecuteService(usuario, "api/usuario/salvar");
 
                         if (result.UsuarioId > 0)
@@ -271,6 +274,42 @@ namespace Sigv.Web.Controllers
             catch (Exception ex)
             {
                 return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+            }
+        }
+
+
+        [HttpPost]
+        [Filtro(Roles = "3")]
+        public ActionResult EnviarSenha(int usuarioId)
+        {
+            try
+            {
+                var usuario = new Usuario();
+
+                using (var srv = new HttpService<Usuario>())
+                {
+                    usuario = srv.ReturnService("api/usuario/retornar?usuarioId=" + usuarioId);
+
+                    if (usuario != null)
+                    {
+                        var password = _comumAplicacao.GetRandomPassword();
+                        usuario.Password = _comumAplicacao.HashMD5(password);
+
+                        var usuarioAlterado = srv.ExecuteService(usuario, "api/usuario/alterar-senha");
+
+                        Mail.EnviarSenha(usuarioAlterado, password, Request.ServerVariables["REMOTE_ADDR"]);
+
+                        return Json(new MensagemRetorno { Id = usuarioAlterado.UsuarioId, Sucesso = true, Mensagem = "Email enviado com sucesso!" });
+                    }
+                    else
+                    {
+                        return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Usuário não localizado!" });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Usuário não localizado!", Erro = ex.Message });
             }
         }
     }

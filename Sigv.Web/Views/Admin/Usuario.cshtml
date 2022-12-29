@@ -66,6 +66,7 @@
             <hr />
 
             <button type="button" class="btn btn-outline-dark" id="btnSalvarUsuario">Salvar</button>
+            <button type="button" class="btn btn-outline-dark" id="btnEnviarSenha">Enviar Senha</button>
 
         </div>
 
@@ -122,12 +123,40 @@
 
     });
 
+    $("#btnEnviarSenha").click(function () {
+
+        enviarSenha($("#UsuarioId").val());
+
+    });
+
+    var loadingButton = function (button) {
+
+        button.attr('disabled', 'disabled');
+
+        var str = '';
+        str += '<div class="spinner-border spinner-border-sm" role="status">';
+        str += '<span class="sr-only">Loading...</span>';
+        str += '</div>';
+        button.html(str);
+
+    };
+
+    var recoveryButton = function (button, text) {
+
+        button.removeAttr('disabled', 'disabled');
+        button.html(text);
+
+    };
+
     var salvarUsuario = function (json) {
 
         $.ajax({
             url: '/Admin/SalvarUsuario',
             method: 'post',
             data: json,
+            beforeSend: function () {
+                loadingButton($("#btnSalvarUsuario"));
+            },
             success: function (data) {
 
                 if (data.Id) {
@@ -141,8 +170,51 @@
                         // Sem callback
                     });
                 }
+            },
+            error: function () {
+                JsAlertError("Erro ao processar a rotina!", "server-response", false, function () {
+                    // Sem callback
+                });
+            },
+            complete: function () {
+                recoveryButton($("#btnSalvarUsuario"), "Salvar");
             }
         });
+
+    }
+
+    var enviarSenha = function (usuarioId) {
+
+        $.ajax({
+            url: "/Admin/EnviarSenha",
+            method: "post",
+            data: { UsuarioId: usuarioId },
+            beforeSend: function () {
+                loadingButton($("#btnEnviarSenha"));
+            },
+            success: function (data) {
+
+                if (data.Id) {
+                    JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                        // Sem callback
+                    });
+                }
+                else {
+                    JsAlertError(data.Mensagem, "server-response", false, function () {
+                        // Sem callback
+                    });
+                }
+
+            },
+            error: function () {
+                JsAlertError("Erro ao processar a rotina!", "server-response", false, function () {
+                    // Sem callback
+                });
+            },
+            complete: function () {
+                recoveryButton($("#btnEnviarSenha"), "Enviar Senha");
+            }
+        })
 
     }
 

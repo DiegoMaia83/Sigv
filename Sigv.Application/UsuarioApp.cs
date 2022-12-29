@@ -1,24 +1,25 @@
-﻿using Sigv.Dal.Repositorio;
+﻿using Sigv.Application.Util;
+using Sigv.Dal.Repositorio;
 using Sigv.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 
 namespace Sigv.Application
 {
     public class UsuarioApp
     {
         //  Usuários  //
-
         public Usuario Retornar(string login, string senha)
         {
             try
             {
-                using(var usuarios = new UsuarioRepositorio())
+                var hashPassword = MD5HashEncryDecry.MD5Hash(senha);
+
+                using (var usuarios = new UsuarioRepositorio())
                 {
                     return usuarios.GetAll()
-                        .Where(x => x.Login == login && x.Password == senha && x.Bloqueado == false && x.DataExpira > DateTime.Now)
+                        .Where(x => x.Login == login && x.Password == hashPassword && x.Bloqueado == false && x.DataExpira > DateTime.Now)
                         .FirstOrDefault();
                 }
             }
@@ -135,6 +136,28 @@ namespace Sigv.Application
                     usuarios.SalvarTodos();
 
                     return usuario;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Usuario AlterarSenha(Usuario usuario)
+        {
+            try
+            {
+                using (var usuarios = new UsuarioRepositorio())
+                {
+                    var usuarioDb = usuarios.GetAll().Where(x => x.UsuarioId == usuario.UsuarioId).FirstOrDefault();
+                    usuarioDb.Password = usuario.Password;
+                    usuarioDb.DataExpira = DateTime.Now;
+
+                    usuarios.Atualizar(usuarioDb);
+                    usuarios.SalvarTodos();
+
+                    return usuarioDb;
                 }
             }
             catch (Exception ex)

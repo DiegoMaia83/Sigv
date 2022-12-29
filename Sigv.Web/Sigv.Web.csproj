@@ -103,7 +103,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\ComumApp.cs" />
     <Compile Include="App\ConfigProvider.cs" />
+    <Compile Include="App\Mail.cs" />
+    <Compile Include="App\Mailer.cs" />
     <Compile Include="App\MensagemApi.cs" />
     <Compile Include="App\MensagemRetorno.cs" />
     <Compile Include="App\SessionCookie.cs" />

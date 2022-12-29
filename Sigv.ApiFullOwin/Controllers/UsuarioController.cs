@@ -108,6 +108,21 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPost]
+        [Route("api/usuario/alterar-senha")]
+        public Usuario AlterarSenha(Usuario usuario)
+        {
+            try
+            {
+                return _usuarioApp.AlterarSenha(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         //  Grupos Usuários  //
 

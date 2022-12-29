@@ -4,7 +4,7 @@
 .server-response-success {
     background-color: #0a9f9f;
     color: #ffffff;
-    padding: 20px;
+    padding: 20px 20px 20px 30px;
     width: 400px;
     position: absolute;
     bottom: 15px;
@@ -13,7 +13,7 @@
 .server-response-error {
     background-color: #e35d6a;
     color: #ffffff;
-    padding: 20px;
+    padding: 20px 20px 20px 30px;
     width: 400px;
     position: absolute;
     bottom: 15px;
@@ -22,7 +22,7 @@
 .server-response-warning {
     background-color: #ffcf40;
     color: #ffffff;
-    padding: 20px;
+    padding: 20px 20px 20px 30px;
     width: 400px;
     position: absolute;
     bottom: 15px;

@@ -47,6 +47,7 @@
     <Compile Include="SegurancaApp.cs" />
     <Compile Include="UsuarioApp.cs" />
     <Compile Include="Util\AESEncrytDecry.cs" />
+    <Compile Include="Util\MD5HashEncryDecry.cs" />
     <Compile Include="VeiculoApp.cs" />
   </ItemGroup>
   <ItemGroup>
