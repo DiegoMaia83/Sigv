@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Sigv.Domain.Log>
+
+@{
+    Layout = null;
+}
+
+<table class="table table-sm small">
+
+    <tr>
+        <td>Log Id</td>
+        <td>Processo</td>
+        <td>Usuário</td>
+        <td>IP</td>
+        <td>Data Log</td>
+        <td>Descrição Log</td>
+    </tr>
+
+    @foreach (var log in Model.OrderByDescending(x => x.DataLog))
+    {
+        <tr>
+            <td>@log.LogId.ToString("000000")</td>
+            <td>@log.Processo</td>
+            <td>@log.UsuarioId</td>
+            <td>@log.Ip</td>
+            <td>@log.DataLog</td>
+            <td>@log.Descricao</td>
+        </tr>
+    }
+
+</table>

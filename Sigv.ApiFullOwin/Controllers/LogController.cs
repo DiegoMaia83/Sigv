@@ -13,8 +13,9 @@ namespace Sigv.ApiFullOwin.Controllers
     {
         private readonly LogAplicacao _logAplicacao = new LogAplicacao();
 
+        [Authorize]
         [HttpGet]
-        [Route("api/log/listar")]
+        [Route("api/log/listar-logs")]
         public IEnumerable<Log> Listar()
         {
             try
@@ -27,8 +28,9 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
-        [Route("api/log/listar-processo")]
+        [Route("api/log/listar-logs-processo")]
         public IEnumerable<Log> Listar(string processo, int codReferencia)
         {
             try
@@ -41,6 +43,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/log/salvar")]
         public Log Salvar(Log log)

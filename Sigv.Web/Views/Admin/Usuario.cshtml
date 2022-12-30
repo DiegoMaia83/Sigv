@@ -19,24 +19,25 @@
 
     <div class="row">
 
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <label>Id</label>
-            <input type="text" class="form-control" name="UsuarioId" id="UsuarioId" value="@Model.UsuarioId" />
+            <input type="hidden" class="form-control" name="UsuarioId" id="UsuarioId" value="@Model.UsuarioId" />
+            <div class="bg-dark text-light input-readonly">@Model.UsuarioId.ToString("0000")</div>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <label>Nome</label>
             <input type="text" class="form-control" name="Nome" id="Nome" value="@Model.Nome" />
         </div>
 
-        <div class="col-sm-3">
-            <label>Login</label>
-            <input type="text" class="form-control" name="Login" id="Login" value="@Model.Login") />
+        <div class="col-sm-6">
+            <label>Email</label>
+            <input type="email" class="form-control" name="Email" id="Email" value="@Model.Email" />
         </div>
 
         <div class="col-sm-3">
-            <label>Email</label>
-            <input type="email" class="form-control" name="Email" id="Email" value="@Model.Email" />
+            <label>Login</label>
+            <input type="text" class="form-control" name="Login" id="Login" value="@Model.Login" ) />
         </div>
 
         <div class="col-sm-3">
@@ -44,7 +45,7 @@
             <input type="text" class="form-control" name="DataExpira" id="DataExpira" value="@(Model.DataExpira.ToShortDateString().Contains("0001") ? "" : Model.DataExpira.ToShortDateString())" readonly disabled />
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <label>Grupo</label>
             <select class="form-control" name="GrupoId" id="GrupoId">
                 <option value=""></option>
@@ -56,17 +57,17 @@
             </select>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <label>Bloqueado</label>
             <input type="checkbox" name="Bloqueado" id="Bloqueado" value="true" @(Model.Bloqueado == true ? "checked" : "") />
-        </div>        
+        </div>
 
         <div class="col-sm-12">
 
             <hr />
 
-            <button type="button" class="btn btn-outline-dark" id="btnSalvarUsuario">Salvar</button>
-            <button type="button" class="btn btn-outline-dark" id="btnEnviarSenha">Enviar Senha</button>
+            <button type="button" class="btn btn-warning" id="btnSalvarUsuario">Salvar</button>
+            <button type="button" class="btn btn-outline-warning" id="btnEnviarSenha">Enviar Senha</button>
 
         </div>
 
@@ -74,10 +75,22 @@
 
 </form>
 
+<div class="row mt-3">
+
+    <div class="col-sm-12">
+        <h6>Logs</h6>
+        <div class="div-listar scroll" id="divListarLogs"></div>
+
+    </div>
+
+</div>
+
 
 <script>
 
     $(document).ready(function () {
+
+        listarLogs("Usuario", $("#UsuarioId").val());
 
         if ($("#UsuarioId").val() > 0) {
 
@@ -129,25 +142,6 @@
 
     });
 
-    var loadingButton = function (button) {
-
-        button.attr('disabled', 'disabled');
-
-        var str = '';
-        str += '<div class="spinner-border spinner-border-sm" role="status">';
-        str += '<span class="sr-only">Loading...</span>';
-        str += '</div>';
-        button.html(str);
-
-    };
-
-    var recoveryButton = function (button, text) {
-
-        button.removeAttr('disabled', 'disabled');
-        button.html(text);
-
-    };
-
     var salvarUsuario = function (json) {
 
         $.ajax({
@@ -155,7 +149,7 @@
             method: 'post',
             data: json,
             beforeSend: function () {
-                loadingButton($("#btnSalvarUsuario"));
+                loadingButton($("#btnSalvarUsuario"), "Salvando ...");
             },
             success: function (data) {
 
@@ -190,13 +184,13 @@
             method: "post",
             data: { UsuarioId: usuarioId },
             beforeSend: function () {
-                loadingButton($("#btnEnviarSenha"));
+                loadingButton($("#btnEnviarSenha"), "Enviando ...");
             },
             success: function (data) {
 
                 if (data.Id) {
                     JsAlertSuccess(data.Mensagem, "server-response", true, function () {
-                        // Sem callback
+                        window.location.href = "/Admin/Usuario?Id=" + data.Id;
                     });
                 }
                 else {
@@ -215,6 +209,24 @@
                 recoveryButton($("#btnEnviarSenha"), "Enviar Senha");
             }
         })
+
+    }
+
+    var listarLogs = function (processo, codReferencia) {
+
+        $.ajax({
+            url: "/Admin/ListarLogs?processo=" + processo + "&codReferencia=" + codReferencia,
+            method: "get",
+            beforeSend: function () {
+                loadingButton($("#divListarLogs"), "");                
+            },
+            success: function (data) {
+                $("#divListarLogs").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                $("#divListarLogs").html("Erro ao processar a rotina! " + error);
+            }
+        });
 
     }
 

@@ -141,6 +141,7 @@
     <Content Include="Views\Admin\Usuarios.cshtml" />
     <Content Include="Views\Admin\_ListarUsuarios.cshtml" />
     <Content Include="Views\Admin\Usuario.cshtml" />
+    <Content Include="Views\Admin\_ListarLogs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

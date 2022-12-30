@@ -277,6 +277,25 @@ namespace Sigv.Web.Controllers
             }
         }
 
+        public ActionResult ListarLogs(string processo, int codReferencia)
+        {
+            try
+            {
+                var listaLogs = new List<Log>();
+
+                using (var srv = new HttpService<List<Log>>())
+                {
+                    listaLogs = srv.ReturnService("api/log/listar-logs-processo?processo=" + processo + "&codreferencia=" + codReferencia);
+                }
+
+                return View("_ListarLogs", listaLogs);
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+            }
+        }
+
 
         [HttpPost]
         [Filtro(Roles = "3")]
@@ -297,6 +316,21 @@ namespace Sigv.Web.Controllers
 
                         var usuarioAlterado = srv.ExecuteService(usuario, "api/usuario/alterar-senha");
 
+                        var log = new Log
+                        {
+                            CodReferencia = usuarioAlterado.UsuarioId,
+                            Processo = "Usuario",
+                            UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                            Ip = Request.ServerVariables["REMOTE_ADDR"],
+                            DataLog = DateTime.Now,
+                            Descricao = "Enviou nova senha para o usuário"
+                        };
+
+                        using (var conn = new HttpService<Log>())
+                        {
+                            conn.ExecuteService(log, "api/log/salvar");
+                        };
+
                         Mail.EnviarSenha(usuarioAlterado, password, Request.ServerVariables["REMOTE_ADDR"]);
 
                         return Json(new MensagemRetorno { Id = usuarioAlterado.UsuarioId, Sucesso = true, Mensagem = "Email enviado com sucesso!" });
@@ -309,7 +343,7 @@ namespace Sigv.Web.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Usuário não localizado!", Erro = ex.Message });
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
     }

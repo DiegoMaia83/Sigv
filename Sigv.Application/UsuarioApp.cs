@@ -152,7 +152,7 @@ namespace Sigv.Application
                 {
                     var usuarioDb = usuarios.GetAll().Where(x => x.UsuarioId == usuario.UsuarioId).FirstOrDefault();
                     usuarioDb.Password = usuario.Password;
-                    usuarioDb.DataExpira = DateTime.Now;
+                    usuarioDb.DataExpira = DateTime.Now.AddMonths(2);
 
                     usuarios.Atualizar(usuarioDb);
                     usuarios.SalvarTodos();

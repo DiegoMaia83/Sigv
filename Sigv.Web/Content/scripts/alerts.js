@@ -59,3 +59,21 @@ var JsAlertError = function (mensagem, div, setTimeOut, callback) {
 $("#server-response-close").click(function () {
     $("#server-response").hide("fast");
 });
+
+var loadingButton = function (button, text) {
+
+    button.attr('disabled', 'disabled');
+
+    var str = '';
+    str += '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + text;
+
+    button.html(str);
+
+};
+
+var recoveryButton = function (button, text) {
+
+    button.removeAttr('disabled', 'disabled');
+    button.html(text);
+
+};

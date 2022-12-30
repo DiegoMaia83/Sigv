@@ -6,7 +6,8 @@
 }
 
 html, body {
-    height: 100%;
+    height: 100vh;
+    margin: 0;
 }
 
 .form-switch .form-check-input {
@@ -16,6 +17,16 @@ html, body {
 .form-check-input:checked {
     background-color: var(--color-dark-secondary) !important;
     border-color: var(--color-dark-secondary) !important;
+}
+
+.div-listar {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    outline: 0;    
+    box-shadow: 3px 3px 10px #e4e4e4;
+    border: 1px solid #d8e4e6    
 }
 
 
@@ -40,18 +51,6 @@ html, body {
 .row-table:hover {
     background-color: var(--color-light-primary);
     transition: 0.5s;
-}
-
-@media screen and (max-width: 1280px) {
-    .row-table-3 {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .row-table-2 {
-        display: none;
-    }
 }
 
 
@@ -81,8 +80,49 @@ html, body {
 }
 
 
-.menu-view {
-      
+.input-readonly {
+    padding: .375rem 0.75rem;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* Ajustes Mobile */
+@media screen and (max-width: 1280px) {
+    .row-table-3 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .row-table-2 {
+        display: none;
+    }
+}
+
+
+
+/* Scroll personalizado */
+/* Works on Firefox */
+.scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #17a2b8 #eeeeee;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: #eeeeee;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: var(--color-dark-secondary);
+    /*border-radius: 20px;*/
+    /*border: 3px solid #ffd800;*/
 }
 
 
