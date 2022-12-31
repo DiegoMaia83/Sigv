@@ -4,29 +4,40 @@
     Layout = null;
 }
 
-<table width="100%">
+@if(Model.Count() > 0)
+{
+    <table class="table table-sm small">
 
-    <tr class="head-table">
-        <td class="row-table-1">Usuário Id</td>
-        <td class="row-table-1">Nome</td>
-        <td class="row-table-2">Login</td>
-        <td class="row-table-2">E-mail</td>
-        <td class="row-table-2">Grupo</td>
-    </tr>
-
-    <tbody>
-        @foreach (var usuario in Model)
-        {
-            <tr class="row-table" onclick="window.location.href = '/Admin/Usuario?Id=@usuario.UsuarioId'">
-                <td class="row-table-1">@usuario.UsuarioId.ToString("0000")</td>
-                <td class="row-table-1">@usuario.Nome</td>
-                <td class="row-table-2">@usuario.Login</td>
-                <td class="row-table-2">@usuario.Email</td>
-                <td class="row-table-2">@usuario.Grupo.Nome</td>
+        <thead>
+            <tr>
+                <td class="responsive-screen-1">Usuário Id</td>
+                <td class="responsive-screen-1">Nome</td>
+                <td class="responsive-screen-2">Login</td>
+                <td class="responsive-screen-2">E-mail</td>
+                <td class="responsive-screen-2">Grupo</td>
             </tr>
-        }
-    </tbody>
+        </thead>  
+
+        <tbody>
+            @foreach (var usuario in Model)
+            {
+                <tr onclick="window.location.href = '/Admin/Usuario?Id=@usuario.UsuarioId'">
+                    <td class="responsive-screen-1">@usuario.UsuarioId.ToString("0000")</td>
+                    <td class="responsive-screen-1">@usuario.Nome</td>
+                    <td class="responsive-screen-2">@usuario.Login</td>
+                    <td class="responsive-screen-2">@usuario.Email</td>
+                    <td class="responsive-screen-2">@usuario.Grupo.Nome</td>
+                </tr>
+            }
+        </tbody>
 
 
-</table>
+    </table>
+}
+else
+{
+    <span>Nenhum usuário localizado</span>
+}
+
+
 

@@ -30,30 +30,6 @@ html, body {
 }
 
 
-/* Início Table */
-.row-table {
-    background-color: var(--color-dark-secondary);
-    margin-bottom: 5px;
-    cursor: pointer;
-    border-bottom: 5px solid #ffffff;
-    color: #ffffff;
-}
-
-.row-table td {
-    padding: 5px 10px 5px 10px;
-}
-
-.head-table td {
-    
-    color: var(--color-dark-secondary);
-}
-
-.row-table:hover {
-    background-color: var(--color-light-primary);
-    transition: 0.5s;
-}
-
-
 /* Início Menu Lateral */
 #sidebar-menu {
     background-color: var(--color-dark-primary);
@@ -90,13 +66,13 @@ html, body {
 
 /* Ajustes Mobile */
 @media screen and (max-width: 1280px) {
-    .row-table-3 {
+    .responsive-screen-3 {
         display: none;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .row-table-2 {
+    .responsive-screen-2 {
         display: none;
     }
 }

@@ -68,6 +68,7 @@
 
             <button type="button" class="btn btn-warning" id="btnSalvarUsuario">Salvar</button>
             <button type="button" class="btn btn-outline-warning" id="btnEnviarSenha">Enviar Senha</button>
+            <button type="button" class="btn btn-outline-warning" id="btnNovo">Novo</button>
 
         </div>
 
@@ -142,6 +143,12 @@
 
     });
 
+    $("#btnNovo").click(function () {
+
+        window.location.href = "/Admin/Usuario";
+
+    });
+
     var salvarUsuario = function (json) {
 
         $.ajax({
@@ -165,8 +172,8 @@
                     });
                 }
             },
-            error: function () {
-                JsAlertError("Erro ao processar a rotina!", "server-response", false, function () {
+            error: function (xhr, textStatus, error) {
+                JsAlertError("Erro ao processar a rotina! " + error, "server-response", false, function () {
                     // Sem callback
                 });
             },
@@ -200,8 +207,8 @@
                 }
 
             },
-            error: function () {
-                JsAlertError("Erro ao processar a rotina!", "server-response", false, function () {
+            error: function (xhr, textStatus, error) {
+                JsAlertError("Erro ao processar a rotina! " + error, "server-response", false, function () {
                     // Sem callback
                 });
             },
@@ -218,7 +225,7 @@
             url: "/Admin/ListarLogs?processo=" + processo + "&codReferencia=" + codReferencia,
             method: "get",
             beforeSend: function () {
-                loadingButton($("#divListarLogs"), "");                
+                loading($("#divListarLogs"), "carregando ...");                
             },
             success: function (data) {
                 $("#divListarLogs").html(data);

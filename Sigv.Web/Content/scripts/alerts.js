@@ -71,6 +71,14 @@ var loadingButton = function (button, text) {
 
 };
 
+var loading = function (div, text) {
+
+    var str = '';
+    str += '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + text;
+    div.html(str);
+
+};
+
 var recoveryButton = function (button, text) {
 
     button.removeAttr('disabled', 'disabled');

@@ -7,13 +7,7 @@
 
     $(document).ready(function () {
 
-        $.ajax({
-            url: '/Admin/ListarUsuarios',
-            method: 'get',
-            success: function (data) {
-                $('#divListarUsuarios').html(data);
-            }
-        });
+        pesquisarUsuarios();
 
         $("#btnPesquisarUsuarios").click(function () {
 
@@ -35,8 +29,14 @@
             url: '/Admin/PesquisarUsuarios',
             method: 'get',
             data: json,
+            beforeSend: function () {
+                loading($('#divListarUsuarios'), "Aguarde ...")
+            },
             success: function (data) {
                 $('#divListarUsuarios').html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                $("#divListarUsuarios").html("Erro ao processar a rotina! " + error);
             }
         });
 
@@ -79,7 +79,12 @@
 
     </div>
 
-    <div class="col-sm-10" id="divListarUsuarios">
+    <div class="col-sm-10">
+
+        <label>Listar de usuários</label>
+        <div id="divListarUsuarios" class="div-listar scroll">
+
+        </div>
 
     </div>
 
