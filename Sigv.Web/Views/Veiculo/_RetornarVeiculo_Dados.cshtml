@@ -1,0 +1,124 @@
+﻿@model Sigv.Domain.Veiculo
+
+@{
+    Layout = null;
+}
+
+<script>
+
+    $(document).ready(function () {
+
+
+        // Popula o select dos combustíveis
+        popularCombustiveis($("#hidCombustivelId").val());
+
+        // Popula o select das condições
+        popularCondicoes($("#hidCondicaoId").val());
+
+        // Popula o select das espécies
+        popularEspecies($("#hidEspecieId").val());
+
+        // Popula o select dos status
+        popularStatus($("#hidStatusId").val());
+
+    })
+
+</script>
+
+<form id="formUsuario">
+
+    <div class="row">
+
+        <input type="hidden" id="hidCombustivelId" value="@Model.CombustivelId" />
+        <input type="hidden" id="hidCondicaoId" value="@Model.CondicaoId" />
+        <input type="hidden" id="hidEspecieId" value="@Model.EspecieId" />
+        <input type="hidden" id="hidStatusId" value="@Model.StatusId" />
+
+        <div class="col-sm-2">
+            <label>Id</label>
+            <input type="hidden" class="form-control" name="VeiculoId" id="VeiculoId" value="@Model.VeiculoId" />
+            <div class="bg-dark text-light input-readonly">@Model.VeiculoId.ToString("000000")</div>
+        </div>
+
+        <div class="col-sm-3">
+            <label>Marca</label>
+            <input type="text" class="form-control" name="Marca" id="Marca" value="@Model.Marca" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Modelo</label>
+            <input type="text" class="form-control" name="Modelo" id="Modelo" value="@Model.Modelo" />
+        </div>
+
+        <div class="col-sm-2">
+            <label>Ano Fabricação</label>
+            <input type="text" class="form-control" name="AnoFabricacao" id="AnoFabricacao" value="@Model.AnoFabricacao" />
+        </div>
+
+        <div class="col-sm-2">
+            <label>Ano Modelo</label>
+            <input type="text" class="form-control" name="AnoModelo" id="AnoModelo" value="@Model.AnoModelo" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Placa</label>
+            <input type="text" class="form-control" name="Placa" id="Placa" value="@Model.Placa" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Chassi</label>
+            <input type="text" class="form-control" name="Chassi" id="Chassi" value="@Model.Chassi" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Renavam</label>
+            <input type="text" class="form-control" name="Renavam" id="Renavam" value="@Model.Renavam" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Combustível</label>
+            <select class="form-control form-control" id="txCombustivelId">
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label>Condição</label>
+            <select class="form-control form-control" id="txCondicaoId">
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label>Espécie</label>
+            <select class="form-control form-control" id="txEspecieId">
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label>Status</label>
+            <select class="form-control form-control" id="txStatusId">
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label>Data Entrada</label>
+            <input type="text" class="form-control" name="DataEntrada" id="DataEntrada" value="@Model.DataEntrada" />
+        </div>
+
+        <div class="col-sm-12">
+            <label>Observações</label>
+            <textarea class="form-control" name="DataEntrada" id="DataEntrada">@Model.Observacoes</textarea>
+        </div>
+
+
+        <div class="col-sm-12">
+
+            <hr />
+
+            <button type="button" class="btn btn-warning" id="btnSalvarVeiculo">Salvar</button>
+            <button type="button" class="btn btn-outline-warning" id="btnNovo">Novo</button>
+
+        </div>
+
+    </div>
+
+</form>

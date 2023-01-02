@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        var veiculoId = parseInt('@ViewBag.Id');
+
+        retornarVeiculoDados(veiculoId);
+
+    });
+
+    var retornarVeiculoDados = function (veiculoId) {
+
+        $.ajax({
+            url: "/Veiculo/RetornarVeiculoDados?id=" + veiculoId,
+            method: "get",
+            beforeSend: function () {
+                loading($('#divVeiculo'), "Aguarde ...")
+            },
+            success: function (data) {
+                $("#divVeiculo").html(data);
+            }
+        });
+
+    };
+
+
+
+</script>
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <h5>Veículo</h5>
+        <hr />
+    </div>
+
+    <div class="col-sm-12">
+
+        <div id="divVeiculo" class="div-content scroll">
+
+        </div>
+
+    </div>
+
+</div>

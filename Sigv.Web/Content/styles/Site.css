@@ -29,6 +29,16 @@ html, body {
     border: 1px solid #d8e4e6    
 }
 
+.div-content {    
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    padding: 10px;
+    outline: 0;
+    box-shadow: 3px 3px 10px #e4e4e4;
+    border: 1px solid #d8e4e6
+}
+
 
 /* Início Menu Lateral */
 #sidebar-menu {

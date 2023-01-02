@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\scripts\alerts.js" />
+    <Content Include="Content\scripts\comum.js" />
     <Content Include="Content\scripts\font-awesome.js" />
     <Content Include="Content\scripts\funcoes.js" />
     <Content Include="Content\scripts\jquery-3.6.1.js" />
@@ -142,6 +143,8 @@
     <Content Include="Views\Admin\_ListarUsuarios.cshtml" />
     <Content Include="Views\Admin\Usuario.cshtml" />
     <Content Include="Views\Admin\_ListarLogs.cshtml" />
+    <Content Include="Views\Veiculo\Index.cshtml" />
+    <Content Include="Views\Veiculo\_RetornarVeiculo_Dados.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

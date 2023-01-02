@@ -44,6 +44,21 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("api/veiculo/pesquisar")]
+        public IEnumerable<Veiculo> Pesquisar(string filtro = "", string param = "", int condicaoId = 0, int statusId = 0, int especieId = 0, string dataEntradaInicial = "", string dataEntradaFinal = "")
+        {
+            try
+            {
+                return _veiculoApp.Pesquisar(filtro, param, condicaoId, statusId, especieId, dataEntradaInicial, dataEntradaFinal);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("api/veiculo/salvar")]
         public Veiculo Salvar(Veiculo veiculo)

@@ -15,5 +15,8 @@ namespace Sigv.Domain
         public string Ip { get; set; }
         public DateTime DataLog { get; set; }
         public string Descricao { get; set; }
+
+        [ForeignKey("UsuarioId")]
+        public virtual Usuario Usuario { get; set; }
     }
 }

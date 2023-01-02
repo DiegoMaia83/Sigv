@@ -170,6 +170,7 @@ namespace Sigv.Web.Controllers
             }
         }
 
+        [Filtro(Roles = "1")]
         public ActionResult Usuario(int id = 0)
         {
             try
@@ -183,6 +184,21 @@ namespace Sigv.Web.Controllers
                         usuario = srv.ReturnService("api/usuario/retornar?usuarioId=" + id);
                     }
                 }
+
+                var log = new Log
+                {
+                    CodReferencia = usuario.UsuarioId,
+                    Processo = "Usuario",
+                    UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                    Ip = Request.ServerVariables["REMOTE_ADDR"],
+                    DataLog = DateTime.Now,
+                    Descricao = "Acessou o cadastro do usuário"
+                };
+
+                using (var conn = new HttpService<Log>())
+                {
+                    conn.ExecuteService(log, "api/log/salvar");
+                };
 
                 return View(usuario);
             }

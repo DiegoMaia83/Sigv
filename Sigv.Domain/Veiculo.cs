@@ -29,7 +29,7 @@ namespace Sigv.Domain
         public virtual VeiculoCombustivel Combustivel { get; set; }
 
         [ForeignKey("CondicaoId")]
-        public virtual VeiculoEspecie Condicao { get; set; }
+        public virtual VeiculoCondicao Condicao { get; set; }
 
         [ForeignKey("EspecieId")]
         public virtual VeiculoEspecie Especie { get; set; }

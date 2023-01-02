@@ -33,7 +33,12 @@
                 loading($('#divListarUsuarios'), "Aguarde ...")
             },
             success: function (data) {
-                $('#divListarUsuarios').html(data);
+                if (data.Sucesso == false) {
+                    $("#divListarUsuarios").html(data.Mensagem);                    
+                }
+                else {
+                    $('#divListarUsuarios').html(data);
+                }
             },
             error: function (xhr, textStatus, error) {
                 $("#divListarUsuarios").html("Erro ao processar a rotina! " + error);

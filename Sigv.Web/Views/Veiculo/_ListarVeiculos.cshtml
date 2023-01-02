@@ -6,35 +6,35 @@
 
 <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
 
-<table width="100%">
+<table class="table table-sm small">
 
-    <tr class="head-table">
-        <td class="row-table-1">Veículo Id</td>
-        <td class="row-table-1">Marca</td>
-        <td class="row-table-2">Ano</td>
-        <td class="row-table-1">Placa</td>
-        <td class="row-table-3">Chassi</td>
-        <td class="row-table-3">Cor</td>
-        <td class="row-table-3">Combustível</td>
-        <td class="row-table-3">Espécie</td>
-        <td class="row-table-2">Condição</td>
-        <td class="row-table-2">Status</td>
+    <tr>
+        <td class="responsive-screen-1">Veículo Id</td>
+        <td class="responsive-screen-1">Marca</td>
+        <td class="responsive-screen-2">Ano</td>
+        <td class="responsive-screen-1">Placa</td>
+        <td class="responsive-screen-3">Chassi</td>
+        <td class="responsive-screen-3">Cor</td>
+        <td class="responsive-screen-3">Combustível</td>
+        <td class="responsive-screen">Espécie</td>
+        <td class="responsive-screen-2">Condição</td>
+        <td class="responsive-screen-2">Status</td>
     </tr>
 
     <tbody>
         @foreach (var veiculo in Model)
         {
-            <tr class="row-table">
-                <td class="row-table-1">@veiculo.VeiculoId.ToString("0000")</td>
-                <td class="row-table-1">@veiculo.Marca @veiculo.Modelo</td>
-                <td class="row-table-2">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
-                <td class="row-table-1">@veiculo.Placa</td>
-                <td class="row-table-3">@veiculo.Chassi</td>
-                <td class="row-table-3">Amarelo</td>
-                <td class="row-table-3">@veiculo.Combustivel.Nome</td>
-                <td class="row-table-3">@veiculo.Especie.Nome</td>
-                <td class="row-table-2">@veiculo.Condicao.Nome</td>
-                <td class="row-table-2">@veiculo.Status.Nome</td>
+            <tr onclick="window.location.href = '/Veiculo?Id=@veiculo.VeiculoId'">
+                <td class="responsive-screen-1">@veiculo.VeiculoId.ToString("0000")</td>
+                <td class="responsive-screen-1">@veiculo.Marca @veiculo.Modelo</td>
+                <td class="responsive-screen-2">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
+                <td class="responsive-screen-1">@veiculo.Placa</td>
+                <td class="responsive-screen-3">@veiculo.Chassi</td>
+                <td class="responsive-screene-3">Amarelo</td>
+                <td class="responsive-screen-3">@veiculo.Combustivel.Nome</td>
+                <td class="responsive-screen-3">@veiculo.Especie.Nome</td>
+                <td class="responsive-screen-2">@veiculo.Condicao.Nome</td>
+                <td class="responsive-screen-2">@veiculo.Status.Nome</td>
             </tr>
         }
     </tbody>

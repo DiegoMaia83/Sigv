@@ -2,6 +2,7 @@
 using Sigv.Domain;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,55 @@ namespace Sigv.Application
                 using (var veiculos = new VeiculoRepositorio())
                 {
                     return veiculos.GetAll().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Veiculo> Pesquisar(string filtro = "", string param = "", int condicaoId = 0, int statusId = 0, int especieId = 0, string dataEntradaInicial = "", string dataEntradaFinal = "")
+        {
+            try
+            {
+                using (var veiculos = new VeiculoRepositorio())
+                {
+                    var listaVeiculos = veiculos.GetAll().ToList();
+
+                    if (!String.IsNullOrEmpty(filtro) && !String.IsNullOrEmpty(param))
+                    {
+                        if (filtro == "veiculoId")
+                        {
+                            listaVeiculos = listaVeiculos.Where(x => x.VeiculoId == Convert.ToInt32(param)).ToList();
+                        }
+                        else if (filtro == "placa")
+                        {
+                            listaVeiculos = listaVeiculos.Where(x => x.Placa.Replace("-","").Trim().ToLower().Contains(param.Replace("-", "").Trim().ToLower())).ToList();
+                        }
+                        else if (filtro == "chassi")
+                        {
+                            listaVeiculos = listaVeiculos.Where(x => x.Chassi.Trim().ToLower().Contains(param.Trim().ToLower())).ToList();
+                        }
+                    }
+
+                    if (condicaoId > 0)
+                        listaVeiculos = listaVeiculos.Where(x => x.CondicaoId == condicaoId).ToList();
+
+                    if (especieId > 0)
+                        listaVeiculos = listaVeiculos.Where(x => x.EspecieId == especieId).ToList();
+
+                    if (statusId > 0)
+                        listaVeiculos = listaVeiculos.Where(x => x.StatusId == statusId).ToList();
+
+                    if (!String.IsNullOrEmpty(dataEntradaInicial))
+                        listaVeiculos = listaVeiculos.Where(x => x.DataEntrada >= Convert.ToDateTime(dataEntradaInicial)).ToList();
+
+                    if (!String.IsNullOrEmpty(dataEntradaFinal))
+                        listaVeiculos = listaVeiculos.Where(x => x.DataEntrada >= Convert.ToDateTime(dataEntradaFinal)).ToList();
+
+
+                    return listaVeiculos.ToList();
                 }
             }
             catch (Exception ex)

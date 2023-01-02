@@ -7,21 +7,119 @@
 
     $(document).ready(function () {
 
-        $.ajax({
-            url: '/Veiculo/ListarVeiculos',
-            method: 'get',
-            success: function (data) {
-                $('#divListarVeiculos').html(data);
-            }
+        // Popula o select das condições
+        popularCondicoes();
+
+        // Popula o select das espécies
+        popularEspecies();
+
+        // Popula o select dos status
+        popularStatus();
+
+        // Retorna a pesquisa dos veículos
+        pesquisarVeiculos();
+
+        $("#btnPesquisarVeiculos").click(function () {
+
+            var json = {
+                filtro: $("#txFiltro").val(),
+                param: $("#txParam").val(),
+                condicaoId: $("#txCondicaoId").val(),
+                especieId: $("#txEspecieId").val(),
+                statusId: $("#txStatusId").val(),
+                dataEntradaInicial: $("#txDataEntradaInicial").val(),
+                dataEntradaFinal: $("#txDataEntradaFinal").val()
+            };
+
+            console.log(json);
+
+            pesquisarVeiculos(json);
+
         });
 
     });
 
+    var pesquisarVeiculos = function (json) {
+
+        $.ajax({
+            url: '/Veiculo/PesquisarVeiculos',
+            method: 'get',
+            data: json,
+            beforeSend: function () {
+                loading($('#divListarVeiculos'), "Aguarde ...")
+            },
+            success: function (data) {
+                if (data.Sucesso == false) {
+                    $("#divListarVeiculos").html(data.Mensagem);
+                }
+                else {
+                    $('#divListarVeiculos').html(data);
+                }
+            },
+            error: function (xhr, textStatus, error) {
+                $("#divListarVeiculos").html("Erro ao processar a rotina! " + error);
+            }
+        });
+
+    }     
+
 </script>
 
-<h5>Veículos</h5>
+<div class="row">
 
-<div id="divListarVeiculos">
+    <div class="col-sm-12">
+        <h5>Veículos</h5>
+        <hr />
+    </div>
+
+    <div class="col-sm-2">
+
+        <div class="menu-view">           
+
+            <label>Filtro</label>
+            <select class="form-control form-control-sm" id="txFiltro" style="margin-bottom: 0 !important; ">
+                <option value="veiculoId">Código</option>
+                <option value="placa">Placa</option>
+                <option value="chassi">Chassi</option>
+            </select>            
+            <input type="text" class="form-control form-control-sm" id="txParam" />
+
+            <label>Condição</label>
+            <select class="form-control form-control-sm" id="txCondicaoId">
+            </select>
+
+            <label>Espécie</label>
+            <select class="form-control form-control-sm" id="txEspecieId">
+            </select>
+
+            <label>Status</label>
+            <select class="form-control form-control-sm" id="txStatusId">
+            </select>
+
+            <label>Data Entrada Inicial</label>
+            <input type="date" class="form-control form-control-sm" id="txDataEntradaInicial" />
+
+            <label>Data Entrada Final</label>
+            <input type="date" class="form-control form-control-sm" id="txDataEntradaFinal" />
+
+            <hr />
+
+            <button class="btn btn-outline-dark btn-sm w-100" id="btnPesquisarVeiculos">Pesquisar</button>
+
+        </div>
+
+    </div>
+
+    <div class="col-sm-10">
+
+        <label>Lista de veículos</label>
+        <div id="divListarVeiculos" class="div-listar scroll">
+
+        </div>
+
+    </div>
 
 </div>
+
+
 
