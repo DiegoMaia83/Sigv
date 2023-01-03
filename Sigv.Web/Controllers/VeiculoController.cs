@@ -1,4 +1,5 @@
 ﻿using Sigv.Domain;
+using Sigv.Web.App;
 using Sigv.Web.Services;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Sigv.Web.Controllers
             return View();
         }
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int id = 0)
         {
             ViewBag.Id = id;
 
@@ -93,6 +94,85 @@ namespace Sigv.Web.Controllers
                 throw ex;
             }
         }
+
+        [HttpPost]
+        public ActionResult SalvarVeiculo(Veiculo veiculo)
+        {
+            try
+            {
+                using (var srv = new HttpService<Veiculo>())
+                {
+                    if (veiculo.VeiculoId > 0)
+                    {
+                        var result = srv.ExecuteService(veiculo, "api/veiculo/alterar");
+
+                        if (result.VeiculoId > 0)
+                        {
+                            var log = new Log
+                            {
+                                CodReferencia = result.VeiculoId,
+                                Processo = "Veiculo",
+                                UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                                Ip = Request.ServerVariables["REMOTE_ADDR"],
+                                DataLog = DateTime.Now,
+                                Descricao = "Alterou o cadastro do veículo"
+                            };
+
+                            using (var conn = new HttpService<Log>())
+                            {
+                                conn.ExecuteService(log, "api/log/salvar");
+                            };
+
+                            return Json(new MensagemRetorno { Id = result.VeiculoId, Sucesso = true, Mensagem = "Operação efetuada com sucesso!" });
+                        }
+                        else
+                        {
+                            return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao efetuar a operação!" });
+
+                        }
+                    }
+                    else
+                    {
+
+                        veiculo.UsuCriacaoId = Convert.ToInt32(SessionCookie.Logado.UsuarioId);
+                        veiculo.DataCriacao = DateTime.Now;
+                        veiculo.StatusId = 1;
+
+                        var result = srv.ExecuteService(veiculo, "api/veiculo/salvar");
+
+                        if (result.VeiculoId > 0)
+                        {
+                            var log = new Log
+                            {
+                                CodReferencia = result.VeiculoId,
+                                Processo = "Veiculo",
+                                UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                                Ip = Request.ServerVariables["REMOTE_ADDR"],
+                                DataLog = DateTime.Now,
+                                Descricao = "Inseriu o cadastro do veículo"
+                            };
+
+                            using (var conn = new HttpService<Log>())
+                            {
+                                conn.ExecuteService(log, "api/log/salvar");
+                            };
+
+                            return Json(new MensagemRetorno { Id = result.VeiculoId, Sucesso = true, Mensagem = "Operação efetuada com sucesso!" });
+                        }
+                        else
+                        {
+                            return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao efetuar a operação!" });
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+            }
+        }
+
 
         [HttpGet]
         public JsonResult ListarCondicoes()

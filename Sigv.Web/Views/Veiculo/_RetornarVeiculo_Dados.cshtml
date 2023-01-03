@@ -23,9 +23,118 @@
 
     })
 
+    $("#btnSalvarVeiculo").click(function () {
+        
+        if ($("#Marca").val() == "") {
+            JsAlertError("O campo marca é obrigatório!", "server-response", true, function () {
+                $("#Marca").focus();
+            });
+            return false;
+        };
+
+        if ($("#Modelo").val() == "") {
+            JsAlertError("O campo modelo é obrigatório!", "server-response", true, function () {
+                $("#Modelo").focus();
+            });
+            return false;
+        };
+
+        if ($("#Placa").val() == "") {
+            JsAlertError("O campo placa é obrigatório!", "server-response", true, function () {
+                $("#Placa").focus();
+            });
+            return false;
+        };
+
+        if ($("#AnoFabricacao").val() == "") {
+            JsAlertError("Preencha o ano de fabricação!", "server-response", true, function () {
+                $("#AnoFabricacao").focus();
+            });
+            return false;
+        };
+
+        if ($("#AnoModelo").val() == "") {
+            JsAlertError("Preencha o ano do modelo!", "server-response", true, function () {
+                $("#AnoModelo").focus();
+            });
+            return false;
+        };
+
+        if ($("#txCombustivelId").val() == 0 || $("#txCombustivelId").val() == "") {
+            JsAlertError("Selecione um combustível.", "server-response", true, function () {
+                $("#txCombustivelId").focus();
+            });
+            return false;
+        };
+
+        if ($("#txCondicaoId").val() == 0 || $("#txCondicaoId").val() == "") {
+            JsAlertError("Selecione uma condição.", "server-response", true, function () {
+                $("#txCondicaoId").focus();
+            });
+            return false;
+        };
+
+        if ($("#txEspecieId").val() == 0 || $("#txEspecieId").val() == "") {
+            JsAlertError("Selecione uma espécie.", "server-response", true, function () {
+                $("#txEspecieId").focus();
+            });
+            return false;
+        };
+        
+
+        var json = $("#formVeiculo").serialize();
+
+        console.log(json);
+        //return false;
+
+        salvarVeiculo(json);
+
+    });
+
+
+    $("#btnNovo").click(function () {
+
+        window.location.href = "/Veiculo";
+
+    });
+
+    var salvarVeiculo = function (json) {
+
+        $.ajax({
+            url: '/Veiculo/SalvarVeiculo',
+            method: 'post',
+            data: json,
+            beforeSend: function () {
+                loadingButton($("#btnSalvarVeiculo"), "Salvando ...");
+            },
+            success: function (data) {
+
+                if (data.Id) {
+                    JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                        window.location.href = "/Veiculo/Index?Id=" + data.Id;
+                    });
+                }
+                else {
+                    JsAlertError(data.Mensagem, "server-response", false, function () {
+                        // Sem callback
+                    });
+                }
+            },
+            error: function (xhr, textStatus, error) {
+                JsAlertError("Erro ao processar a rotina! " + error, "server-response", false, function () {
+                    // Sem callback
+                });
+            },
+            complete: function () {
+                recoveryButton($("#btnSalvarVeiculo"), "Salvar");
+            }
+        });
+
+    }
+
 </script>
 
-<form id="formUsuario">
+<form id="formVeiculo">
 
     <div class="row">
 
@@ -33,10 +142,13 @@
         <input type="hidden" id="hidCondicaoId" value="@Model.CondicaoId" />
         <input type="hidden" id="hidEspecieId" value="@Model.EspecieId" />
         <input type="hidden" id="hidStatusId" value="@Model.StatusId" />
+        <input type="hidden" id="hidUsuCriacaoId" name="UsuCriacaoId" value="@Model.UsuCriacaoId" />
+        <input type="hidden" id="hidDataCriacao" name="UsuDataCriacao" value="@Model.DataCriacao" />
+        <input type="hidden" id="VeiculoId" name="VeiculoId" value="@Model.VeiculoId" />
+        <input type="hidden" id="StatusId" name="StatusId" value="@Model.StatusId" />
 
         <div class="col-sm-2">
             <label>Id</label>
-            <input type="hidden" class="form-control" name="VeiculoId" id="VeiculoId" value="@Model.VeiculoId" />
             <div class="bg-dark text-light input-readonly">@Model.VeiculoId.ToString("000000")</div>
         </div>
 
@@ -45,68 +157,80 @@
             <input type="text" class="form-control" name="Marca" id="Marca" value="@Model.Marca" />
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-5">
             <label>Modelo</label>
             <input type="text" class="form-control" name="Modelo" id="Modelo" value="@Model.Modelo" />
         </div>
 
-        <div class="col-sm-2">
-            <label>Ano Fabricação</label>
-            <input type="text" class="form-control" name="AnoFabricacao" id="AnoFabricacao" value="@Model.AnoFabricacao" />
-        </div>
 
         <div class="col-sm-2">
-            <label>Ano Modelo</label>
-            <input type="text" class="form-control" name="AnoModelo" id="AnoModelo" value="@Model.AnoModelo" />
+            <label>Status</label>
+            <div class="bg-dark text-light input-readonly">@(Model.StatusId > 0 ? Model.Status.Nome : "-")</div>
         </div>
 
         <div class="col-sm-3">
             <label>Placa</label>
-            <input type="text" class="form-control" name="Placa" id="Placa" value="@Model.Placa" />
+            <input type="text" class="form-control" name="Placa" id="Placa" value="@Model.Placa" maxlength="9" />
         </div>
 
         <div class="col-sm-3">
             <label>Chassi</label>
-            <input type="text" class="form-control" name="Chassi" id="Chassi" value="@Model.Chassi" />
+            <input type="text" class="form-control" name="Chassi" id="Chassi" value="@Model.Chassi" maxlength="20"/>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-2">
+            <label>Ano Fabricação</label>
+            <select class="form-control" name="AnoFabricacao" id="AnoFabricacao">
+                <option value="">-- Selecione --</option>
+                @for (var ano = DateTime.Now.Year; ano >= 1970; ano--)
+                {
+                    <option value="@ano" @(Model.AnoFabricacao == ano ? "selected" : "")>@ano</option>
+                }
+            </select>            
+        </div>
+
+        <div class="col-sm-2">
+            <label>Ano Modelo</label>
+            <select class="form-control" name="AnoModelo" id="AnoModelo">
+                <option value="">-- Selecione --</option>
+                @for (var ano = DateTime.Now.Year; ano >= 1970; ano--)
+                {
+                    <option value="@ano" @(Model.AnoFabricacao == ano ? "selected" : "")>@ano</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-sm-2">
             <label>Renavam</label>
             <input type="text" class="form-control" name="Renavam" id="Renavam" value="@Model.Renavam" />
         </div>
 
         <div class="col-sm-3">
             <label>Combustível</label>
-            <select class="form-control form-control" id="txCombustivelId">
+            <select class="form-control form-control" name="CombustivelId" id="txCombustivelId">
             </select>
         </div>
 
         <div class="col-sm-3">
             <label>Condição</label>
-            <select class="form-control form-control" id="txCondicaoId">
+            <select class="form-control form-control" name="CondicaoId" id="txCondicaoId">
             </select>
         </div>
 
         <div class="col-sm-3">
             <label>Espécie</label>
-            <select class="form-control form-control" id="txEspecieId">
-            </select>
-        </div>
-
-        <div class="col-sm-3">
-            <label>Status</label>
-            <select class="form-control form-control" id="txStatusId">
+            <select class="form-control form-control" name="EspecieId" id="txEspecieId">
             </select>
         </div>
 
         <div class="col-sm-3">
             <label>Data Entrada</label>
-            <input type="text" class="form-control" name="DataEntrada" id="DataEntrada" value="@Model.DataEntrada" />
+            <input type="date" class="form-control" name="DataEntrada" id="DataEntrada" value="@(Model.DataEntrada.ToString().Contains("0001") ? "0000-00-00" : Model.DataEntrada.ToString("yyyy-MM-dd"))" />
         </div>
 
         <div class="col-sm-12">
             <label>Observações</label>
-            <textarea class="form-control" name="DataEntrada" id="DataEntrada">@Model.Observacoes</textarea>
+            <textarea class="form-control" name="Observacoes" id="Observacoes">@Model.Observacoes</textarea>
         </div>
 
 
@@ -115,7 +239,7 @@
             <hr />
 
             <button type="button" class="btn btn-warning" id="btnSalvarVeiculo">Salvar</button>
-            <button type="button" class="btn btn-outline-warning" id="btnNovo">Novo</button>
+            <button type="button" class="btn btn-outline-warning" id="btnNovo" onclick="window.location.href = '/Veiculo';">Novo</button>
 
         </div>
 
