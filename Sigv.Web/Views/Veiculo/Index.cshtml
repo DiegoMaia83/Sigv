@@ -3,13 +3,70 @@
     ViewBag.Title = "Index";
 }
 
+<div class="row">
+
+    <div class="col-sm-12">
+        <h5>Veículo</h5>
+        <hr />
+    </div>
+
+</div>
+
+<div class="row d-flex flex-row">
+
+    <div class="col-sm-1 d-flex flex-column">
+        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-dados"><i class="fa-solid fa-car"></i><br />Dados</button>
+        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-logs"><i class="fa fa-history"></i><br />Logs</button>
+        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-ocorrencias"><i class="fa-solid fa-flag"></i><br />Ocorr.</button>
+        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-fotos"><i class="fa-solid fa-camera"></i><br />Fotos</button>
+    </div>
+
+    <div class="col-sm-11">
+
+        <div id="divVeiculo" class="div-content scroll">
+
+        </div>
+
+    </div>
+
+</div>
+
 <script>
+
+    window.onload = function () {
+        document.getElementById("btn-veiculo-dados").click();
+    }
 
     $(document).ready(function () {
 
-        var veiculoId = parseInt('@ViewBag.Id');
+        var veiculoId = parseInt('@ViewBag.Id');        
 
-        retornarVeiculoDados(veiculoId);
+        $("#btn-veiculo-dados").click(function () {
+            retornarVeiculoDados(veiculoId);
+        });
+
+        $("#btn-veiculo-logs").click(function () {
+            retornarVeiculoLogs();
+        });
+
+        $("#btn-veiculo-ocorrencias").click(function () {
+            retornarVeiculoOcorrencias();
+        });
+
+        $("#btn-veiculo-fotos").click(function () {
+            retornarVeiculoFotos();
+        });
+
+
+        $(".btn-menu-veiculo").click(function () {
+
+            $(".btn-menu-veiculo").removeClass("btn-outline-secondary");
+            $(".btn-menu-veiculo").removeClass("btn-warning");
+
+            $(".btn-menu-veiculo").addClass("btn-outline-secondary");
+            $(this).removeClass("btn-outline-secondary").addClass("btn-warning");
+
+        });
 
     });
 
@@ -28,21 +85,51 @@
 
     };
 
+    var retornarVeiculoLogs = function () {
+
+        $.ajax({
+            url: "/Veiculo/RetornarVeiculoLogs",
+            method: "get",
+            beforeSend: function () {
+                loading($('#divVeiculo'), "Aguarde ...")
+            },
+            success: function (data) {
+                $("#divVeiculo").html(data);
+            }
+        });
+
+    };
+
+    var retornarVeiculoOcorrencias = function () {
+
+        $.ajax({
+            url: "/Veiculo/RetornarVeiculoOcorrencias",
+            method: "get",
+            beforeSend: function () {
+                loading($('#divVeiculo'), "Aguarde ...")
+            },
+            success: function (data) {
+                $("#divVeiculo").html(data);
+            }
+        });
+
+    };
+
+    var retornarVeiculoFotos = function () {
+
+        $.ajax({
+            url: "/Veiculo/RetornarVeiculoFotos",
+            method: "get",
+            beforeSend: function () {
+                loading($('#divVeiculo'), "Aguarde ...")
+            },
+            success: function (data) {
+                $("#divVeiculo").html(data);
+            }
+        });
+
+    };
+
+ 
+
 </script>
-
-<div class="row">
-
-    <div class="col-sm-12">
-        <h5>Veículo</h5>
-        <hr />
-    </div>
-
-    <div class="col-sm-12">
-
-        <div id="divVeiculo" class="div-content scroll">
-
-        </div>
-
-    </div>
-
-</div>

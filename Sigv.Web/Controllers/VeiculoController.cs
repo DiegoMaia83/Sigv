@@ -47,6 +47,45 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult RetornarVeiculoLogs()
+        {
+            try
+            {
+                return View("_RetornarVeiculo_Logs");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult RetornarVeiculoOcorrencias()
+        {
+            try
+            {
+                return View("_RetornarVeiculo_Ocorrencias");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult RetornarVeiculoFotos()
+        {
+            try
+            {
+                return View("_RetornarVeiculo_Fotos");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         public ActionResult ListarVeiculos()
         {
             try
