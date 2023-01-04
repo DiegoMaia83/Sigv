@@ -5,10 +5,7 @@
     --color-light-gold: #Fbd302;
 }
 
-html, body {
-    height: 100vh;
-    margin: 0;
-}
+
 
 .form-switch .form-check-input {
     border-radius: 3px !important;
@@ -39,19 +36,36 @@ html, body {
     border: 1px solid #d8e4e6
 }
 
+html, body {
+    background-color: aqua;
+    height: 100vh;
+}
+
+#workspace {
+    background-color: antiquewhite;
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+}
 
 /* Início Menu Lateral */
 #sidebar-menu {
     background-color: var(--color-dark-primary);
     color: var(--color-light-primary);
-    height: 100vh;
-    overflow-y: auto;
+    flex-grow: 0;
+    flex-basis: auto;
+}
+
+#body {
+    flex-grow: 1;
+    flex-basis: auto;
 }
 
 .sidebar-menu-item {
     padding: 10px 40px 10px 20px;
     border-bottom: 1px solid #324656;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .sidebar-menu-item:hover {
@@ -59,12 +73,6 @@ html, body {
     color: #ffffff;
     transition: 0.5s;
 }
-
-#body-content {
-    padding: 25px;
-    position: relative;
-}
-
 
 .input-readonly {
     padding: .375rem 0.75rem;

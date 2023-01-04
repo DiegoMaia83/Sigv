@@ -46,11 +46,11 @@
         });
 
         $("#btn-veiculo-logs").click(function () {
-            retornarVeiculoLogs();
+            retornarVeiculoLogs(veiculoId);
         });
 
         $("#btn-veiculo-ocorrencias").click(function () {
-            retornarVeiculoOcorrencias();
+            retornarVeiculoOcorrencias(veiculoId);
         });
 
         $("#btn-veiculo-fotos").click(function () {
@@ -80,36 +80,46 @@
             },
             success: function (data) {
                 $("#divVeiculo").html(data);
+            },
+            error: function () {
+                $("#divVeiculo").html("Houve um erro ao retornar os dados!");
             }
+
         });
 
     };
 
-    var retornarVeiculoLogs = function () {
+    var retornarVeiculoLogs = function (veiculoId) {
 
         $.ajax({
-            url: "/Veiculo/RetornarVeiculoLogs",
+            url: "/Veiculo/RetornarVeiculoLogs?processo=Veiculo&codReferencia=" + veiculoId,
             method: "get",
             beforeSend: function () {
                 loading($('#divVeiculo'), "Aguarde ...")
             },
             success: function (data) {
                 $("#divVeiculo").html(data);
+            },
+            error: function () {
+                $("#divVeiculo").html("Houve um erro ao retornar os dados!");
             }
         });
 
     };
 
-    var retornarVeiculoOcorrencias = function () {
+    var retornarVeiculoOcorrencias = function (veiculoId) {
 
         $.ajax({
-            url: "/Veiculo/RetornarVeiculoOcorrencias",
+            url: "/Veiculo/RetornarVeiculoOcorrencias?veiculoId=" + veiculoId,
             method: "get",
             beforeSend: function () {
                 loading($('#divVeiculo'), "Aguarde ...")
             },
             success: function (data) {
                 $("#divVeiculo").html(data);
+            },
+            error: function () {
+                $("#divVeiculo").html("Houve um erro ao retornar os dados!");
             }
         });
 

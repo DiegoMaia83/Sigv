@@ -1,6 +1,105 @@
 ﻿
 @{
     Layout = null;
+
+    var veiculoId = ViewBag.VeiculoId;
 }
 
-Ocorrencias
+<script>
+
+    var veiculoId = '@veiculoId';
+
+    
+
+    $("#btnSalvarVeiculoOcorrencia").click(function () {
+
+        if ($("#Descricao").val() == "") {
+            JsAlertError("O campo da descrição da ocorrência não pode estar vazio!", "server-response", true, function () {
+                $("#Descricao").focus();
+            });
+            return false;
+        };
+
+        var ocorrencia = {
+            VeiculoId: veiculoId,
+            Descricao: $("#Descricao").val(),
+            DataOcorrencia: $("#DataOcorrencia").val() + " " + $("#HoraOcorrencia").val()
+        }
+
+        salvarVeiculoOcorrencia(ocorrencia);
+
+    });
+
+    var salvarVeiculoOcorrencia = function (ocorrencia) {
+
+        
+
+        $.ajax({
+            url: "/Veiculo/SalvarOcorrencia",
+            method: "post",
+            data: ocorrencia,
+            beforeSend: function () {
+                loadingButton($("#btnSalvarVeiculoOcorrencia"), "Salvando ...");
+            },
+            success: function (data) {                
+                if (data.Id) {
+                    JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                        $("#Descricao").val("");
+                        listarVeiculoOcorrencias(data.Id)
+                    });
+                }
+                else {
+                    JsAlertError(data.Mensagem, "server-response", false, function () {
+                        // Sem callback
+                    });
+                }
+            },
+            error: function (xhr, textStatus, error) {
+                JsAlertError("Erro ao processar a rotina! " + error, "server-response", false, function () {
+                    // Sem callback
+                });
+            },
+            complete: function () {                
+                recoveryButton($("#btnSalvarVeiculoOcorrencia"), "Inserir ocorrência");
+            }
+        });
+
+    }
+
+    var listarVeiculoOcorrencias = function (veiculoId) {
+
+        $.ajax({
+            url: "/Veiculo/ListarOcorrencias?veiculoId=" + veiculoId,
+            method: "get",
+            beforeSend: function () {
+                loading($('#divOcorrencias'), "Aguarde ...");
+            },
+            success: function (data) {
+                $("#divOcorrencias").html(data);
+            },
+            error: function () {
+                $("#divOcorrencias").html("Houve um erro ao retornar os dados!");
+            }
+        });
+    }
+
+    listarVeiculoOcorrencias(veiculoId);
+
+</script>
+
+<div class="row">
+
+    <div class="col-sm-4">
+        <textarea class="form-control" style="height: 160px" name="Descricao" id="Descricao" maxlength="1500"></textarea>
+        <div class="input-group">
+            <input type="date" class="form-control" name="DataOcorrencia" id="DataOcorrencia" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            <input type="time" class="form-control" name="HoraOcorrencia" id="HoraOcorrencia" value="@DateTime.Now.ToString("HH:mm")" />
+        </div>        
+        <button class="btn btn-outline-warning" id="btnSalvarVeiculoOcorrencia">Inserir ocorrência</button>
+    </div>
+
+    <div class="col-sm-8 div-content scroll" style="max-height: 80vh;" id="divOcorrencias">
+        Listar Ocorrencias
+    </div>
+
+</div>

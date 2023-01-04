@@ -129,13 +129,13 @@ namespace Sigv.Application
 
         // Ocorrências //
 
-        public IEnumerable<VeiculoOcorrencia> ListarOcorrencias()
+        public IEnumerable<VeiculoOcorrencia> ListarOcorrencias(int veiculoId)
         {
             try
             {
                 using (var ocorrencias = new VeiculoOcorrenciaRepositorio())
                 {
-                    return ocorrencias.GetAll().ToList();
+                    return ocorrencias.GetAll().Where(x => x.VeiculoId == veiculoId).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace Sigv.Application
             }
         }
 
-        public int SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
+        public VeiculoOcorrencia SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace Sigv.Application
                     ocorrencias.Adicionar(ocorrencia);
                     ocorrencias.SalvarTodos();
 
-                    return ocorrencia.OcorrenciaId;
+                    return ocorrencia;
                 }
             }
             catch (Exception ex)

@@ -1,6 +1,34 @@
-﻿
+﻿@model IEnumerable<Sigv.Domain.Log>
+
 @{
     Layout = null;
 }
 
-Logs
+<table class="table table-sm small">
+
+    <tr>
+        <td class="responsive-screen-1">Log Id</td>
+        <td class="responsive-screen-1">Usuário</td>
+        <td class="responsive-screen-1">IP</td>
+        <td class="responsive-screen-1">Data Log</td>
+        <td class="responsive-screen-1">Hora Log</td>
+        <td class="responsive-screen-1">Descrição</td>
+    </tr>
+
+    <tbody>
+        @foreach (var log in Model.OrderByDescending(x => x.DataLog))
+        {
+            <tr>
+                <td class="responsive-screen-1">@log.LogId</td>
+                <td class="responsive-screen-1">@log.Usuario.Nome</td>
+                <td class="responsive-screen-1">@log.Ip</td>
+                <td class="responsive-screen-1">@log.DataLog.ToShortDateString()</td>
+                <td class="responsive-screen-1">@log.DataLog.ToLongTimeString()</td>
+                <td class="responsive-screen-1">@log.Descricao</td>
+
+            </tr>
+        }
+    </tbody>
+
+
+</table>

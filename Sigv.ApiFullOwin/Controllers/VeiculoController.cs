@@ -94,11 +94,11 @@ namespace Sigv.ApiFullOwin.Controllers
         [Authorize]
         [HttpGet]
         [Route("api/veiculo-ocorrencia/listar")]
-        public IEnumerable<VeiculoOcorrencia> ListarOcorrencias()
+        public IEnumerable<VeiculoOcorrencia> ListarOcorrencias(int veiculoId)
         {
             try
             {
-                return _veiculoApp.ListarOcorrencias();
+                return _veiculoApp.ListarOcorrencias(veiculoId);
             }
             catch (Exception ex)
             {
@@ -109,7 +109,7 @@ namespace Sigv.ApiFullOwin.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/veiculo-ocorrencia/salvar")]
-        public int SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
+        public VeiculoOcorrencia SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
         {
             try
             {

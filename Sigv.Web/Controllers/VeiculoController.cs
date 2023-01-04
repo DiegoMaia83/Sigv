@@ -3,6 +3,7 @@ using Sigv.Web.App;
 using Sigv.Web.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Web.Mvc;
 
@@ -47,11 +48,34 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult RetornarVeiculoLogs()
+        public ActionResult RetornarVeiculoLogs(string processo, int codReferencia)
         {
             try
             {
-                return View("_RetornarVeiculo_Logs");
+                var listaLogs = new List<Log>();
+
+                using (var srv = new HttpService<List<Log>>())
+                {
+                    listaLogs = srv.ReturnService("api/log/listar-logs-processo?processo=" + processo + "&codreferencia=" + codReferencia);
+
+                }
+
+                return View("_RetornarVeiculo_Logs", listaLogs);
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult RetornarVeiculoOcorrencias(int veiculoId)
+        {
+            try
+            {
+                ViewBag.VeiculoId = veiculoId;
+
+                return View("_RetornarVeiculo_Ocorrencias");
             }
             catch (Exception ex)
             {
@@ -60,15 +84,65 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult RetornarVeiculoOcorrencias()
+        public ActionResult ListarOcorrencias(int veiculoId)
         {
             try
             {
-                return View("_RetornarVeiculo_Ocorrencias");
+                var listaOcorrencias = new List<VeiculoOcorrencia>();
+
+                using (var srv = new HttpService<List<VeiculoOcorrencia>>())
+                {
+                    listaOcorrencias = srv.ReturnService("api/veiculo-ocorrencia/listar?veiculoId=" + veiculoId);
+                }
+
+                return View("_ListarOcorrencias", listaOcorrencias);
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
+        {
+            try
+            {
+                ocorrencia.UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId);
+
+                using (var srv = new HttpService<VeiculoOcorrencia>())
+                {
+                    var result = srv.ExecuteService(ocorrencia, "api/veiculo-ocorrencia/salvar");
+
+                    if (result.OcorrenciaId > 0)
+                    {
+                        var log = new Log
+                        {
+                            CodReferencia = result.VeiculoId,
+                            Processo = "Veiculo",
+                            UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                            Ip = Request.ServerVariables["REMOTE_ADDR"],
+                            DataLog = DateTime.Now,
+                            Descricao = "Inseriu uma ocorrência ao veículo"
+                        };
+
+                        using (var conn = new HttpService<Log>())
+                        {
+                            conn.ExecuteService(log, "api/log/salvar");
+                        };
+
+                        return Json(new MensagemRetorno { Id = result.VeiculoId, Sucesso = true, Mensagem = "Operação efetuada com sucesso!" });
+                    }
+                    else
+                    {
+                        return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao efetuar a operação!" });
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
 

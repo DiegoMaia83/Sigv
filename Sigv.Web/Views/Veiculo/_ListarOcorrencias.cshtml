@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Sigv.Domain.VeiculoOcorrencia>
+
+@{
+    Layout = null;
+}
+
+<table class="table table-sm small">
+
+    <tr>
+        <td class="responsive-screen-1">Id</td>
+        <td class="responsive-screen-1">Descrição</td>
+        <td class="responsive-screen-1">Usuário</td>
+        <td class="responsive-screen-1">Data</td>
+    </tr>
+
+    <tbody>
+        @foreach (var ocorrencia in Model)
+        {
+            <tr>
+                <td class="responsive-screen-1">@ocorrencia.OcorrenciaId</td>
+                <td class="responsive-screen-1">@ocorrencia.Descricao</td>
+                <td class="responsive-screen-1">@ocorrencia.Usuario.Login</td>
+                <td class="responsive-screen-1">@ocorrencia.DataOcorrencia.ToString("dd/MM/yyyy hh:MM:ss")</td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
