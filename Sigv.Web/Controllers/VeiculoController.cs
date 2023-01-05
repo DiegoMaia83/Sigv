@@ -4,7 +4,9 @@ using Sigv.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Sigv.Web.Controllers
@@ -147,15 +149,149 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult RetornarVeiculoFotos()
+        public ActionResult RetornarVeiculoFotos(int veiculoId)
         {
             try
             {
+                ViewBag.VeiculoId = veiculoId;
+
                 return View("_RetornarVeiculo_Fotos");
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ListarFotos(int id, string tipo)
+        {
+            try
+            {
+                var lista = new List<VeiculoFoto>();
+
+                using (var srv = new HttpService<List<VeiculoFoto>>())
+                {
+                    lista = srv.ReturnService("api/veiculo-foto/listar-por-tipo?VeiculoId=" + id + "&Tipo=" + tipo);
+                }
+
+                ViewBag.Tipo = tipo;
+
+                return View("_ListarFotos", lista);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public JsonResult SalvarFotos(int veiculoId, string tipo)
+        {
+            try
+            {
+                int arquivosSalvos = 0;
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    HttpPostedFileBase arquivo = Request.Files[i];
+
+                    //Suas validações ......
+
+                    //Salva o arquivo
+                    if (arquivo.ContentLength > 0)
+                    {
+                        var uploadPath = Server.MapPath("~/Content/Uploads");
+                        string caminhoArquivo = Path.Combine(@uploadPath, Path.GetFileName(arquivo.FileName));
+                        string diretorioDestino = Server.MapPath("~/Content/Imagens/" + veiculoId);
+
+                        arquivo.SaveAs(caminhoArquivo);
+                        arquivosSalvos++;
+
+                        var fotoVeiculo = new VeiculoFoto
+                        {
+                            VeiculoId = veiculoId,
+                            Tipo = tipo,
+                            SourcePath = caminhoArquivo,
+                            TargetPath = diretorioDestino,
+                            UsuCriacao = SessionCookie.Logado.Login
+                        };
+
+                        using (var srv = new HttpService<int>())
+                        {
+                            var fotoId = srv.ExecuteService(fotoVeiculo, "api/veiculo-foto/copiar-para-diretorio");
+
+                            var log = new Log()
+                            {
+                                CodReferencia = veiculoId,
+                                Processo = "Veiculo",
+                                UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                                Ip = Request.ServerVariables["REMOTE_ADDR"],
+                                DataLog = DateTime.Now,
+                                Descricao = "Inseriu o arquivo id [ " + fotoId + " ]"
+                            };
+
+                            using (var conn = new HttpService<Log>())
+                            {
+                                conn.ExecuteService(log, "api/log/salvar");
+                            };
+                        }
+
+                    }
+                }
+
+                return Json(new MensagemRetorno { Id = veiculoId, Sucesso = true, Mensagem = arquivosSalvos + " arquivos salvos com sucesso!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!" , Erro = ex.Message });
+            }
+
+        }
+
+        [HttpPost]
+        public JsonResult ExcluirFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                if (foto.FotoId > 0)
+                {
+                    foto.UsuExclusao = SessionCookie.Logado.Login;
+
+                    using (var srv = new HttpService<VeiculoFoto>())
+                    {
+                        var result = srv.ExecuteService(foto, "api/veiculo-foto/remover");
+
+                        if (result.FotoId > 0)
+                        {
+                            var log = new Log()
+                            {
+                                CodReferencia = 2,
+                                Processo = "Veiculo",
+                                UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                                Ip = Request.ServerVariables["REMOTE_ADDR"],
+                                DataLog = DateTime.Now,
+                                Descricao = "Removeu o arquivo id [ " + foto.FotoId + " ]"
+                            };
+
+                            using (var conn = new HttpService<Log>())
+                            {
+                                conn.ExecuteService(log, "api/log/salvar");
+                            };
+                        }
+
+                        return Json(new MensagemRetorno { Id = foto.VeiculoId, Sucesso = true, Mensagem = "Operação realizada com sucesso!" });
+
+                    }
+
+                }
+                else
+                {
+                    return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Arquivo não localizado!" });
+                }
+            }
+            catch (Exception ex) 
+            {
+                return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
 
@@ -285,6 +421,9 @@ namespace Sigv.Web.Controllers
                 return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
+
+
+
 
 
         [HttpGet]

@@ -149,6 +149,7 @@
     <Content Include="Views\Veiculo\_RetornarVeiculo_Ocorrencias.cshtml" />
     <Content Include="Views\Veiculo\_RetornarVeiculo_Fotos.cshtml" />
     <Content Include="Views\Veiculo\_ListarOcorrencias.cshtml" />
+    <Content Include="Views\Veiculo\_ListarFotos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

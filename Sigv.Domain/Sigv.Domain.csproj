@@ -49,6 +49,7 @@
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioGrupo.cs" />
     <Compile Include="Veiculo.cs" />
+    <Compile Include="VeiculoFoto.cs" />
     <Compile Include="VeiculoOcorrencia.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

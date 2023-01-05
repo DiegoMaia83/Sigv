@@ -5,17 +5,6 @@
     --color-light-gold: #Fbd302;
 }
 
-
-
-.form-switch .form-check-input {
-    border-radius: 3px !important;
-}
-
-.form-check-input:checked {
-    background-color: var(--color-dark-secondary) !important;
-    border-color: var(--color-dark-secondary) !important;
-}
-
 .div-listar {
     height: 300px;
     overflow-y: auto;
@@ -37,12 +26,13 @@
 }
 
 html, body {
-    background-color: aqua;
     height: 100vh;
+    margin: 0;
+    overflow: hidden;
 }
 
+/* Div pai que contém o menu lateral e a área do conteúdo */
 #workspace {
-    background-color: antiquewhite;
     height: 100%;
     display: flex;
     flex-flow: row;
@@ -59,6 +49,17 @@ html, body {
 #body {
     flex-grow: 1;
     flex-basis: auto;
+}
+
+#body-header {
+    background-color: var(--color-dark-primary);
+    color: var(--color-light-primary);
+    height: 50px;
+}
+
+#body-content {
+    padding: 25px;
+    height: calc(100vh - 50px);
 }
 
 .sidebar-menu-item {
@@ -89,9 +90,13 @@ html, body {
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 575px) {
     .responsive-screen-2 {
         display: none;
+    }
+
+    html, body {
+        overflow: auto;
     }
 }
 
@@ -118,6 +123,7 @@ html, body {
     /*border-radius: 20px;*/
     /*border: 3px solid #ffd800;*/
 }
+
 
 
 /* Override Bootstrap */
@@ -148,4 +154,13 @@ label {
     border-color: #17a2b8 !important;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+.form-switch .form-check-input {
+    border-radius: 3px !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--color-dark-secondary) !important;
+    border-color: var(--color-dark-secondary) !important;
 }

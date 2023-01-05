@@ -85,3 +85,7 @@ var recoveryButton = function (button, text) {
     button.html(text);
 
 };
+
+var btnSidebarMenu = function () {
+    $("#sidebar-menu").toggle();
+}

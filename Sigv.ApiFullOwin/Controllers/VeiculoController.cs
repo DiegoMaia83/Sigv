@@ -121,6 +121,85 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+
+        // Fotos //
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/veiculo-foto/listar")]
+        public IEnumerable<VeiculoFoto> ListarFotos(int veiculoId)
+        {
+            try
+            {
+                return _veiculoApp.ListarFotos(veiculoId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/veiculo-foto/listar-por-tipo")]
+        public IEnumerable<VeiculoFoto> ListarFotos(int veiculoId, string tipo)
+        {
+            try
+            {
+                return _veiculoApp.ListarFotos(veiculoId, tipo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/veiculo-foto/salvar")]
+        public VeiculoFoto SalvarFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                return _veiculoApp.SalvarFoto(foto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/veiculo-foto/remover")]
+        public VeiculoFoto RemoverFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                return _veiculoApp.RemoverFoto(foto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/veiculo-foto/copiar-para-diretorio")]
+        public int CopiarParaDiretorio(VeiculoFoto arq)
+        {
+            try
+            {
+                return _veiculoApp.CopiarParaDiretorio(arq);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }       
+
+
         [Authorize]
         [HttpGet]
         [Route("api/veiculo/listar-combustiveis")]

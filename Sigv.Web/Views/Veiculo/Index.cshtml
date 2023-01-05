@@ -54,7 +54,7 @@
         });
 
         $("#btn-veiculo-fotos").click(function () {
-            retornarVeiculoFotos();
+            retornarVeiculoFotos(veiculoId);
         });
 
 
@@ -125,13 +125,13 @@
 
     };
 
-    var retornarVeiculoFotos = function () {
+    var retornarVeiculoFotos = function (veiculoId) {
 
         $.ajax({
-            url: "/Veiculo/RetornarVeiculoFotos",
+            url: "/Veiculo/RetornarVeiculoFotos?veiculoId=" + veiculoId,
             method: "get",
             beforeSend: function () {
-                loading($('#divVeiculo'), "Aguarde ...")
+                loading($('#divVeiculo'), "Aguarde ...");
             },
             success: function (data) {
                 $("#divVeiculo").html(data);

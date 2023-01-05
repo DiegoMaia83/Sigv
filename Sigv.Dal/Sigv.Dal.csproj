@@ -110,6 +110,7 @@
     <Compile Include="Repositorio\VeiculoCombustivelRepositorio.cs" />
     <Compile Include="Repositorio\VeiculoCondicaoRepositorio.cs" />
     <Compile Include="Repositorio\VeiculoEspecieRepositorio.cs" />
+    <Compile Include="Repositorio\VeiculoFotoRepositorio.cs" />
     <Compile Include="Repositorio\VeiculoOcorrenciaRepositorio.cs" />
     <Compile Include="Repositorio\VeiculoRepositorio.cs" />
     <Compile Include="Repositorio\VeiculoStatusRepositorio.cs" />

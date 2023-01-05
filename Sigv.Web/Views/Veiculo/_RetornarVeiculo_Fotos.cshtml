@@ -1,6 +1,165 @@
 ﻿
 @{
     Layout = null;
+
+    int veiculoId = ViewBag.VeiculoId;
 }
 
-Fotos
+<div class="row">
+
+    <div class="col-sm-4">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="form-img" method="post" action="" enctype="multipart/form-data">
+                    <input type="hidden" name="VeiculoId" id="VeiculoId" value="@veiculoId" />
+
+                    <input class="form-control form-control-sm" type="file" id="filesUpload" multiple />
+
+                    <select class="form-control form-control-sm mt-2" id="tipoFoto">
+                        <option value="">-- Selecione um tipo --</option>
+                        <option value="PUB">Públicas</option>
+                        <option value="RES">Reservadas</option>
+                        <option value="DOC">Documentos</option>
+                    </select>
+
+                </form>
+            </div>
+
+            <div class="col-sm-12 pt-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSalvarFotos">Inserir fotos</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-sm-8">
+
+        <div class="bt-menu-group mb-2">
+            <button class="btn btn-outline-secondary btn-sm small btn_tipo" id="tipo_PUB">Publicas</button>
+            <button class="btn btn-outline-secondary btn-sm small btn_tipo" id="tipo_RES">Reservadas</button>
+            <button class="btn btn-outline-secondary btn-sm small btn_tipo" id="tipo_DOC">Documentos</button>
+        </div>
+        <div id="mostraFotos"></div>
+
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalFoto" tabindex="-1" role="dialog" aria-labelledby="modalFotoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 0;">
+                <img src="" style="width: 100%;" id="divModalImage" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary btn-sm small" data-dismiss="modal" onclick="closeImageModal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        // Carrega as fotos padrão
+        mostrarFotosVeiculo(parseInt('@veiculoId'), 'PUB');
+        $("#tipo_PUB").removeClass("btn-outline-secondary").addClass("btn-secondary");
+
+        // Remove todas as classes dos botões, e insere a classe selecionada no botão do tipo clicado
+        $(".btn_tipo").click(function () {
+            $(".btn_tipo").removeClass("btn-secondary").addClass("btn-outline-secondary");
+            $(this).removeClass("btn-outline-secondary").addClass("btn-secondary");
+            var tipo = $(this).html();
+            mostrarFotosVeiculo(parseInt('@veiculoId'), tipo.substr(0, 3));
+        });
+
+
+        // -------------- Upload Arquivos ---------------- //
+        // Daqui em diante captura e prepara os arquivos para enviar para o controller
+        var form;
+
+        $("#filesUpload").change(function (event) {
+            form = new FormData();
+
+            for (var i = 0; i < event.target.files.length; i++) {
+                form.append("file" + i, event.target.files[i]);
+            };
+
+        });
+
+        $("#btnSalvarFotos").click(function () {
+
+            if ($("#filesUpload").val() == "") {
+                JsAlertError("Nenhuma imagem selecionada", "server-response", true, function () {
+                    // Sem callback
+                });
+                return false;
+            }
+
+            if ($("#tipoFoto").val() == "") {
+                JsAlertError("Selecione um tipo de foto", "server-response", true, function () {
+                    // Sem callback
+                });
+                return false;
+            }
+
+            form.append("VeiculoId", $("#VeiculoId").val());
+            form.append("Tipo", $("#tipoFoto").val());
+
+            $.ajax({
+                url: "/Veiculo/SalvarFotos",
+                method: "post",
+                enctype: 'multipart/form-data',
+                data: form,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.Sucesso) {
+                        JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                            mostrarFotosVeiculo(data.Id, $("#tipoFoto").val());
+                            $("#filesUpload").val("");
+                            $("#tipoFoto").val("");
+                        });
+                    } else {
+                        JsAlertError(data.Mensagem, "server-response", false, function () {
+                            // Sem callback
+                        });
+                    }
+                }
+            });
+        });
+
+    });
+
+    var mostrarFotosVeiculo = function (veiculoId, tipo) {
+        $.ajax({
+            url: "/Veiculo/ListarFotos",
+            method: "get",
+            data: { Id: veiculoId, Tipo: tipo },
+            beforeSend: function () {
+                loading($('#mostraFotos'), "Aguarde ...");
+            },
+            success: function (data) {
+                $("#mostraFotos").html(data);
+            }
+        })
+    }
+
+    var openImageModal = function (img) {
+        $("#divModalImage").attr("src", img);
+        $("#modalFoto").modal("show");
+    };
+
+    var closeImageModal = function (img) {
+        $("#modalFoto").modal("hide");
+    }
+
+</script>

@@ -3,6 +3,7 @@ using Sigv.Domain;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -163,6 +164,137 @@ namespace Sigv.Application
         }
 
 
+        // Fotos //
+
+        public IEnumerable<VeiculoFoto> ListarFotos(int veiculoId)
+        {
+            try
+            {
+                using (var fotos = new VeiculoFotoRepositorio())
+                {
+                    return fotos.GetAll().Where(x => x.VeiculoId == veiculoId && x.Excluida == false).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<VeiculoFoto> ListarFotos(int veiculoId, string tipo)
+        {
+            try
+            {
+                using (var fotos = new VeiculoFotoRepositorio())
+                {
+                    return fotos.GetAll().Where(x => x.VeiculoId == veiculoId && x.Tipo == tipo && x.Excluida == false).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public VeiculoFoto SalvarFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                using (var fotos = new VeiculoFotoRepositorio())
+                {
+                    fotos.Adicionar(foto);
+                    fotos.SalvarTodos();
+
+                    return foto;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public VeiculoFoto RemoverFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                using (var fotos = new VeiculoFotoRepositorio())
+                {
+                    var fotoDb = fotos.GetAll().Where(x => x.FotoId == foto.FotoId).FirstOrDefault();
+                    fotoDb.Excluida = true;
+                    fotoDb.UsuExclusao = foto.UsuExclusao;
+                    fotoDb.DataExclusao= DateTime.Now;
+
+                    fotos.Atualizar(fotoDb);
+                    fotos.SalvarTodos();
+
+                    return foto;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private int RetornarUltimaInserida(int veiculoId, string tipo)
+        {
+            try
+            {
+                using (var fotos = new VeiculoFotoRepositorio())
+                {
+                    return fotos.GetAll()
+                        .Where(x => x.VeiculoId == veiculoId && x.Tipo == tipo)
+                        .OrderByDescending(x => x.NumeroFoto)
+                        .Select(x => x.NumeroFoto)
+                        .FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int CopiarParaDiretorio(VeiculoFoto arq)
+        {
+            try
+            {
+                var ultimaInserida = RetornarUltimaInserida(arq.VeiculoId, arq.Tipo);
+                var numFoto = ultimaInserida + 1;
+                var extensao = Path.GetExtension(arq.SourcePath);
+                var arquivo = arq.Tipo + arq.VeiculoId.ToString("000000") + "_" + numFoto.ToString("00") + extensao;
+
+                var newFile = Path.Combine(arq.TargetPath, arquivo);
+
+                if (!Directory.Exists(arq.TargetPath))
+                    Directory.CreateDirectory(arq.TargetPath);
+
+
+                if (!File.Exists(newFile))
+                    File.Move(arq.SourcePath, newFile);
+
+
+                var foto = new VeiculoFoto
+                {
+                    VeiculoId = arq.VeiculoId,
+                    NumeroFoto = numFoto,
+                    Tipo = arq.Tipo,
+                    Extensao = extensao,
+                    UsuCriacao = arq.UsuCriacao,
+                    DataCriacao = DateTime.Now
+                };
+
+                var fotoInserida = SalvarFoto(foto);
+
+                return fotoInserida.FotoId;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
 
 
         public IEnumerable<VeiculoCombustivel> ListarCombustiveis()
