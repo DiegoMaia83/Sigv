@@ -228,7 +228,7 @@ namespace Sigv.Application
                     fotos.Atualizar(fotoDb);
                     fotos.SalvarTodos();
 
-                    return foto;
+                    return fotoDb;
                 }
             }
             catch (Exception ex)

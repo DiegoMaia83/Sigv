@@ -79,6 +79,15 @@ var loading = function (div, text) {
 
 };
 
+
+var errorMessage = function (div, text) {
+
+    var str = '';
+    str += '<span><i class="fas fa-ban small"></i> ' + text + '</span>';
+    div.html(str);
+
+};
+
 var recoveryButton = function (button, text) {
 
     button.removeAttr('disabled', 'disabled');

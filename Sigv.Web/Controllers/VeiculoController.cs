@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using static Sigv.Web.App.ConfigProvider;
 
 namespace Sigv.Web.Controllers
 {
@@ -163,6 +164,8 @@ namespace Sigv.Web.Controllers
             }
         }
 
+        [Authorize]
+        [Filtro(Roles = "2")]
         [HttpGet]
         public ActionResult ListarFotos(int id, string tipo)
         {
@@ -185,6 +188,8 @@ namespace Sigv.Web.Controllers
             }
         }
 
+        [Authorize]
+        [Filtro(Roles = "10")]
         [HttpPost]
         public JsonResult SalvarFotos(int veiculoId, string tipo)
         {
@@ -279,7 +284,7 @@ namespace Sigv.Web.Controllers
                             };
                         }
 
-                        return Json(new MensagemRetorno { Id = foto.VeiculoId, Sucesso = true, Mensagem = "Operação realizada com sucesso!" });
+                        return Json(new MensagemRetorno { Id = result.VeiculoId, Sucesso = true, Mensagem = "Operação realizada com sucesso!" });
 
                     }
 

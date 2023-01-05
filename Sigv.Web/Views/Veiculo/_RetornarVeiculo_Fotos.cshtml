@@ -122,17 +122,25 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    if (data.Sucesso) {
-                        JsAlertSuccess(data.Mensagem, "server-response", true, function () {
-                            mostrarFotosVeiculo(data.Id, $("#tipoFoto").val());
-                            $("#filesUpload").val("");
-                            $("#tipoFoto").val("");
-                        });
-                    } else {
+
+                    if (data.Sucesso == false) {
                         JsAlertError(data.Mensagem, "server-response", false, function () {
                             // Sem callback
                         });
-                    }
+                        return false;
+                    } 
+
+                    JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                        mostrarFotosVeiculo(data.Id, $("#tipoFoto").val());
+                        $("#filesUpload").val("");
+                        $("#tipoFoto").val("");
+                    });
+
+                },
+                error: function (xhr, textStatus, error) {
+                    JsAlertError("Houve um erro ao processar a rotina! " + error, "server-response", false, function () {
+                        // Sem callback
+                    });
                 }
             });
         });
@@ -148,7 +156,17 @@
                 loading($('#mostraFotos'), "Aguarde ...");
             },
             success: function (data) {
+
+                if (data.Sucesso == false) {
+                    errorMessage($('#mostraFotos'), data.Mensagem);
+                    return false;
+                }
+
                 $("#mostraFotos").html(data);
+
+            },
+            error: function (xhr, textStatus, error) {
+                errorMessage($('#mostraFotos'), "Houve um erro ao processar a rotina! " + error);
             }
         })
     }
