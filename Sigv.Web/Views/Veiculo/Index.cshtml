@@ -81,8 +81,8 @@
             success: function (data) {
                 $("#divVeiculo").html(data);
             },
-            error: function () {
-                $("#divVeiculo").html("Houve um erro ao retornar os dados!");
+            error: function (xhr, textStatus, error) {
+                errorMessage($('#divVeiculo'), "Houve um erro ao processar a rotina! " + error);
             }
 
         });
@@ -100,8 +100,8 @@
             success: function (data) {
                 $("#divVeiculo").html(data);
             },
-            error: function () {
-                $("#divVeiculo").html("Houve um erro ao retornar os dados!");
+            error: function (xhr, textStatus, error) {
+                errorMessage($('#divVeiculo'), "Houve um erro ao processar a rotina! " + error);
             }
         });
 
@@ -118,8 +118,8 @@
             success: function (data) {
                 $("#divVeiculo").html(data);
             },
-            error: function () {
-                $("#divVeiculo").html("Houve um erro ao retornar os dados!");
+            error: function (xhr, textStatus, error) {
+                errorMessage($('#divVeiculo'), "Houve um erro ao processar a rotina! " + error);
             }
         });
 
@@ -135,6 +135,9 @@
             },
             success: function (data) {
                 $("#divVeiculo").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                errorMessage($('#divVeiculo'), "Houve um erro ao processar a rotina! " + error);
             }
         });
 

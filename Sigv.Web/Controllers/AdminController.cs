@@ -15,6 +15,8 @@ namespace Sigv.Web.Controllers
     {
         private readonly ComumApp _comumAplicacao = new ComumApp();
 
+        // ----- Permissões ----- //
+
         public ActionResult Permissoes()
         {
             return View();
@@ -122,6 +124,9 @@ namespace Sigv.Web.Controllers
                 return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
+
+
+        // ----- Usuários ----- //
 
         public ActionResult Usuarios()
         {
@@ -293,6 +298,8 @@ namespace Sigv.Web.Controllers
             }
         }
 
+        [HttpGet]
+        [Filtro(Roles = "12")]
         public ActionResult ListarLogs(string processo, int codReferencia)
         {
             try

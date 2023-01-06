@@ -10,6 +10,7 @@ namespace Sigv.Domain
     {
         [Key]
         public int PermissaoId { get; set; }
+        public string Tipo { get; set; }
         public string Descricao { get; set; }
 
         public virtual ICollection<PermissaoGrupo> Grupo { get; set; }

@@ -27,21 +27,6 @@ namespace Sigv.Application
             }
         }
 
-        public List<Veiculo> Listar()
-        {
-            try
-            {
-                using (var veiculos = new VeiculoRepositorio())
-                {
-                    return veiculos.GetAll().ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public List<Veiculo> Pesquisar(string filtro = "", string param = "", int condicaoId = 0, int statusId = 0, int especieId = 0, string dataEntradaInicial = "", string dataEntradaFinal = "")
         {
             try
