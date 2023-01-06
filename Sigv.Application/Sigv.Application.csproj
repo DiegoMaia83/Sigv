@@ -45,6 +45,7 @@
     <Compile Include="PermissaoApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SegurancaApp.cs" />
+    <Compile Include="StatsAplicacao.cs" />
     <Compile Include="UsuarioApp.cs" />
     <Compile Include="Util\AESEncrytDecry.cs" />
     <Compile Include="Util\MD5HashEncryDecry.cs" />

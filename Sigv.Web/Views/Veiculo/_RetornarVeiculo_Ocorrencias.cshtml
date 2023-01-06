@@ -41,21 +41,22 @@
             beforeSend: function () {
                 loadingButton($("#btnSalvarVeiculoOcorrencia"), "Salvando ...");
             },
-            success: function (data) {                
-                if (data.Id) {
-                    JsAlertSuccess(data.Mensagem, "server-response", true, function () {
-                        $("#Descricao").val("");
-                        listarVeiculoOcorrencias(data.Id)
-                    });
-                }
-                else {
+            success: function (data) { 
+
+                if (data.Sucesso == false) {
                     JsAlertError(data.Mensagem, "server-response", false, function () {
                         // Sem callback
                     });
+                    return false;
                 }
+
+                JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                    $("#Descricao").val("");
+                    listarVeiculoOcorrencias(data.Id)
+                });
             },
             error: function (xhr, textStatus, error) {
-                JsAlertError("Erro ao processar a rotina! " + error, "server-response", false, function () {
+                JsAlertError("Houve um erro ao processar a rotina! " + error, "server-response", false, function () {
                     // Sem callback
                 });
             },
@@ -78,7 +79,7 @@
                 $("#divOcorrencias").html(data);
             },
             error: function () {
-                $("#divOcorrencias").html("Houve um erro ao retornar os dados!");
+                errorMessage($('#divOcorrencias'), "Houve um erro ao processar a rotina! " + error);
             }
         });
     }

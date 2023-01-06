@@ -4,8 +4,129 @@
     ViewBag.Title = "Index";
 }
 
-@SessionCookie.Logado.UsuarioId
-@SessionCookie.Logado.Login
-@SessionCookie.Logado.Nome
-@SessionCookie.Logado.GrupoId
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<div class="row">
+
+    <div class="col-sm-4">
+        <h5>Quantidade por Status</h5>
+        <canvas id="qtdVeiculosStatus"></canvas>
+    </div>
+
+    <div class="col-sm-4">
+        <h5>Quantidade por Espécie</h5>
+        <canvas id="qtdVeiculosEspecies"></canvas>
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        retornarStatusVeiculos();
+        retornarEspeciesVeiculos();
+
+    })
+
+    var retornarStatusVeiculos = function () {
+
+        const ctx = document.getElementById('qtdVeiculosStatus');
+
+        $.ajax({
+            url: "/Home/RetornarStatusVeiculos",
+            method: "get",
+            success: function (result) {
+
+                var status = [];
+                var quantidades = [];
+
+                for (var i = 0; i < result.length; i++) {
+                    status[i] = result[i].Status
+                    quantidades[i] = result[i].Quantidade
+                }
+
+                const data = {
+                    labels: status,
+                    datasets: [{
+                        label: 'Quantidade',
+                        data: quantidades,
+                        backgroundColor: [
+                            '#1c68a9',
+                            '#155998',
+                            '#0e4a86'
+                            //#073a75
+                            //#002b63
+                        ]
+                    }]
+                };
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        plugins: {
+                            legend: {
+                                position: 'left'
+                            }
+                        }
+                    }
+                });
+
+            }
+        })
+
+    }
+
+    var retornarEspeciesVeiculos = function () {
+
+        const ctx = document.getElementById('qtdVeiculosEspecies');
+
+        $.ajax({
+            url: "/Home/RetornarEspeciesVeiculos",
+            method: "get",
+            success: function (result) {
+
+                console.log(result);
+
+                var especies = [];
+                var quantidades = [];
+
+                for (var i = 0; i < result.length; i++) {
+                    especies[i] = result[i].Especie
+                    quantidades[i] = result[i].Quantidade
+                }
+
+                const data = {
+                    labels: especies,
+                    datasets: [{
+                        label: 'Quantidade',
+                        data: quantidades,
+                        backgroundColor: [
+                            '#ff8a68',
+                            '#f86852',
+                            '#f0463c',
+                            '#e92325'
+                            //#e1010f
+                        ]
+                    }]
+                };
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        plugins: {
+                            legend: {
+                                position: 'left'
+                            }
+                        }
+                    }
+                });
+
+            }
+        })
+
+    }
+
+</script>

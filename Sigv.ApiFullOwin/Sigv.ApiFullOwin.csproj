@@ -140,6 +140,7 @@
     <Compile Include="ProviderDeTokensDeAcesso.cs" />
     <Compile Include="Seguranca\Acesso.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="StatsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ConnectionStrings.config" />

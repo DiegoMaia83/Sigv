@@ -72,6 +72,11 @@
                     mostrarFotosVeiculo(data.Id, tipo);
                 });
 
+            },
+            error: function (xhr, textStatus, error) {
+                JsAlertError("Houve um erro ao processar a rotina! " + error, "server-response", false, function () {
+                    // Sem callback
+                });
             }
         })
     }

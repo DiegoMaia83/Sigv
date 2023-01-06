@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Sigv.Web.App
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -42,6 +44,10 @@
 
             <div id="body-header">
                 <i class="fa-solid fa-bars" id="btnSidebarMenu" onclick="btnSidebarMenu()"></i>
+                @SessionCookie.Logado.UsuarioId
+                @SessionCookie.Logado.Login
+                @SessionCookie.Logado.Nome
+                @SessionCookie.Logado.GrupoId
             </div>
 
             <div id="server-response" class="server-response-success" style="display: none;">
@@ -53,7 +59,7 @@
                 @RenderBody()
             </div>
 
-            
+
         </div>
     </div>
 

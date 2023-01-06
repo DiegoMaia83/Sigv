@@ -289,7 +289,7 @@ namespace Sigv.Web.Controllers
             {
                 ViewBag.VeiculoId = veiculoId;
 
-                return View("_RetornarVeiculdso_Fotos");
+                return View("_RetornarVeiculo_Fotos");
             }
             catch (Exception ex)
             {

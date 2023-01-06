@@ -84,9 +84,6 @@
 
         var json = $("#formVeiculo").serialize();
 
-        console.log(json);
-        //return false;
-
         salvarVeiculo(json);
 
     });
@@ -109,19 +106,19 @@
             },
             success: function (data) {
 
-                if (data.Id) {
-                    JsAlertSuccess(data.Mensagem, "server-response", true, function () {
-                        window.location.href = "/Veiculo/Index?Id=" + data.Id;
-                    });
-                }
-                else {
+                if (data.Sucesso == false) {
                     JsAlertError(data.Mensagem, "server-response", false, function () {
                         // Sem callback
                     });
+                    return false;
                 }
+
+                JsAlertSuccess(data.Mensagem, "server-response", true, function () {
+                    window.location.href = "/Veiculo/Index?Id=" + data.Id;
+                });
             },
             error: function (xhr, textStatus, error) {
-                JsAlertError("Erro ao processar a rotina! " + error, "server-response", false, function () {
+                JsAlertError("Houve um erro ao processar a rotina! " + error, "server-response", false, function () {
                     // Sem callback
                 });
             },
