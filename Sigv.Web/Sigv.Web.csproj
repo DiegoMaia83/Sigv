@@ -151,6 +151,7 @@
     <Content Include="Views\Veiculo\_ListarOcorrencias.cshtml" />
     <Content Include="Views\Veiculo\_ListarFotos.cshtml" />
     <Content Include="Views\Home\_ListarAcessos.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

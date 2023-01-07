@@ -35,7 +35,7 @@ namespace Sigv.Web.Controllers
                     srv.ExecuteService(acesso, "api/acesso/salvar");
                 }
 
-                return RedirectToAction("../Home/Index");
+                return RedirectToAction("../Home/Dashboard");
             }
 
             ViewBag.MensagemRetorno = loginEfetuado;
