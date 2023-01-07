@@ -18,6 +18,26 @@
         <canvas id="qtdVeiculosEspecies"></canvas>
     </div>
 
+    <div class="col-sm-4">
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-sm-4" id="divListarAcessos">
+
+    </div>
+
+    <div class="col-sm-4">
+
+    </div>
+
+    <div class="col-sm-4">
+
+    </div>
+
 </div>
 
 <script>
@@ -26,6 +46,8 @@
 
         retornarStatusVeiculos();
         retornarEspeciesVeiculos();
+
+        listarAcessos();
 
     })
 
@@ -124,6 +146,18 @@
                     }
                 });
 
+            }
+        })
+
+    }
+
+    var listarAcessos = function () {
+
+        $.ajax({
+            url: "/Home/ListarAcessos",
+            method: "get",
+            success: function (data) {
+                $("#divListarAcessos").html(data);
             }
         })
 

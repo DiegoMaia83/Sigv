@@ -12,7 +12,6 @@ namespace Sigv.ApiFullOwin.Controllers
     public class LogController : ApiController
     {
         private readonly LogAplicacao _logAplicacao = new LogAplicacao();
-
         [Authorize]
         [HttpGet]
         [Route("api/log/listar-logs")]

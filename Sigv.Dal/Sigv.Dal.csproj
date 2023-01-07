@@ -100,6 +100,7 @@
     <Compile Include="Database\ConexaoMySql.cs" />
     <Compile Include="Database\Contexto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorio\AcessoRepositorio.cs" />
     <Compile Include="Repositorio\Base\IRepositorio.cs" />
     <Compile Include="Repositorio\Base\Repositorio.cs" />
     <Compile Include="Repositorio\LogRepositorio.cs" />

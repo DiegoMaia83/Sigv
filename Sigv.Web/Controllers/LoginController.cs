@@ -23,6 +23,17 @@ namespace Sigv.Web.Controllers
 
             if (loginEfetuado.Sucesso)
             {
+                using (var srv = new HttpService<Acesso>())
+                {
+                    var acesso = new Acesso()
+                    {
+                        UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                        Ip = Request.ServerVariables["REMOTE_ADDR"],
+                        Data = DateTime.Now
+                    };
+
+                    srv.ExecuteService(acesso, "api/acesso/salvar");
+                }
 
                 return RedirectToAction("../Home/Index");
             }

@@ -55,5 +55,25 @@ namespace Sigv.Web.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public ActionResult ListarAcessos()
+        {
+            try
+            {
+                var lista = new List<Acesso>();
+
+                using (var srv = new HttpService<List<Acesso>>())
+                {
+                    lista = srv.ReturnService("api/acesso/listar");
+                }
+
+                return View("_ListarAcessos", lista);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

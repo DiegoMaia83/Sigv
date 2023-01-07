@@ -7,11 +7,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Sigv.ApiFullOwin
+namespace Sigv.ApiFullOwin.Controllers
 {
     public class StatsController : ApiController
     {
         private readonly StatsAplicacao _statsAplicacao = new StatsAplicacao();
+        private readonly AcessoAplicacao _acessosAplicacao = new AcessoAplicacao();
 
         [Authorize]
         [HttpGet]
@@ -40,6 +41,36 @@ namespace Sigv.ApiFullOwin
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/acesso/salvar")]
+        public Acesso SalvarAcesso(Acesso acesso)
+        {
+            try
+            {
+                return _acessosAplicacao.Salvar(acesso);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao processar a rotina!", ex);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/acesso/listar")]
+        public IEnumerable<Acesso> ListarAcessos()
+        {
+            try
+            {
+                return _acessosAplicacao.Listar();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao processar a rotina!", ex);
             }
         }
     }

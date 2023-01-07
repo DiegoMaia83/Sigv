@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Sigv.Domain.Acesso>
+
+@{
+    Layout = null;
+}
+<table class="table table-sm small">
+
+    <tr>
+        <td>Acesso Id</td>
+        <td>Usuário</td>
+        <td>Ip</td>
+        <td>Data Acesso</td>
+    </tr>
+
+    @foreach (var acesso in Model.OrderByDescending(x => x.AcessoId))
+    {
+        <tr>
+            <td>@acesso.AcessoId</td>
+            <td>@acesso.Usuario.Login</td>
+            <td>@acesso.Ip</td>
+            <td>@acesso.Data.ToShortTimeString()</td>
+        </tr>
+    }
+
+</table>
+
