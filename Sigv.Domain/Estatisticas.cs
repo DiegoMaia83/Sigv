@@ -18,4 +18,12 @@ namespace Sigv.Domain
         public int EspecieId { get; set; }
         public int Quantidade { get; set; }
     }
+
+    public class StatsPeriodo
+    {
+        public int Mes { get; set; }
+        public int Ano { get; set; }
+        public string MesExtenso { get; set; }
+        public int Quantidade { get; set; }
+    }
 }

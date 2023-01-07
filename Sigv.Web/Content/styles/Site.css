@@ -1,7 +1,7 @@
 ﻿:root {
-    --color-dark-primary: #1c2933;
-    --color-dark-secondary: #778899;
-    --color-light-primary: #b0c4de;
+    --color-dark-primary: #2F515E;
+    --color-dark-secondary: #365C6B;
+    --color-light-primary: #B6D6E3;
     --color-light-gold: #Fbd302;
 }
 
@@ -52,8 +52,11 @@ html, body {
 }
 
 #body-header {
-    background-color: var(--color-dark-primary);
+    background-color: var(--color-dark-secondary);
     color: var(--color-light-primary);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
     height: 50px;
 }
 
@@ -62,9 +65,15 @@ html, body {
     height: calc(100vh - 50px);
 }
 
+.sidebar-menu-logo {
+    padding: 40px 20px 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-dark-secondary);
+}
+
 .sidebar-menu-item {
     padding: 10px 40px 10px 20px;
-    border-bottom: 1px solid #324656;
+    border-bottom: 1px solid var(--color-dark-secondary);
     cursor: pointer;
     white-space: nowrap;
 }

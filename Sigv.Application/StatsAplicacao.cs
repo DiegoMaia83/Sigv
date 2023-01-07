@@ -2,6 +2,7 @@
 using Sigv.Domain;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +62,43 @@ namespace Sigv.Application
                         };
 
                         lista.Add(stats);
+                    }
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<StatsPeriodo> RetornarEntradasPeriodo(int ano)
+        {
+            try
+            {
+                
+                var lista = new List<StatsPeriodo>();
+
+                using (var entradas = new VeiculoRepositorio())
+                {
+                    var listaEntradasAno = entradas.GetAll().Where(x => x.DataEntrada.Year == ano).ToList();
+
+                    for (var i = 1; i <= 12; i++)
+                    {
+                        var mes = new DateTime(ano, i, 1);
+
+                        TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+
+                        var statsMes = new StatsPeriodo
+                        {
+                            Mes = i,
+                            MesExtenso = ti.ToTitleCase(mes.ToString("MMMM")),
+                            Ano = ano,
+                            Quantidade = listaEntradasAno.Where(x => x.DataEntrada.Month == i).Count()
+                        };
+
+                        lista.Add(statsMes);
                     }
                 }
 

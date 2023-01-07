@@ -57,6 +57,26 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpGet]
+        public JsonResult RetornarEntradasPeriodo(int ano)
+        {
+            try
+            {
+                var lista = new List<StatsPeriodo>();
+
+                using (var srv = new HttpService<List<StatsPeriodo>>())
+                {
+                    lista = srv.ReturnService("api/stats/retornar-entradas-periodo?ano=" + ano);
+                }
+
+                return Json(lista.ToArray(), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         public ActionResult ListarAcessos()
         {
             try

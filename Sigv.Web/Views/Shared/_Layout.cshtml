@@ -14,15 +14,17 @@
 
     <script src="~/Content/scripts/comum.js"></script>
 
-
-
-
 </head>
 
 <body>
 
     <div id="workspace">
         <div id="sidebar-menu">
+
+            <div class="sidebar-menu-logo">
+                Logo
+            </div>
+
             <div class="sidebar-menu-item" id="menu-home" onclick="window.location.href = '/Home'">
                 <i class="fa-solid fa-house"></i>&nbsp;&nbsp; Home
             </div>
@@ -43,11 +45,12 @@
         <div id="body">
 
             <div id="body-header">
-                <i class="fa-solid fa-bars" id="btnSidebarMenu" onclick="btnSidebarMenu()"></i>
-                @SessionCookie.Logado.UsuarioId
-                @SessionCookie.Logado.Login
-                @SessionCookie.Logado.Nome
-                @SessionCookie.Logado.GrupoId
+                <div>
+                    <i class="fa-solid fa-bars" id="btnSidebarMenu" onclick="btnSidebarMenu()"></i>
+                </div>
+                <div>
+                    Bem vindo, @SessionCookie.Logado.Nome
+                </div>
             </div>
 
             <div id="server-response" class="server-response-success" style="display: none;">

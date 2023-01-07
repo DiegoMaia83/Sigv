@@ -45,6 +45,21 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("api/stats/retornar-entradas-periodo")]
+        public IEnumerable<StatsPeriodo> RetornarEntradasPeriod(int ano)
+        {
+            try
+            {
+                return _statsAplicacao.RetornarEntradasPeriodo(ano);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("api/acesso/salvar")]
         public Acesso SalvarAcesso(Acesso acesso)
