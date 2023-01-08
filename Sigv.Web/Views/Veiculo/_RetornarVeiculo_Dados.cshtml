@@ -146,38 +146,38 @@
 
         <div class="col-sm-2">
             <label>Id</label>
-            <div class="bg-dark text-light input-readonly">@Model.VeiculoId.ToString("000000")</div>
+            <div class="text-light input-readonly" style="background-color: var(--color-primary-two);">@Model.VeiculoId.ToString("000000")</div>
         </div>
 
         <div class="col-sm-3">
             <label>Marca</label>
-            <input type="text" class="form-control" name="Marca" id="Marca" value="@Model.Marca" />
+            <input type="text" class="form-control form-control-sm" name="Marca" id="Marca" value="@Model.Marca" />
         </div>
 
         <div class="col-sm-5">
             <label>Modelo</label>
-            <input type="text" class="form-control" name="Modelo" id="Modelo" value="@Model.Modelo" />
+            <input type="text" class="form-control form-control-sm" name="Modelo" id="Modelo" value="@Model.Modelo" />
         </div>
 
 
         <div class="col-sm-2">
             <label>Status</label>
-            <div class="bg-dark text-light input-readonly">@(Model.StatusId > 0 ? Model.Status.Nome : "-")</div>
+            <div class="text-light input-readonly" style="background-color: var(--color-primary-two);">@(Model.StatusId > 0 ? Model.Status.Nome : "-")</div>
         </div>
 
         <div class="col-sm-3">
             <label>Placa</label>
-            <input type="text" class="form-control" name="Placa" id="Placa" value="@Model.Placa" maxlength="9" />
+            <input type="text" class="form-control form-control-sm" name="Placa" id="Placa" value="@Model.Placa" maxlength="9" />
         </div>
 
         <div class="col-sm-3">
             <label>Chassi</label>
-            <input type="text" class="form-control" name="Chassi" id="Chassi" value="@Model.Chassi" maxlength="20"/>
+            <input type="text" class="form-control form-control-sm" name="Chassi" id="Chassi" value="@Model.Chassi" maxlength="20"/>
         </div>
 
         <div class="col-sm-2">
             <label>Ano Fabricação</label>
-            <select class="form-control" name="AnoFabricacao" id="AnoFabricacao">
+            <select class="form-control form-control-sm" name="AnoFabricacao" id="AnoFabricacao">
                 <option value="">-- Selecione --</option>
                 @for (var ano = DateTime.Now.Year; ano >= 1970; ano--)
                 {
@@ -188,7 +188,7 @@
 
         <div class="col-sm-2">
             <label>Ano Modelo</label>
-            <select class="form-control" name="AnoModelo" id="AnoModelo">
+            <select class="form-control form-control-sm" name="AnoModelo" id="AnoModelo">
                 <option value="">-- Selecione --</option>
                 @for (var ano = DateTime.Now.Year; ano >= 1970; ano--)
                 {
@@ -199,35 +199,35 @@
 
         <div class="col-sm-2">
             <label>Renavam</label>
-            <input type="text" class="form-control" name="Renavam" id="Renavam" value="@Model.Renavam" />
+            <input type="text" class="form-control form-control-sm" name="Renavam" id="Renavam" value="@Model.Renavam" />
         </div>
 
         <div class="col-sm-3">
             <label>Combustível</label>
-            <select class="form-control form-control" name="CombustivelId" id="txCombustivelId">
+            <select class="form-control form-control-sm" name="CombustivelId" id="txCombustivelId">
             </select>
         </div>
 
         <div class="col-sm-3">
             <label>Condição</label>
-            <select class="form-control form-control" name="CondicaoId" id="txCondicaoId">
+            <select class="form-control form-control-sm" name="CondicaoId" id="txCondicaoId">
             </select>
         </div>
 
         <div class="col-sm-3">
             <label>Espécie</label>
-            <select class="form-control form-control" name="EspecieId" id="txEspecieId">
+            <select class="form-control form-control-sm" name="EspecieId" id="txEspecieId">
             </select>
         </div>
 
         <div class="col-sm-3">
             <label>Data Entrada</label>
-            <input type="date" class="form-control" name="DataEntrada" id="DataEntrada" value="@(Model.DataEntrada.ToString().Contains("0001") ? "0000-00-00" : Model.DataEntrada.ToString("yyyy-MM-dd"))" />
+            <input type="date" class="form-control-sm" name="DataEntrada" id="DataEntrada" value="@(Model.DataEntrada.ToString().Contains("0001") ? "0000-00-00" : Model.DataEntrada.ToString("yyyy-MM-dd"))" />
         </div>
 
         <div class="col-sm-12">
             <label>Observações</label>
-            <textarea class="form-control" name="Observacoes" id="Observacoes">@Model.Observacoes</textarea>
+            <textarea class="form-control form-control-sm" name="Observacoes" id="Observacoes">@Model.Observacoes</textarea>
         </div>
 
 

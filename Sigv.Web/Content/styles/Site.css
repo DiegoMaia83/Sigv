@@ -1,28 +1,63 @@
 ﻿:root {
-    --color-dark-primary: #2F515E;
-    --color-dark-secondary: #365C6B;
-    --color-light-primary: #B6D6E3;
+    --color-primary-one: #1F353D;
+    --color-primary-two: #0E6D8F;
+    --color-primary-three: #86BBCF;
+    --color-primary-four: #B1D4E0;
+
+    --color-secondary-one: #FFE1AE;
+    --color-secondary-two: #FFF8EB;
     --color-light-gold: #Fbd302;
 }
 
-.div-listar {
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    outline: 0;    
-    box-shadow: 3px 3px 10px #e4e4e4;
-    border: 1px solid #d8e4e6    
+
+/* Configuração tabelas */
+table {
+    width: 100%;
+    font-size: small;
 }
 
-.div-content {    
+thead tr {
+    background-color: #ffffff;
+    color: #0E6D8F;
+    border-bottom: 1px solid var(--color-primary-four);
+    cursor: pointer;
+}
+
+tbody tr {
+    background-color: #ffffff;
+    color: #0E6D8F;
+    border-bottom: 1px solid var(--color-primary-four);
+    cursor: pointer;
+}
+
+tbody tr:hover {
+    background-color: var(--color-primary-two);
+    color: #FFF8EB;
+    border: 1px solid var(--color-primary-two);
+    transition: 0.5s;
+}
+
+td, th {
+    padding: 5px;
+}
+
+
+
+
+.div-listar {
+    overflow-y: auto;    
+    /*border-radius: 4px !important;*/
+    border-bottom: 1px solid var(--color-primary-three);
+    border-top: 1px solid var(--color-primary-three);
+    color: var(--color-primary-two);
+}
+
+.div-content {
     overflow-y: auto;
-    overflow-x: hidden;
-    border: 1px solid #ccc;
-    padding: 10px;
-    outline: 0;
-    box-shadow: 3px 3px 10px #e4e4e4;
-    border: 1px solid #d8e4e6
+    padding: 20px;
+    border-radius: 4px !important;
+    border: 1px solid var(--color-primary-three) !important;
+    color: var(--color-primary-two) !important;
 }
 
 html, body {
@@ -40,8 +75,8 @@ html, body {
 
 /* Início Menu Lateral */
 #sidebar-menu {
-    background-color: var(--color-dark-primary);
-    color: var(--color-light-primary);
+    background-color: var(--color-primary-one);
+    color: var(--color-secondary-two);
     flex-grow: 0;
     flex-basis: auto;
 }
@@ -52,8 +87,8 @@ html, body {
 }
 
 #body-header {
-    background-color: var(--color-dark-secondary);
-    color: var(--color-light-primary);
+    background-color: var(--color-primary-two);
+    color: var(--color-secondary-one);
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -68,30 +103,30 @@ html, body {
 .sidebar-menu-logo {
     padding: 40px 20px 40px 20px;
     text-align: center;
-    border-bottom: 1px solid var(--color-dark-secondary);
+    border-bottom: 1px solid var(--color-primary-two);
 }
 
 .sidebar-menu-item {
     padding: 10px 40px 10px 20px;
-    border-bottom: 1px solid var(--color-dark-secondary);
+    border-bottom: 1px solid var(--color-primary-two);
     cursor: pointer;
     white-space: nowrap;
 }
 
 .active {
-    background-color: var(--color-light-primary);
-    color: #ffffff;
+    background-color: var(--color-secondary-one);
+    color: var(--color-primary-one);
     transition: 0.5s;
 }
 
 .sidebar-menu-item:hover {
-    background-color: var(--color-dark-secondary);
+    background-color: var(--color-primary-two);
     color: #ffffff;
     transition: 0.5s;
 }
 
 .input-readonly {
-    padding: .375rem 0.75rem;
+    padding: 0.20rem 0.5rem;
     display: block;
     text-align: center;
     font-weight: bold;
@@ -134,7 +169,7 @@ html, body {
 }
 
 .scroll::-webkit-scrollbar-thumb {
-    background-color: var(--color-dark-secondary);
+    background-color: var(--color-primary-two);
     /*border-radius: 20px;*/
     /*border: 3px solid #ffd800;*/
 }
@@ -143,9 +178,9 @@ html, body {
 
 /* Override Bootstrap */
 input, select, textarea {
-    border-radius: 0px !important;
-    box-shadow: 3px 3px 10px #e4e4e4;
-    border: 1px solid #d8e4e6 !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--color-primary-three) !important;
+    color: var(--color-primary-two) !important;
     margin-bottom: 5px !important;
 }
 
@@ -156,7 +191,7 @@ input, select, textarea {
 
 label {
     margin: 0 !important;
-    color: var(--color-dark-secondary) !important;
+    color: var(--color-primary-two) !important;
 }
 
 .form-group {
@@ -166,9 +201,9 @@ label {
 .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #17a2b8 !important;
+    border-color: var(--color-primary-two) !important;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+    box-shadow: 0 0 0 0.2rem rgb(14 109 143 / 25%) !important;
 }
 
 .form-switch .form-check-input {
@@ -176,6 +211,6 @@ label {
 }
 
 .form-check-input:checked {
-    background-color: var(--color-dark-secondary) !important;
-    border-color: var(--color-dark-secondary) !important;
+    background-color: var(--color-primary-two) !important;
+    border-color: var(--color-primary-two) !important;
 }

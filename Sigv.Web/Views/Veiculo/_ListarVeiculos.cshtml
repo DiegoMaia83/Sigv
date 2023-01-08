@@ -4,42 +4,44 @@
     Layout = null;
 }
 
-<table class="table table-sm small">
+<link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
 
-    <tr>
-        <td class="responsive-screen-1">Veículo Id</td>
-        <td class="responsive-screen-1">Marca</td>
-        <td class="responsive-screen-2">Ano</td>
-        <td class="responsive-screen-1">Placa</td>
-        <td class="responsive-screen-3">Chassi</td>
-        <td class="responsive-screen-3">Cor</td>
-        <td class="responsive-screen-3">Combustível</td>
-        <td class="responsive-screen">Espécie</td>
-        <td class="responsive-screen-2">Condição</td>
-        <td class="responsive-screen-2">Status</td>
-    </tr>
 
-    <tbody>
-        @foreach (var veiculo in Model)
-        {
-            <tr onclick="window.location.href = '/Veiculo?Id=@veiculo.VeiculoId'">
-                <td class="responsive-screen-1">@veiculo.VeiculoId.ToString("0000")</td>
-                <td class="responsive-screen-1">@veiculo.Marca @veiculo.Modelo</td>
-                <td class="responsive-screen-2">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
-                <td class="responsive-screen-1">@veiculo.Placa</td>
-                <td class="responsive-screen-3">@veiculo.Chassi</td>
-                <td class="responsive-screene-3">Amarelo</td>
-                <td class="responsive-screen-3">@veiculo.Combustivel.Nome</td>
-                <td class="responsive-screen-3">@veiculo.Especie.Nome</td>
-                <td class="responsive-screen-2">@veiculo.Condicao.Nome</td>
-                <td class="responsive-screen-2">@veiculo.Status.Nome</td>
+@if(Model.Count() > 0)
+{
+    <table>
+
+        <thead>
+            <tr>
+                <th class="responsive-screen-1">Veículo Id</th>
+                <th class="responsive-screen-1">Marca</th>
+                <th class="responsive-screen-2">Ano</th>
+                <th class="responsive-screen-1">Placa</th>
+                <th class="responsive-screen-3">Chassi</th>
+                <th class="responsive-screen-2">Condição</th>
+                <th class="responsive-screen-2">Status</th>
             </tr>
-        }
-    </tbody>
+        </thead>
+
+        <tbody>
+            @foreach (var veiculo in Model)
+            {
+                <tr onclick="window.location.href = '/Veiculo?Id=@veiculo.VeiculoId'">
+                    <td class="responsive-screen-1">@veiculo.VeiculoId.ToString("0000")</td>
+                    <td class="responsive-screen-1">@veiculo.Marca @veiculo.Modelo</td>
+                    <td class="responsive-screen-2">@($"{veiculo.AnoFabricacao}/{veiculo.AnoModelo}")</td>
+                    <td class="responsive-screen-1">@veiculo.Placa</td>
+                    <td class="responsive-screen-3">@veiculo.Chassi</td>
+                    <td class="responsive-screen-2">@veiculo.Condicao.Nome</td>
+                    <td class="responsive-screen-2">@veiculo.Status.Nome</td>
+                </tr>
+            }
+        </tbody>
 
 
-</table>
-
-
-
-
+    </table>
+}
+else
+{
+    <span>Nenhum resgistro localizado</span>
+}
