@@ -15,15 +15,15 @@
 <div class="row d-flex flex-row">
 
     <div class="col-sm-1 d-flex flex-column">
-        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-dados"><i class="fa-solid fa-car"></i><br />Dados</button>
-        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-logs"><i class="fa fa-history"></i><br />Logs</button>
-        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-ocorrencias"><i class="fa-solid fa-flag"></i><br />Ocorr.</button>
-        <button class="btn btn-outline-secondary btn-menu-veiculo mb-2" id="btn-veiculo-fotos"><i class="fa-solid fa-camera"></i><br />Fotos</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-dados"><i class="fa-solid fa-car"></i><br />Dados</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-logs"><i class="fa fa-history"></i><br />Logs</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-ocorrencias"><i class="fa-solid fa-flag"></i><br />Ocorr.</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-fotos"><i class="fa-solid fa-camera"></i><br />Fotos</button>
     </div>
 
     <div class="col-sm-11">
 
-        <div id="divVeiculo" class="div-content scroll">
+        <div id="divVeiculo" class="div-content scroll" style="max-height: 70vh;">
 
         </div>
 
@@ -60,11 +60,11 @@
 
         $(".btn-menu-veiculo").click(function () {
 
-            $(".btn-menu-veiculo").removeClass("btn-outline-secondary");
-            $(".btn-menu-veiculo").removeClass("btn-warning");
+            $(".btn-menu-veiculo").removeClass("btn-primary");
+            $(".btn-menu-veiculo").removeClass("btn-secondary");
 
-            $(".btn-menu-veiculo").addClass("btn-outline-secondary");
-            $(this).removeClass("btn-outline-secondary").addClass("btn-warning");
+            $(".btn-menu-veiculo").addClass("btn-primary");
+            $(this).removeClass("btn-primary").addClass("btn-secondary");
 
         });
 

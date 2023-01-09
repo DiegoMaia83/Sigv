@@ -1,9 +1,8 @@
 ﻿:root {
-    --color-primary-one: #1F353D;
+    --color-primary-one: #233C45;
     --color-primary-two: #0E6D8F;
     --color-primary-three: #86BBCF;
     --color-primary-four: #B1D4E0;
-
     --color-secondary-one: #FFE1AE;
     --color-secondary-two: #FFF8EB;
     --color-light-gold: #Fbd302;
@@ -13,7 +12,7 @@
 /* Configuração tabelas */
 table {
     width: 100%;
-    font-size: small;
+    font-size: 14px;
 }
 
 thead tr {
@@ -87,8 +86,8 @@ html, body {
 }
 
 #body-header {
-    background-color: var(--color-primary-two);
-    color: var(--color-secondary-one);
+    background-color: var(--color-primary-one);
+    color: var(--color-secondary-two);
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -185,7 +184,7 @@ input, select, textarea {
 }
 
 .btn {
-    border-radius: 0px !important;
+    border-radius: 2px 2px 2px 2px !important;
     padding: 5px 25px 5px 25px !important;
 }
 
@@ -213,4 +212,43 @@ label {
 .form-check-input:checked {
     background-color: var(--color-primary-two) !important;
     border-color: var(--color-primary-two) !important;
+}
+
+
+
+
+.btn-primary {
+    background-color: var(--color-primary-one) !important;
+    color: var(--color-secondary-two) !important;
+    border: var(--bs-btn-border-width) solid var(--color-primary-two) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-two) !important;
+    color: var(--color-secondary-two) !important;
+    border: var(--bs-btn-border-width) solid var(--color-secondary-two) !important;
+}
+
+
+.btn-secondary {
+    background-color: var(--color-secondary-one) !important;
+    color: var(--color-primary-one) !important;
+    border: var(--bs-btn-border-width) solid var(--color-secondary-two) !important;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-two) !important;
+    color: var(--color-primary-one) !important;
+    border: var(--bs-btn-border-width) solid var(--color-secondary-two) !important;
+}
+
+.btn-outline-secondary {
+    color: var(--color-secondary-two) !important;
+    border: var(--bs-btn-border-width) solid var(--color-secondary-two) !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--color-secondary-one) !important;
+    color: var(--color-primary-one) !important;
+    border: var(--bs-btn-border-width) solid var(--color-secondary-two) !important;
 }
