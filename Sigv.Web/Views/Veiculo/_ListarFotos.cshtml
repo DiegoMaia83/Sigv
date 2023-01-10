@@ -24,9 +24,7 @@
 
 </script>
 
-<div class="card">
-
-    <div class="card-body small">
+<div class="div-content">
 
         <div class="row">
 
@@ -35,19 +33,19 @@
                 var arquivo = foto.Tipo + foto.VeiculoId.ToString("000000") + "_" + foto.NumeroFoto.ToString("00") + foto.Extensao;
 
                 <div class="col-sm-3">
-                    <div class="card mb-3">
-                        <img style="width: 100%;" src="~/Content/Imagens/@foto.VeiculoId/@arquivo" onclick="openImageModal($(this).attr('src'))" />
-                        <span class="p-1 text-center">@foto.Tipo ( @foto.NumeroFoto.ToString("00") )</span>
-                        <input type="hidden" id="hidFotoId_@foto.FotoId" value="@foto.FotoId" />
-                        <button class="btn btn-outline-danger btn-sm small" onclick="excluirFoto($('#hidFotoId_@foto.FotoId').val(), '@foto.Tipo')">Excluir</button>
+                    <div class="wrapper">
+                        <img src="~/Content/Imagens/@foto.VeiculoId/@arquivo" style="cursor: pointer;" onclick="openImageModal($(this).attr('src'))" />
                     </div>
+                    <div class="wrapper-label">@foto.Tipo ( @foto.NumeroFoto.ToString("00"))</div>
+                    <input type="hidden" id="hidFotoId_@foto.FotoId" value="@foto.FotoId" />
+                    <i class="fa-solid fa-square-xmark" style="cursor: pointer;" title="Excluir foto" onclick="excluirFoto($('#hidFotoId_@foto.FotoId').val(), '@foto.Tipo')"></i>
                 </div>
 
             }
 
         </div>
 
-    </div>
+
 
 </div>
 

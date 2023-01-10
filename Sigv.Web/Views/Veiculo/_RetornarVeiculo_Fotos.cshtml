@@ -27,7 +27,7 @@
             </div>
 
             <div class="col-sm-12 pt-2">
-                <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSalvarFotos">Inserir fotos</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnSalvarFotos">Inserir fotos</button>
             </div>
         </div>
 
@@ -37,9 +37,9 @@
     <div class="col-sm-8">
 
         <div class="bt-menu-group mb-2">
-            <button class="btn btn-outline-secondary btn-sm small btn_tipo" id="tipo_PUB">Publicas</button>
-            <button class="btn btn-outline-secondary btn-sm small btn_tipo" id="tipo_RES">Reservadas</button>
-            <button class="btn btn-outline-secondary btn-sm small btn_tipo" id="tipo_DOC">Documentos</button>
+            <button class="btn btn-primary btn-sm small btn_tipo" id="tipo_PUB">Publicas</button>
+            <button class="btn btn-primary btn-sm small btn_tipo" id="tipo_RES">Reservadas</button>
+            <button class="btn btn-primary btn-sm small btn_tipo" id="tipo_DOC">Documentos</button>
         </div>
         <div id="mostraFotos"></div>
 
@@ -56,7 +56,7 @@
                 <img src="" style="width: 100%;" id="divModalImage" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary btn-sm small" data-dismiss="modal" onclick="closeImageModal()">Fechar</button>
+                <button type="button" class="btn btn-primary btn-sm small" data-dismiss="modal" onclick="closeImageModal()">Fechar</button>
             </div>
         </div>
     </div>
@@ -70,12 +70,12 @@
 
         // Carrega as fotos padrão
         mostrarFotosVeiculo(parseInt('@veiculoId'), 'PUB');
-        $("#tipo_PUB").removeClass("btn-outline-secondary").addClass("btn-secondary");
+        $("#tipo_PUB").removeClass("btn-primary").addClass("btn-secondary");
 
         // Remove todas as classes dos botões, e insere a classe selecionada no botão do tipo clicado
         $(".btn_tipo").click(function () {
-            $(".btn_tipo").removeClass("btn-secondary").addClass("btn-outline-secondary");
-            $(this).removeClass("btn-outline-secondary").addClass("btn-secondary");
+            $(".btn_tipo").removeClass("btn-secondary").addClass("btn-primary");
+            $(this).removeClass("btn-primary").addClass("btn-secondary");
             var tipo = $(this).html();
             mostrarFotosVeiculo(parseInt('@veiculoId'), tipo.substr(0, 3));
         });
