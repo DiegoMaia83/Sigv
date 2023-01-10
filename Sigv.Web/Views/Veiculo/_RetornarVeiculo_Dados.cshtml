@@ -146,7 +146,7 @@
 
         <div class="col-sm-2">
             <label>Id</label>
-            <div class="text-light input-readonly">@Model.VeiculoId.ToString("000000")</div>
+            <div class="input-readonly">@Model.VeiculoId.ToString("000000")</div>
         </div>
 
         <div class="col-sm-3">
@@ -162,7 +162,7 @@
 
         <div class="col-sm-2">
             <label>Status</label>
-            <div class="text-light input-readonly">@(Model.StatusId > 0 ? Model.Status.Nome : "-")</div>
+            <div class="input-readonly">@(Model.StatusId > 0 ? Model.Status.Nome : "-")</div>
         </div>
 
         <div class="col-sm-3">
@@ -231,9 +231,7 @@
         </div>
 
 
-        <div class="col-sm-12">
-
-            <hr />
+        <div class="col-sm-12 mt-2">
 
             <button type="button" class="btn btn-primary" id="btnSalvarVeiculo">Salvar</button>
             <button type="button" class="btn btn-outline-primary" id="btnNovo" onclick="window.location.href = '/Veiculo';">Novo</button>

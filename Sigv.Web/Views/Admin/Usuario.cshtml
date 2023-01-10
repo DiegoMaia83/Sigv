@@ -21,33 +21,33 @@
 
         <div class="col-sm-2">
             <label>Id</label>
-            <input type="hidden" class="form-control" name="UsuarioId" id="UsuarioId" value="@Model.UsuarioId" />
-            <div class="bg-dark text-light input-readonly">@Model.UsuarioId.ToString("0000")</div>
+            <input type="hidden" class="form-control form-control-sm" name="UsuarioId" id="UsuarioId" value="@Model.UsuarioId" />
+            <div class="input-readonly">@Model.UsuarioId.ToString("0000")</div>
         </div>
 
         <div class="col-sm-4">
             <label>Nome</label>
-            <input type="text" class="form-control" name="Nome" id="Nome" value="@Model.Nome" />
+            <input type="text" class="form-control form-control-sm" name="Nome" id="Nome" value="@Model.Nome" />
         </div>
 
         <div class="col-sm-6">
             <label>Email</label>
-            <input type="email" class="form-control" name="Email" id="Email" value="@Model.Email" />
+            <input type="email" class="form-control form-control-sm" name="Email" id="Email" value="@Model.Email" />
         </div>
 
         <div class="col-sm-3">
             <label>Login</label>
-            <input type="text" class="form-control" name="Login" id="Login" value="@Model.Login" ) />
+            <input type="text" class="form-control form-control-sm" name="Login" id="Login" value="@Model.Login" ) />
         </div>
 
         <div class="col-sm-3">
             <label>Data Expira</label>
-            <input type="text" class="form-control" name="DataExpira" id="DataExpira" value="@(Model.DataExpira.ToShortDateString().Contains("0001") ? "" : Model.DataExpira.ToShortDateString())" readonly disabled />
+            <input type="text" class="form-control form-control-sm" name="DataExpira" id="DataExpira" value="@(Model.DataExpira.ToShortDateString().Contains("0001") ? "" : Model.DataExpira.ToShortDateString())" readonly disabled />
         </div>
 
         <div class="col-sm-4">
             <label>Grupo</label>
-            <select class="form-control" name="GrupoId" id="GrupoId">
+            <select class="form-control form-control-sm" name="GrupoId" id="GrupoId">
                 <option value=""></option>
                 <option value="1" @(Model.GrupoId == 1 ? "selected" : "")>Comum</option>
                 <option value="2" @(Model.GrupoId == 2 ? "selected" : "")>Editor</option>
@@ -62,13 +62,11 @@
             <input type="checkbox" name="Bloqueado" id="Bloqueado" value="true" @(Model.Bloqueado == true ? "checked" : "") />
         </div>
 
-        <div class="col-sm-12">
+        <div class="col-sm-12 mt-2">
 
-            <hr />
-
-            <button type="button" class="btn btn-warning" id="btnSalvarUsuario">Salvar</button>
-            <button type="button" class="btn btn-outline-warning" id="btnEnviarSenha">Enviar Senha</button>
-            <button type="button" class="btn btn-outline-warning" id="btnNovo">Novo</button>
+            <button type="button" class="btn btn-primary" id="btnSalvarUsuario">Salvar</button>
+            <button type="button" class="btn btn-outline-primary" id="btnEnviarSenha">Enviar Senha</button>
+            <button type="button" class="btn btn-outline-primary" id="btnNovo">Novo</button>
 
         </div>
 
@@ -80,7 +78,7 @@
 
     <div class="col-sm-12">
         <h6>Logs</h6>
-        <div class="div-listar scroll" id="divListarLogs"></div>
+        <div class="div-listar scroll" style="height: calc(100vh - 407px);" id="divListarLogs"></div>
 
     </div>
 

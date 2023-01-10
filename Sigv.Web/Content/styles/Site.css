@@ -8,6 +8,14 @@
     --color-light-gold: #Fbd302;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-primary-two) !important;
+}
+
+hr {
+    border-color: var(--color-primary-three) !important;
+    margin: 12px 0px 12px 0px !important;
+}
 
 /* Configuração tabelas */
 table {
@@ -53,6 +61,15 @@ td, th {
     border-radius: 2px !important;
     border: 1px solid var(--color-primary-three) !important;
     color: var(--color-primary-two) !important;
+}
+
+.div-content-2 {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 15px 0px 15px 0px;
+    border-bottom: 1px solid var(--color-primary-three);
+    border-top: 1px solid var(--color-primary-three);
+    color: var(--color-primary-two);
 }
 
 .wrapper {
@@ -155,6 +172,7 @@ html, body {
     font-weight: bold;
     background-color: var(--color-primary-two);
     border-radius: 2px !important;
+    color: var(--color-secondary-two);
 }
 
 
