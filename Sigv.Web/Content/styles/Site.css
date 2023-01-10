@@ -23,25 +23,36 @@ table {
     font-size: 14px;
 }
 
+.cursor-clicker {
+    cursor: pointer;
+}
+
+.cursor-clicker:hover {
+    background-color: var(--color-primary-two);
+    color: #FFF8EB;
+    border: 1px solid var(--color-primary-two);
+    transition: 0.5s;
+}
+
+.cursor-no-clicker {
+    cursor: default;
+}
+
+.cursor-no-clicker:hover {
+    background-color: var(--bs-gray-200);
+    transition: 0.5s;
+}
+
 thead tr {
     background-color: #ffffff;
     color: #0E6D8F;
     border-bottom: 1px solid var(--bs-gray-200);
-    cursor: pointer;
 }
 
 tbody tr {
     background-color: #ffffff;
     color: #0E6D8F;
     border-bottom: 1px solid var(--bs-gray-200);
-    cursor: pointer;
-}
-
-tbody tr:hover {
-    background-color: var(--color-primary-two);
-    color: #FFF8EB;
-    border: 1px solid var(--color-primary-two);
-    transition: 0.5s;
 }
 
 td, th {

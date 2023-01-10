@@ -1,6 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+
+    int veiculoId = ViewBag.Id;
 }
 
 <div class="row">
@@ -16,9 +18,9 @@
 
     <div class="col-sm-1 d-flex flex-column">
         <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-dados"><i class="fa-solid fa-car"></i><br />Dados</button>
-        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-logs"><i class="fa fa-history"></i><br />Logs</button>
-        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-ocorrencias"><i class="fa-solid fa-flag"></i><br />Ocorr.</button>
-        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" id="btn-veiculo-fotos"><i class="fa-solid fa-camera"></i><br />Fotos</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" @(veiculoId == 0 ? "disabled" : "") id="btn-veiculo-logs"><i class="fa fa-history"></i><br />Logs</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" @(veiculoId == 0 ? "disabled" : "") id="btn-veiculo-ocorrencias"><i class="fa-solid fa-flag"></i><br />Ocorr.</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" @(veiculoId == 0 ? "disabled" : "") id="btn-veiculo-fotos"><i class="fa-solid fa-camera"></i><br />Fotos</button>
     </div>
 
     <div class="col-sm-11">
@@ -39,7 +41,7 @@
 
     $(document).ready(function () {
 
-        var veiculoId = parseInt('@ViewBag.Id');        
+        var veiculoId = parseInt('@veiculoId');        
 
         $("#btn-veiculo-dados").click(function () {
             retornarVeiculoDados(veiculoId);

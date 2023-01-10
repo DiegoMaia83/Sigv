@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-@if(Model.Count() > 0)
+@if (Model.Count() > 0)
 {
     <table>
 
@@ -16,12 +16,12 @@
                 <th class="responsive-screen-2">E-mail</th>
                 <th class="responsive-screen-2">Grupo</th>
             </tr>
-        </thead>  
+        </thead>
 
         <tbody>
             @foreach (var usuario in Model)
             {
-                <tr onclick="window.location.href = '/Admin/Usuario?Id=@usuario.UsuarioId'">
+                <tr class="cursor-clicker" onclick="window.location.href = '/Admin/Usuario?Id=@usuario.UsuarioId'">
                     <td class="responsive-screen-1">@usuario.UsuarioId.ToString("0000")</td>
                     <td class="responsive-screen-1">@usuario.Nome</td>
                     <td class="responsive-screen-2">@usuario.Login</td>
@@ -36,8 +36,5 @@
 }
 else
 {
-    <span>Nenhum usuário localizado</span>
+    <span>Nenhum resgistro localizado</span>
 }
-
-
-

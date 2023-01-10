@@ -20,6 +20,7 @@ namespace Sigv.Domain
         public int CondicaoId { get; set; }
         public int StatusId { get; set; }
         public int EspecieId { get; set; }
+        public int CorId { get; set; }
         public DateTime DataEntrada { get; set; }
         public int UsuCriacaoId { get; set; }
         public DateTime DataCriacao { get; set; }
@@ -67,6 +68,14 @@ namespace Sigv.Domain
     {
         [Key]
         public int StatusId { get; set; }
+        public string Nome { get; set; }
+    }
+
+    [Table("veiculos_cor")]
+    public class VeiculoCor
+    {
+        [Key]
+        public int CorId { get; set; }
         public string Nome { get; set; }
     }
 }

@@ -244,5 +244,20 @@ namespace Sigv.ApiFullOwin.Controllers
                 throw ex;
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/veiculo/listar-cores")]
+        public IEnumerable<VeiculoCor> ListarCores()
+        {
+            try
+            {
+                return _veiculoApp.ListarCores();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

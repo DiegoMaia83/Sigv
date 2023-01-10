@@ -91,3 +91,26 @@ var popularStatus = function (selecionado) {
     });
 
 }
+
+var popularCores = function (selecionado) {
+
+    $.ajax({
+        url: "/Veiculo/ListarCores",
+        method: "get",
+        success: function (data) {
+
+            var option = '<option value="0">--- Selecione ---</option>'
+
+            for (var i = 0; i < data.length; i++) {
+
+                var selected = data[i].CorId == selecionado ? "selected" : "";
+
+                option += '<option ' + selected + ' value="' + data[i].CorId + '">' + data[i].Nome + '</option>'
+            }
+
+            $("#txCorId").html(option);
+
+        }
+    });
+
+}

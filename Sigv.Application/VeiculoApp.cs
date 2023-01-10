@@ -341,5 +341,20 @@ namespace Sigv.Application
                 throw ex;
             }
         }
+
+        public IEnumerable<VeiculoCor> ListarCores()
+        {
+            try
+            {
+                using (var cores = new VeiculoCorRepositorio())
+                {
+                    return cores.GetAll().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

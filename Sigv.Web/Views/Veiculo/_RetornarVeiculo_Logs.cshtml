@@ -4,31 +4,39 @@
     Layout = null;
 }
 
-<table>
+@if (Model.Count() > 0)
+{
+    <table>
 
-    <tr>
-        <th class="responsive-screen-1">Log Id</th>
-        <th class="responsive-screen-1">Usuário</th>
-        <th class="responsive-screen-1">IP</th>
-        <th class="responsive-screen-1">Data Log</th>
-        <th class="responsive-screen-1">Hora Log</th>
-        <th class="responsive-screen-1">Descrição</th>
-    </tr>
-
-    <tbody>
-        @foreach (var log in Model.OrderByDescending(x => x.DataLog))
-        {
+        <thead>
             <tr>
-                <td class="responsive-screen-1">@log.LogId</td>
-                <td class="responsive-screen-1">@log.Usuario.Nome</td>
-                <td class="responsive-screen-1">@log.Ip</td>
-                <td class="responsive-screen-1">@log.DataLog.ToShortDateString()</td>
-                <td class="responsive-screen-1">@log.DataLog.ToLongTimeString()</td>
-                <td class="responsive-screen-1">@log.Descricao</td>
-
+                <th class="responsive-screen-1">Log Id</th>
+                <th class="responsive-screen-1">Usuário</th>
+                <th class="responsive-screen-1">IP</th>
+                <th class="responsive-screen-1">Data Log</th>
+                <th class="responsive-screen-1">Hora Log</th>
+                <th class="responsive-screen-1">Descrição</th>
             </tr>
-        }
-    </tbody>
+        </thead>
 
+        <tbody>
+            @foreach (var log in Model.OrderByDescending(x => x.DataLog))
+            {
+                <tr class="cursor-no-clicker">
+                    <td class="responsive-screen-1">@log.LogId</td>
+                    <td class="responsive-screen-1">@log.Usuario.Nome</td>
+                    <td class="responsive-screen-1">@log.Ip</td>
+                    <td class="responsive-screen-1">@log.DataLog.ToShortDateString()</td>
+                    <td class="responsive-screen-1">@log.DataLog.ToLongTimeString()</td>
+                    <td class="responsive-screen-1">@log.Descricao</td>
 
-</table>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <span>Nenhum resgistro localizado</span>
+}

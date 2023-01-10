@@ -21,6 +21,9 @@
         // Popula o select dos status
         popularStatus($("#hidStatusId").val());
 
+        // Popula o select dos status
+        popularCores($("#hidCorId").val());
+
     })
 
     $("#btnSalvarVeiculo").click(function () {
@@ -80,7 +83,13 @@
             });
             return false;
         };
-        
+
+        if ($("#txCorId").val() == 0 || $("#txCorId").val() == "") {
+            JsAlertError("Selecione uma cor.", "server-response", true, function () {
+                $("#txCorId").focus();
+            });
+            return false;
+        };        
 
         var json = $("#formVeiculo").serialize();
 
@@ -139,6 +148,7 @@
         <input type="hidden" id="hidCondicaoId" value="@Model.CondicaoId" />
         <input type="hidden" id="hidEspecieId" value="@Model.EspecieId" />
         <input type="hidden" id="hidStatusId" value="@Model.StatusId" />
+        <input type="hidden" id="hidCorId" value="@Model.CorId" />
         <input type="hidden" id="hidUsuCriacaoId" name="UsuCriacaoId" value="@Model.UsuCriacaoId" />
         <input type="hidden" id="hidDataCriacao" name="UsuDataCriacao" value="@Model.DataCriacao" />
         <input type="hidden" id="VeiculoId" name="VeiculoId" value="@Model.VeiculoId" />
@@ -172,7 +182,7 @@
 
         <div class="col-sm-3">
             <label>Chassi</label>
-            <input type="text" class="form-control form-control-sm" name="Chassi" id="Chassi" value="@Model.Chassi" maxlength="20"/>
+            <input type="text" class="form-control form-control-sm" name="Chassi" id="Chassi" value="@Model.Chassi" maxlength="20" />
         </div>
 
         <div class="col-sm-2">
@@ -183,7 +193,7 @@
                 {
                     <option value="@ano" @(Model.AnoFabricacao == ano ? "selected" : "")>@ano</option>
                 }
-            </select>            
+            </select>
         </div>
 
         <div class="col-sm-2">
@@ -221,6 +231,12 @@
         </div>
 
         <div class="col-sm-3">
+            <label>Cor</label>
+            <select class="form-control form-control-sm" name="CorId" id="txCorId">
+            </select>
+        </div>
+
+        <div class="col-sm-3">
             <label>Data Entrada</label>
             <input type="date" class="form-control form-control-sm" name="DataEntrada" id="DataEntrada" value="@(Model.DataEntrada.ToString().Contains("0001") ? "0000-00-00" : Model.DataEntrada.ToString("yyyy-MM-dd"))" />
         </div>
@@ -233,8 +249,8 @@
 
         <div class="col-sm-12 mt-2">
 
-            <button type="button" class="btn btn-primary" id="btnSalvarVeiculo">Salvar</button>
-            <button type="button" class="btn btn-outline-primary" id="btnNovo" onclick="window.location.href = '/Veiculo';">Novo</button>
+            <button type="button" class="btn btn-primary btn-sm" id="btnSalvarVeiculo">Salvar</button>
+            <button type="button" class="btn btn-outline-primary btn-sm" id="btnNovo" onclick="window.location.href = '/Veiculo';">Novo</button>
 
         </div>
 

@@ -3,24 +3,29 @@
 @{
     Layout = null;
 }
-<table class="table table-sm small">
+<table>
 
-    <tr>
-        <td>Acesso Id</td>
-        <td>Usuário</td>
-        <td>Ip</td>
-        <td>Data Acesso</td>
-    </tr>
-
-    @foreach (var acesso in Model.OrderByDescending(x => x.AcessoId))
-    {
+    <thead>
         <tr>
-            <td>@acesso.AcessoId</td>
-            <td>@acesso.Usuario.Login</td>
-            <td>@acesso.Ip</td>
-            <td>@acesso.Data.ToShortTimeString()</td>
+            <th>Acesso Id</th>
+            <th>Usuário</th>
+            <th>Ip</th>
+            <th>Data Acesso</th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+
+        @foreach (var acesso in Model.OrderByDescending(x => x.AcessoId))
+        {
+            <tr class="cursor-no-clicker">
+                <td>@acesso.AcessoId</td>
+                <td>@acesso.Usuario.Login</td>
+                <td>@acesso.Ip</td>
+                <td>@acesso.Data.ToShortTimeString()</td>
+            </tr>
+        }
+
+    </tbody>
 
 </table>
-

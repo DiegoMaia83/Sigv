@@ -516,5 +516,25 @@ namespace Sigv.Web.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public JsonResult ListarCores()
+        {
+            try
+            {
+                var listaCores = new List<VeiculoCor>();
+
+                using (var srv = new HttpService<List<VeiculoCor>>())
+                {
+                    listaCores = srv.ReturnService("api/veiculo/listar-cores");
+                }
+
+                return Json(listaCores, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
