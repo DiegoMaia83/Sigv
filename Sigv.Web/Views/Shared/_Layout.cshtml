@@ -51,13 +51,14 @@
                     <i class="fa-solid fa-bars" id="btnSidebarMenu" onclick="btnSidebarMenu()"></i>
                 </div>
                 <div>
+                    <button id="btnModalAlterarSenha" class="btn btn-outline-secondary btn-sm">Alterar Senha</button>
                     <button class="btn btn-secondary btn-sm">
                         Bem vindo, @SessionCookie.Logado.Nome
                     </button>
                 </div>
             </div>
 
-            <div id="server-response" class="server-response-success" style="display: none;">
+            <div id="server-response" style="display: none;">
                 <i id="server-response-close" class="fa-solid fa-square-xmark"></i>
                 <span id="server-response-message"></span>
             </div>
@@ -67,6 +68,36 @@
             </div>
 
 
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAlterarSenha" tabindex="-1" role="dialog" aria-labelledby="modalAlterarSenha" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">                
+                <div class="modal-header">
+                    <h5 class="modal-title">Alterar Senha</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div id="server-response-div" style="display: none;">
+                        <i id="server-response-div-close" class="fa-solid fa-square-xmark"></i>
+                        <span id="server-response-div-message"></span>
+                    </div>
+
+                    <label>Senha atual</label>
+                    <input type="text" id="txSenhaAtual" class="form-control form-control-sm" />
+
+                    <label>Nova Senha</label>
+                    <input type="text" id="txSenhaNova" class="form-control form-control-sm" />
+
+                    <button type="button" id="btnAlterarSenha" class="btn btn-primary btn-sm small">Alterar</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm small" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -80,22 +111,26 @@
 <script>
 
     var url_atual = window.location.href;
-    console.log(url_atual);
 
     if (url_atual.indexOf("/Dashboard") != -1) {
         $("#menu-home").addClass("active");
     }
-
-    if (url_atual.indexOf("/Veiculo") != -1) {
+    else if (url_atual.indexOf("/Veiculo") != -1) {
         $("#menu-veiculo").addClass("active");
     }
-
-    if (url_atual.indexOf("/Admin/Permissoes") != -1) {
+    else if (url_atual.indexOf("/Admin/Permissoes") != -1) {
         $("#menu-permissao").addClass("active");
     }
-
-    if (url_atual.indexOf("/Admin/Usuario") != -1) {
+    else if (url_atual.indexOf("/Admin/Usuario") != -1) {
         $("#menu-user").addClass("active");
     }
+
+    $("#btnModalAlterarSenha").click(function () {
+        $("#modalAlterarSenha").modal("show");
+    });
+
+    $("#btnAlterarSenha").click(function () {
+        alterarSenha($("#txSenhaAtual").val(), $("#txSenhaNova").val());
+    });
 
 </script>

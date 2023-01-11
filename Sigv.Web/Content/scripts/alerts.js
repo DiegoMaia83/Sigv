@@ -18,7 +18,6 @@ var JsAlertSuccess = function (mensagem, div, setTimeOut, callback) {
 
 }
 
-
 var JsAlertWarning = function (mensagem, div, setTimeOut, callback) {
 
     var divAlert = '#' + div;
@@ -59,6 +58,71 @@ var JsAlertError = function (mensagem, div, setTimeOut, callback) {
 $("#server-response-close").click(function () {
     $("#server-response").hide("fast");
 });
+
+
+var JsDivSuccess = function (mensagem, div, setTimeOut, callback) {
+
+    var divAlert = '#' + div;
+    var divMessage = divAlert + '-message';
+
+    $(divAlert).removeClass().addClass("server-response-div-success");
+    var msg = mensagem;
+    $(divMessage).html(msg);
+    $(divAlert).show("normal");
+
+    if (setTimeOut) {
+        setTimeout(function () {
+            $(divAlert).hide("normal");
+            callback();
+        }, 2000);
+    }
+
+}
+
+var JsDivWarning = function (mensagem, div, setTimeOut, callback) {
+
+    var divAlert = '#' + div;
+    var divMessage = divAlert + '-message';
+
+    $(divAlert).removeClass().addClass("server-response-div-warning");
+    var msg = mensagem;
+    $(divMessage).html(msg);
+    $(divAlert).show("normal");
+
+    if (setTimeOut) {
+        setTimeout(function () {
+            $(divAlert).hide("normal");
+            callback();
+        }, 2000);
+    }
+
+}
+
+
+var JsDivError = function (mensagem, div, setTimeOut, callback) {
+
+    var divAlert = '#' + div;
+    var divMessage = divAlert + '-message';
+
+    $(divAlert).removeClass().addClass("server-response-div-error");
+    var msg = mensagem;
+    $(divMessage).html(msg);
+    $(divAlert).show("normal");
+
+    if (setTimeOut) {
+        setTimeout(function () {
+            $(divAlert).hide("normal");
+            callback();
+        }, 2000);
+    }
+
+}
+
+$("#server-response-div-close").click(function () {
+    $("#server-response-div").hide("fast");
+});
+
+
 
 var loadingButton = function (button, text) {
 

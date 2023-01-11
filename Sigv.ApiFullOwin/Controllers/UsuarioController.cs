@@ -32,6 +32,21 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [Authorize]
         [HttpGet]
+        [Route("api/usuario/retornar-login")]
+        public Usuario Retornar(string login, string senha)
+        {
+            try
+            {
+                return _usuarioApp.Retornar(login, senha);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
         [Route("api/usuario/listar")]
         public List<Usuario> Listar()
         {

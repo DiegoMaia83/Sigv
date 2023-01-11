@@ -4,6 +4,7 @@ using Sigv.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web;
 using System.Web.Mvc;
@@ -362,6 +363,52 @@ namespace Sigv.Web.Controllers
                     {
                         return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Usuário não localizado!" });
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AlterarSenha(string senhaAtual, string senhaNova)
+        {
+            try
+            {
+                var login = SessionCookie.Logado.Login;
+
+                using (var srv = new HttpService<Usuario>())
+                {
+                    var usuario = srv.ReturnService("api/usuario/retornar-login?login=" + login + "&senha=" + senhaAtual);
+
+                    if (usuario != null)
+                    {
+                        usuario.Password = _comumAplicacao.HashMD5(senhaNova);
+
+                        var usuarioAlterado = srv.ExecuteService(usuario, "api/usuario/alterar-senha");
+
+                        var log = new Log
+                        {
+                            CodReferencia = usuarioAlterado.UsuarioId,
+                            Processo = "Usuario",
+                            UsuarioId = Convert.ToInt32(SessionCookie.Logado.UsuarioId),
+                            Ip = Request.ServerVariables["REMOTE_ADDR"],
+                            DataLog = DateTime.Now,
+                            Descricao = "Usuário alterou a própria senha pelo sistema."
+                        };
+
+                        using (var conn = new HttpService<Log>())
+                        {
+                            conn.ExecuteService(log, "api/log/salvar");
+                        };
+
+                        return Json(new MensagemRetorno { Id = usuarioAlterado.UsuarioId, Sucesso = true, Mensagem = "Senha alterada com sucesso!" });
+                    }
+                    else
+                    {
+                        return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Usuário não localizado!" });
+                    }                    
                 }
             }
             catch (Exception ex)
