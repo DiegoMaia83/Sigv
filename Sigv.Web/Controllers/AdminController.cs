@@ -372,6 +372,7 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpPost]
+        [Filtro(Roles = "3")]
         public ActionResult AlterarSenha(string senhaAtual, string senhaNova)
         {
             try
