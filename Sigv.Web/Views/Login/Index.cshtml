@@ -13,38 +13,42 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Sis Publicidade</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/styles/LoginPage.css">
+    <title>@ViewBag.Title - Login</title>
+    <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Content/scripts/jquery-3.6.1.js"></script>
 
     <style>
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="card">
-            <div class="container-label">Login Page <span></span></div>
+    <div class="login-container">
 
             <div class="container-form">
                 <form class="form-signin" method="post" action="/Login/Index">
                     @Html.AntiForgeryToken()
 
                     <label for="email">E-mail</label>
-                    <input type="text" id="login" name="login" placeholder="Digite o seu e-mail" autofocus />
+                    <input type="text" class="form-control form-control-sm" id="login" name="login" placeholder="Digite o seu e-mail" autofocus />
 
                     <label for="password">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite a sua senha" />
+                    <input type="password" class="form-control form-control-sm" id="senha" name="senha" placeholder="Digite a sua senha" />
 
                     <div class="change-password">
                         Para alterar a senha <a href="">clique aqui</a>
                     </div>
 
-                    <button type="submit">Entrar</button>
+                    <button type="submit" class="btn btn-outline-primary">Entrar</button>
                 </form>
             </div>
-        </div>
+
     </div>
 </body>
 
