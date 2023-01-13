@@ -152,6 +152,7 @@
     <Content Include="Views\Veiculo\_ListarFotos.cshtml" />
     <Content Include="Views\Home\_ListarAcessos.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Login\RecuperarSenha.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

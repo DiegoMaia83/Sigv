@@ -139,6 +139,36 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
 
+        [HttpPost]
+        [Route("api/usuario/alterar-senha-loggedout")]
+        public Usuario AlterarSenhaLoggedOut(Usuario usuario)
+        {
+            try
+            {
+                return _usuarioApp.AlterarSenha(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("api/usuario/recuperar-senha-loggedout")]
+        public Usuario RecuperarSenhaLoggedOut(string login, string email)
+        {
+            try
+            {
+                return _usuarioApp.RecuperarSenha(login, email);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         //  Grupos Usuários  //
 
         [Authorize]

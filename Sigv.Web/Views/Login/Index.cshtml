@@ -12,64 +12,6 @@
     <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Content/scripts/jquery-3.6.1.js"></script>
-
-    <style>
-        .login-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-image: linear-gradient(to right, var(--color-primary-one), var(--color-primary-two));
-        }
-
-        .login-container-alert {
-            background-color: var(--color-secondary-one);
-            border-radius: 4px;
-            border: 1px solid var(--color-secondary-two);
-            padding: 20px;
-            margin-bottom: 10px;
-            max-width: 25vw;
-        }
-
-        .login-container label {
-            color: var(--color-secondary-one) !important;
-        }
-
-        .login-container-form {
-            border: 1px solid rgba(255,225,174,0.4);
-            padding: 30px;
-            border-radius: 4px;
-            background-color: rgba(14,109,143,0.4);
-            min-width: 25vw;
-            max-width: 75vw;
-        }
-
-        .div-recovery-password {
-            text-align: center;
-            color: var(--color-secondary-one);
-        }
-
-        .div-recovery-password a {
-            text-decoration: none;
-        }
-
-        .div-recovery-password a:link {
-            color: var(--color-secondary-one);
-            text-decoration: none;
-        }
-
-        .div-recovery-password a:hover {
-            color: var(--color-secondary-one);
-            text-decoration: underline;
-        }
-
-        .div-recovery-password a:visited {
-            color: var(--color-primary-four);
-            text-decoration: underline;
-        }
-
-
-    </style>
 </head>
 
 <body>
@@ -84,6 +26,8 @@
                     @ViewBag.MensagemRetorno.Mensagem
                 </div>                
             }
+
+            <h5 style="color: var(--color-primary-four) !important;">Efetuar Login</h5>
 
             <div class="login-container-form">
                 <form class="form-signin" method="post" action="/Login/Index">
@@ -100,7 +44,7 @@
             </div>
 
             <div class="div-recovery-password ">
-                Esqueceu a senha ? <a href="">clique aqui</a>
+                Esqueceu a senha ? <a href="/Login/RecuperarSenha">clique aqui</a>
             </div>
         </div>
 

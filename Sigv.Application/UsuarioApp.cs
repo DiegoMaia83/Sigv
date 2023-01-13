@@ -166,6 +166,20 @@ namespace Sigv.Application
             }
         }
 
+        public Usuario RecuperarSenha(string login, string email)
+        {
+            try
+            {
+                using (var usuarios = new UsuarioRepositorio())
+                {
+                    return usuarios.GetAll().Where(x => x.Login == login && x.Email == email).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         //  Grupos Usuários  //
 

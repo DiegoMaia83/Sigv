@@ -9,6 +9,8 @@ namespace Sigv.Web.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly ComumApp _comumAplicacao = new ComumApp();
+
         public ActionResult Index()
         {
             return View();
@@ -41,6 +43,44 @@ namespace Sigv.Web.Controllers
             ViewBag.MensagemRetorno = loginEfetuado;
 
             return View();
+        }
+
+        public ActionResult RecuperarSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RecuperarSenha(string login, string email)
+        {
+            try
+            {
+                using (var srv = new HttpService<Usuario>())
+                {
+                    var str = "api/usuario/recuperar-senha-loggedout?login=" + login + "&email=" + email;
+                    var usuario = srv.ReturnService(str);
+
+                    if (usuario != null)
+                    {
+                        var password = _comumAplicacao.GetRandomPassword();
+                        usuario.Password = _comumAplicacao.HashMD5(password);
+
+                        var usuarioAlterado = srv.ExecuteService(usuario, "api/usuario/alterar-senha-loggedout");
+
+                        Mail.EnviarSenha(usuarioAlterado, password, Request.ServerVariables["REMOTE_ADDR"]);
+
+                        return Json(new MensagemRetorno { Id = usuarioAlterado.UsuarioId, Sucesso = true, Mensagem = "Dados de acesso enviado para o e-mail informado!" });
+                    }
+                    else
+                    {
+                        return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Usuário não localizado!" });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+            }
         }
 
 

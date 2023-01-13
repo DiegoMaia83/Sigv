@@ -234,6 +234,69 @@ html, body {
 
 
 
+
+
+
+
+/* Estilos Tela de Login */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: linear-gradient(to right, var(--color-primary-one), var(--color-primary-two));
+}
+
+#login-container-alert {
+    background-color: var(--color-secondary-one);
+    border-radius: 4px;
+    border: 1px solid var(--color-secondary-two);
+    padding: 20px;
+    margin-bottom: 10px;
+    max-width: 25vw;
+}
+
+.login-container label {
+    color: var(--color-secondary-one) !important;
+}
+
+.login-container-form {
+    border: 1px solid rgba(255,225,174,0.4);
+    padding: 30px;
+    border-radius: 4px;
+    background-color: rgba(14,109,143,0.4);
+    min-width: 25vw;
+    max-width: 75vw;
+}
+
+.div-recovery-password {
+    text-align: center;
+    color: var(--color-secondary-one);
+}
+
+.div-recovery-password a {
+text-decoration: none;
+}
+
+.div-recovery-password a:link {
+    color: var(--color-secondary-one);
+    text-decoration: none;
+}
+
+.div-recovery-password a:hover {
+    color: var(--color-secondary-one);
+    text-decoration: underline;
+}
+
+.div-recovery-password a:visited {
+    color: var(--color-primary-four);
+    text-decoration: underline;
+}
+
+
+
+
+
 /* Override Bootstrap */
 input, select, textarea {
     border-radius: 2px !important;

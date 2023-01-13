@@ -118,6 +118,25 @@ var JsDivError = function (mensagem, div, setTimeOut, callback) {
 
 }
 
+var JsDivNeutral = function (mensagem, div, setTimeOut, callback) {
+
+    var divAlert = '#' + div;
+    var divMessage = divAlert + '-message';
+
+    $(divAlert).removeClass().addClass("server-response-div-neutral");
+    var msg = mensagem;
+    $(divMessage).html(msg);
+    $(divAlert).show("normal");
+
+    if (setTimeOut) {
+        setTimeout(function () {
+            $(divAlert).hide("normal");
+            callback();
+        }, 3000);
+    }
+
+}
+
 $("#server-response-div-close").click(function () {
     $("#server-response-div").hide("fast");
 });

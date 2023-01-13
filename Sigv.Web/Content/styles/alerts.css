@@ -45,7 +45,7 @@
     background-color: #0a9f9f;
     color: #ffffff;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 10px;
     border-radius: 2px;
 }
@@ -54,7 +54,7 @@
     background-color: #ffcf40;
     color: #ffffff;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 10px;
     border-radius: 2px;
 }
@@ -63,7 +63,16 @@
     background-color: #e35d6a;
     color: #ffffff;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+
+.server-response-div-neutral {
+    background-color: #FFE1AE;
+    color: #233C45;
+    width: 100%;
+    padding: 20px;
     margin-bottom: 10px;
     border-radius: 2px;
 }

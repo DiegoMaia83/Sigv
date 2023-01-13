@@ -1,0 +1,105 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigv - Recuperar Senha</title>
+    <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/styles/alerts.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/scripts/jquery-3.6.1.js"></script>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div>
+
+            <div id="server-response-div" style="display: none;">
+                <i id="server-response-div-close" class="fa-solid fa-square-xmark"></i>
+                <span id="server-response-div-message"></span>
+            </div>
+
+            <h5 style="color: var(--color-primary-four) !important;">Recuperar Senha</h5>
+
+            <div class="login-container-form">
+                <form class="form-signin">
+
+                    <label for="email">E-mail</label>
+                    <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Digite o seu e-mail" autofocus />
+
+                    <label for="login">Login</label>
+                    <input type="text" class="form-control form-control-sm" id="login" name="login" placeholder="Digite o seu login" />
+                    <br />
+                    <button type="button" class="btn btn-outline-secondary w-100" id="btnRecuperarSenha">Recuperar Senha</button>
+                </form>
+            </div>
+
+            <div class="div-recovery-password ">
+                <a href="/Login">Clique aqui</a> para efetuar o Login
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>
+
+<script src="~/Content/scripts/alerts.js"></script>
+
+<script src="~/Content/scripts/crypto-js.js"></script>
+<script>
+    $(function () {
+
+        $("#btnRecuperarSenha").click(function () {
+
+            if ($("#email").val() == "") {
+                JsDivNeutral("Informe o e-mail", "server-response-div", true, function () {
+                    $("#email").focus();
+                });
+                return false;
+            };
+
+            if ($("#login").val() == "") {
+                JsDivNeutral("Informe o login", "server-response-div", true, function () {
+                    $("#login").focus();
+                });
+                return false;
+            };
+
+            var json = {
+                login: $("#login").val(),
+                email: $("#email").val()
+            }
+
+            $.ajax({
+                url: "/Login/RecuperarSenha",
+                method: "post",
+                data: json,
+                beforeSend: function () {
+                    loadingButton($("#btnRecuperarSenha"), "Aguarde ...");                    
+                },
+                success: function (data) {
+                    JsDivNeutral(data.Mensagem, "server-response-div", true, function () {
+
+                    });
+                },
+                error: function (xhr, textStatus, error) {
+                    console.log(error);
+                },
+                complete: function () {
+                    recoveryButton($("#btnRecuperarSenha"), "Recuperar Senha");
+                }
+            })
+
+        });
+    })
+</script>
