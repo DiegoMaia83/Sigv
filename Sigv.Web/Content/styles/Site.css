@@ -192,6 +192,10 @@ html, body {
     .responsive-screen-3 {
         display: none;
     }
+
+    .login-container-alert {        
+       min-width: 75vw;
+    }
 }
 
 @media screen and (max-width: 575px) {
