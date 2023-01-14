@@ -153,6 +153,7 @@
     <Content Include="Views\Home\_ListarAcessos.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Login\RecuperarSenha.cshtml" />
+    <Content Include="Views\Home\_ListarLogs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

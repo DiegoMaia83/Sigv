@@ -82,7 +82,7 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListarAcessos()
+        public ActionResult ListarAcessos(int limit)
         {
             try
             {
@@ -90,10 +90,30 @@ namespace Sigv.Web.Controllers
 
                 using (var srv = new HttpService<List<Acesso>>())
                 {
-                    lista = srv.ReturnService("api/acesso/listar");
+                    lista = srv.ReturnService("api/acesso/listar?limit=" + limit);
                 }
 
                 return View("_ListarAcessos", lista);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ListarLogs(int limit)
+        {
+            try
+            {
+                var lista = new List<Log>();
+
+                using (var srv = new HttpService<List<Log>>())
+                {
+                    lista = srv.ReturnService("api/log/listar-logs?limit=" + limit);
+                }
+
+                return View("_ListarLogs", lista);
             }
             catch (Exception ex)
             {

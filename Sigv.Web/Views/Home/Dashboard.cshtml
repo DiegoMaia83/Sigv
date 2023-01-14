@@ -41,15 +41,13 @@
         <div class="div-listar scroll" id="divListarAcessos" style="height: calc(100vh - 543px);">
 
         </div>
-
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-8">
+        <h6>Últimos logs</h6>
+        <div class="div-listar scroll" id="divListarLogs" style="height: calc(100vh - 543px);">
 
-    </div>
-
-    <div class="col-sm-4">
-
+        </div>
     </div>
 
 </div>
@@ -63,6 +61,7 @@
         retornarEntradasPeriodo();
 
         listarAcessos();
+        listarLogs();
 
     })
 
@@ -229,10 +228,22 @@
     var listarAcessos = function () {
 
         $.ajax({
-            url: "/Home/ListarAcessos",
+            url: "/Home/ListarAcessos?limit=50",
             method: "get",
             success: function (data) {
                 $("#divListarAcessos").html(data);
+            }
+        })
+
+    }
+
+    var listarLogs = function () {
+
+        $.ajax({
+            url: "/Home/ListarLogs?limit=50",
+            method: "get",
+            success: function (data) {
+                $("#divListarLogs").html(data);
             }
         })
 

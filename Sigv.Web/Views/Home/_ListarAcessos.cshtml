@@ -6,23 +6,23 @@
 <table>
 
     <thead>
-        <tr>
-            <th>Acesso Id</th>
+        <tr>           
             <th>Usuário</th>
             <th>Ip</th>
-            <th>Data Acesso</th>
+            <th>Data</th>
+            <th>Hora</th>
         </tr>
     </thead>
 
     <tbody>
 
-        @foreach (var acesso in Model.OrderByDescending(x => x.AcessoId))
+        @foreach (var acesso in Model)
         {
-            <tr class="cursor-no-clicker">
-                <td>@acesso.AcessoId</td>
+            <tr class="cursor-no-clicker">                
                 <td>@acesso.Usuario.Login</td>
                 <td>@acesso.Ip</td>
-                <td>@acesso.Data.ToShortTimeString()</td>
+                <td>@acesso.Data.ToShortDateString()</td>
+                <td>@acesso.Data.ToLongTimeString()</td>
             </tr>
         }
 

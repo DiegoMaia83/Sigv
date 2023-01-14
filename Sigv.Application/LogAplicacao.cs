@@ -25,6 +25,24 @@ namespace Sigv.Application
             }
         }
 
+        public IEnumerable<Log> Listar(int limit)
+        {
+            try
+            {
+                using (var logs = new LogRepositorio())
+                {
+                    return logs.GetAll()
+                        .OrderByDescending(x => x.LogId)
+                        .Take(limit)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IEnumerable<Log> Listar(string processo, int codReferencia)
         {
             try

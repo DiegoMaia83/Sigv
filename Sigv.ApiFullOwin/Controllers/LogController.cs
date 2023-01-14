@@ -12,6 +12,7 @@ namespace Sigv.ApiFullOwin.Controllers
     public class LogController : ApiController
     {
         private readonly LogAplicacao _logAplicacao = new LogAplicacao();
+
         [Authorize]
         [HttpGet]
         [Route("api/log/listar-logs")]
@@ -20,6 +21,21 @@ namespace Sigv.ApiFullOwin.Controllers
             try
             {
                 return _logAplicacao.Listar();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao processar a rotina!", ex);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/log/listar-logs")]
+        public IEnumerable<Log> Listar(int limit)
+        {
+            try
+            {
+                return _logAplicacao.Listar(limit);
             }
             catch (Exception ex)
             {

@@ -101,7 +101,7 @@ var alterarSenha = function (senhaAtual, senhaNova) {
         return false;
     }
 
-    if (resultPassComplexity <= 70) {
+    if (resultPassComplexity <= 60) {
         JsDivError("A nova senha é muito fraca! Utilize números, letras maiúsculas, letras minúsculas e caracteres especiais.", "server-response-div", true, function () {
 
         });

@@ -77,11 +77,11 @@ namespace Sigv.ApiFullOwin.Controllers
         [Authorize]
         [HttpGet]
         [Route("api/acesso/listar")]
-        public IEnumerable<Acesso> ListarAcessos()
+        public IEnumerable<Acesso> ListarAcessos(int limit)
         {
             try
             {
-                return _acessosAplicacao.Listar();
+                return _acessosAplicacao.Listar(limit);
             }
             catch (Exception ex)
             {

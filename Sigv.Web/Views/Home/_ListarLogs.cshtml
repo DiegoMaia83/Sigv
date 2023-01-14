@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Sigv.Domain.Log>
+
+@{
+    Layout = null;
+}
+<table>
+
+    <thead>
+        <tr>           
+            <th>Usuário</th>
+            <th>Ip</th>
+            <th>Cód. Ref.</th>
+            <th>Processo</th>
+            <th>Descrição</th>
+            <th>Data</th>
+            <th>Hora</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var log in Model)
+        {
+            <tr class="cursor-no-clicker">                
+                <td>@log.Usuario.Login</td>
+                <td>@log.Ip</td>
+                <td>@log.CodReferencia</td>
+                <td>@log.Processo</td>
+                <td>@log.Descricao</td>
+                <td>@log.DataLog.ToShortDateString()</td>
+                <td>@log.DataLog.ToLongTimeString()</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
