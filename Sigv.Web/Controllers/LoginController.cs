@@ -79,7 +79,7 @@ namespace Sigv.Web.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!" });
             }
         }
 

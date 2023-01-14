@@ -43,7 +43,7 @@ namespace Sigv.Web.Services
                         return new MensagemRetorno { Sucesso = true, Mensagem = "Token armazenado." };
                     }
 
-                    return new MensagemRetorno { Sucesso = false, Mensagem = "Não foi possível autenticar na API. Verifique os dados e tente novamente.", Erro = response.Content.ReadAsStringAsync().Result };
+                    return new MensagemRetorno { Sucesso = false, Mensagem = "Não foi possível autenticar na API. Verifique os dados e tente novamente", Erro = response.Content.ReadAsStringAsync().Result };
 
                 }
 

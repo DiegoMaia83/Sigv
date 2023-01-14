@@ -71,7 +71,8 @@
 .server-response-div-neutral {
     background-color: #FFE1AE;
     color: #233C45;
-    width: 100%;
+    min-width: 25vw;
+    max-width: 50vw;
     padding: 20px;
     margin-bottom: 10px;
     border-radius: 2px;

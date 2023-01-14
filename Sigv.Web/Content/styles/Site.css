@@ -191,11 +191,7 @@ html, body {
 @media screen and (max-width: 1280px) {
     .responsive-screen-3 {
         display: none;
-    }
-
-    .login-container-alert {        
-       min-width: 75vw;
-    }
+    } 
 }
 
 @media screen and (max-width: 575px) {
@@ -266,7 +262,7 @@ html, body {
     border-radius: 4px;
     background-color: rgba(14,109,143,0.4);
     min-width: 25vw;
-    max-width: 75vw;
+    max-width: 50vw;
 }
 
 .div-recovery-password {
