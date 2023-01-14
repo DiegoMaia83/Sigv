@@ -92,6 +92,11 @@
                     <label>Nova Senha</label>
                     <input type="text" id="txSenhaNova" class="form-control form-control-sm" />
 
+                    <div id="passwordResult">
+                        <div id="passwordBar"></div>
+                        <div id="passwordMessage"></div>
+                    </div>
+
                     <button type="button" id="btnAlterarSenha" class="btn btn-primary btn-sm small">Alterar</button>
                 </div>
                 <div class="modal-footer">
@@ -127,6 +132,27 @@
 
     $("#btnModalAlterarSenha").click(function () {
         $("#modalAlterarSenha").modal("show");
+    });
+
+    $("#txSenhaNova").keyup(function () {
+
+        if ($(this).val() == "") {
+            $("#passwordBar").width("0%");
+            $("#passwordMessage").html("");
+            return false;
+        }
+
+        var result = checkPasswordComplexity($(this).val());
+        result = result > 100 ? 100 : result;
+
+        var color = returnColorPassword(result);
+        var message = returnMsgPassword(result);
+
+        $("#passwordBar").width(result + "%");
+        $("#passwordBar").css("background-color", color);
+        $("#passwordMessage").html(message);
+        $("#passwordMessage").css("color", color);
+        
     });
 
     $("#btnAlterarSenha").click(function () {

@@ -28,6 +28,48 @@ function checkPasswordComplexity(password) {
     return parseInt(score);
 }
 
+function returnColorPassword(password) {
+
+    var color = "";
+
+    if (password <= 30) {
+        color = "#DB5644";
+    }
+    else if (password <= 60) {
+        color = "#FAC146";
+    }
+    else if (password <= 75) {
+        color = "#F7E945";
+    }
+    else {
+        color = "#2FC44F";
+    }
+
+    return color;
+
+}
+
+function returnMsgPassword(password) {
+
+    var color = "";
+
+    if (password <= 30) {
+        color = "Muito Fraca";
+    }
+    else if (password <= 60) {
+        color = "Fraca";
+    }
+    else if (password <= 75) {
+        color = "Média";
+    }
+    else {
+        color = "Ótima";
+    }
+
+    return color;
+
+}
+
 
 var alterarSenha = function (senhaAtual, senhaNova) {
 
@@ -59,14 +101,8 @@ var alterarSenha = function (senhaAtual, senhaNova) {
         return false;
     }
 
-    if (resultPassComplexity < 30) {
-        JsDivError("Sua senha é muito simples! Tente novamente.", "server-response-div", true, function () {
-
-        });
-        return false;
-    }
-    else if (resultPassComplexity < 70) {
-        JsDivError("Sua senha deve conter letras, números e caracteres especiais!", "server-response-div", true, function () {
+    if (resultPassComplexity <= 70) {
+        JsDivError("A nova senha é muito fraca! Utilize números, letras maiúsculas, letras minúsculas e caracteres especiais.", "server-response-div", true, function () {
 
         });
         return false;

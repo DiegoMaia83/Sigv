@@ -291,6 +291,19 @@ text-decoration: none;
 
 
 
+/* Alteração de senha */
+#passwordResult {
+    height: 40px;
+    padding: 5px 0px 5px 0px;
+    font-size: small;
+}
+
+#passwordBar {
+    width: 0px;
+    background-color: #ff6a00;
+    height: 6px;
+    border-radius: 3px;
+}
 
 
 /* Override Bootstrap */
