@@ -129,6 +129,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Content\styles\bootstrap.min.css.map" />
+    <Content Include="App.config" />
     <None Include="packages.config" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />

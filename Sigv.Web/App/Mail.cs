@@ -18,7 +18,7 @@ namespace Sigv.Web.App
 
             string[] anexos = { };
 
-            Mailer.Send(ConfigurationManager.AppSettings["MailRecipient"], usuario.Email, "Contato do Site", body, "", new string[0]);
+            Mailer.Send(usuario.Email, usuario.Email, "Dados de acesso", body, "", new string[0]);
         }
     }
 }

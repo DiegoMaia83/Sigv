@@ -134,3 +134,27 @@ var alterarSenha = function (senhaAtual, senhaNova) {
     })
 
 }
+
+var formataPlaca = function (input) {
+
+    // Obtém o elemento de input
+    const plateInput = document.getElementById(input);
+
+    // Adiciona um ouvinte de eventos input ao elemento de input
+    plateInput.addEventListener("input", function (event) {
+        // Obtém o valor atual do input
+        let currentValue = event.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        let currentLength = currentValue.length;
+        let newValue = '';
+        // formata o valor
+        if (currentLength > 3 && currentValue.indexOf("-") === -1) {
+            newValue = currentValue.slice(0, 3) + '-' + currentValue.slice(3);
+        } else if (currentValue.indexOf("-") !== -1 && currentLength < 4) {
+            newValue = currentValue.replace(/-/g, '');
+        } else {
+            newValue = currentValue;
+        }
+        // Atualiza o valor do input com o valor formatado
+        event.target.value = newValue;
+    });
+}

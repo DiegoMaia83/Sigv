@@ -8,6 +8,9 @@
 
     $(document).ready(function () {
 
+        var veiculo = '@Model';
+        console.log(veiculo);
+
 
         // Popula o select dos combustíveis
         popularCombustiveis($("#hidCombustivelId").val());
@@ -24,7 +27,13 @@
         // Popula o select dos status
         popularCores($("#hidCorId").val());
 
+
+        // Formata a placa ao digitar, e retorna a placa formatada para o input
+        formataPlaca("Placa");
+
     })
+
+
 
     $("#btnSalvarVeiculo").click(function () {
         
@@ -177,7 +186,7 @@
 
         <div class="col-sm-3">
             <label>Placa</label>
-            <input type="text" class="form-control form-control-sm" name="Placa" id="Placa" value="@Model.Placa" maxlength="9" />
+            <input type="text" class="form-control form-control-sm" name="Placa" id="Placa" value="@Model.Placa" maxlength="8" />
         </div>
 
         <div class="col-sm-3">

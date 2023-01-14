@@ -56,9 +56,8 @@ namespace Sigv.Web.Controllers
             try
             {
                 using (var srv = new HttpService<Usuario>())
-                {
-                    var str = "api/usuario/recuperar-senha-loggedout?login=" + login + "&email=" + email;
-                    var usuario = srv.ReturnService(str);
+                {                    
+                    var usuario = srv.ReturnService("api/usuario/recuperar-senha-loggedout?login=" + login + "&email=" + email);
 
                     if (usuario != null)
                     {
@@ -77,7 +76,7 @@ namespace Sigv.Web.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!" });
             }
