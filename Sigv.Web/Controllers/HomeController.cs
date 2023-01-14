@@ -1,4 +1,5 @@
 ﻿using Sigv.Domain;
+using Sigv.Web.App;
 using Sigv.Web.Services;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Sigv.Web.Controllers
         }
 
         [HttpGet]
+        [Filtro(Roles = "19")]
         public JsonResult RetornarStatusVeiculos()
         {
             try
@@ -37,11 +39,12 @@ namespace Sigv.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
 
         [HttpGet]
+        [Filtro(Roles = "19")]
         public JsonResult RetornarEspeciesVeiculos()
         {
             try
@@ -57,11 +60,12 @@ namespace Sigv.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
 
         [HttpGet]
+        [Filtro(Roles = "19")]
         public JsonResult RetornarEntradasPeriodo(int ano)
         {
             try
@@ -77,11 +81,12 @@ namespace Sigv.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
 
         [HttpGet]
+        [Filtro(Roles = "19")]
         public ActionResult ListarAcessos(int limit)
         {
             try
@@ -97,11 +102,12 @@ namespace Sigv.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!" , Erro = ex.Message });
             }
         }
 
         [HttpGet]
+        [Filtro(Roles = "19")]
         public ActionResult ListarLogs(int limit)
         {
             try
@@ -117,7 +123,7 @@ namespace Sigv.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
             }
         }
     }

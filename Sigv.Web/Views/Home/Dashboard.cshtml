@@ -19,16 +19,19 @@
 
     <div class="col-sm-3">
         <h6>Quantidade por Status</h6>
+        <div id="divVeiculosStatus"></div>
         <canvas id="qtdVeiculosStatus"></canvas>
     </div>
 
     <div class="col-sm-3">
         <h6>Quantidade por Espécie</h6>
+        <div id="divVeiculosEspecies"></div>
         <canvas id="qtdVeiculosEspecies"></canvas>
     </div>
 
     <div class="col-sm-6">
         <h6>Entradas por período</h6>
+        <div id="divEntradasPorPeriodo"></div>
         <canvas id="entradasPorPeriodo"></canvas>
     </div>
 
@@ -73,6 +76,11 @@
             url: "/Home/RetornarStatusVeiculos",
             method: "get",
             success: function (result) {
+
+                if (result.Sucesso == false) {
+                    $("#divVeiculosStatus").addClass("div-content").html(result.Mensagem);
+                    return false;
+                }
 
                 var status = [];
                 var quantidades = [];
@@ -123,6 +131,11 @@
             method: "get",
             success: function (result) {
 
+                if (result.Sucesso == false) {
+                    $("#divVeiculosEspecies").addClass("div-content").html(result.Mensagem);
+                    return false;
+                }    
+
                 var especies = [];
                 var quantidades = [];
 
@@ -172,6 +185,11 @@
             url: "/Home/RetornarEntradasPeriodo?ano=2022",
             method: "get",
             success: function (result) {
+
+                if (result.Sucesso == false) {
+                    $("#divEntradasPorPeriodo").addClass("div-content").html(result.Mensagem);
+                    return false;
+                }     
 
                 var periodos = [];
                 var quantidades = [];
@@ -231,6 +249,12 @@
             url: "/Home/ListarAcessos?limit=50",
             method: "get",
             success: function (data) {
+                
+                if (data.Sucesso == false) {
+                    $("#divListarAcessos").html(data.Mensagem);
+                    return false;
+                }     
+
                 $("#divListarAcessos").html(data);
             }
         })
@@ -243,6 +267,12 @@
             url: "/Home/ListarLogs?limit=50",
             method: "get",
             success: function (data) {
+
+                if (data.Sucesso == false) {
+                    $("#divListarLogs").html(data.Mensagem);
+                    return false;
+                }                    
+
                 $("#divListarLogs").html(data);
             }
         })
