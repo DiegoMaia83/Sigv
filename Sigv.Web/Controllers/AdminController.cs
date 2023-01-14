@@ -18,6 +18,7 @@ namespace Sigv.Web.Controllers
 
         // ----- Permissões ----- //
 
+        
         public ActionResult Permissoes()
         {
             return View();
@@ -129,6 +130,7 @@ namespace Sigv.Web.Controllers
 
         // ----- Usuários ----- //
 
+        [Filtro(Roles = "21")]
         public ActionResult Usuarios()
         {
             return View();

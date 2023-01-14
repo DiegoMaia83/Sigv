@@ -12,8 +12,8 @@ namespace Sigv.Web.App
         public static bool isOk()
         {
 
-            return new AuthService().RetornarTokenState();
-            // return TokenCookie.Token != "";
+            //return new AuthService().RetornarTokenState();
+            return TokenCookie.Token != "";
         }
     }
 }

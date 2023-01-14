@@ -12,11 +12,13 @@ namespace Sigv.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [Filtro(Roles = "23")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Filtro(Roles = "23")]
         public ActionResult Dashboard()
         {
             return View();

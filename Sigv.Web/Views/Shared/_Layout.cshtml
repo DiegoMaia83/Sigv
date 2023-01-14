@@ -115,6 +115,27 @@
 
 <script>
 
+    $(document).ready(function () {
+
+        setInterval(function () {
+
+            $.ajax({
+                url: "/Login/ValidaToken",
+                method: "get",
+                success: function (data) {
+                    if (data) {
+                        console.log("ok");
+                    }
+                    else
+                    {
+                        window.location.href = "/Login/Index";
+                    }
+                }
+            })
+        }, 30000);
+
+    });
+
     var url_atual = window.location.href;
 
     if (url_atual.indexOf("/Dashboard") != -1) {
@@ -158,5 +179,6 @@
     $("#btnAlterarSenha").click(function () {
         alterarSenha($("#txSenhaAtual").val(), $("#txSenhaNova").val());
     });
+
 
 </script>

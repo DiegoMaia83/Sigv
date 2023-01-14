@@ -82,6 +82,24 @@ namespace Sigv.Web.Controllers
             }
         }
 
+        public ActionResult ValidaToken()
+        {
+            var token = Token.isOk();
+            var usuarioLogado = UsuarioLogado.isOk();
+
+            if (token || usuarioLogado)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                SessionCookie.Logoff();
+                TokenCookie.Logoff();
+
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }            
+        }
+
 
         public ActionResult Logoff()
         {

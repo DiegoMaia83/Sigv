@@ -13,11 +13,13 @@ namespace Sigv.Web.Controllers
 {
     public class VeiculoController : Controller
     {
+        [Filtro(Roles = "22")]
         public ActionResult Home()
         {
             return View();
         }
 
+        [Filtro(Roles = "22")]
         public ActionResult Index(int id = 0)
         {
             try
