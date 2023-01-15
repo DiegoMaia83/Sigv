@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 
 ConnectionStrings.config
-Sigv.Web/App.config
+Sigv.Web/Mail.config

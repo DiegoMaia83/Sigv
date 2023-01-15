@@ -157,6 +157,9 @@
 
     $("#txSenhaNova").keyup(function () {
 
+        // Não permite inserir o caracter (&).
+        $(this).val($(this).val().replace(/\&/g, ""));
+
         if ($(this).val() == "") {
             $("#passwordBar").width("0%");
             $("#passwordMessage").html("");
