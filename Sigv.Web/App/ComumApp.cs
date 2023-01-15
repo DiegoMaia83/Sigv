@@ -7,7 +7,7 @@ namespace Sigv.Web.App
     {
         public string GetRandomPassword()
         {
-            const string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%*?.";
+            const string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%*.";
 
             StringBuilder sb = new StringBuilder();
             Random rnd = new Random();

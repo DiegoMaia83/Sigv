@@ -1,20 +1,14 @@
 ﻿@using Sigv.Web.App
+@using System.Configuration
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/styles/alerts.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Content/scripts/jquery-3.6.1.js"></script>
-    <script src="~/Content/scripts/font-awesome.js"></script>
+    <title>@ConfigurationManager.AppSettings["SiteName"] - @ViewBag.Title</title>
 
-    <script src="~/Content/scripts/comum.js"></script>
-
-
+    @RenderPage("_Header.cshtml")
 
 </head>
 
@@ -24,7 +18,7 @@
         <div id="sidebar-menu">
 
             <div class="sidebar-menu-logo">
-                Logo
+                <img src="~/Content/Imagens/logo_01.png" style="width: 60px;" />
             </div>
 
             <div class="sidebar-menu-item" id="menu-home" onclick="window.location.href = '/Home/Dashboard'">
@@ -75,7 +69,7 @@
     <div class="modal fade" id="modalAlterarSenha" tabindex="-1" role="dialog" aria-labelledby="modalAlterarSenha" aria-hidden="true">
 
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">                
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Alterar Senha</h5>
                 </div>
@@ -109,9 +103,7 @@
 </body>
 </html>
 
-<script src="~/Content/scripts/bootstrap.min.js"></script>
-<script src="~/Content/scripts/funcoes.js"></script>
-<script src="~/Content/scripts/alerts.js"></script>
+@RenderPage("_Footer.cshtml")
 
 <script>
 
@@ -126,8 +118,7 @@
                     if (data) {
                         console.log("ok");
                     }
-                    else
-                    {
+                    else {
                         window.location.href = "/Login/Index";
                     }
                 }
@@ -176,7 +167,7 @@
         $("#passwordBar").css("background-color", color);
         $("#passwordMessage").html(message);
         $("#passwordMessage").css("color", color);
-        
+
     });
 
     $("#btnAlterarSenha").click(function () {

@@ -9,10 +9,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sigv - Login</title>
-    <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/styles/alerts.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Content/scripts/jquery-3.6.1.js"></script>
+
+    @RenderPage("~/Views/Shared/_Header.cshtml")
+
 </head>
 
 <body>
@@ -26,11 +25,11 @@
                 string msg = ViewBag.MensagemRetorno.Mensagem;
                 var split = msg.Split('.');
                 <div class="server-response-div-neutral">
-                    @foreach(var i in split)
+                    @foreach (var i in split)
                     {
                         <span>@i</span><br>
                     }
-                </div>                
+                </div>
             }
 
             <h5 style="color: var(--color-primary-four) !important;">Efetuar Login</h5>
@@ -61,7 +60,8 @@
 
 </html>
 
-<script src="~/Content/scripts/crypto-js.js"></script>
+@RenderPage("~/Views/Shared/_Footer.cshtml")
+
 <script>
     $(function () {
 
