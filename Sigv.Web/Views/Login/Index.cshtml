@@ -12,50 +12,78 @@
 
     @RenderPage("~/Views/Shared/_Header.cshtml")
 
+    <style>
+
+        .login-container-logo {
+            width: 50vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container-text {
+            width: 50vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+
 </head>
+
+
 
 <body>
 
     <div class="login-container">
 
-        <div>
+        <div class="login-container-logo">
 
-            @if (ViewBag.MensagemRetorno != null)
-            {
-                string msg = ViewBag.MensagemRetorno.Mensagem;
-                var split = msg.Split('.');
-                <div class="server-response-div-neutral">
-                    @foreach (var i in split)
-                    {
-                        <span>@i</span><br>
-                    }
-                </div>
-            }
+            <img src="~/Content/Imagens/logo_01.png" style="width: 150px;" />
 
-            <h5 style="color: var(--color-primary-four) !important;">Efetuar Login</h5>
-
-            <div class="login-container-form">
-                <form class="form-signin" method="post" action="/Login/Index">
-                    @Html.AntiForgeryToken()
-
-                    <label for="login">Login</label>
-                    <input type="text" class="form-control form-control-sm" id="login" name="login" placeholder="Digite o seu login" autofocus />
-
-                    <label for="password">Senha</label>
-                    <input type="password" class="form-control form-control-sm" id="senha" name="senha" placeholder="Digite a sua senha" />
-                    <br />
-                    <button type="submit" class="btn btn-outline-secondary w-100">Entrar</button>
-                </form>
-            </div>
-
-            <div class="div-recovery-password ">
-                Esqueceu a senha ? <a href="/Login/RecuperarSenha">clique aqui</a>
-            </div>
         </div>
 
+        <div class="login-container-text">
 
+            <div>
+                @if (ViewBag.MensagemRetorno != null)
+                {
+                    string msg = ViewBag.MensagemRetorno.Mensagem;
+                    var split = msg.Split('.');
+                    <div class="server-response-div-neutral">
+                        @foreach (var i in split)
+                        {
+                            <span>@i</span><br>
+                        }
+                    </div>
+                }
+
+                <h5 style="color: var(--color-primary-four) !important;">Efetuar Login</h5>
+
+                <div class="login-container-form">
+                    <form class="form-signin" method="post" action="/Login/Index">
+                        @Html.AntiForgeryToken()
+
+                        <label for="login">Login</label>
+                        <input type="text" class="form-control form-control-sm" id="login" name="login" placeholder="Digite o seu login" autofocus />
+
+                        <label for="password">Senha</label>
+                        <input type="password" class="form-control form-control-sm" id="senha" name="senha" placeholder="Digite a sua senha" />
+                        <br />
+                        <button type="submit" class="btn btn-outline-secondary w-100">Entrar</button>
+                    </form>
+                </div>
+
+                <div class="div-recovery-password ">
+                    Esqueceu a senha ? <a href="/Login/RecuperarSenha">clique aqui</a>
+                </div>
+            </div>
+
+        </div>
 
     </div>
+
 </body>
 
 </html>

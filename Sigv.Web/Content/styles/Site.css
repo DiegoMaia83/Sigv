@@ -205,7 +205,6 @@ html, body {
 }
 
 
-
 /* Scroll personalizado */
 /* Works on Firefox */
 .scroll {
@@ -237,8 +236,7 @@ html, body {
 /* Estilos Tela de Login */
 .login-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
     height: 100vh;
     background-image: linear-gradient(to right, var(--color-primary-one), var(--color-primary-two));
 }
