@@ -101,6 +101,7 @@
     <Content Include="Content\scripts\jquery-3.6.1.js" />
     <Content Include="Content\styles\alerts.css" />
     <Content Include="Content\styles\bootstrap.min.css" />
+    <Content Include="Content\styles\login.css" />
     <Content Include="Content\styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -159,6 +160,7 @@
     <Content Include="Views\Home\_ListarLogs.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Login\Login2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

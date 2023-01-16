@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = null;
 }
 
@@ -7,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Sigv - Login</title>
+    <title>Login2</title>
     @RenderPage("~/Views/Shared/_Header.cshtml")
     <link rel="stylesheet" type="text/css" href="~/Content/styles/login.css" />
 
@@ -16,7 +17,7 @@
     <div class="login-container">
 
         <div class="login-logo">
-            <img src="~/Content/Imagens/logo_01.png" />
+            <img src="~/Content/Imagens/logo_01.png" style="width: 150px;" />
         </div>
 
         <div class="login-form">
@@ -60,35 +61,3 @@
     </div>
 </body>
 </html>
-
-@RenderPage("~/Views/Shared/_Footer.cshtml")
-
-<script>
-    $(function () {
-
-        $(".form-signin").submit(function () {
-
-            var key = CryptoJS.enc.Utf8.parse("ydvMmMc3I7HOje3i");
-            var iv = CryptoJS.enc.Utf8.parse("wp4zjuwGZwh593An");
-
-            //O Serverside tem uma classe para decodificar
-            var encryptedPassword = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($("#senha").val()), key,
-                {
-                    keySize: 128 / 8,
-                    iv: iv,
-                    mode: CryptoJS.mode.CBC,
-                    padding: CryptoJS.pad.Pkcs7
-                });
-
-            $("#senha").val(encryptedPassword);
-
-            // console.log($("#senha").val());
-            // return false;
-
-
-            $("#senha").attr('readonly', 'readonly');
-
-            $("#btnSubmit").text("Aguarde...");
-        });
-    })
-</script>

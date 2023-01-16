@@ -16,6 +16,11 @@ namespace Sigv.Web.Controllers
             return View();
         }
 
+        public ActionResult Login2()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(string login, string senha)
