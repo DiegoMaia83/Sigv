@@ -1,0 +1,16 @@
+﻿/* Ajustes Mobile */
+@media screen and (max-width: 1280px) {
+    .responsive-screen-3 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .responsive-screen-2 {
+        display: none;
+    }
+
+    html, body {
+        overflow: auto;
+    }
+}

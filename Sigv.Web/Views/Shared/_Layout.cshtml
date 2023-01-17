@@ -21,21 +21,36 @@
                 <img src="~/Content/Imagens/logo_01.png" style="width: 60px;" />
             </div>
 
-            <div class="sidebar-menu-item" id="menu-home" onclick="window.location.href = '/Home/Dashboard'">
-                <i class="fa-solid fa-house"></i>&nbsp;&nbsp; Home
+            <div class="sidebar-menu-itens scroll" style="overflow-y: auto;">
+                <div class="sidebar-menu-item" id="menu-home" onclick="window.location.href = '/Home/Dashboard'">
+                    <i class="fa-solid fa-house"></i>&nbsp;&nbsp; Home
+                </div>
+                <div class="sidebar-menu-item" id="menu-veiculo" onclick="window.location.href = '/Veiculo/Home'">
+                    <i class="fa-solid fa-car"></i>&nbsp;&nbsp; Veículos
+                </div>
+                <div class="sidebar-menu-item" id="menu-permissao" onclick="window.location.href = '/Admin/Permissoes'">
+                    <i class="fa-solid fa-shield-halved"></i>&nbsp;&nbsp; Permissões
+                </div>
+                <div class="sidebar-menu-item" id="menu-user" onclick="window.location.href = '/Admin/Usuarios'">
+                    <i class="fa-solid fa-user"></i>&nbsp;&nbsp; Usuários
+                </div>
+                <div class="sidebar-menu-item" id="menu-logoff" onclick="window.location.href = '/Login/Logoff'">
+                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Sair
+                </div>
             </div>
-            <div class="sidebar-menu-item" id="menu-veiculo" onclick="window.location.href = '/Veiculo/Home'">
-                <i class="fa-solid fa-car"></i>&nbsp;&nbsp; Veículos
+
+            <div class="sidebar-menu-item" style="" id="menu-logoff">
+                <i class="fa fa-cog"></i>&nbsp;&nbsp; Opções
             </div>
-            <div class="sidebar-menu-item" id="menu-permissao" onclick="window.location.href = '/Admin/Permissoes'">
-                <i class="fa-solid fa-shield-halved"></i>&nbsp;&nbsp; Permissões
+            <div class="sidebar-sub-menu" id="sub-menu-logoff">
+                <div class="sidebar-sub-menu-item">
+                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Alterar Senha
+                </div>
+                <div class="sidebar-sub-menu-item">
+                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Sair
+                </div>
             </div>
-            <div class="sidebar-menu-item" id="menu-user" onclick="window.location.href = '/Admin/Usuarios'">
-                <i class="fa-solid fa-user"></i>&nbsp;&nbsp; Usuários
-            </div>
-            <div class="sidebar-menu-item" id="menu-logoff" onclick="window.location.href = '/Login/Logoff'">
-                <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Sair
-            </div>
+
         </div>
 
         <div id="body">
@@ -56,6 +71,8 @@
                 <i id="server-response-close" class="fa-solid fa-square-xmark"></i>
                 <span id="server-response-message"></span>
             </div>
+
+            
 
             <div id="body-content">
                 @RenderBody()
@@ -106,6 +123,8 @@
 @RenderPage("_Footer.cshtml")
 
 <script>
+
+
 
     $(document).ready(function () {
 

@@ -130,6 +130,8 @@ html, body {
     color: var(--color-secondary-two);
     flex-grow: 0;
     flex-basis: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 #body {
@@ -155,6 +157,11 @@ html, body {
     padding: 40px 20px 40px 20px;
     text-align: center;
     border-bottom: 1px solid var(--color-primary-two);
+    flex-grow: 0;
+}
+
+.sidebar-menu-itens {
+    flex-grow: 1;
 }
 
 .sidebar-menu-item {
@@ -176,6 +183,18 @@ html, body {
     transition: 0.5s;
 }
 
+.sidebar-sub-menu {
+    background-color: var(--color-primary-two);
+    font-size: small;
+}
+
+.sidebar-sub-menu-item {
+    padding: 10px 40px 10px 20px;
+    border-bottom: 1px solid var(--color-primary-two);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
 .input-readonly {
     padding: 0.20rem 0.5rem;
     display: block;
@@ -187,22 +206,7 @@ html, body {
 }
 
 
-/* Ajustes Mobile */
-@media screen and (max-width: 1280px) {
-    .responsive-screen-3 {
-        display: none;
-    } 
-}
 
-@media screen and (max-width: 575px) {
-    .responsive-screen-2 {
-        display: none;
-    }
-
-    html, body {
-        overflow: auto;
-    }
-}
 
 
 /* Scroll personalizado */
