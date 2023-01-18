@@ -24,6 +24,24 @@
     width: 150px;
 }
 
+.login-logo div {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column
+}
+
+.login-logo-title {
+    color: var(--color-secondary-one);
+    font-family: Verdana;
+    font-size: 3rem;
+}
+
+.login-logo-text {
+    color: var(--color-primary-three);
+    font-family: Verdana;
+    font-size: 1rem;
+}
+
 .login-form {
     width: 50vw;
     display: flex;

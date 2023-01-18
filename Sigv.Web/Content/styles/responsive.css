@@ -3,6 +3,8 @@
     .responsive-screen-3 {
         display: none;
     }
+
+
 }
 
 @media screen and (max-width: 768px) {
@@ -12,5 +14,17 @@
 
     html, body {
         overflow: auto;
+    }
+
+    #btnModalAlterarSenha {
+        display: none;
+    }
+
+    #menu-alterar-senha {
+        display: block;
+    }
+
+    .login-logo-text {
+        display: none;
     }
 }

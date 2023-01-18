@@ -205,6 +205,10 @@ html, body {
     color: var(--color-secondary-two);
 }
 
+#menu-alterar-senha {
+    display: none;
+}
+
 
 
 

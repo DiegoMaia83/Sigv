@@ -34,21 +34,15 @@
                 <div class="sidebar-menu-item" id="menu-user" onclick="window.location.href = '/Admin/Usuarios'">
                     <i class="fa-solid fa-user"></i>&nbsp;&nbsp; Usuários
                 </div>
-                <div class="sidebar-menu-item" id="menu-logoff" onclick="window.location.href = '/Login/Logoff'">
-                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Sair
-                </div>
+
             </div>
 
-            <div class="sidebar-menu-item" style="" id="menu-logoff">
-                <i class="fa fa-cog"></i>&nbsp;&nbsp; Opções
+            <div class="sidebar-menu-item" id="menu-alterar-senha" onclick="$('#modalAlterarSenha').modal('show');">
+                <i class="fa fa-refresh"></i>&nbsp;&nbsp; Alterar senha
             </div>
-            <div class="sidebar-sub-menu" id="sub-menu-logoff">
-                <div class="sidebar-sub-menu-item">
-                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Alterar Senha
-                </div>
-                <div class="sidebar-sub-menu-item">
-                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Sair
-                </div>
+
+            <div class="sidebar-menu-item" id="menu-logoff" onclick="window.location.href = '/Login/Logoff'">
+                <i class="fa fa-sign-out"></i>&nbsp;&nbsp; Sair
             </div>
 
         </div>
@@ -98,10 +92,10 @@
                     </div>
 
                     <label>Senha atual</label>
-                    <input type="text" id="txSenhaAtual" class="form-control form-control-sm" />
+                    <input type="password" id="txSenhaAtual" class="form-control form-control-sm" />
 
                     <label>Nova Senha</label>
-                    <input type="text" id="txSenhaNova" class="form-control form-control-sm" />
+                    <input type="password" id="txSenhaNova" class="form-control form-control-sm" />
 
                     <div id="passwordResult">
                         <div id="passwordBar"></div>
@@ -123,8 +117,6 @@
 @RenderPage("_Footer.cshtml")
 
 <script>
-
-
 
     $(document).ready(function () {
 

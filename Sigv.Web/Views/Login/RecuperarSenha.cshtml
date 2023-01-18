@@ -3,55 +3,62 @@
 }
 
 <!DOCTYPE html>
+
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sigv - Recuperar Senha</title>
-    <link href="~/Content/styles/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/styles/alerts.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Content/scripts/jquery-3.6.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sigv - Login</title>
+    @RenderPage("~/Views/Shared/_Header.cshtml")
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/login.css" />
+
 </head>
-
 <body>
-
     <div class="login-container">
 
-        <div>
-
-            <div id="server-response-div" style="display: none;">
-                <i id="server-response-div-close" class="fa-solid fa-square-xmark"></i>
-                <span id="server-response-div-message"></span>
-            </div>
-
-            <h5 style="color: var(--color-primary-four) !important;">Recuperar Senha</h5>
-
-            <div class="login-container-form">
-                <form class="form-signin">
-
-                    <label for="email">E-mail</label>
-                    <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Digite o seu e-mail" autofocus />
-
-                    <label for="login">Login</label>
-                    <input type="text" class="form-control form-control-sm" id="login" name="login" placeholder="Digite o seu login" />
-                    <br />
-                    <button type="button" class="btn btn-outline-secondary w-100" id="btnRecuperarSenha">Recuperar Senha</button>
-                </form>
-            </div>
-
-            <div class="div-recovery-password ">
-                <a href="/Login">Clique aqui</a> para efetuar o Login
+        <div class="login-logo">
+            <img src="~/Content/Imagens/logo_01.png" />
+            <div>
+                <span class="login-logo-title">Sigv</span>
+                <span class="login-logo-text">Sistemas integrados de gerenciamento de veículos</span>
             </div>
         </div>
 
+        <div class="login-form">
 
+            <div>
+                <div id="server-response-div" style="display: none;">
+                    <i id="server-response-div-close" class="fa-solid fa-square-xmark"></i>
+                    <span id="server-response-div-message"></span>
+                </div>
+
+
+                <h5 style="color: var(--color-primary-four) !important;">Recuperar Senha</h5>
+
+                <div class="login-form-box">
+                    <form class="form-signin">
+
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Digite o seu e-mail" autofocus />
+
+                        <label for="login">Login</label>
+                        <input type="text" class="form-control form-control-sm" id="login" name="login" placeholder="Digite o seu login" />
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary w-100" id="btnRecuperarSenha">Recuperar Senha</button>
+                    </form>
+                </div>
+
+                <div class="div-recovery-password ">
+                    <a href="/Login">Clique aqui</a> para efetuar o Login
+                </div>
+            </div>
+
+        </div>
 
     </div>
 </body>
-
 </html>
+
+@RenderPage("~/Views/Shared/_Footer.cshtml")
 
 <script src="~/Content/scripts/alerts.js"></script>
 
@@ -85,7 +92,7 @@
                 method: "post",
                 data: json,
                 beforeSend: function () {
-                    loadingButton($("#btnRecuperarSenha"), "Aguarde ...");                    
+                    loadingButton($("#btnRecuperarSenha"), "Aguarde ...");
                 },
                 success: function (data) {
                     JsDivNeutral(data.Mensagem, "server-response-div", true, function () {
@@ -103,3 +110,4 @@
         });
     })
 </script>
+
