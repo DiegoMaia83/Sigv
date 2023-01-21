@@ -8,6 +8,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    #sidebar-menu {
+        display: none;
+    }
+
     .responsive-screen-2 {
         display: none;
     }
@@ -27,4 +31,56 @@
     .login-logo-text {
         display: none;
     }
+
+
+
+    /* ----- DASHBOARD ----- */
+    #dashStatus {
+        height: 330px;
+    }
+
+    #dashEspecie {
+        height: 330px;
+    }
+
+    #dashEntradas {
+        display: none;
+    }
+
+    #divListarAcessos, #divListarLogs {
+        margin-bottom: 40px;
+        width: 330px;
+        height: 300px !important;
+        overflow-x: auto;
+    }
+
 }
+
+
+
+
+@media screen and (max-width: 400px) {
+
+    /* ----- DASHBOARD ----- */
+    #dashStatus {
+        height: 330px;
+    }
+
+    #dashEspecie {
+        height: 330px;
+    }
+
+    #dashEntradas {
+        display: none;
+    }
+
+    #divListarAcessos, #divListarLogs {
+        margin-bottom: 40px;
+        width: 330px;
+        height: 300px !important;
+        overflow-x: auto;
+    }
+}
+
+
+

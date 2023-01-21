@@ -4,7 +4,11 @@
     ViewBag.Title = "Dashboard";
 }
 
+<style>
 
+
+
+</style>
 
 <div class="row">
 
@@ -17,19 +21,19 @@
 
 <div class="row">
 
-    <div class="col-sm-3">
+    <div class="col-sm-3" id="dashStatus">
         <h6>Quantidade por Status</h6>
         <div id="divVeiculosStatus"></div>
         <canvas id="qtdVeiculosStatus"></canvas>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-3" id="dashEspecie">
         <h6>Quantidade por Espécie</h6>
         <div id="divVeiculosEspecies"></div>
         <canvas id="qtdVeiculosEspecies"></canvas>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-6" id="dashEntradas">
         <h6>Entradas por período</h6>
         <div id="divEntradasPorPeriodo"></div>
         <canvas id="entradasPorPeriodo"></canvas>
