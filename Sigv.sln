@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigv.ApiFullOwin", "Sigv.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigv.Web", "Sigv.Web\Sigv.Web.csproj", "{1AA9CE0B-1FEF-4D78-9581-AB4DC197A3CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigv.Mobile.Laudo", "Sigv.Mobile.Laudo\Sigv.Mobile.Laudo.csproj", "{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{1AA9CE0B-1FEF-4D78-9581-AB4DC197A3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AA9CE0B-1FEF-4D78-9581-AB4DC197A3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AA9CE0B-1FEF-4D78-9581-AB4DC197A3CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
