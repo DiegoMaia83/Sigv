@@ -1,4 +1,7 @@
-﻿namespace Sigv.Mobile.Laudo
+﻿using Sigv.Mobile.Laudo.Aplicacao;
+using Sigv.Mobile.Laudo.Services;
+
+namespace Sigv.Mobile.Laudo
 {
     public partial class MainPage : ContentPage
     {
@@ -17,17 +20,25 @@
             {
                 using (var client = new HttpClient())
                 {
-                    string senhaDecr = Aplicacao.Util.AESEncrytDecry.DecryptStringAES("fOEbHAaCQv62wfw/UArvTg==");
                     var senhaEncr = Aplicacao.Util.AESEncrytDecry.EncryptStringAES("Martins.1101");
 
+                    var loginEfetuado = (MensagemRetorno)new AuthService().RetornarLoginToken("diego", senhaEncr);
 
                     client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Add("Authorization", "Bearer W00rp12awhaF-DmpfIlylfnI9UgM6glxbqNZon5PW5M37tZ8QUQGZRAIJneFXBtpmDiOTw0lLBHRGP3sHB1fPLbFk2pdFPkBjfHk3vGtNJqT0odPCVB6DB42mnIjfAnGKXROmcdBwVqFBlo7ayJNHotKXh9txEiNF0SiW_-4Jvk1864UFM7hmVFtizM-VZ0vxwz2z6Ec0SuZhK-YP5dXgg6efqizVSqZM25nMhNhYx8ulU8Hq2-hwFbTSJWOcHHw6LaqTUU6Lv9hxTu9iXLzqw");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + TokenPreferences.Token);
 
                     var urlService = "http://api.devmaia.com.br/api/usuario/listar";
                     var response = client.GetAsync(urlService).Result;
 
                     var content = response.Content.ReadAsStringAsync().Result;
+
+                    lbToken.Text = TokenPreferences.Token;
+
+                    lbNome.Text = UserPreferences.Logado.Nome;
+                    lbLogin.Text = UserPreferences.Logado.Login;
+                    lbUsuarioId.Text = UserPreferences.Logado.UsuarioId;
+                    lbGrupoId.Text = UserPreferences.Logado.GrupoId;
+                    
                 }
             }
             catch (Exception ex)

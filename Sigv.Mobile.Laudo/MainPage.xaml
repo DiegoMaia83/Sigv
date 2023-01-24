@@ -35,6 +35,12 @@
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
 
+            <Label x:Name="lbNome"/>
+            <Label x:Name="lbLogin"/>
+            <Label x:Name="lbGrupoId"/>
+            <Label x:Name="lbUsuarioId"/>
+            <Label x:Name="lbToken"/>
+
         </VerticalStackLayout>
     </ScrollView>
 
