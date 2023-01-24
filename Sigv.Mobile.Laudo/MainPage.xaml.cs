@@ -1,5 +1,8 @@
-﻿using Sigv.Mobile.Laudo.Aplicacao;
+﻿using Sigv.Domain;
+using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Services;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Sigv.Mobile.Laudo
 {
@@ -14,7 +17,7 @@ namespace Sigv.Mobile.Laudo
             Teste();
         }
 
-        private void Teste()
+        private async void Teste()
         {
             try
             {
@@ -24,13 +27,20 @@ namespace Sigv.Mobile.Laudo
 
                     var loginEfetuado = (MensagemRetorno)new AuthService().RetornarLoginToken("diego", senhaEncr);
 
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + TokenPreferences.Token);
+                    if (loginEfetuado.Sucesso)
+                    {
+                        using (var srv = new HttpService<Acesso>())
+                        {
+                            var acesso = new Acesso()
+                            {
+                                UsuarioId = Convert.ToInt32(UserPreferences.Logado.UsuarioId),
+                                Ip = UserPreferences.Logado.Ip,
+                                Data = DateTime.Now
+                            };
 
-                    var urlService = "http://api.devmaia.com.br/api/usuario/listar";
-                    var response = client.GetAsync(urlService).Result;
-
-                    var content = response.Content.ReadAsStringAsync().Result;
+                            srv.ExecuteService(acesso, "api/acesso/salvar");
+                        }
+                    }
 
                     lbToken.Text = TokenPreferences.Token;
 

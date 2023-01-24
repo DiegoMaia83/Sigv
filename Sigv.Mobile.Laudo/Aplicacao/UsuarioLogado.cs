@@ -12,6 +12,7 @@ namespace Sigv.Mobile.Laudo.Aplicacao
         public string Nome { get; set; }
         public string Login { get; set; }
         public string GrupoId { get; set; }
+        public string Ip { get; set; }
 
         //Verifica se o login não expirou
         /*

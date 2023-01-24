@@ -53,4 +53,8 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Sigv.Domain\Sigv.Domain.csproj" />
+	</ItemGroup>
+
 </Project>
