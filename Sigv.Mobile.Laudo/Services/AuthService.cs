@@ -1,11 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sigv.Mobile.Laudo.Aplicacao;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sigv.Mobile.Laudo.Services
 {
@@ -38,8 +32,6 @@ namespace Sigv.Mobile.Laudo.Services
                     {
                         var token = JsonConvert.DeserializeObject<Token>(response.Content.ReadAsStringAsync().Result);
                         TokenPreferences.Token = token.access_token;
-                        //Preferences.Set("Token", token.access_token);
-                        //TokenCookie.Token = token.access_token;
                         return new MensagemRetorno { Sucesso = true, Mensagem = "Token armazenado." };
                     }
 
@@ -121,7 +113,6 @@ namespace Sigv.Mobile.Laudo.Services
                     if (response.IsSuccessStatusCode)
                     {
                         var usuario = JsonConvert.DeserializeObject<UsuarioLogado>(response.Content.ReadAsStringAsync().Result);
-                        //FormsAuthentication.SetAuthCookie(usuario.Login, false);
                         UserPreferences.SetPreferences(usuario);
                         return new MensagemRetorno { Sucesso = true, Mensagem = "Login efetuado com sucesso!" };
                     }

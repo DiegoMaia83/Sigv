@@ -57,4 +57,10 @@
 	  <ProjectReference Include="..\Sigv.Domain\Sigv.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Views\PageLogin.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

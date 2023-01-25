@@ -1,4 +1,6 @@
-﻿namespace Sigv.Mobile.Laudo
+﻿using Sigv.Mobile.Laudo.Views;
+
+namespace Sigv.Mobile.Laudo
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new PageLogin();
         }
     }
 }
