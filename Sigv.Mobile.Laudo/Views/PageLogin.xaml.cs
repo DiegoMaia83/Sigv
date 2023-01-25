@@ -36,8 +36,7 @@ public partial class PageLogin : ContentPage
                             Data = DateTime.Now
                         };
 
-                        srv.ExecuteService(acesso, "api/acesso/salvar");
-
+                        srv.ExecuteService(acesso, "api/acesso/salvar");                        
 
                         Application.Current.MainPage = new PageHome();
                     }

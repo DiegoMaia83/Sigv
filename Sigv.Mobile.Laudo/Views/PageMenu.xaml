@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sigv.Mobile.Laudo.Views.PageMenu"
+             Title="PageMenu">
+
+    <FlyoutPage.Flyout>
+
+        <ContentPage>
+
+            <StackLayout>
+
+                <StackLayout Orientation="Horizontal">                    
+                    <Label Text="Home" FontSize="16" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="btHome" Tapped="btHome_Clicked" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+            </StackLayout>
+            
+        </ContentPage>
+        
+    </FlyoutPage.Flyout>
+
+    <FlyoutPage.Detail>
+        <ContentPage>
+        </ContentPage>
+    </FlyoutPage.Detail>
+
+</FlyoutPage>

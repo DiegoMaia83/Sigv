@@ -8,7 +8,7 @@ namespace Sigv.Mobile.Laudo
         {
             InitializeComponent();
 
-            MainPage = new PageLogin();
+            MainPage = new NavigationPage(new PageLogin());
         }
     }
 }
