@@ -103,6 +103,11 @@
     <Compile Include="Repositorio\AcessoRepositorio.cs" />
     <Compile Include="Repositorio\Base\IRepositorio.cs" />
     <Compile Include="Repositorio\Base\Repositorio.cs" />
+    <Compile Include="Repositorio\LaudoApontamentoCondicao.cs" />
+    <Compile Include="Repositorio\LaudoApontamentoRepositorio.cs" />
+    <Compile Include="Repositorio\LaudoItemRepositorio.cs" />
+    <Compile Include="Repositorio\LaudoRepositorio.cs" />
+    <Compile Include="Repositorio\LaudoStatusRepositorio.cs" />
     <Compile Include="Repositorio\LogRepositorio.cs" />
     <Compile Include="Repositorio\PermissaoGrupoRepositorio.cs" />
     <Compile Include="Repositorio\PermissaoRepositorio.cs" />

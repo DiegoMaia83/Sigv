@@ -44,6 +44,11 @@
   <ItemGroup>
     <Compile Include="Acesso.cs" />
     <Compile Include="Estatisticas.cs" />
+    <Compile Include="Laudo.cs" />
+    <Compile Include="LaudoApontamento.cs" />
+    <Compile Include="LaudoApontamentoCondicao.cs" />
+    <Compile Include="LaudoItem.cs" />
+    <Compile Include="LaudoStatus.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Permissao.cs" />
     <Compile Include="PermissaoGrupo.cs" />

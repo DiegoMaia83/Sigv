@@ -26,5 +26,11 @@ namespace Sigv.Dal.Database
         public DbSet<VeiculoCor> VeiculosCores { get; set; }
         public DbSet<VeiculoOcorrencia> VeiculosOcorrencias { get; set; }
         public DbSet<VeiculoFoto> VeiculosFotos { get; set; }
+
+        public DbSet<Laudo> Laudos { get; set; }
+        public DbSet<LaudoStatus> LaudosStatus { get; set; }
+        public DbSet<LaudoItem> LaudosItens { get; set; }
+        public DbSet<LaudoApontamento> LaudosApontamentos { get; set; }
+        public DbSet<LaudoApontamentoCondicao> LaudosApontamentosCondicoes { get; set; }
     }
 }
