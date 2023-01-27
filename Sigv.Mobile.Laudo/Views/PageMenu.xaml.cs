@@ -1,8 +1,9 @@
 namespace Sigv.Mobile.Laudo.Views;
 
+[XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class PageMenu : FlyoutPage
 {
-	public PageMenu()
+    public PageMenu()
 	{
 		InitializeComponent();
 

@@ -9,7 +9,11 @@ public partial class PageLogin : ContentPage
 	public PageLogin()
 	{
 		InitializeComponent();
-	}
+
+        UsernameEntry.Text = "willie";
+        PasswordEntry.Text = "abc.123";
+
+    }
 
     private void LoginButton_Clicked(object sender, EventArgs e)
     {
@@ -36,9 +40,10 @@ public partial class PageLogin : ContentPage
                             Data = DateTime.Now
                         };
 
-                        srv.ExecuteService(acesso, "api/acesso/salvar");                        
+                        srv.ExecuteService(acesso, "api/acesso/salvar");
 
-                        Application.Current.MainPage = new PageHome();
+                        Application.Current.MainPage = new PageMenu();
+
                     }
 
                 }

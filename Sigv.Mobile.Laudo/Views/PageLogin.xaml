@@ -29,7 +29,7 @@
                     <Label Text="Usuário" TextColor="{StaticResource Primary}" />
                     <Entry x:Name="UsernameEntry" />
                     <Label Text="Senha" TextColor="{StaticResource Primary}" />
-                    <Entry x:Name="PasswordEntry" IsPassword="True" />
+                    <Entry x:Name="PasswordEntry" IsPassword="False" />
                     <Button x:Name="LoginButton" Text="Entrar" 
                             BackgroundColor="{StaticResource Tertiary}"
                             TextColor="{StaticResource Secondary}"

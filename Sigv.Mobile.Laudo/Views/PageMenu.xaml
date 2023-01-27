@@ -6,14 +6,14 @@
 
     <FlyoutPage.Flyout>
 
-        <ContentPage>
+        <ContentPage Title="Menu">
 
             <StackLayout>
 
                 <StackLayout Orientation="Horizontal">                    
                     <Label Text="Home" FontSize="16" />
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="btHome" Tapped="btHome_Clicked" NumberOfTapsRequired="1"/>
+                        <TapGestureRecognizer Tapped="btHome_Clicked" NumberOfTapsRequired="1"/>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
 
@@ -24,7 +24,7 @@
     </FlyoutPage.Flyout>
 
     <FlyoutPage.Detail>
-        <ContentPage>
+        <ContentPage Title="Detail">
         </ContentPage>
     </FlyoutPage.Detail>
 
