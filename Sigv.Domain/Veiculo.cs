@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -37,6 +38,10 @@ namespace Sigv.Domain
 
         [ForeignKey("StatusId")]
         public virtual VeiculoStatus Status { get; set; }
+
+        [NotMapped]
+        public int LaudoId { get; set; }
+
     }
 
     [Table("veiculos_combustivel")]

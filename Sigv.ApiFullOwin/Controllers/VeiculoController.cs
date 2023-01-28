@@ -45,12 +45,12 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [Authorize]
         [HttpGet]
-        [Route("api/veiculo/listar")]
-        public IEnumerable<Veiculo> Pesquisar()
+        [Route("api/veiculo/listar-veiculos-status-laudo")]
+        public IEnumerable<Veiculo> ListarVeiculosPorStatusLaudo(int statusId = 0)
         {
             try
             {
-                return _veiculoApp.Listar();
+                return _veiculoApp.ListarVeiculosPorStatusLaudo(statusId);
             }
             catch (Exception ex)
             {

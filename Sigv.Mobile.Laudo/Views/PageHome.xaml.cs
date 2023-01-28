@@ -11,8 +11,6 @@ public partial class PageHome : ContentPage
 		InitializeComponent();
 
 		listView.ItemsSource = ListarVeiculos();
-
-
     }
 
 	private List<Veiculo> ListarVeiculos()

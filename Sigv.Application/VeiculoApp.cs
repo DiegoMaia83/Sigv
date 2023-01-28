@@ -1,10 +1,12 @@
-﻿using Sigv.Dal.Repositorio;
+﻿using Sigv.Dal.Database;
+using Sigv.Dal.Repositorio;
 using Sigv.Domain;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +14,8 @@ namespace Sigv.Application
 {
     public class VeiculoApp
     {
+        private readonly LaudoApp _laudoApp = new LaudoApp();
+
         public Veiculo Retornar(int veiculoId)
         {
             try
@@ -76,13 +80,53 @@ namespace Sigv.Application
             }
         }
 
-        public List<Veiculo> Listar()
+        public List<Veiculo> ListarVeiculosPorStatusLaudo(int statusId = 0)
         {
             try
             {
-                using (var veiculos = new VeiculoRepositorio())
+                using (var conn = new ConexaoMySql())
                 {
-                    return veiculos.GetAll().ToList();
+                    var sql = new StringBuilder();
+                    sql.Append(" SELECT t1.*, ");
+                    sql.Append(" t2.LaudoId, t2.StatusId ");
+                    sql.Append(" FROM sigv.veiculos t1 ");
+                    sql.Append(" Left Join sigv.laudos t2 on t2.VeiculoId = t1.VeiculoId ");
+
+                    if (statusId == 0)
+                    {
+                        sql.Append(" where t2.LaudoId is null ");
+                    }
+                    else if (statusId == 1)
+                    {
+                        sql.Append(" where t2.StatusId = 1 ");
+                    }
+                    else if (statusId == 2)
+                    {
+                        sql.Append(" where t2.StatusId = 2 ");
+                        sql.Append(" and t2.DataFechamento >= DATE_SUB(NOW(), INTERVAL 30 DAY) ");
+                    }
+
+                    var listaVeiculos = new List<Veiculo>();
+
+                    var reader = conn.RetornaComando(sql.ToString());
+
+                    while (reader.Read()) 
+                    { 
+                        var veiculo = new Veiculo();
+                        veiculo.VeiculoId = reader.GetInt32(reader.GetOrdinal("VeiculoId"));
+                        veiculo.Marca = reader[reader.GetOrdinal("Marca")].ToString();
+                        veiculo.Modelo = reader[reader.GetOrdinal("Modelo")].ToString();
+                        veiculo.AnoFabricacao = reader[reader.GetOrdinal("AnoFabricacao")] != DBNull.Value ? reader.GetInt32("AnoFabricacao") : 0;
+                        veiculo.AnoModelo = reader[reader.GetOrdinal("AnoModelo")] != DBNull.Value ? reader.GetInt32("AnoModelo") : 0;
+                        veiculo.Placa = reader[reader.GetOrdinal("Placa")].ToString();
+
+                        veiculo.LaudoId = reader[reader.GetOrdinal("LaudoId")] != DBNull.Value ? reader.GetInt32("LaudoId") : 0;
+
+                        listaVeiculos.Add(veiculo);
+                    }
+
+                    return listaVeiculos;
+
                 }
             }
             catch (Exception ex)

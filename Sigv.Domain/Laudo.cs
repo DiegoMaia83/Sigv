@@ -17,5 +17,8 @@ namespace Sigv.Domain
         public string UsuarioFechamento { get; set; }
         public DateTime DataReabre { get; set; }
         public string UsuarioReabre { get; set; }
+
+        [ForeignKey("VeiculoId")]
+        public Veiculo Veiculo { get; set; }
     }
 }
