@@ -9,9 +9,12 @@ public partial class PageLogin : ContentPage
 	public PageLogin()
 	{
 		InitializeComponent();
-
+        
+        //Api em Produção Servidor
         //Preferences.Set("Api", "http://api.devmaia.com.br");
-        Preferences.Set("Api", "http://192.168.1.108:45463");
+
+        //Api em Produção Local
+        Preferences.Set("Api", "http://192.168.1.108:8000");
 
         UsernameEntry.Text = "willie";
         PasswordEntry.Text = "abc.123";
@@ -22,7 +25,6 @@ public partial class PageLogin : ContentPage
     {
         var userName = UsernameEntry.Text;
         var password = PasswordEntry.Text;
-
 
         try
         {

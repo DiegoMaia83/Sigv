@@ -5,9 +5,6 @@ namespace Sigv.Mobile.Laudo.Services
 {
     public class AuthService
     {
-
-        //private readonly string _apiUri = "http://api.devmaia.com.br";
-
         //Faz Login e armazena o token no cookie
         public object ApiAuthGetToken(string login, string password)
         {

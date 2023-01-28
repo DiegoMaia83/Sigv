@@ -76,6 +76,21 @@ namespace Sigv.Application
             }
         }
 
+        public List<Veiculo> Listar()
+        {
+            try
+            {
+                using (var veiculos = new VeiculoRepositorio())
+                {
+                    return veiculos.GetAll().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Veiculo Salvar(Veiculo veiculo)
         {
             try

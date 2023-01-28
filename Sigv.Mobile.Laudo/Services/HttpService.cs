@@ -12,9 +12,6 @@ namespace Sigv.Mobile.Laudo.Services
 {
     public class HttpService<T> : IDisposable
     {
-
-        private static readonly string _apiUri = "http://api.devmaia.com.br";
-
         //Retorna um httpService 
         public T ReturnService(string uri)
         {
@@ -26,7 +23,7 @@ namespace Sigv.Mobile.Laudo.Services
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + TokenPreferences.Token);
 
-                    var urlService = _apiUri + "/" + uri;
+                    var urlService = Preferences.Get("Api", "") + "/" + uri;
                     var response = client.GetAsync(urlService).Result;
 
                     var content = response.Content.ReadAsStringAsync().Result;
@@ -66,7 +63,7 @@ namespace Sigv.Mobile.Laudo.Services
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + TokenPreferences.Token);
 
-                    var urlService = _apiUri + "/" + uri;
+                    var urlService = Preferences.Get("Api", "") + "/" + uri;
                     var response = client.GetAsync(urlService).Result;
 
                     var content = response.Content.ReadAsStringAsync().Result;
@@ -111,7 +108,7 @@ namespace Sigv.Mobile.Laudo.Services
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + TokenPreferences.Token);
 
-                    var urlService = _apiUri + "/" + uri;
+                    var urlService = Preferences.Get("Api", "") + "/" + uri;
                     var response = client.PostAsync(urlService, byteContent).Result;
 
                     var content = response.Content.ReadAsStringAsync().Result;
@@ -156,7 +153,7 @@ namespace Sigv.Mobile.Laudo.Services
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + TokenPreferences.Token);
 
-                    var urlService = _apiUri + "/" + uri;
+                    var urlService = Preferences.Get("Api", "") + "/" + uri;
                     var response = client.PostAsync(urlService, byteContent).Result;
 
                     var content = response.Content.ReadAsStringAsync().Result;

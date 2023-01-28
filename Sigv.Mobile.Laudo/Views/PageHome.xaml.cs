@@ -1,4 +1,6 @@
+using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
+using Sigv.Mobile.Laudo.Services;
 
 namespace Sigv.Mobile.Laudo.Views;
 
@@ -8,10 +10,28 @@ public partial class PageHome : ContentPage
 	{
 		InitializeComponent();
 
-		lbGrupoId.Text = UserPreferences.Logado.GrupoId.ToString();
-		lbNome.Text= UserPreferences.Logado.Nome.ToString();
-		lbUsuario.Text = UserPreferences.Logado.Login.ToString();
-		lbUsuarioId.Text = UserPreferences.Logado.UsuarioId.ToString();
-		lbToken.Text = TokenPreferences.Token.ToString();
+		listView.ItemsSource = ListarVeiculos();
+
+
+    }
+
+	private List<Veiculo> ListarVeiculos()
+	{
+		try
+		{
+			var lista = new List<Veiculo>();
+
+			using (var srv = new HttpService<List<Veiculo>>())
+			{
+
+				lista = srv.ReturnService("api/veiculo/listar");
+			}
+
+			return lista;
+		}
+		catch (Exception ex)
+		{
+			throw ex;
+		}
 	}
 }

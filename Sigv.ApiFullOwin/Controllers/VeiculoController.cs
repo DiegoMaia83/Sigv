@@ -44,6 +44,21 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("api/veiculo/listar")]
+        public IEnumerable<Veiculo> Pesquisar()
+        {
+            try
+            {
+                return _veiculoApp.Listar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("api/veiculo/salvar")]
         public Veiculo Salvar(Veiculo veiculo)
