@@ -6,7 +6,7 @@ namespace Sigv.Mobile.Laudo.Services
     public class AuthService
     {
 
-        private readonly string _apiUri = "http://api.devmaia.com.br";
+        //private readonly string _apiUri = "http://api.devmaia.com.br";
 
         //Faz Login e armazena o token no cookie
         public object ApiAuthGetToken(string login, string password)
@@ -16,7 +16,7 @@ namespace Sigv.Mobile.Laudo.Services
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var urlService = _apiUri + "/auth/token";
+                    var urlService = Preferences.Get("Api", "") + "/auth/token";
 
                     var dict = new Dictionary<string, string>();
                     dict.Add("username", login);
@@ -100,7 +100,7 @@ namespace Sigv.Mobile.Laudo.Services
 
                 using (HttpClient client = new HttpClient())
                 {
-                    var urlService = _apiUri + "/api/login/in";
+                    var urlService = Preferences.Get("Api", "") + "/api/login/in";
 
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + TokenPreferences.Token);
