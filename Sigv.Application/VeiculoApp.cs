@@ -88,7 +88,7 @@ namespace Sigv.Application
                 {
                     var sql = new StringBuilder();
                     sql.Append(" SELECT t1.*, ");
-                    sql.Append(" t2.LaudoId, t2.StatusId ");
+                    sql.Append(" t2.LaudoId, t2.StatusId as 'LaudoStatusId' ");
                     sql.Append(" FROM sigv.veiculos t1 ");
                     sql.Append(" Left Join sigv.laudos t2 on t2.VeiculoId = t1.VeiculoId ");
 
@@ -121,6 +121,7 @@ namespace Sigv.Application
                         veiculo.Placa = reader[reader.GetOrdinal("Placa")].ToString();
 
                         veiculo.LaudoId = reader[reader.GetOrdinal("LaudoId")] != DBNull.Value ? reader.GetInt32("LaudoId") : 0;
+                        veiculo.LaudoStatusId = reader[reader.GetOrdinal("LaudoStatusId")] != DBNull.Value ? reader.GetInt32("LaudoStatusId") : 0;
 
                         listaVeiculos.Add(veiculo);
                     }

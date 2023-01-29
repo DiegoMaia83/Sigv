@@ -41,6 +41,7 @@ namespace Sigv.Domain
 
         [NotMapped]
         public int LaudoId { get; set; }
+        public int LaudoStatusId { get; set; }
 
     }
 

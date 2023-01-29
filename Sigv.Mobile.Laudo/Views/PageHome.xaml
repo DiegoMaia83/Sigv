@@ -5,18 +5,25 @@
              Title="PageHome">
     <StackLayout Padding="20">
 
-        <ListView x:Name="listView">
+        <ListView x:Name="listViewVeiculos" ItemSelected="listViewVeiculos_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding VeiculoId}" />
                             <Label Text="{Binding Placa}" />
+                            <Label Text="{Binding Marca}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackLayout>
+            <Button x:Name="listarLaudosPendentes" CommandParameter="0" Text="Pendentes" Clicked="ListarVeiculosLaudos_Clicked"/>
+            <Button x:Name="listarLaudosAbertos" CommandParameter="1" Text="Abertos" Clicked="ListarVeiculosLaudos_Clicked"/>
+            <Button x:Name="listarLaudosFinalizados" CommandParameter="2" Text="Finalizados" Clicked="ListarVeiculosLaudos_Clicked"/>            
+        </StackLayout>
 
     </StackLayout>
 </ContentPage>
