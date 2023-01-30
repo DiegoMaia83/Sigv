@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigv.ApiFullOwin", "Sigv.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigv.Web", "Sigv.Web\Sigv.Web.csproj", "{1AA9CE0B-1FEF-4D78-9581-AB4DC197A3CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigv.Mobile.Laudo", "Sigv.Mobile.Laudo\Sigv.Mobile.Laudo.csproj", "{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigv.Mobile.Laudo", "Sigv.Mobile.Laudo\Sigv.Mobile.Laudo.csproj", "{F26A0443-E346-4CC0-8E5B-C6B341ACA6DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

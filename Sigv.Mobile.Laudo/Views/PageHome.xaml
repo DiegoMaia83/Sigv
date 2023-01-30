@@ -5,14 +5,13 @@
              Title="PageHome">
     <StackLayout Padding="20">
 
-        <ListView x:Name="listViewVeiculos" ItemSelected="listViewVeiculos_ItemSelected">
+        <ListView x:Name="listViewVeiculos" HasUnevenRows="True" ItemSelected="listViewVeiculos_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Label Text="{Binding VeiculoId}" />
+                            <Label Text="{Binding VeiculoId}" />                            
                             <Label Text="{Binding Placa}" />
-                            <Label Text="{Binding Marca}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

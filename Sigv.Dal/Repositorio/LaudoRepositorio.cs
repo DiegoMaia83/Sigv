@@ -3,7 +3,7 @@ using Sigv.Domain;
 
 namespace Sigv.Dal.Repositorio
 {
-    public class LaudoRepositorio : Repositorio<Laudo>
+    public class LaudoRepositorio : Repositorio<LaudoVeiculo>
     {
     }
 }

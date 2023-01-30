@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Sigv.Domain
 {
     [Table("laudos")]
-    public class Laudo
+    public class LaudoVeiculo
     {
         [Key]
         public int LaudoId { get; set; }
@@ -19,6 +19,6 @@ namespace Sigv.Domain
         public string UsuarioReabre { get; set; }
 
         [ForeignKey("VeiculoId")]
-        public Veiculo Veiculo { get; set; }
+        public virtual Veiculo Veiculo { get; set; }
     }
 }

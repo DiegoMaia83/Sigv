@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sigv.Domain
-{
+{    
     [Table("veiculos")]
     public class Veiculo
     {

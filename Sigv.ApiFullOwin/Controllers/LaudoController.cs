@@ -12,7 +12,7 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [HttpGet]
         [Route("api/laudo/retornar")]
-        public Laudo Retornar(int laudoId)
+        public LaudoVeiculo Retornar(int laudoId)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [HttpGet]
         [Route("api/laudo/listar")]
-        public IEnumerable<Laudo> Listar()
+        public IEnumerable<LaudoVeiculo> Listar()
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [HttpGet]
         [Route("api/laudo/listar-por-status")]
-        public IEnumerable<Laudo> Listar(int statusId)
+        public IEnumerable<LaudoVeiculo> Listar(int statusId)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [HttpPost]
         [Route("api/laudo/inserir")]
-        public Laudo InserirLaudo(Laudo laudo)
+        public LaudoVeiculo InserirLaudo(LaudoVeiculo laudo)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [HttpPost]
         [Route("api/laudo/finalizar")]
-        public Laudo FinalizarLaudo(Laudo laudo)
+        public LaudoVeiculo FinalizarLaudo(LaudoVeiculo laudo)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [HttpPost]
         [Route("api/laudo/reabrir")]
-        public Laudo ReabrirLaudo(Laudo laudo)
+        public LaudoVeiculo ReabrirLaudo(LaudoVeiculo laudo)
         {
             try
             {

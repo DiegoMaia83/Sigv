@@ -11,7 +11,7 @@ namespace Sigv.Application
 {
     public class LaudoApp
     {
-        public Laudo Retornar(int laudoId)
+        public LaudoVeiculo Retornar(int laudoId)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace Sigv.Application
             }
         }
 
-        public IEnumerable<Laudo> Listar()
+        public IEnumerable<LaudoVeiculo> Listar()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Sigv.Application
             }
         }
 
-        public IEnumerable<Laudo> Listar(int statusId)
+        public IEnumerable<LaudoVeiculo> Listar(int statusId)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace Sigv.Application
             }
         }
 
-        public Laudo InserirLaudo(Laudo laudo)
+        public LaudoVeiculo InserirLaudo(LaudoVeiculo laudo)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace Sigv.Application
             }
         }
 
-        public Laudo FinalizarLaudo(Laudo laudo)
+        public LaudoVeiculo FinalizarLaudo(LaudoVeiculo laudo)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace Sigv.Application
             }
         }
 
-        public Laudo ReabrirLaudo(Laudo laudo)
+        public LaudoVeiculo ReabrirLaudo(LaudoVeiculo laudo)
         {
             try
             {

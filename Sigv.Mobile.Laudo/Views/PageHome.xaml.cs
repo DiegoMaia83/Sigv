@@ -1,14 +1,14 @@
 using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Services;
-using Sigv.Mobile.Laudo.Views.Laudo;
+using Sigv.Mobile.Laudo.Views.Laudos;
 
 namespace Sigv.Mobile.Laudo.Views;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class PageHome : ContentPage
-{
-	public PageHome()
+{    
+    public PageHome()
 	{
 		InitializeComponent();
 
@@ -55,8 +55,10 @@ public partial class PageHome : ContentPage
 
         if (veiculo.LaudoStatusId == 1)
         {
+            var laudo = RetornarLaudo(veiculo.LaudoId);
+
             FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
-            page.Detail = new NavigationPage(new PageLaudo());
+            page.Detail = new NavigationPage(new PageLaudo(laudo));
         }
 
         if (veiculo.LaudoStatusId == 2)
@@ -64,5 +66,23 @@ public partial class PageHome : ContentPage
             DisplayAlert("Laudo finalizado", "Esse laudo foi finalizado. Deseja reabrir o Laudo desse veículo?", "OK");
         }
 
+    }
+
+
+    private LaudoVeiculo RetornarLaudo(int laudoId)
+    {
+        try
+        {
+            using (var srv = new HttpService<LaudoVeiculo>())
+            {
+
+                return srv.ReturnService("api/laudo/retornar?LaudoId=" + laudoId);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 }
