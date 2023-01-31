@@ -3,11 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageLaudo"
              Title="PageLaudo">
-    <StackLayout>
+    <StackLayout Padding="20">
 
-        <Label x:Name="lbPlaca" />
-        <Label x:Name="lbMarca" />
-        <Label x:Name="lbAno" />
+        <StackLayout>
+            <Label x:Name="lbPlaca" Text="" FontSize="20" />
+            <Label x:Name="lbMarca" Text="" />
+            <Label x:Name="lbAno" Text=""/>            
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" >
+            <Button Text="Avarias" HorizontalOptions="FillAndExpand" Margin="2"/>
+            <Button Text="Opcionais" HorizontalOptions="FillAndExpand" Margin="2"/>            
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" >
+            <Button Text="Avaliação" HorizontalOptions="FillAndExpand" Margin="2"/>
+            <Button Text="Fotos" HorizontalOptions="FillAndExpand" Margin="2"/>
+        </StackLayout>
 
     </StackLayout>
 </ContentPage>

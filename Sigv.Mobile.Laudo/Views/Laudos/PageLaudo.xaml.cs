@@ -11,10 +11,10 @@ public partial class PageLaudo : ContentPage
 
     public PageLaudo(LaudoVeiculo laudo)
     {
-        lbPlaca.Text = laudo.Veiculo.Placa;
-        lbMarca.Text = laudo.Veiculo.Marca;
-        lbAno.Text = laudo.Veiculo.AnoFabricacao.ToString();
-
         InitializeComponent();
+
+        lbPlaca.Text = laudo.Veiculo.Placa.ToString();
+        lbMarca.Text = laudo.Veiculo.Marca + "/" + laudo.Veiculo.Modelo;
+        lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
     }
 }
