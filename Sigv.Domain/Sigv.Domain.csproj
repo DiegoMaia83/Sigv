@@ -45,9 +45,8 @@
     <Compile Include="Acesso.cs" />
     <Compile Include="Estatisticas.cs" />
     <Compile Include="LaudoVeiculo.cs" />
-    <Compile Include="LaudoApontamento.cs" />
-    <Compile Include="LaudoApontamentoCondicao.cs" />
-    <Compile Include="LaudoItem.cs" />
+    <Compile Include="LaudoAvariaApontamento.cs" />
+    <Compile Include="LaudoAvaria.cs" />
     <Compile Include="LaudoStatus.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Permissao.cs" />

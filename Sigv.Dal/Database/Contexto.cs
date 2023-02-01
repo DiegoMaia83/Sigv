@@ -29,8 +29,7 @@ namespace Sigv.Dal.Database
 
         public DbSet<LaudoVeiculo> Laudos { get; set; }
         public DbSet<LaudoStatus> LaudosStatus { get; set; }
-        public DbSet<LaudoItem> LaudosItens { get; set; }
-        public DbSet<LaudoApontamento> LaudosApontamentos { get; set; }
-        public DbSet<LaudoApontamentoCondicao> LaudosApontamentosCondicoes { get; set; }
+        public DbSet<LaudoAvaria> LaudosAvarias { get; set; }
+        public DbSet<LaudoAvariaApontamento> LaudosAvariasApontamentos { get; set; }
     }
 }

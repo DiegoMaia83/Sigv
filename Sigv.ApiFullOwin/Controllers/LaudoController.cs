@@ -94,5 +94,19 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("api/laudo/listar-avarias")]
+        public IEnumerable<LaudoAvaria> ListarAvarias()
+        {
+            try
+            {
+                return _laudoApp.ListarAvarias();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -17,4 +17,10 @@ public partial class PageLaudo : ContentPage
         lbMarca.Text = laudo.Veiculo.Marca + "/" + laudo.Veiculo.Modelo;
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
     }
+
+    private void ButtonAvarias_Clicked(object sender, EventArgs e)
+    {
+        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
+        page.Detail = new NavigationPage(new PageAvarias());
+    }
 }

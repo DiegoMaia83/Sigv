@@ -120,5 +120,20 @@ namespace Sigv.Application
             }
         }
 
+        public IEnumerable<LaudoAvaria> ListarAvarias()
+        {
+            try
+            {
+                using (var avarias = new LaudoAvariaRepositorio())
+                {
+                    return avarias.GetAll().ToList();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

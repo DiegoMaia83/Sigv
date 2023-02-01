@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sigv.Domain
 {
-    [Table("laudos_apontamentos")]
-    public class LaudoApontamento
+    [Table("laudos_avarias_apontamentos")]
+    public class LaudoAvariaApontamento
     {
         [Key]
         public int ApontamentoId { get; set; }
