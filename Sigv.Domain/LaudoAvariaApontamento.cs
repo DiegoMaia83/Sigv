@@ -10,8 +10,8 @@ namespace Sigv.Domain
         [Key]
         public int ApontamentoId { get; set; }
         public int LaudoId { get; set; }
-        public int CondicaoId { get; set; }
-        public int UsuarioIdCadastro { get; set; }
+        public int AvariaId { get; set; }
+        public string UsuarioCadastro { get; set; }
         public DateTime DataCadastro { get; set; }
     }
 }

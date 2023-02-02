@@ -108,5 +108,47 @@ namespace Sigv.ApiFullOwin.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        [Route("api/laudo/listar-avarias-apontamentos")]
+        public IEnumerable<LaudoAvariaApontamento> ListarAvariasApontamentos(int laudoId)
+        {
+            try
+            {
+                return _laudoApp.ListarAvariasApomtamentos(laudoId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/laudo/inserir-avaria-apontamento")]
+        public LaudoAvariaApontamento InserInserirAvariaApontamento(LaudoAvariaApontamento apontamento)
+        {
+            try
+            {
+                return _laudoApp.InserirAvariaApontamento(apontamento);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/laudo/remover-avaria-apontamento")]
+        public LaudoAvariaApontamento RemoverAvariaApontamento(LaudoAvariaApontamento apontamento)
+        {
+            try
+            {
+                return _laudoApp.RemoverAvariaApontamento(apontamento);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

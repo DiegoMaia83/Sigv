@@ -120,6 +120,8 @@ namespace Sigv.Application
             }
         }
 
+
+
         public IEnumerable<LaudoAvaria> ListarAvarias()
         {
             try
@@ -134,6 +136,65 @@ namespace Sigv.Application
                 throw ex;
             }
         }
+
+        public IEnumerable<LaudoAvariaApontamento> ListarAvariasApomtamentos(int laudoId)
+        {
+            try
+            {
+                using (var apontamentos = new LaudoAvariaApontamentoRepositorio())
+                {
+                    return apontamentos.GetAll()
+                        .Where(x => x.LaudoId == laudoId)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public LaudoAvariaApontamento InserirAvariaApontamento(LaudoAvariaApontamento apontamento)
+        {
+            try
+            {
+                using (var apontamentos = new LaudoAvariaApontamentoRepositorio())
+                {
+                    apontamentos.Adicionar(apontamento);
+                    apontamentos.SalvarTodos();
+
+                    return apontamento;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public LaudoAvariaApontamento RemoverAvariaApontamento(LaudoAvariaApontamento apontamento)
+        {
+            try
+            {
+                using (var apontamentos = new LaudoAvariaApontamentoRepositorio())
+                {
+                    var apontamentoDb = apontamentos.GetAll()
+                        .Where(x => x.ApontamentoId == apontamento.ApontamentoId)
+                        .FirstOrDefault();
+
+                    apontamentos.Excluir(apontamentoDb);
+                    apontamentos.SalvarTodos();
+
+                    return apontamento;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
     }
 }

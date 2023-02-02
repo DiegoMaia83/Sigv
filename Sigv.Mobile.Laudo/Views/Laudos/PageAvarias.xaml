@@ -3,7 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageAvarias"
              Title="PageAvarias">
-    <StackLayout>
-        <CheckBox x:Name="checkBox" />
+    <StackLayout Padding="20">
+        <ListView x:Name="listViewAvarias" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="false" BindingContext="{Binding .}" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="CheckBoxAvaria_CheckedChanged" />                            
+                            <Label Text="{Binding Descricao}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                            <Label Text="{Binding AvariaId}" />
+                            <Label Text="{Binding Laudo.LaudoId}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
     </StackLayout>
 </ContentPage>

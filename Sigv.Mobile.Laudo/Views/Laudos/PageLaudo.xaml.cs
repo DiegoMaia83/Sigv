@@ -13,6 +13,8 @@ public partial class PageLaudo : ContentPage
     {
         InitializeComponent();
 
+        bindingContextLaudoVeculo.BindingContext = laudo;
+
         lbPlaca.Text = laudo.Veiculo.Placa.ToString();
         lbMarca.Text = laudo.Veiculo.Marca + "/" + laudo.Veiculo.Modelo;
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
@@ -20,6 +22,8 @@ public partial class PageLaudo : ContentPage
 
     private void ButtonAvarias_Clicked(object sender, EventArgs e)
     {
+        var laudo = bindingContextLaudoVeculo.BindingContext;
+
         FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
         page.Detail = new NavigationPage(new PageAvarias());
     }

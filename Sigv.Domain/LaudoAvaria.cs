@@ -7,7 +7,7 @@ namespace Sigv.Domain
     public class LaudoAvaria
     {
         [Key]
-        public int ItemId { get; set; }
+        public int AvariaId { get; set; }
         public string Descricao { get; set; }
     }
 }
