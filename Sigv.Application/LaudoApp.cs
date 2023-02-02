@@ -179,9 +179,9 @@ namespace Sigv.Application
                 using (var apontamentos = new LaudoAvariaApontamentoRepositorio())
                 {
                     var apontamentoDb = apontamentos.GetAll()
-                        .Where(x => x.ApontamentoId == apontamento.ApontamentoId)
+                        .Where(x => x.LaudoId == apontamento.LaudoId && x.AvariaId == apontamento.AvariaId)
                         .FirstOrDefault();
-
+                        
                     apontamentos.Excluir(apontamentoDb);
                     apontamentos.SalvarTodos();
 

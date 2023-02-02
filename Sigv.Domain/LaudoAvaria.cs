@@ -9,5 +9,7 @@ namespace Sigv.Domain
         [Key]
         public int AvariaId { get; set; }
         public string Descricao { get; set; }
+
+        public bool IsChecked { get; set; }
     }
 }

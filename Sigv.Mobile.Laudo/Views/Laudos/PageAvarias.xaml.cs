@@ -1,4 +1,5 @@
 using Sigv.Domain;
+using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Services;
 
 namespace Sigv.Mobile.Laudo.Views.Laudos;
@@ -16,26 +17,48 @@ public partial class PageAvarias : ContentPage
     {
         InitializeComponent();
 
-        BindingContext = new { Laudo = laudo };
+        bindingContextLaudo.BindingContext = laudo;
 
-        listViewAvarias.ItemsSource = ListarAvarias();
+        var listaAvariasChecked = new List<LaudoAvaria>();
+
+        var listaAvarias = ListarAvarias();
+        var listaApontamentos = ListarApontamentos(laudo.LaudoId);
+
+        foreach (var item in ListarAvarias())
+        {
+            if (listaApontamentos.Any(x => x.AvariaId == item.AvariaId))
+            {
+                item.IsChecked = true;
+            }
+
+            listaAvariasChecked.Add(item);
+        }
+
+        listViewAvarias.ItemsSource = listaAvariasChecked;
     }
 
     private void CheckBoxAvaria_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var checkBox = (CheckBox)sender;
 
-        var dados = BindingContext as LaudoAvariaApontamento;
+        var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
+        var avaria = (LaudoAvaria)checkBox.BindingContext;
 
-        var apontamento = new LaudoAvariaApontamento();
+        var apontamento = new LaudoAvariaApontamento()
+        {
+            LaudoId = laudo.LaudoId,
+            AvariaId = avaria.AvariaId,
+            UsuarioCadastro = UserPreferences.Logado.Login,
+            DataCadastro = DateTime.Now
+        };
 
         if (checkBox.IsChecked)
         {
-            // Checkbox foi selecionado
+            InserirAvariaApontamento(apontamento);
         }
         else
         {
-            // Checkbox não foi selecionado
+            RemoverAvariaApontamento(apontamento);
         }
     }
 
@@ -60,7 +83,7 @@ public partial class PageAvarias : ContentPage
         {
             using (var srv = new HttpService<LaudoAvariaApontamento>())
             {
-                return srv.ExecuteService(apontamento, "api/laudo/removeravaria-apontamento");
+                return srv.ExecuteService(apontamento, "api/laudo/remover-avaria-apontamento");
             }
         }
         catch
@@ -82,13 +105,30 @@ public partial class PageAvarias : ContentPage
 
 			return listaAvarias;
 		}
-		catch (Exception ex) 
+		catch
 		{
-			DisplayAlert("Atenção", "Houve um erro ao processar a rotina. " +  ex.Message, "OK");
-
 			return null;
 		}
 	}
+
+    private List<LaudoAvariaApontamento> ListarApontamentos(int laudoId)
+    {
+        try
+        {
+            var listaApontamentos = new List<LaudoAvariaApontamento>();
+
+            using (var srv = new HttpService<List<LaudoAvariaApontamento>>())
+            {
+                listaApontamentos = srv.ReturnService("api/laudo/listar-avarias-apontamentos?laudoId=" + laudoId);
+            }
+
+            return listaApontamentos;
+        }
+        catch
+        {
+            return null;
+        }
+    }
 
 
 }

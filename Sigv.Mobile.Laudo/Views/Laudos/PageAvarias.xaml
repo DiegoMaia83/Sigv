@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageAvarias"
+             x:Name="bindingContextLaudo"
              Title="PageAvarias">
     <StackLayout Padding="20">
         <ListView x:Name="listViewAvarias" HasUnevenRows="True">
@@ -9,10 +10,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="false" BindingContext="{Binding .}" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="CheckBoxAvaria_CheckedChanged" />                            
-                            <Label Text="{Binding Descricao}" HorizontalOptions="Start" VerticalOptions="Center"/>
-                            <Label Text="{Binding AvariaId}" />
-                            <Label Text="{Binding Laudo.LaudoId}" />
+                            <CheckBox IsChecked="{Binding IsChecked}" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="CheckBoxAvaria_CheckedChanged" />
+                            <Label x:Name="lbDescricao" Text="{Binding Descricao}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                            <Label x:Name="lbAvaria" Text="{Binding AvariaId}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
