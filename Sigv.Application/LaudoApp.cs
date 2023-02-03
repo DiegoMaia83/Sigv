@@ -196,5 +196,76 @@ namespace Sigv.Application
 
 
 
+        public IEnumerable<LaudoOpcional> ListarOpcionais()
+        {
+            try
+            {
+                using (var opcionais = new LaudoOpcionalRepositorio())
+                {
+                    return opcionais.GetAll().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<LaudoOpcionalApontamento> ListarOpcionaisApontamentos(int laudoId)
+        {
+            try
+            {
+                using (var opcionais = new LaudoOpcionalApontamentoRepositorio())
+                {
+                    return opcionais.GetAll()
+                        .Where(x => x.LaudoId == laudoId)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public LaudoOpcionalApontamento InserirOpcionalApontamento(LaudoOpcionalApontamento opcional)
+        {
+            try
+            {
+                using (var opcionais = new LaudoOpcionalApontamentoRepositorio())
+                {
+                    opcionais.Adicionar(opcional);
+                    opcionais.SalvarTodos();
+
+                    return opcional;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public LaudoOpcionalApontamento RemoverOpcionalApontamento(LaudoOpcionalApontamento opcional)
+        {
+            try
+            {
+                using (var opcionais = new LaudoOpcionalApontamentoRepositorio())
+                {
+                    var opcionalDb = opcionais.GetAll()
+                        .Where(x => x.LaudoId == opcional.LaudoId && x.OpcionalId == opcional.OpcionalId)
+                        .FirstOrDefault();
+
+                    opcionais.Excluir(opcionalDb);
+                    opcionais.SalvarTodos();
+
+                    return opcional;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

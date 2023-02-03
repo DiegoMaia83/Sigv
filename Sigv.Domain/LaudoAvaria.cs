@@ -10,6 +10,7 @@ namespace Sigv.Domain
         public int AvariaId { get; set; }
         public string Descricao { get; set; }
 
+        [NotMapped]
         public bool IsChecked { get; set; }
     }
 }

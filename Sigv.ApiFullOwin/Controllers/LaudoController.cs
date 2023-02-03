@@ -95,6 +95,7 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
 
+
         [HttpGet]
         [Route("api/laudo/listar-avarias")]
         public IEnumerable<LaudoAvaria> ListarAvarias()
@@ -125,7 +126,7 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [HttpPost]
         [Route("api/laudo/inserir-avaria-apontamento")]
-        public LaudoAvariaApontamento InserInserirAvariaApontamento(LaudoAvariaApontamento apontamento)
+        public LaudoAvariaApontamento InserirAvariaApontamento(LaudoAvariaApontamento apontamento)
         {
             try
             {
@@ -144,6 +145,64 @@ namespace Sigv.ApiFullOwin.Controllers
             try
             {
                 return _laudoApp.RemoverAvariaApontamento(apontamento);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("api/laudo/listar-opcionais")]
+        public IEnumerable<LaudoOpcional> ListarOpcionais()
+        {
+            try
+            {
+                return _laudoApp.ListarOpcionais();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Route("api/laudo/listar-opcionais-apontamentos")]
+        public IEnumerable<LaudoOpcionalApontamento> ListarOpcionaisApontamentos(int laudoId)
+        {
+            try
+            {
+                return _laudoApp.ListarOpcionaisApontamentos(laudoId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/laudo/inserir-opcional-apontamento")]
+        public LaudoOpcionalApontamento InserirOpcionalApontamento(LaudoOpcionalApontamento apontamento)
+        {
+            try
+            {
+                return _laudoApp.InserirOpcionalApontamento(apontamento);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/laudo/remover-opcional-apontamento")]
+        public LaudoOpcionalApontamento RemoverOpcionalApontamento(LaudoOpcionalApontamento apontamento)
+        {
+            try
+            {
+                return _laudoApp.RemoverOpcionalApontamento(apontamento);
             }
             catch (Exception ex)
             {

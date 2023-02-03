@@ -131,4 +131,12 @@ public partial class PageAvarias : ContentPage
     }
 
 
+
+    private void BtnGoToLaudo_Clicked(object sender, EventArgs e)
+    {
+        var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
+
+        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
+        page.Detail = new NavigationPage(new PageLaudo(laudo));
+    }
 }

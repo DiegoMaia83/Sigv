@@ -18,6 +18,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
+        <StackLayout VerticalOptions="End">
+            <Button Text="Voltar" Clicked="BtnGoToLaudo_Clicked"/>
+        </StackLayout>
+
     </StackLayout>
 </ContentPage>

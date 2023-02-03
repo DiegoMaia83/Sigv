@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Acesso.cs" />
     <Compile Include="Estatisticas.cs" />
+    <Compile Include="LaudoOpcional.cs" />
+    <Compile Include="LaudoOpcionalApontamento.cs" />
     <Compile Include="LaudoVeiculo.cs" />
     <Compile Include="LaudoAvariaApontamento.cs" />
     <Compile Include="LaudoAvaria.cs" />
