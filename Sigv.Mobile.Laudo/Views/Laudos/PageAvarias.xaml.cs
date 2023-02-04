@@ -6,7 +6,9 @@ namespace Sigv.Mobile.Laudo.Views.Laudos;
 
 public partial class PageAvarias : ContentPage
 {
-	public PageAvarias()
+    private bool isPageLoaded = false;
+
+    public PageAvarias()
 	{
 		InitializeComponent();
 
@@ -16,6 +18,7 @@ public partial class PageAvarias : ContentPage
     public PageAvarias(LaudoVeiculo laudo)
     {
         InitializeComponent();
+        Loaded += Page_Loaded;
 
         bindingContextLaudo.BindingContext = laudo;
 
@@ -24,45 +27,38 @@ public partial class PageAvarias : ContentPage
         var listaAvarias = ListarAvarias();
         var listaApontamentos = ListarApontamentos(laudo.LaudoId);
 
-        foreach (var item in ListarAvarias())
-        {
-            if (listaApontamentos.Any(x => x.AvariaId == item.AvariaId))
-            {
-                item.IsChecked = true;
-            }
-
-            listaAvariasChecked.Add(item);
-        }
-
-        listViewAvarias.ItemsSource = listaAvariasChecked;
+        listViewAvarias.ItemsSource = listaAvarias;
     }
 
     private void CheckBoxAvaria_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        var checkBox = (CheckBox)sender;
-
-        var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
-        var avaria = (LaudoAvaria)checkBox.BindingContext;
-
-        var apontamento = new LaudoAvariaApontamento()
+        if (isPageLoaded)
         {
-            LaudoId = laudo.LaudoId,
-            AvariaId = avaria.AvariaId,
-            UsuarioCadastro = UserPreferences.Logado.Login,
-            DataCadastro = DateTime.Now
-        };
+            var checkBox = (CheckBox)sender;
 
-        if (checkBox.IsChecked)
-        {
-            InserirAvariaApontamento(apontamento);
-        }
-        else
-        {
-            RemoverAvariaApontamento(apontamento);
+            var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
+            var avaria = (LaudoAvaria)checkBox.BindingContext;
+
+            var apontamento = new LaudoAvariaApontamento()
+            {
+                LaudoId = laudo.LaudoId,
+                AvariaId = avaria.AvariaId,
+                UsuarioCadastro = UserPreferences.Logado.Login,
+                DataCadastro = DateTime.Now
+            };
+
+            if (checkBox.IsChecked)
+            {
+                InserirAvariaApontamento(apontamento);
+            }
+            else
+            {
+                RemoverAvariaApontamento(apontamento);
+            }
         }
     }
 
-	private LaudoAvariaApontamento InserirAvariaApontamento(LaudoAvariaApontamento apontamento)
+    private LaudoAvariaApontamento InserirAvariaApontamento(LaudoAvariaApontamento apontamento)
 	{
 		try
 		{
@@ -139,4 +135,17 @@ public partial class PageAvarias : ContentPage
         FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
         page.Detail = new NavigationPage(new PageLaudo(laudo));
     }
+
+
+    private void Page_Loaded(object sender, EventArgs e)
+    {
+        foreach (var item in listViewAvarias.ItemsSource)
+        {
+            //var checkBox = listViewAvarias.FindByName<CheckBox>(item.AvariaId.ToString());
+            //checkBox.CheckedChanged += CheckBoxAvaria_CheckedChanged;
+        }
+
+        isPageLoaded = true;
+    }
+
 }
