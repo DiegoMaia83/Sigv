@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sigv.Domain
@@ -12,5 +13,12 @@ namespace Sigv.Domain
 
         [NotMapped]
         public bool IsChecked { get; set; }
+
+        [NotMapped]
+        public string CheckBoxName
+        {
+            get { return "checkBox_" + AvariaId.ToString(); }
+        }
+
     }
 }

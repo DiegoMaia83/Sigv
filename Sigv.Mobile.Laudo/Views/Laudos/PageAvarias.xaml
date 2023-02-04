@@ -10,7 +10,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="CheckBoxAvaria_CheckedChanged" />
+                            <CheckBox x:Name="checkBox_1" HorizontalOptions="Start" VerticalOptions="Center" />
                             <Label x:Name="lbDescricao" Text="{Binding Descricao}" HorizontalOptions="Start" VerticalOptions="Center"/>
                             <Label x:Name="lbAvaria" Text="{Binding AvariaId}" />
                         </StackLayout>
