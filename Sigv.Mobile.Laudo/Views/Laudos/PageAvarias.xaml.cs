@@ -29,7 +29,6 @@ public partial class PageAvarias : ContentPage
         
         var listaApontamentos = ListarApontamentos(laudo.LaudoId);
 
-        /*
         foreach (var item in ListarAvarias())
         {
             if (listaApontamentos.Any(x => x.AvariaId == item.AvariaId))
@@ -38,26 +37,65 @@ public partial class PageAvarias : ContentPage
             }
 
             listaAvariasChecked.Add(item);
-        }
-        */
-        
+        }        
 
-        listViewAvarias.ItemsSource = listaAvarias;
-
-        foreach (LaudoAvaria item in listViewAvarias.ItemsSource)
-        {
-            var id = item.CheckBoxName;
-            var viewCell = listViewAvarias.ItemTemplate.CreateContent() as ViewCell;
-            var checkBox = viewCell.View.FindByName<CheckBox>(id);
-            checkBox.IsChecked = true;
-            checkBox.CheckedChanged += CheckBoxAvaria_CheckedChanged;
-        }
-
-        // Atualize a exibição da ListView
-        listViewAvarias.ItemsSource = null;
-        listViewAvarias.ItemsSource = listaAvarias;
+        listViewAvarias.ItemsSource = listaAvariasChecked;
 
     }
+
+
+    private void SalvarAvarias_Clicked(object sender, EventArgs e)
+    {
+        try
+        {            
+            btnSalvarAvarias.IsEnabled = true;
+
+            LaudoVeiculo laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
+            var listaItens = listViewAvarias.ItemsSource;
+            var listaApontamentos = ListarApontamentos(laudo.LaudoId);
+
+            foreach (LaudoAvaria avaria in listaItens)
+            {
+                if (listaApontamentos.Where(x => x.AvariaId == avaria.AvariaId).FirstOrDefault() == null)
+                {                
+                    if (avaria.IsChecked)
+                    {
+                        var apontamento = new LaudoAvariaApontamento()
+                        {
+                            LaudoId = laudo.LaudoId,
+                            AvariaId = avaria.AvariaId,
+                            UsuarioCadastro = UserPreferences.Logado.Login,
+                            DataCadastro = DateTime.Now
+                        };
+
+                        InserirAvariaApontamento(apontamento);
+                    }
+                }
+                else
+                {
+                    if (!avaria.IsChecked)
+                    {
+                        var apontamento = new LaudoAvariaApontamento()
+                        {
+                            LaudoId = laudo.LaudoId,
+                            AvariaId = avaria.AvariaId,
+                            UsuarioCadastro = UserPreferences.Logado.Login,
+                            DataCadastro = DateTime.Now
+                        };
+
+                        RemoverAvariaApontamento(apontamento);
+                    }
+                }
+            }
+
+            DisplayAlert("Alerta", "Operação realizada com sucesso!", "OK");
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Alerta", "Houve um erro ao processar a roltina!", "OK");
+        }
+    }
+
 
     private void CheckBoxAvaria_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
@@ -164,12 +202,5 @@ public partial class PageAvarias : ContentPage
         page.Detail = new NavigationPage(new PageLaudo(laudo));
     }
 
-    /*
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
 
-        isPageLoaded = true;
-    }
-    */
 }

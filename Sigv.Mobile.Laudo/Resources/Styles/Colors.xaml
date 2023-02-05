@@ -7,6 +7,8 @@
     <Color x:Key="Primary">#233C45</Color>
     <Color x:Key="Secondary">#FFE1AE</Color>
     <Color x:Key="Tertiary">#0E6D8F</Color>
+    <Color x:Key="Primary-Light">#B1D4E0</Color>
+    <Color x:Key="Secondary-Light">#FFF8EB</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>

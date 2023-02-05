@@ -1,4 +1,5 @@
-﻿using Sigv.Dal.Repositorio;
+﻿using Sigv.Dal.Database;
+using Sigv.Dal.Repositorio;
 using Sigv.Domain;
 using System;
 using System.Collections.Generic;

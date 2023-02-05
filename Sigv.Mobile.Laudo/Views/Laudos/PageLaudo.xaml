@@ -13,13 +13,13 @@
         </StackLayout>  
         
         <StackLayout Orientation="Horizontal" >
-            <Button Text="Avarias" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Tertiary}" Margin="2" Clicked="ButtonAvarias_Clicked"/>
-            <Button Text="Opcionais" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Tertiary}" Margin="2"/>            
+            <Button Text="Avarias" Style="{StaticResource CustomButtonPage}" Clicked="ButtonAvarias_Clicked"/>
+            <Button Text="Opcionais" Style="{StaticResource CustomButtonPage}" Margin="2"/>            
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" >
-            <Button Text="Avaliação" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Tertiary}" Margin="2"/>
-            <Button Text="Fotos" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Tertiary}" Margin="2"/>
+            <Button Text="Avaliação" Style="{StaticResource CustomButtonPage}"/>
+            <Button Text="Fotos" Style="{StaticResource CustomButtonPage}"/>
         </StackLayout>
 
     </StackLayout>
