@@ -13,8 +13,8 @@
         </StackLayout>  
         
         <StackLayout Orientation="Horizontal" >
-            <Button Text="Avarias" Style="{StaticResource CustomButtonPage}" Clicked="ButtonAvarias_Clicked"/>
-            <Button Text="Opcionais" Style="{StaticResource CustomButtonPage}" Margin="2"/>            
+            <Button Text="Avarias" Style="{StaticResource CustomButtonPage}" Clicked="BtnAvarias_Clicked"/>
+            <Button Text="Opcionais" Style="{StaticResource CustomButtonPage}" Clicked="BtnOpcionais_Clicked"/>            
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" >

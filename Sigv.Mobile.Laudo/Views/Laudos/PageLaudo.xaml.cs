@@ -20,11 +20,19 @@ public partial class PageLaudo : ContentPage
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
     }
 
-    private void ButtonAvarias_Clicked(object sender, EventArgs e)
+    private void BtnAvarias_Clicked(object sender, EventArgs e)
     {
         var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
 
         FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
         page.Detail = new NavigationPage(new PageAvarias(laudo));
+    }
+
+    private void BtnOpcionais_Clicked(object sender, EventArgs e)
+    {
+        var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
+
+        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
+        page.Detail = new NavigationPage(new PageOpcionais(laudo));
     }
 }

@@ -73,6 +73,9 @@
 	  <MauiXaml Update="Views\Laudos\PageLaudo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Laudos\PageOpcionais.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PageHome.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

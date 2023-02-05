@@ -8,46 +8,22 @@ namespace Sigv.Mobile.Laudo.Views.Laudos;
 
 public partial class PageAvarias : ContentPage
 {
-    private bool isPageLoaded = false;
-
-    public PageAvarias()
-	{
-		InitializeComponent();
-
-        listViewAvarias.ItemsSource = ListarAvarias();
-	}
-
     public PageAvarias(LaudoVeiculo laudo)
     {
         InitializeComponent();
 
-        bindingContextLaudo.BindingContext = laudo;
+        bindingContextLaudo.BindingContext = laudo; 
 
-        var listaAvariasChecked = new List<LaudoAvaria>();
-
-        var listaAvarias = ListarAvarias();
-        
-        var listaApontamentos = ListarApontamentos(laudo.LaudoId);
-
-        foreach (var item in ListarAvarias())
-        {
-            if (listaApontamentos.Any(x => x.AvariaId == item.AvariaId))
-            {
-                item.IsChecked = true;                
-            }
-
-            listaAvariasChecked.Add(item);
-        }        
-
-        listViewAvarias.ItemsSource = listaAvariasChecked;
+        listViewAvarias.ItemsSource = ListarAvariasChecked(laudo);
 
     }
 
 
-    private void SalvarAvarias_Clicked(object sender, EventArgs e)
+    // ---------- Page Actions ---------- //
+    private void BtnSalvarAvarias_Clicked(object sender, EventArgs e)
     {
         try
-        {            
+        {
             btnSalvarAvarias.IsEnabled = true;
 
             LaudoVeiculo laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
@@ -57,7 +33,7 @@ public partial class PageAvarias : ContentPage
             foreach (LaudoAvaria avaria in listaItens)
             {
                 if (listaApontamentos.Where(x => x.AvariaId == avaria.AvariaId).FirstOrDefault() == null)
-                {                
+                {
                     if (avaria.IsChecked)
                     {
                         var apontamento = new LaudoAvariaApontamento()
@@ -90,40 +66,42 @@ public partial class PageAvarias : ContentPage
 
             DisplayAlert("Alerta", "Operação realizada com sucesso!", "OK");
         }
-        catch (Exception ex)
+        catch
         {
             DisplayAlert("Alerta", "Houve um erro ao processar a roltina!", "OK");
         }
     }
 
-
-    private void CheckBoxAvaria_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    private void BtnGoToLaudo_Clicked(object sender, EventArgs e)
     {
-
-        var checkBox = (CheckBox)sender;
-
         var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
-        var avaria = (LaudoAvaria)checkBox.BindingContext;
 
-        var apontamento = new LaudoAvariaApontamento()
-        {
-            LaudoId = laudo.LaudoId,
-            AvariaId = avaria.AvariaId,
-            UsuarioCadastro = UserPreferences.Logado.Login,
-            DataCadastro = DateTime.Now
-        };
-
-        if (checkBox.IsChecked)
-        {
-            InserirAvariaApontamento(apontamento);
-        }
-        else
-        {
-            RemoverAvariaApontamento(apontamento);
-        }
-      
+        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
+        page.Detail = new NavigationPage(new PageLaudo(laudo));
     }
 
+    private List<LaudoAvaria> ListarAvariasChecked(LaudoVeiculo laudo)
+    {
+        var listaAvarias = ListarAvarias();
+        var listaApontamentos = ListarApontamentos(laudo.LaudoId);
+
+        var listaAvariasChecked = new List<LaudoAvaria>();
+        // Verifica se existe apontamento salvo para popular a lista com checbox selecionado
+        foreach (var item in ListarAvarias())
+        {
+            if (listaApontamentos.Any(x => x.AvariaId == item.AvariaId))
+            {
+                item.IsChecked = true;
+            }
+
+            listaAvariasChecked.Add(item);
+        }
+
+        return listaAvariasChecked.OrderBy(x => x.Descricao).ToList();
+    }
+
+
+    // --------- Context Methods ---------- //
     private LaudoAvariaApontamento InserirAvariaApontamento(LaudoAvariaApontamento apontamento)
 	{
 		try
@@ -191,16 +169,5 @@ public partial class PageAvarias : ContentPage
             return null;
         }
     }
-
-
-
-    private void BtnGoToLaudo_Clicked(object sender, EventArgs e)
-    {
-        var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
-
-        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
-        page.Detail = new NavigationPage(new PageLaudo(laudo));
-    }
-
 
 }

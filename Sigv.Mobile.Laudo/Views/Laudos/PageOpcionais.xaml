@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageAvarias"
+             x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageOpcionais"
              x:Name="bindingContextLaudo"
-             Title="PageAvarias">
+             Title="PageOpcionais">
 
     <StackLayout>
 
         <Frame HasShadow="False" Margin="20" Padding="10" CornerRadius="2" BorderColor="{StaticResource Primary-Light}">
-            <StackLayout Orientation="Horizontal">                
-                <Label Text="AVARIAS" FontSize="16" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"  TextColor="{StaticResource Tertiary}" />                
+            <StackLayout Orientation="Horizontal">
+                <Label Text="OPCIONAIS" FontSize="16" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"  TextColor="{StaticResource Tertiary}" />
             </StackLayout>
         </Frame>
 
-        <ListView x:Name="listViewAvarias" HasUnevenRows="True">
+        <ListView x:Name="listViewOpcionais" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -22,13 +22,13 @@
                             <Label x:Name="lbDescricao" Text="{Binding Descricao}" HorizontalOptions="Start" VerticalOptions="Center"/>
                         </StackLayout>
                     </ViewCell>
-                </DataTemplate> 
+                </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
             <Button Text="Voltar" x:Name="btnGoToLaudo" Style="{StaticResource CustomButtonPage}" Clicked="BtnGoToLaudo_Clicked"/>
-            <Button Text="Salvar" x:Name="btnSalvarAvarias" Style="{StaticResource CustomButtonPage}" Clicked="BtnSalvarAvarias_Clicked"/>
+            <Button Text="Salvar" x:Name="btnSalvarOpcionais" Style="{StaticResource CustomButtonPage}" Clicked="BtnSalvarOpcionais_Clicked"/>
         </StackLayout>
 
     </StackLayout>
