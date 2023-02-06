@@ -4,22 +4,26 @@
              x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageLaudo" 
              x:Name="bindingContextLaudo"
              Title="PageLaudo">
-    <StackLayout Padding="20">
+    <StackLayout>
         
-        <StackLayout>
+        <StackLayout Padding="20">
             <Label x:Name="lbPlaca" Text="" FontSize="20" FontAttributes="Bold" />
             <Label x:Name="lbMarca" Text="" />
             <Label x:Name="lbAno" Text=""/>
         </StackLayout>  
         
-        <StackLayout Orientation="Horizontal" >
+        <StackLayout Orientation="Horizontal" Padding="20,0,20,0" >
             <Button Text="Avarias" Style="{StaticResource CustomButtonPage}" Clicked="BtnAvarias_Clicked"/>
             <Button Text="Opcionais" Style="{StaticResource CustomButtonPage}" Clicked="BtnOpcionais_Clicked"/>            
         </StackLayout>
 
-        <StackLayout Orientation="Horizontal" >
+        <StackLayout Orientation="Horizontal" Padding="20,0,20,0" >
             <Button Text="Avaliação" Style="{StaticResource CustomButtonPage}"/>
             <Button Text="Fotos" Style="{StaticResource CustomButtonPage}"/>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="EndAndExpand" Orientation="Horizontal" Padding="18">
+            <Button Text="Finalizar Laudo" x:Name="btnFinalizarLaudo" Style="{StaticResource CustomButtonPage}" Clicked="BtnFinalizarLaudo_Clicked"/>
         </StackLayout>
 
     </StackLayout>
