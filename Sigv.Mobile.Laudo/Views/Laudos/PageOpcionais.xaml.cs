@@ -1,11 +1,14 @@
 using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
+using Sigv.Mobile.Laudo.Aplicacao.App;
 using Sigv.Mobile.Laudo.Services;
 
 namespace Sigv.Mobile.Laudo.Views.Laudos;
 
 public partial class PageOpcionais : ContentPage
 {
+    private readonly LaudoApp _laudoApp = new LaudoApp();
+
 	public PageOpcionais(LaudoVeiculo laudo)
 	{
 		InitializeComponent();
@@ -25,7 +28,7 @@ public partial class PageOpcionais : ContentPage
 
             LaudoVeiculo laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
             var listaItens = listViewOpcionais.ItemsSource;
-            var listaApontamentos = ListarApontamentos(laudo.LaudoId);
+            var listaApontamentos = _laudoApp.ListarOpcionaisApontamentos(laudo.LaudoId);
 
             foreach (LaudoOpcional opcional in listaItens)
             {
@@ -41,7 +44,7 @@ public partial class PageOpcionais : ContentPage
                             DataCadastro = DateTime.Now
                         };
 
-                        InserirOpcionalApontamento(apontamento);
+                        _laudoApp.InserirOpcionalApontamento(apontamento);
                     }
                 }
                 else
@@ -56,7 +59,7 @@ public partial class PageOpcionais : ContentPage
                             DataCadastro = DateTime.Now
                         };
 
-                        RemoverOpcionalApontamento(apontamento);
+                        _laudoApp.RemoverOpcionalApontamento(apontamento);
                     }
                 }
             }
@@ -71,20 +74,28 @@ public partial class PageOpcionais : ContentPage
 
     private void BtnGoToLaudo_Clicked(object sender, EventArgs e)
     {
-        var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
+        try
+        {
+            var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
 
-        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
-        page.Detail = new NavigationPage(new PageLaudo(laudo));
+            FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
+            page.Detail = new NavigationPage(new PageLaudo(laudo));
+        }
+        catch
+        {
+            DisplayAlert("Alerta", "Houve um erro ao processar a roltina!", "OK");
+        }
     }
 
     private List<LaudoOpcional> ListarOpcionaisChecked(LaudoVeiculo laudo)
     {
-        var listaAvarias = ListarOpcionais();
-        var listaApontamentos = ListarApontamentos(laudo.LaudoId);
+        var listaOpcionais = _laudoApp.ListarOpcionais();
+        var listaApontamentos = _laudoApp.ListarOpcionaisApontamentos(laudo.LaudoId);
 
         var listaOpcionaisChecked = new List<LaudoOpcional>();
-        // Verifica se existe apontamento salvo para popular a lista com checbox selecionado
-        foreach (var item in ListarOpcionais())
+
+        // Verifica se existe apontamento salvos para popular a lista com checbox selecionado
+        foreach (var item in listaOpcionais)
         {
             if (listaApontamentos.Any(x => x.OpcionalId == item.OpcionalId))
             {
@@ -97,73 +108,4 @@ public partial class PageOpcionais : ContentPage
         return listaOpcionaisChecked.OrderBy(x => x.Descricao).ToList();
     }
 
-
-    // --------- Context Methods ---------- //
-    private LaudoOpcionalApontamento InserirOpcionalApontamento(LaudoOpcionalApontamento apontamento)
-    {
-        try
-        {
-            using (var srv = new HttpService<LaudoOpcionalApontamento>())
-            {
-                return srv.ExecuteService(apontamento, "api/laudo/inserir-opcional-apontamento");
-            }
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    private LaudoOpcionalApontamento RemoverOpcionalApontamento(LaudoOpcionalApontamento apontamento)
-    {
-        try
-        {
-            using (var srv = new HttpService<LaudoOpcionalApontamento>())
-            {
-                return srv.ExecuteService(apontamento, "api/laudo/remover-opcional-apontamento");
-            }
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    private List<LaudoOpcional> ListarOpcionais()
-    {
-        try
-        {
-            var listaOpcionais = new List<LaudoOpcional>();
-
-            using (var srv = new HttpService<List<LaudoOpcional>>())
-            {
-                listaOpcionais = srv.ReturnService("api/laudo/listar-opcionais");
-            }
-
-            return listaOpcionais;
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    private List<LaudoOpcionalApontamento> ListarApontamentos(int laudoId)
-    {
-        try
-        {
-            var listaApontamentos = new List<LaudoOpcionalApontamento>();
-
-            using (var srv = new HttpService<List<LaudoOpcionalApontamento>>())
-            {
-                listaApontamentos = srv.ReturnService("api/laudo/listar-opcionais-apontamentos?laudoId=" + laudoId);
-            }
-
-            return listaApontamentos;
-        }
-        catch
-        {
-            return null;
-        }
-    }
 }

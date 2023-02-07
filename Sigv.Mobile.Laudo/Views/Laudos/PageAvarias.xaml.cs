@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
+using Sigv.Mobile.Laudo.Aplicacao.App;
 using Sigv.Mobile.Laudo.Services;
 using System.ComponentModel;
 
@@ -8,6 +9,8 @@ namespace Sigv.Mobile.Laudo.Views.Laudos;
 
 public partial class PageAvarias : ContentPage
 {
+    private readonly LaudoApp _laudoApp = new LaudoApp();
+
     public PageAvarias(LaudoVeiculo laudo)
     {
         InitializeComponent();
@@ -28,7 +31,7 @@ public partial class PageAvarias : ContentPage
 
             LaudoVeiculo laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
             var listaItens = listViewAvarias.ItemsSource;
-            var listaApontamentos = ListarApontamentos(laudo.LaudoId);
+            var listaApontamentos = _laudoApp.ListarAvariasApontamentos(laudo.LaudoId);
 
             foreach (LaudoAvaria avaria in listaItens)
             {
@@ -44,7 +47,7 @@ public partial class PageAvarias : ContentPage
                             DataCadastro = DateTime.Now
                         };
 
-                        InserirAvariaApontamento(apontamento);
+                        _laudoApp.InserirAvariaApontamento(apontamento);
                     }
                 }
                 else
@@ -59,7 +62,7 @@ public partial class PageAvarias : ContentPage
                             DataCadastro = DateTime.Now
                         };
 
-                        RemoverAvariaApontamento(apontamento);
+                        _laudoApp.RemoverAvariaApontamento(apontamento);
                     }
                 }
             }
@@ -82,12 +85,13 @@ public partial class PageAvarias : ContentPage
 
     private List<LaudoAvaria> ListarAvariasChecked(LaudoVeiculo laudo)
     {
-        var listaAvarias = ListarAvarias();
-        var listaApontamentos = ListarApontamentos(laudo.LaudoId);
+        var listaAvarias = _laudoApp.ListarAvarias();
+        var listaApontamentos = _laudoApp.ListarAvariasApontamentos(laudo.LaudoId);
 
         var listaAvariasChecked = new List<LaudoAvaria>();
-        // Verifica se existe apontamento salvo para popular a lista com checbox selecionado
-        foreach (var item in ListarAvarias())
+
+        // Verifica se existe apontamento salvos para popular a lista com checbox selecionado
+        foreach (var item in listaAvarias)
         {
             if (listaApontamentos.Any(x => x.AvariaId == item.AvariaId))
             {
@@ -98,76 +102,6 @@ public partial class PageAvarias : ContentPage
         }
 
         return listaAvariasChecked.OrderBy(x => x.Descricao).ToList();
-    }
-
-
-    // --------- Context Methods ---------- //
-    private LaudoAvariaApontamento InserirAvariaApontamento(LaudoAvariaApontamento apontamento)
-	{
-		try
-		{
-			using (var srv = new HttpService<LaudoAvariaApontamento>())
-			{
-				return srv.ExecuteService(apontamento, "api/laudo/inserir-avaria-apontamento");
-			}
-		}
-		catch
-		{
-			return null;
-		}
-	}
-
-    private LaudoAvariaApontamento RemoverAvariaApontamento(LaudoAvariaApontamento apontamento)
-    {
-        try
-        {
-            using (var srv = new HttpService<LaudoAvariaApontamento>())
-            {
-                return srv.ExecuteService(apontamento, "api/laudo/remover-avaria-apontamento");
-            }
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    private List<LaudoAvaria> ListarAvarias()
-	{
-		try
-		{
-			var listaAvarias = new List<LaudoAvaria>();
-
-			using (var srv = new HttpService<List<LaudoAvaria>>()) 
-			{
-				listaAvarias = srv.ReturnService("api/laudo/listar-avarias");
-			}
-
-			return listaAvarias;
-		}
-		catch
-		{
-			return null;
-		}
-	}
-
-    private List<LaudoAvariaApontamento> ListarApontamentos(int laudoId)
-    {
-        try
-        {
-            var listaApontamentos = new List<LaudoAvariaApontamento>();
-
-            using (var srv = new HttpService<List<LaudoAvariaApontamento>>())
-            {
-                listaApontamentos = srv.ReturnService("api/laudo/listar-avarias-apontamentos?laudoId=" + laudoId);
-            }
-
-            return listaApontamentos;
-        }
-        catch
-        {
-            return null;
-        }
     }
 
 }

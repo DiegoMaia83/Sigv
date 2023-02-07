@@ -9,11 +9,6 @@ public partial class PageLaudo : ContentPage
 {
     private readonly LaudoApp _laudoApp = new LaudoApp();
 
-    public PageLaudo()
-	{
-		InitializeComponent();
-	}
-
     public PageLaudo(LaudoVeiculo laudo)
     {
         InitializeComponent();
@@ -39,6 +34,14 @@ public partial class PageLaudo : ContentPage
 
         FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
         page.Detail = new NavigationPage(new PageOpcionais(laudo));
+    }
+
+    private void BtnFotos_Clicked(object sender, EventArgs e)
+    {
+        var laudo = (LaudoVeiculo)bindingContextLaudo.BindingContext;
+
+        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
+        page.Detail = new NavigationPage(new PageFotos(laudo));
     }
 
     private async void BtnFinalizarLaudo_Clicked(object sender, EventArgs e)

@@ -19,7 +19,7 @@
 
         <StackLayout Orientation="Horizontal" Padding="20,0,20,0" >
             <Button Text="Avaliação" Style="{StaticResource CustomButtonPage}"/>
-            <Button Text="Fotos" Style="{StaticResource CustomButtonPage}"/>
+            <Button Text="Fotos" Style="{StaticResource CustomButtonPage}" Clicked="BtnFotos_Clicked"/>
         </StackLayout>
 
         <StackLayout VerticalOptions="EndAndExpand" Orientation="Horizontal" Padding="18">

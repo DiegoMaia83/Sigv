@@ -70,6 +70,9 @@
 	  <MauiXaml Update="Views\Laudos\PageAvarias.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Laudos\PageFotos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Laudos\PageLaudo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
