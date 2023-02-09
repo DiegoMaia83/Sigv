@@ -282,7 +282,7 @@ namespace Sigv.Application
             }
         }
 
-        private int RetornarUltimaInserida(int veiculoId, string tipo)
+        public int RetornarUltimaInserida(int veiculoId, string tipo)
         {
             try
             {

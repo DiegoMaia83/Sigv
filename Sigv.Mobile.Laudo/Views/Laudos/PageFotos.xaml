@@ -17,7 +17,10 @@
             <Label x:Name="lbPlaca" Text="" FontSize="20" FontAttributes="Bold" />
             <Label x:Name="lbMarca" Text="" />
             <Label x:Name="lbAno" Text=""/>
+            <Label x:Name="lbVeiculoId" Text=""/>
         </StackLayout>
+
+        <Button Text="Capturar" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Clicked="BtnCapture_Clicked" />
 
     </StackLayout>
     

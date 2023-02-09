@@ -11,10 +11,10 @@ public partial class PageLogin : ContentPage
 		InitializeComponent();
         
         //Api em Produção Servidor
-        Preferences.Set("Api", "http://api.devmaia.com.br");
+        //Preferences.Set("Api", "http://api.devmaia.com.br");
 
         //Api em Produção Local
-        //Preferences.Set("Api", "http://192.168.1.108:8000");
+        Preferences.Set("Api", "http://192.168.1.108:8000");
 
         UsernameEntry.Text = "willie";
         PasswordEntry.Text = "abc.123";

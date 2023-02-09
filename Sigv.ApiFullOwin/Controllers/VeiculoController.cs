@@ -185,6 +185,21 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("api/veiculo-foto/retornar-ultima-inserida")]
+        public int RetornarUltimaInserida(int veiculoId, string tipo)
+        {
+            try
+            {
+                return _veiculoApp.RetornarUltimaInserida(veiculoId, tipo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("api/veiculo-foto/copiar-para-diretorio")]
         public int CopiarParaDiretorio(VeiculoFoto arq)
