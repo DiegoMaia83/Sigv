@@ -27,6 +27,10 @@ public partial class PageFotos : ContentPage
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
         lbVeiculoId.Text = laudo.VeiculoId.ToString();
 
+        listViewFotos.ItemsSource = ListarFotos(laudo.VeiculoId);
+
+        
+
         //ListarFotos();
 
     }
@@ -67,14 +71,52 @@ public partial class PageFotos : ContentPage
     //'/data/user/0/com.companyname.sigv.mobile.laudo/cache/
 
 
-    private void ListarFotos()
+    private IEnumerable<VeiculoFoto> ListarFotos(int veiculoId)
     {
-        string path = _diretorioLocal;
-        var files = Directory.GetFiles(path).Where(file => file.EndsWith(".jpg") || file.EndsWith(".jpeg") || file.EndsWith(".png"));
+        try
+        {
+            var listaFotos = new List<VeiculoFoto>();
+
+            using (var srv = new HttpService<List<VeiculoFoto>>())
+            {
+                listaFotos = srv.ReturnService("api/veiculo-foto/listar-por-tipo?veiculoId=" + veiculoId + "&tipo=LAU");
+            }
+
+            var listaFotosLaudo = new List<VeiculoFoto>();
+
+            foreach (var item in listaFotos)
+            {
+                var foto = new VeiculoFoto();
+                foto.VeiculoId = item.VeiculoId;
+                foto.NumeroFoto = item.NumeroFoto;
+                foto.Tipo = item.Tipo;
+                foto.Extensao = item.Extensao;
+
+                string nomeFoto = String.Format("{0}{1}{2}{3}{4}", foto.Tipo, foto.VeiculoId.ToString("000000"), "_", foto.NumeroFoto.ToString("00"), foto.Extensao);
+                foto.SourcePath = Path.Combine(_diretorioLocal, nomeFoto);
+
+                listaFotosLaudo.Add(foto);
+
+            }
+
+            return listaFotosLaudo;
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+
+        //string path = _diretorioLocal;
+
+        //var files = Directory.GetFiles(path);
+        //var lista = files.Where(file => file.EndsWith(".jpg") || file.EndsWith(".jpeg") || file.EndsWith(".png"));
+        
+        /*
         foreach (var file in files)
         {
             Console.WriteLine(file);
         }
+        */
     }
 
 
