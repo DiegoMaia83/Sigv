@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Sigv.Domain;
+using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Services;
 
 namespace Sigv.Mobile.Laudo.Views.Laudos;
@@ -26,7 +27,7 @@ public partial class PageFotos : ContentPage
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
         lbVeiculoId.Text = laudo.VeiculoId.ToString();
 
-        ListarFotos();
+        //ListarFotos();
 
     }
 
@@ -90,19 +91,25 @@ public partial class PageFotos : ContentPage
 
                 if (photo != null)
                 {
-                    var ultimaInserida = 0;
-
-                    /*
-                    using (var srv = new HttpService<int>())
-                    {
-                        ultimaInserida = srv.ReturnService("api/veiculo-foto/retornar-ultima-inserida?veiculoId=1&tipo=LAU");
-                    }
-                    */
-                    var numFoto = ultimaInserida + 1;
-                    //var extensao = Path.GetExtension(arq.SourcePath);
-                    var arquivo = "LAU" + veiculoId.ToString("000000") + "_" + numFoto.ToString("00");
+                    // Recupera o número da última fotó e monta o no da foto.
+                    var numFoto = RetornarUltimaFotoInserida(veiculoId, "LAU") + 1;
+                    var extensao = Path.GetExtension(photo.FullPath);
+                    var arquivo = "LAU" + veiculoId.ToString("000000") + "_" + numFoto.ToString("00") + extensao;
 
                     photo.FileName = arquivo;
+
+                    var foto = new VeiculoFoto
+                    {
+                        VeiculoId = veiculoId,
+                        NumeroFoto = numFoto,
+                        Tipo = "LAU",
+                        Extensao = extensao,
+                        UsuCriacao = UserPreferences.Logado.Login,
+                        DataCriacao = DateTime.Now,
+                        Excluida = false
+                    };
+
+                    SalvarFoto(foto);
 
                     // save the file into local storage
                     string localFilePath = Path.Combine(_diretorioLocal, photo.FileName);
@@ -112,11 +119,42 @@ public partial class PageFotos : ContentPage
 
                     await sourceStream.CopyToAsync(localFileStream);
                 }
-            } 
-
-
-
+            }
             //TakePhoto(veiculoId);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    private int RetornarUltimaFotoInserida(int veiculoId, string tipoFoto)
+    {
+        try
+        {
+            var ultimaInserida = 0;
+            
+            using (var srv = new HttpService<int>())
+            {
+                ultimaInserida = srv.ReturnService("api/veiculo-foto/retornar-ultima-inserida?veiculoId=" + veiculoId + "&tipo=" + tipoFoto);
+            }
+            
+            return ultimaInserida;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    private VeiculoFoto SalvarFoto(VeiculoFoto foto)
+    {
+        try
+        {
+            using (var srv = new HttpService<VeiculoFoto>())
+            {
+                return srv.ExecuteService(foto, "api/veiculo-foto/salvar");
+            }
         }
         catch (Exception ex)
         {
