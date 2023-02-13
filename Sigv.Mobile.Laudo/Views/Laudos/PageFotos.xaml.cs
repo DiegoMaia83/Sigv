@@ -2,6 +2,8 @@ using Microsoft.Maui.Controls.PlatformConfiguration;
 using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Services;
+using System.Globalization;
+using System.Security.AccessControl;
 
 namespace Sigv.Mobile.Laudo.Views.Laudos;
 
@@ -17,7 +19,7 @@ public partial class PageFotos : ContentPage
 
         if (!System.IO.Directory.Exists(_diretorioLocal))
         {
-            System.IO.Directory.CreateDirectory(_diretorioLocal);
+            System.IO.Directory.CreateDirectory(_diretorioLocal);            
         }
 
         bindingContextLaudo.BindingContext = laudo;
@@ -82,24 +84,27 @@ public partial class PageFotos : ContentPage
                 listaFotos = srv.ReturnService("api/veiculo-foto/listar-por-tipo?veiculoId=" + veiculoId + "&tipo=LAU");
             }
 
-            var listaFotosLaudo = new List<VeiculoFoto>();
+            //var listaFotosLaudo = new List<VeiculoFoto>();
 
             foreach (var item in listaFotos)
             {
+                /*
                 var foto = new VeiculoFoto();
                 foto.VeiculoId = item.VeiculoId;
                 foto.NumeroFoto = item.NumeroFoto;
                 foto.Tipo = item.Tipo;
                 foto.Extensao = item.Extensao;
+                foto.Identificador = item.Identificador;
+                */
 
-                string nomeFoto = String.Format("{0}{1}{2}{3}{4}", foto.Tipo, foto.VeiculoId.ToString("000000"), "_", foto.NumeroFoto.ToString("00"), foto.Extensao);
-                foto.SourcePath = Path.Combine(_diretorioLocal, nomeFoto);
+                string nomeFoto = String.Format("{0}{1}", item.Identificador, item.Extensao);
+                item.SourcePath = Path.Combine(_diretorioLocal, nomeFoto);
 
-                listaFotosLaudo.Add(foto);
+                //listaFotosLaudo.Add(foto);
 
             }
 
-            return listaFotosLaudo;
+            return listaFotos;
         }
         catch(Exception ex)
         {
@@ -133,12 +138,12 @@ public partial class PageFotos : ContentPage
 
                 if (photo != null)
                 {
-                    // Recupera o número da última fotó e monta o no da foto.
+                    // Recupera o número da última foto e monta o no da foto.
                     var numFoto = RetornarUltimaFotoInserida(veiculoId, "LAU") + 1;
                     var extensao = Path.GetExtension(photo.FullPath);
                     var arquivo = "LAU" + veiculoId.ToString("000000") + "_" + numFoto.ToString("00") + extensao;
 
-                    photo.FileName = arquivo;
+                    //photo.FileName = arquivo;
 
                     var foto = new VeiculoFoto
                     {
@@ -148,7 +153,8 @@ public partial class PageFotos : ContentPage
                         Extensao = extensao,
                         UsuCriacao = UserPreferences.Logado.Login,
                         DataCriacao = DateTime.Now,
-                        Excluida = false
+                        Excluida = false,
+                        Identificador = photo.FileName.Split('.')[0]
                     };
 
                     SalvarFoto(foto);

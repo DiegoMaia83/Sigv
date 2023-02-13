@@ -22,6 +22,7 @@ namespace Sigv.Domain
         public bool Excluida { get; set; }
         public string UsuExclusao { get; set; }
         public DateTime? DataExclusao { get; set; }
+        public string Identificador { get; set; }
 
         [NotMapped]
         public string SourcePath { get; set; }
