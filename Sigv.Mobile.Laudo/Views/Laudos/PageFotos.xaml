@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageFotos"
              x:Name="bindingContextLaudo"
-             Title="PageFotos">
+             Title="Fotos">
 
     <StackLayout>
 
@@ -17,27 +17,55 @@
             <Label x:Name="lbPlaca" Text="" FontSize="20" FontAttributes="Bold" />
             <Label x:Name="lbMarca" Text="" />
             <Label x:Name="lbAno" Text=""/>
-            <Label x:Name="lbVeiculoId" Text=""/>
+            <Label x:Name="lbVeiculoId" Text="" IsVisible="false"/>
         </StackLayout>
 
         <!--<Image Source="../Resources/Images/logo_01.png"/>-->
 
-        <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand" Padding="10">
             <ListView x:Name="listViewFotos" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>                                
-                                <Image Source="{Binding SourcePath}" WidthRequest="200" />
-                            </StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackLayout Grid.Column="0" Padding="10">
+                                    <Image Source="{Binding SourcePath}" Aspect="AspectFill" />
+                                </StackLayout>
+                                
+                                <StackLayout Grid.Column="1" Padding="10">
+                                    
+                                    <StackLayout VerticalOptions="FillAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Nº Foto: " FontAttributes="Bold" />
+                                            <Label Text="{Binding NumeroFoto}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Id: " FontAttributes="Bold" />
+                                            <Label Text="{Binding Identificador}" />
+                                        </StackLayout>                                         
+                                    </StackLayout>
+
+                                    <StackLayout VerticalOptions="End">
+                                        <Button x:Name="BtnRemover" CommandParameter="{Binding FotoId}" Text="Remover" Style="{StaticResource CustomButtonPage}" Clicked="BtnRemover_Clicked"/>
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                                
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
 
-        <StackLayout>
-            <Button Text="Capturar" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Clicked="BtnCapture_Clicked" />            
+        <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
+            <Button Text="Voltar" x:Name="btnGoToLaudo" Style="{StaticResource CustomButtonPage}" Clicked="BtnGoToLaudo_Clicked"/>
+            <Button Text="Capturar" x:Name="btnCapturar" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Style="{StaticResource CustomButtonPage}" Clicked="BtnCapturar_Clicked" />
         </StackLayout>
 
     </StackLayout>

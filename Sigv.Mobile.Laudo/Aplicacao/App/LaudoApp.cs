@@ -236,5 +236,58 @@ namespace Sigv.Mobile.Laudo.Aplicacao.App
                 return null;
             }
         }
+
+
+
+        // --------- Fotos ---------- //
+        public int RetornarUltimaFotoInserida(int veiculoId, string tipoFoto)
+        {
+            try
+            {
+                var ultimaInserida = 0;
+
+                using (var srv = new HttpService<int>())
+                {
+                    ultimaInserida = srv.ReturnService("api/veiculo-foto/retornar-ultima-inserida?veiculoId=" + veiculoId + "&tipo=" + tipoFoto);
+                }
+
+                return ultimaInserida;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public VeiculoFoto SalvarFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                using (var srv = new HttpService<VeiculoFoto>())
+                {
+                    return srv.ExecuteService(foto, "api/veiculo-foto/salvar");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public VeiculoFoto RemoverFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                using (var srv = new HttpService<VeiculoFoto>())
+                {
+                    return srv.ExecuteService(foto, "api/veiculo-foto/remover");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
