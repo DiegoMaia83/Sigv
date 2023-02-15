@@ -20,8 +20,6 @@
             <Label x:Name="lbVeiculoId" Text="" IsVisible="false"/>
         </StackLayout>
 
-        <!--<Image Source="../Resources/Images/logo_01.png"/>-->
-
         <StackLayout VerticalOptions="FillAndExpand" Padding="10">
             <ListView x:Name="listViewFotos" HasUnevenRows="True">
                 <ListView.ItemTemplate>
@@ -66,6 +64,7 @@
         <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
             <Button Text="Voltar" x:Name="btnGoToLaudo" Style="{StaticResource CustomButtonPage}" Clicked="BtnGoToLaudo_Clicked"/>
             <Button Text="Capturar" x:Name="btnCapturar" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Style="{StaticResource CustomButtonPage}" Clicked="BtnCapturar_Clicked" />
+            <Button Text="Sync" x:Name="btnSync" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Style="{StaticResource CustomButtonPage}" Clicked="BtnSync_Clicked" />
         </StackLayout>
 
     </StackLayout>

@@ -1,10 +1,12 @@
 using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Storage;
 using Plugin.Media.Abstractions;
 using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Aplicacao.App;
 using Sigv.Mobile.Laudo.Services;
 using System.Globalization;
+using System.Net.Http.Headers;
 using System.Security.AccessControl;
 
 namespace Sigv.Mobile.Laudo.Views.Laudos;
@@ -31,7 +33,7 @@ public partial class PageFotos : ContentPage
         lbPlaca.Text = laudo.Veiculo.Placa.ToString();
         lbMarca.Text = laudo.Veiculo.Marca + "/" + laudo.Veiculo.Modelo;
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
-        lbVeiculoId.Text = laudo.VeiculoId.ToString();
+        lbVeiculoId.Text = laudo.VeiculoId.ToString();        
 
         listViewFotos.ItemsSource = ListarFotos(laudo.VeiculoId);
 
@@ -67,7 +69,7 @@ public partial class PageFotos : ContentPage
     {
         try
         {
-            var veiculoId = Convert.ToInt32(lbVeiculoId.Text);            
+            var veiculoId = Convert.ToInt32(lbVeiculoId.Text);
 
             if (MediaPicker.Default.IsCaptureSupported)
             {   
@@ -122,6 +124,8 @@ public partial class PageFotos : ContentPage
                         };
                     }
 
+                    //await SendImageToAPI(fileResult.FileName);
+
                     this.OnAppearing();
                 }
             }            
@@ -131,6 +135,58 @@ public partial class PageFotos : ContentPage
             await DisplayAlert("Atenção", "Houve um erro ao processar a rotina! " + ex.Message, "OK");
         }
     }
+
+    public async Task SendImageToAPI(string filePath)
+    {
+        //string filePath = "C:\Users\diego.martins\source\repos\EnvioImagem\EnvioImagemApi\api\fotos";
+        //string filePath = Path.Combine(_diretorioLocal, fileName);
+
+
+        // Converta a imagem em um array de bytes.
+        byte[] imageData = File.ReadAllBytes(filePath);
+
+        // Crie uma instância da classe HttpClient.
+        var client = new HttpClient();
+
+        // Crie uma instância da classe MultipartFormDataContent.
+        var content = new MultipartFormDataContent();
+
+        // Adicione a imagem ao conteúdo da solicitação usando o método Add.
+        var imageContent = new ByteArrayContent(imageData);
+        imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpg");
+        content.Add(imageContent, "image", Path.GetFileName(filePath));
+
+        // Envie a solicitação HTTP usando o método PostAsync do objeto HttpClient.
+        var response = await client.PostAsync(Preferences.Get("Api", "") + "/api/fotos/sync", content);
+
+        if (response.IsSuccessStatusCode)
+        {
+            // Sucesso! A imagem foi enviada para a API.
+        }
+        else
+        {
+            // A solicitação falhou. Lide com o erro de acordo.
+        }
+    }
+
+    private async void BtnSync_Clicked(object sender, EventArgs e)
+    {
+        var veiculoId = Convert.ToInt32(lbVeiculoId.Text);
+
+        var listaFotos = ListarFotos(veiculoId);
+
+        foreach (var foto in listaFotos) 
+        {
+            string nomeFoto = foto.Identificador + foto.Extensao;
+            string localFilePath = Path.Combine(_diretorioLocal, nomeFoto);
+
+            if (File.Exists(localFilePath))
+            {
+                await SendImageToAPI(localFilePath);
+            }
+        }
+    }
+
 
     private void BtnRemover_Clicked(object sender, EventArgs e)
     {
@@ -204,4 +260,6 @@ public partial class PageFotos : ContentPage
 
         listViewFotos.ItemsSource = listViewFotos.ItemsSource = ListarFotos(laudo.VeiculoId);
     }
+
+
 }

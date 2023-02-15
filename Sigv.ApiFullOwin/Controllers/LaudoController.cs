@@ -2,6 +2,10 @@
 using Sigv.Domain;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Sigv.ApiFullOwin.Controllers
@@ -208,6 +212,53 @@ namespace Sigv.ApiFullOwin.Controllers
             {
                 throw ex;
             }
+        }
+
+
+
+
+        [HttpPost]
+        [Route("api/fotos/sync")]
+        public async Task<IHttpActionResult> SincronizarImagem()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return BadRequest("O tipo de conteúdo da solicitação não é suportado.");
+            }
+
+            var provider = new MultipartMemoryStreamProvider();
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            var file = provider.Contents.FirstOrDefault();
+
+            // Verifica se o arquivo não é nulo
+            if (file == null)
+            {
+                return BadRequest("Nenhuma imagem encontrada na solicitação.");
+            }
+
+            var buffer = await file.ReadAsByteArrayAsync();
+
+
+            int veiculoId = 2;
+            int fotoId = 3;
+            string nomeFoto = "LAU000002_03.jpg";           
+
+
+            var targetPath = System.Web.HttpContext.Current.Server.MapPath("~/Content/Imagens/" + veiculoId.ToString("000000"));
+
+            // Verifica se o diretório existe. Se não o cria.
+            if (!Directory.Exists(targetPath))
+                Directory.CreateDirectory(targetPath);
+
+            var filePath = Path.Combine(targetPath, nomeFoto);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await stream.WriteAsync(buffer, 0, buffer.Length);
+            }
+
+            return Ok("Imagem recebida com sucesso!");
         }
     }
 }
