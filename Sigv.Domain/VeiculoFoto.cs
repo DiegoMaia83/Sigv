@@ -23,6 +23,7 @@ namespace Sigv.Domain
         public string UsuExclusao { get; set; }
         public DateTime? DataExclusao { get; set; }
         public string Identificador { get; set; }
+        public int SyncStatus { get; set; }
 
         [NotMapped]
         public string SourcePath { get; set; }

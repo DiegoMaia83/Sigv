@@ -351,3 +351,4 @@ MigrationBackup/
 
 ConnectionStrings.config
 Sigv.Web/Mail.config
+*.jpg

@@ -124,8 +124,6 @@ public partial class PageFotos : ContentPage
                         };
                     }
 
-                    //await SendImageToAPI(fileResult.FileName);
-
                     this.OnAppearing();
                 }
             }            
@@ -136,7 +134,7 @@ public partial class PageFotos : ContentPage
         }
     }
 
-    public async Task SendImageToAPI(string filePath)
+    public async Task SendImageToAPI(VeiculoFoto foto, string filePath)
     {
         //string filePath = "C:\Users\diego.martins\source\repos\EnvioImagem\EnvioImagemApi\api\fotos";
         //string filePath = Path.Combine(_diretorioLocal, fileName);
@@ -156,16 +154,31 @@ public partial class PageFotos : ContentPage
         imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpg");
         content.Add(imageContent, "image", Path.GetFileName(filePath));
 
+        // Adiciona o parâmetro de string à solicitação usando o método Add
+        var veiculoId = new StringContent(foto.VeiculoId.ToString());
+        content.Add(veiculoId, "veiculoId");
+
+        // Adiciona o parâmetro de string à solicitação usando o método Add
+        var nomeFoto = new StringContent("LAU" + foto.VeiculoId.ToString("000000") + "_" + foto.NumeroFoto.ToString("00") + foto.Extensao);
+        content.Add(nomeFoto, "nomeFoto");
+
         // Envie a solicitação HTTP usando o método PostAsync do objeto HttpClient.
         var response = await client.PostAsync(Preferences.Get("Api", "") + "/api/fotos/sync", content);
 
         if (response.IsSuccessStatusCode)
         {
+            foto.SyncStatus = 1;
             // Sucesso! A imagem foi enviada para a API.
         }
         else
         {
+            foto.SyncStatus = 2;
             // A solicitação falhou. Lide com o erro de acordo.
+        }
+
+        using (var srv = new HttpService<bool>())
+        {
+            srv.ExecuteService(foto, "api/laudo/alterar-sync-status-foto");
         }
     }
 
@@ -182,7 +195,7 @@ public partial class PageFotos : ContentPage
 
             if (File.Exists(localFilePath))
             {
-                await SendImageToAPI(localFilePath);
+                await SendImageToAPI(foto, localFilePath);
             }
         }
     }

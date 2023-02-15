@@ -268,5 +268,30 @@ namespace Sigv.Application
                 throw ex;
             }
         }
+
+
+
+        public bool AlterarSyncStatusFoto(VeiculoFoto foto)
+        {
+            try
+            {
+                using (var conn = new ConexaoMySql())
+                {
+                    var sql = new StringBuilder();
+                    sql.Append(" UPDATE sigv.veiculos_foto ");
+                    sql.Append(" SET  ");
+                    sql.AppendFormat(" SyncStatus = '{0}' ", foto.SyncStatus);
+                    sql.AppendFormat(" WHERE FotoId = '{0}' ", foto.FotoId);
+
+                    conn.ExecutaComando(sql.ToString());
+
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
