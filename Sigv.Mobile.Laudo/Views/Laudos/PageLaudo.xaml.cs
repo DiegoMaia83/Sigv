@@ -18,6 +18,11 @@ public partial class PageLaudo : ContentPage
         lbPlaca.Text = laudo.Veiculo.Placa.ToString();
         lbMarca.Text = laudo.Veiculo.Marca + "/" + laudo.Veiculo.Modelo;
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
+
+
+        resumoAvarias.Text = _laudoApp.RetornarResumoAvarias(laudo.LaudoId);
+        resumoOpcionais.Text = "Avarias";
+        resumoFotos.Text = "Avarias";
     }
 
     private void BtnAvarias_Clicked(object sender, EventArgs e)

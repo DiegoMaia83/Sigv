@@ -195,6 +195,37 @@ namespace Sigv.Application
             }
         }
 
+        public string RetornarResumoAvarias(int laudoId)
+        {
+            try
+            {
+                using (var conn = new ConexaoMySql())
+                {
+                    var sql = new StringBuilder();
+                    sql.Append(" SELECT GROUP_CONCAT(t2.Descricao SEPARATOR ', ') as 'Avarias' ");
+                    sql.Append(" FROM sigv.laudos_avarias_apontamentos t1 ");
+                    sql.Append(" Left Join sigv.laudos_avarias t2 on t2.AvariaId = t1.AvariaId ");
+                    sql.AppendFormat(" where t1.LaudoId = {0} ", laudoId);
+
+                    var reader = conn.RetornaComando(sql.ToString());
+
+                    string avarias = "";
+
+                    if (reader.Read())
+                    {
+                        avarias = reader[reader.GetOrdinal("Avarias")].ToString();
+                    }
+
+                    return avarias;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
         public IEnumerable<LaudoOpcional> ListarOpcionais()

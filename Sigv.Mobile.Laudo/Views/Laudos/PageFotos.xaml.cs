@@ -33,37 +33,11 @@ public partial class PageFotos : ContentPage
         lbPlaca.Text = laudo.Veiculo.Placa.ToString();
         lbMarca.Text = laudo.Veiculo.Marca + "/" + laudo.Veiculo.Modelo;
         lbAno.Text = laudo.Veiculo.AnoFabricacao + "/" + laudo.Veiculo.AnoModelo;
-        lbVeiculoId.Text = laudo.VeiculoId.ToString();        
+        lbVeiculoId.Text = laudo.VeiculoId.ToString();
 
-        listViewFotos.ItemsSource = ListarFotos(laudo.VeiculoId);
+        listViewFotos.ItemsSource = _laudoApp.ListarFotos(laudo.VeiculoId);
 
-    }   
-
-    private IEnumerable<VeiculoFoto> ListarFotos(int veiculoId)
-    {
-        try
-        {
-            var listaFotos = new List<VeiculoFoto>();
-
-            using (var srv = new HttpService<List<VeiculoFoto>>())
-            {
-                listaFotos = srv.ReturnService("api/veiculo-foto/listar-por-tipo?veiculoId=" + veiculoId + "&tipo=LAU");
-            }
-
-            foreach (var item in listaFotos)
-            {
-                string nomeFoto = String.Format("{0}{1}", item.Identificador, item.Extensao);
-                item.SourcePath = Path.Combine(_diretorioLocal, nomeFoto);
-            }
-
-            return listaFotos;
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
+    }  
 
     private async void BtnCapturar_Clicked(object sender, EventArgs e)
     {
@@ -136,11 +110,7 @@ public partial class PageFotos : ContentPage
 
     public async Task SendImageToAPI(VeiculoFoto foto, string filePath)
     {
-        //string filePath = "C:\Users\diego.martins\source\repos\EnvioImagem\EnvioImagemApi\api\fotos";
-        //string filePath = Path.Combine(_diretorioLocal, fileName);
-
-
-        // Converta a imagem em um array de bytes.
+        // Converte a imagem em um array de bytes.
         byte[] imageData = File.ReadAllBytes(filePath);
 
         // Crie uma instância da classe HttpClient.
@@ -185,7 +155,7 @@ public partial class PageFotos : ContentPage
         var veiculoId = Convert.ToInt32(lbVeiculoId.Text);
 
         // Lista somente as fotos que não foram sincronizadas
-        var listaFotos = ListarFotos(veiculoId).Where(x => x.SyncStatus == 0);
+        var listaFotos = _laudoApp.ListarFotos(veiculoId).Where(x => x.SyncStatus == 0);
 
         foreach (var foto in listaFotos) 
         {
@@ -270,7 +240,7 @@ public partial class PageFotos : ContentPage
 
         base.OnAppearing();
 
-        listViewFotos.ItemsSource = listViewFotos.ItemsSource = ListarFotos(laudo.VeiculoId);
+        listViewFotos.ItemsSource = listViewFotos.ItemsSource = _laudoApp.ListarFotos(laudo.VeiculoId);
     }
 
 

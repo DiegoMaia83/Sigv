@@ -157,6 +157,19 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/laudo/retornar-avarias-resumo")]
+        public string RetornarResumoAvarias(int laudoId)
+        {
+            try
+            {
+                return _laudoApp.RetornarResumoAvarias(laudoId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
 
         [HttpGet]

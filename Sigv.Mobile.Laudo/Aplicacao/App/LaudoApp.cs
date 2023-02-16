@@ -3,6 +3,7 @@ using Sigv.Mobile.Laudo.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,9 @@ namespace Sigv.Mobile.Laudo.Aplicacao.App
 {
     public class LaudoApp
     {
+        // /storage/emulated/0/Android/data/com.companyname.sigv.mobile.laudo/files/Pictures
+        private string _diretorioLocal = Path.Combine(Android.App.Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryPictures).AbsolutePath, "LaudoApp");
+
         // --------- Laudo ---------- //
         public LaudoVeiculo RetornarLaudo(int laudoId)
         {
@@ -165,7 +169,20 @@ namespace Sigv.Mobile.Laudo.Aplicacao.App
             }
         }
 
-
+        public string RetornarResumoAvarias(int laudoId)
+        {
+            try
+            {
+                using (var srv = new HttpService<string>())
+                {
+                    return srv.ReturnService("api/laudo/retornar-avarias-resumo?laudoId=" + laudoId);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
 
         // --------- Opcionais ---------- //
@@ -240,6 +257,31 @@ namespace Sigv.Mobile.Laudo.Aplicacao.App
 
 
         // --------- Fotos ---------- //
+        public IEnumerable<VeiculoFoto> ListarFotos(int veiculoId)
+        {
+            try
+            {
+                var listaFotos = new List<VeiculoFoto>();
+
+                using (var srv = new HttpService<List<VeiculoFoto>>())
+                {
+                    listaFotos = srv.ReturnService("api/veiculo-foto/listar-por-tipo?veiculoId=" + veiculoId + "&tipo=LAU");
+                }
+
+                foreach (var item in listaFotos)
+                {
+                    string nomeFoto = String.Format("{0}{1}", item.Identificador, item.Extensao);
+                    item.SourcePath = Path.Combine(_diretorioLocal, nomeFoto);
+                }
+
+                return listaFotos;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public int RetornarUltimaFotoInserida(int veiculoId, string tipoFoto)
         {
             try

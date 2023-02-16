@@ -22,6 +22,29 @@
             <Button Text="Fotos" Style="{StaticResource CustomButtonPage}" Clicked="BtnFotos_Clicked"/>
         </StackLayout>
 
+        <StackLayout Padding="20">
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Avarias" FontAttributes="Bold"/>
+                <Label x:Name="resumoAvarias" TextColor="#666" Text="" />
+            </StackLayout>
+
+            <BoxView HeightRequest="1" BackgroundColor="#ddd" HorizontalOptions="FillAndExpand" Margin="5,10" />
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Opcionais" FontAttributes="Bold"/>
+                <Label x:Name="resumoOpcionais" Text="" />
+            </StackLayout>
+
+            <BoxView HeightRequest="1" BackgroundColor="#ddd" HorizontalOptions="FillAndExpand" Margin="5,10" />
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Fotos" FontAttributes="Bold"/>
+                <Label x:Name="resumoFotos" Text="" />
+            </StackLayout>
+
+        </StackLayout>
+
         <StackLayout VerticalOptions="EndAndExpand" Orientation="Horizontal" Padding="18">
             <Button Text="Finalizar Laudo" x:Name="btnFinalizarLaudo" Style="{StaticResource CustomButtonPage}" Clicked="BtnFinalizarLaudo_Clicked"/>
         </StackLayout>
