@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:util="clr-namespace:Sigv.Mobile.Laudo.Aplicacao.Util"
              x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageFotos"
              x:Name="bindingContextLaudo"
              Title="Fotos">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <util:ColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <StackLayout>
 
@@ -39,8 +46,9 @@
                                     
                                     <StackLayout VerticalOptions="FillAndExpand">
                                         <StackLayout Orientation="Horizontal">
-                                            <Label Text="Nº Foto: " FontAttributes="Bold" />
-                                            <Label Text="{Binding NumeroFoto}"/>
+                                            <Label Text="Nº Foto: " FontAttributes="Bold" HorizontalOptions="Start" />
+                                            <Label Text="{Binding NumeroFoto}" HorizontalOptions="StartAndExpand"/>
+                                            <Ellipse x:Name="iconSyncStatus" Fill="{Binding SyncStatusColor, Converter={StaticResource ColorConverter}}" HorizontalOptions="EndAndExpand" WidthRequest="10" HeightRequest="10"/>                                            
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal">
                                             <Label Text="Id: " FontAttributes="Bold" />

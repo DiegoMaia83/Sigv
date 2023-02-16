@@ -168,12 +168,10 @@ public partial class PageFotos : ContentPage
         if (response.IsSuccessStatusCode)
         {
             foto.SyncStatus = 1;
-            // Sucesso! A imagem foi enviada para a API.
         }
         else
         {
             foto.SyncStatus = 2;
-            // A solicitação falhou. Lide com o erro de acordo.
         }
 
         using (var srv = new HttpService<bool>())
@@ -186,7 +184,8 @@ public partial class PageFotos : ContentPage
     {
         var veiculoId = Convert.ToInt32(lbVeiculoId.Text);
 
-        var listaFotos = ListarFotos(veiculoId);
+        // Lista somente as fotos que não foram sincronizadas
+        var listaFotos = ListarFotos(veiculoId).Where(x => x.SyncStatus == 0);
 
         foreach (var foto in listaFotos) 
         {
@@ -273,6 +272,7 @@ public partial class PageFotos : ContentPage
 
         listViewFotos.ItemsSource = listViewFotos.ItemsSource = ListarFotos(laudo.VeiculoId);
     }
+
 
 
 }

@@ -26,8 +26,28 @@ namespace Sigv.Domain
         public int SyncStatus { get; set; }
 
         [NotMapped]
+        public string SyncStatusColor
+        {
+            get
+            {
+                switch (SyncStatus)
+                {
+                    case 0:
+                        return "#CCCCCC";
+                    case 1:
+                        return "#0DCC2B";
+                    case 2:
+                        return "#EC0000";
+                    default:
+                        return "#FFFFFF";
+                }
+            }
+        }
+
+        [NotMapped]
         public string SourcePath { get; set; }
         [NotMapped]
         public string TargetPath { get; set; }
+
     }
 }
