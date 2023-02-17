@@ -254,6 +254,21 @@ namespace Sigv.Mobile.Laudo.Aplicacao.App
             }
         }
 
+        public string RetornarResumoOpcionais(int laudoId)
+        {
+            try
+            {
+                using (var srv = new HttpService<string>())
+                {
+                    return srv.ReturnService("api/laudo/retornar-opcionais-resumo?laudoId=" + laudoId);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
         // --------- Fotos ---------- //

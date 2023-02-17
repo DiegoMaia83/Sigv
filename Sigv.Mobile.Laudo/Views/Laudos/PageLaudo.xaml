@@ -26,21 +26,21 @@
 
             <StackLayout Orientation="Vertical">
                 <Label Text="Avarias" FontAttributes="Bold"/>
-                <Label x:Name="resumoAvarias" TextColor="#666" Text="" />
+                <Label x:Name="lbResumoAvarias" TextColor="#888" Text="" />
             </StackLayout>
 
-            <BoxView HeightRequest="1" BackgroundColor="#ddd" HorizontalOptions="FillAndExpand" Margin="5,10" />
+            <BoxView HeightRequest="1" Color="#ccc" HorizontalOptions="FillAndExpand" Margin="5,10" />
 
             <StackLayout Orientation="Vertical">
                 <Label Text="Opcionais" FontAttributes="Bold"/>
-                <Label x:Name="resumoOpcionais" Text="" />
+                <Label x:Name="lbResumoOpcionais" TextColor="#888" Text="" />
             </StackLayout>
 
-            <BoxView HeightRequest="1" BackgroundColor="#ddd" HorizontalOptions="FillAndExpand" Margin="5,10" />
+            <BoxView HeightRequest="1" Color="#ccc" HorizontalOptions="FillAndExpand" Margin="5,10" />
 
             <StackLayout Orientation="Vertical">
                 <Label Text="Fotos" FontAttributes="Bold"/>
-                <Label x:Name="resumoFotos" Text="" />
+                <Label x:Name="lbResumoFotos" TextColor="#888" Text="" />
             </StackLayout>
 
         </StackLayout>

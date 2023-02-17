@@ -300,6 +300,37 @@ namespace Sigv.Application
             }
         }
 
+        public string RetornarResumoOpcionais(int laudoId)
+        {
+            try
+            {
+                using (var conn = new ConexaoMySql())
+                {
+                    var sql = new StringBuilder();
+                    sql.Append(" SELECT GROUP_CONCAT(t2.Descricao SEPARATOR ', ') as 'Opcionais' ");
+                    sql.Append(" FROM sigv.laudos_opcionais_apontamentos t1 ");
+                    sql.Append(" Left Join sigv.laudos_opcionais t2 on t2.OpcionalId = t1.OpcionalId ");
+                    sql.AppendFormat(" where t1.LaudoId = {0} ", laudoId);
+
+                    var reader = conn.RetornaComando(sql.ToString());
+
+                    string opcionais = "";
+
+                    if (reader.Read())
+                    {
+                        opcionais = reader[reader.GetOrdinal("Opcionais")].ToString();
+                    }
+
+                    return opcionais;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
         public bool AlterarSyncStatusFoto(VeiculoFoto foto)

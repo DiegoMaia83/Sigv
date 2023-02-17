@@ -9,10 +9,19 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding VeiculoId}" />                            
-                            <Label Text="{Binding Placa}" />
-                        </StackLayout>
+                        <Frame Grid.Row="1" CornerRadius="2" BackgroundColor="{StaticResource Secondary-Light}" Padding="10" Margin="2,5,7,8">
+                            <StackLayout>
+                                <Label x:Name="lbPlaca" Text="{Binding Placa}" FontSize="16" FontAttributes="Bold" />
+                                <Label x:Name="lbMarca">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat=" {0} {1}">
+                                            <Binding Path="Marca" />
+                                            <Binding Path="Modelo" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </StackLayout>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

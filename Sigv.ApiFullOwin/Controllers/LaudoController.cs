@@ -228,6 +228,20 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/laudo/retornar-opcionais-resumo")]
+        public string RetornarResumoOpcionais(int laudoId)
+        {
+            try
+            {
+                return _laudoApp.RetornarResumoOpcionais(laudoId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         [HttpPost]
         [Route("api/laudo/alterar-sync-status-foto")]
