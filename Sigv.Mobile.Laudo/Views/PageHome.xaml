@@ -9,7 +9,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Style="{StaticResource MeuFrame}">
+                        <Frame Style="{StaticResource HomeListItem}">
                             <StackLayout>
                                 <Label x:Name="lbPlaca" Text="{Binding Placa}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray600}" />
                                 <Label x:Name="lbMarcaModelo">

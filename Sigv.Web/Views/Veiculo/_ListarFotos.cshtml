@@ -34,7 +34,7 @@
 
                 <div class="col-sm-3">
                     <div class="wrapper">
-                        <img src="~/Content/Imagens/@foto.VeiculoId/@arquivo" style="cursor: pointer;" onclick="openImageModal($(this).attr('src'))" />
+                        <img src="~/Content/Imagens/@foto.VeiculoId.ToString("000000")/@arquivo" style="cursor: pointer;" onclick="openImageModal($(this).attr('src'))" />
                     </div>
                     <div class="wrapper-label">@foto.Tipo ( @foto.NumeroFoto.ToString("00"))</div>
                     <input type="hidden" id="hidFotoId_@foto.FotoId" value="@foto.FotoId" />

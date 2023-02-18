@@ -8,14 +8,51 @@
 
         <ContentPage Title="Menu">
 
-            <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource Primary}">
 
-                <StackLayout Orientation="Horizontal">                    
-                    <Label Text="Home" FontSize="16" />
+                <StackLayout Padding="50">
+                    <Image Source="/Resources/Images/logo_01.png" WidthRequest="80"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="25, 15">
+                    <Label Text="{StaticResource IconHome}" TextColor="{StaticResource Secondary-Light}" FontFamily="FASolid" VerticalOptions="CenterAndExpand" />
+                    <Label Text="Home" TextColor="{StaticResource Secondary-Light}" FontSize="16" Margin="15,0,0, 0" />
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="btHome_Clicked" NumberOfTapsRequired="1"/>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Tertiary}" />
+
+                <StackLayout Orientation="Horizontal" Padding="25, 15">
+                    <Label Text="{StaticResource IconClock}" TextColor="{StaticResource Secondary-Light}" FontFamily="FASolid" VerticalOptions="CenterAndExpand" />
+                    <Label Text="Laudos pendentes" TextColor="{StaticResource Secondary-Light}" FontSize="16" Margin="15,0,0, 0" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btLaudosPendentes_Clicked" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Tertiary}" />
+
+                <StackLayout Orientation="Horizontal" Padding="25, 15">
+                    <Label Text="{StaticResource IconCheck}" TextColor="{StaticResource Secondary-Light}" FontFamily="FASolid" VerticalOptions="CenterAndExpand" />
+                    <Label Text="Laudos abertos" TextColor="{StaticResource Secondary-Light}" FontSize="16" Margin="15,0,0, 0" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btLaudosAbertos_Clicked" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Tertiary}" />
+
+                <StackLayout Orientation="Horizontal" Padding="25, 15">
+                    <Label Text="{StaticResource IconDoubleCheck}" TextColor="{StaticResource Secondary-Light}" FontFamily="FASolid" VerticalOptions="CenterAndExpand" />
+                    <Label Text="Laudos finalizados" TextColor="{StaticResource Secondary-Light}" FontSize="16" Margin="15,0,0, 0" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btLaudosFinalizados_Clicked" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Tertiary}" />
 
             </StackLayout>
             

@@ -21,6 +21,9 @@
             <x:String x:Key="IconTrash">&#xf1f8;</x:String>
             <x:String x:Key="IconConfig">&#xf013;</x:String>
             <x:String x:Key="IconPadLock">&#xf023;</x:String>
+            <x:String x:Key="IconCheck">&#xf00c;</x:String>
+            <x:String x:Key="IconDoubleCheck">&#xf560;</x:String>
+            <x:String x:Key="IconClock">&#xf017;</x:String>
             
         </ResourceDictionary>
     </Application.Resources>

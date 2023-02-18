@@ -342,7 +342,7 @@ namespace Sigv.Web.Controllers
                     {
                         var uploadPath = Server.MapPath("~/Content/Uploads");
                         string caminhoArquivo = Path.Combine(@uploadPath, Path.GetFileName(arquivo.FileName));
-                        string diretorioDestino = Server.MapPath("~/Content/Imagens/" + veiculoId);
+                        string diretorioDestino = Server.MapPath("~/Content/Imagens/" + veiculoId.ToString("000000"));
 
                         arquivo.SaveAs(caminhoArquivo);
                         arquivosSalvos++;

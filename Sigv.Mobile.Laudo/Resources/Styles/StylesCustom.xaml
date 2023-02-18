@@ -11,7 +11,7 @@
         <Setter Property="Margin" Value="2"/>
     </Style>
 
-    <Style x:Key="MeuFrame" TargetType="Frame">
+    <Style x:Key="HomeListItem" TargetType="Frame">
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="Padding" Value="10" />
         <Setter Property="Margin" Value="2,5,7,8" />
