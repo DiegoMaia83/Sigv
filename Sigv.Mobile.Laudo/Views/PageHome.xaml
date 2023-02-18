@@ -3,22 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sigv.Mobile.Laudo.Views.PageHome"
              Title="PageHome">
-    <StackLayout Padding="20">
+    <StackLayout>
 
         <ListView x:Name="listViewVeiculos" HasUnevenRows="True" ItemSelected="listViewVeiculos_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Grid.Row="1" CornerRadius="2" BackgroundColor="{StaticResource Secondary-Light}" Padding="10" Margin="2,5,7,8">
+                        <Frame Style="{StaticResource MeuFrame}">
                             <StackLayout>
-                                <Label x:Name="lbPlaca" Text="{Binding Placa}" FontSize="16" FontAttributes="Bold" />
-                                <Label x:Name="lbMarca">
-                                    <Label.Text>
-                                        <MultiBinding StringFormat=" {0} {1}">
-                                            <Binding Path="Marca" />
-                                            <Binding Path="Modelo" />
-                                        </MultiBinding>
-                                    </Label.Text>
+                                <Label x:Name="lbPlaca" Text="{Binding Placa}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray600}" />
+                                <Label x:Name="lbMarcaModelo">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Marca}" TextColor="Gray" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding Modelo}" TextColor="Gray" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
                                 </Label>
                             </StackLayout>
                         </Frame>
@@ -27,10 +28,10 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <StackLayout>
-            <Button x:Name="listarLaudosPendentes" CommandParameter="0" Text="Pendentes" Clicked="ListarVeiculosLaudos_Clicked"/>
-            <Button x:Name="listarLaudosAbertos" CommandParameter="1" Text="Abertos" Clicked="ListarVeiculosLaudos_Clicked"/>
-            <Button x:Name="listarLaudosFinalizados" CommandParameter="2" Text="Finalizados" Clicked="ListarVeiculosLaudos_Clicked"/>            
+        <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
+            <Button x:Name="listarLaudosPendentes" CommandParameter="0" Text="Pendentes" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>
+            <Button x:Name="listarLaudosAbertos" CommandParameter="1" Text="Abertos" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>
+            <Button x:Name="listarLaudosFinalizados" CommandParameter="2" Text="Finalizados" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>            
         </StackLayout>
 
     </StackLayout>

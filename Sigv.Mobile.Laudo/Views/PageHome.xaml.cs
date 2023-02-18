@@ -18,7 +18,14 @@ public partial class PageHome : ContentPage
 		listViewVeiculos.ItemsSource = ListarVeiculos(0);
     }
 
-	private List<Veiculo> ListarVeiculos(int statusId)
+    public PageHome(int statusId)
+    {
+        InitializeComponent();
+
+        listViewVeiculos.ItemsSource = ListarVeiculos(statusId);
+    }
+
+    private List<Veiculo> ListarVeiculos(int statusId)
 	{
 		try
 		{
@@ -43,7 +50,9 @@ public partial class PageHome : ContentPage
         var button = (Button)sender;
 		var statusId = Convert.ToInt32(button.CommandParameter);
 
-        listViewVeiculos.ItemsSource = ListarVeiculos(statusId);
+        FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
+        page.Detail = new NavigationPage(new PageHome(statusId));
+
     }
 
     private async void listViewVeiculos_ItemSelected(object sender, SelectedItemChangedEventArgs e)

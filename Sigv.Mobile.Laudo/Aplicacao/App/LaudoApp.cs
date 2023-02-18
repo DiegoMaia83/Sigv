@@ -1,4 +1,5 @@
-﻿using Sigv.Domain;
+﻿using Microsoft.Maui.Controls.PlatformConfiguration;
+using Sigv.Domain;
 using Sigv.Mobile.Laudo.Services;
 using System;
 using System.Collections.Generic;

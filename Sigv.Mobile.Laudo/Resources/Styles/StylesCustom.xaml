@@ -11,4 +11,14 @@
         <Setter Property="Margin" Value="2"/>
     </Style>
 
+    <Style x:Key="MeuFrame" TargetType="Frame">
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Margin" Value="2,5,7,8" />
+        <Setter Property="BackgroundColor" Value="#eee" />
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="Margin" Value="20, 12" />
+    </Style>
+
 </ResourceDictionary>
