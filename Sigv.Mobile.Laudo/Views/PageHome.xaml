@@ -12,7 +12,12 @@
                     <ViewCell>
                         <Frame Style="{StaticResource HomeListItem}">
                             <StackLayout>
-                                <Label x:Name="lbPlaca" Text="{Binding Placa}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray600}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbPlaca" Text="{Binding Placa}" FontSize="16" FontAttributes="Bold" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Gray600}" />
+                                    <Frame Padding="5, 2" CornerRadius="3" BorderColor="Transparent" BackgroundColor="Gray" HorizontalOptions="End" >
+                                        <Label Text="{Binding VeiculoId, StringFormat='{}{0:000000}'}" TextColor="White"  />                                        
+                                    </Frame>
+                                </StackLayout>
                                 <Label x:Name="lbMarcaModelo">
                                     <Label.FormattedText>
                                         <FormattedString>

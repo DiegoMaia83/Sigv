@@ -92,7 +92,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Imagens\logo_01.png" />
     <Content Include="Content\scripts\alerts.js" />
     <Content Include="Content\scripts\comum.js" />
     <Content Include="Content\scripts\crypto-js.js" />
@@ -170,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Imagens\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -395,6 +395,10 @@ namespace Sigv.Web.Controllers
         {
             try
             {
+                if (foto.Tipo == "LAU")
+                    return Json(new MensagemRetorno { Id = 0, Sucesso = false, Mensagem = "Não é possível remover essa foto! Esse arquivo pertence ao laudo do veículo." });
+
+
                 if (foto.FotoId > 0)
                 {
                     foto.UsuExclusao = SessionCookie.Logado.Login;

@@ -56,7 +56,7 @@
         $.ajax({
             url: "/Veiculo/ExcluirFoto",
             method: "post",
-            data: { FotoId: fotoId },
+            data: { FotoId: fotoId, Tipo: tipo },
             success: function (data) {
 
                 if (data.Sucesso == false) {
