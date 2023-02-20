@@ -68,6 +68,9 @@
 	  <MauiXaml Update="Resources\Styles\StylesCustom.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Comum\LoadingOverlay.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Laudos\PageAvarias.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

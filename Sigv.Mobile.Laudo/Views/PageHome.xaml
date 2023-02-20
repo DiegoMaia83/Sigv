@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sigv.Mobile.Laudo.Views.PageHome"
-             Title="PageHome">
+             Title="PageHome">    
+    
     <StackLayout>
 
         <ListView x:Name="listViewVeiculos" HasUnevenRows="True" ItemSelected="listViewVeiculos_ItemSelected">
@@ -27,6 +28,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackLayout VerticalOptions="End" x:Name="loadingOverlay" IsVisible="false" HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <ActivityIndicator IsRunning="true" WidthRequest="20" VerticalOptions="Center" />
+                <Label Text="Aguarde..." VerticalOptions="Center" Margin="10,0" />                
+            </StackLayout>
+        </StackLayout>
 
         <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
             <Button x:Name="listarLaudosPendentes" CommandParameter="0" Text="Pendentes" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>

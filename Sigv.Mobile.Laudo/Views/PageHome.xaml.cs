@@ -2,6 +2,7 @@ using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Aplicacao.App;
 using Sigv.Mobile.Laudo.Services;
+using Sigv.Mobile.Laudo.Views.Comum;
 using Sigv.Mobile.Laudo.Views.Laudos;
 
 namespace Sigv.Mobile.Laudo.Views;
@@ -22,7 +23,19 @@ public partial class PageHome : ContentPage
     {
         InitializeComponent();
 
-        listViewVeiculos.ItemsSource = ListarVeiculos(statusId);
+        loadingOverlay.IsVisible = true;
+
+        Task.Run(() =>
+        {
+            var listaVeiculos = ListarVeiculos(statusId);
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                listViewVeiculos.ItemsSource = ListarVeiculos(statusId);
+                loadingOverlay.IsVisible = false;
+            });
+        });
+        
     }
 
     private List<Veiculo> ListarVeiculos(int statusId)
@@ -52,7 +65,6 @@ public partial class PageHome : ContentPage
 
         FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
         page.Detail = new NavigationPage(new PageHome(statusId));
-
     }
 
     private async void listViewVeiculos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
