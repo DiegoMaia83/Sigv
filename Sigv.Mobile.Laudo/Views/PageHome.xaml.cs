@@ -49,9 +49,9 @@ public partial class PageHome : ContentPage
             FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
             page.Detail = new NavigationPage(new PageHome(statusId));
         }
-        catch (Exception ex)
+        catch
         {
-            throw ex;
+            throw;
         }
     }
 

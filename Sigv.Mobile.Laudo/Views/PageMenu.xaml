@@ -8,7 +8,14 @@
 
         <ContentPage Title="Menu">
 
-            <StackLayout BackgroundColor="{StaticResource Primary}">
+            <StackLayout>
+
+                <StackLayout.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="{StaticResource Primary}" Offset="0" />
+                        <GradientStop Color="{StaticResource Tertiary}" Offset="1" />
+                    </LinearGradientBrush>
+                </StackLayout.Background>
 
                 <StackLayout Padding="50">
                     <Image Source="/Resources/Images/logo_01.png" WidthRequest="80"/>

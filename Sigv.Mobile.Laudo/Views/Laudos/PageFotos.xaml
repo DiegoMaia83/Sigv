@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:util="clr-namespace:Sigv.Mobile.Laudo.Aplicacao.Util"
              x:Class="Sigv.Mobile.Laudo.Views.Laudos.PageFotos"
-             x:Name="bindingContextLaudo"
-             Title="Fotos">
+             x:Name="bindingContextLaudo">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -12,69 +11,69 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout>
+        <StackLayout>
 
-        <Frame HasShadow="False" Margin="20" Padding="10" CornerRadius="2" BorderColor="{StaticResource Primary-Light}">
-            <StackLayout Orientation="Horizontal">
-                <Label Text="FOTOS" FontSize="16" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"  TextColor="{StaticResource Tertiary}" />
+            <Frame HasShadow="False" Margin="20" Padding="10" CornerRadius="2" BorderColor="{StaticResource Primary-Light}">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="FOTOS" FontSize="16" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"  TextColor="{StaticResource Tertiary}" />
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Padding="20">
+                <Label x:Name="lbPlaca" Text="" FontSize="20" FontAttributes="Bold" />
+                <Label x:Name="lbMarca" Text="" />
+                <Label x:Name="lbAno" Text=""/>
+                <Label x:Name="lbVeiculoId" Text="" IsVisible="false"/>
             </StackLayout>
-        </Frame>
 
-        <StackLayout Padding="20">
-            <Label x:Name="lbPlaca" Text="" FontSize="20" FontAttributes="Bold" />
-            <Label x:Name="lbMarca" Text="" />
-            <Label x:Name="lbAno" Text=""/>
-            <Label x:Name="lbVeiculoId" Text="" IsVisible="false"/>
-        </StackLayout>
-
-        <StackLayout VerticalOptions="FillAndExpand" Padding="10">
-            <ListView x:Name="listViewFotos" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+            <StackLayout VerticalOptions="FillAndExpand" Padding="10">
+                <ListView x:Name="listViewFotos" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
                                 
-                                <StackLayout Grid.Column="0" Padding="10">
-                                    <Image Source="{Binding SourcePath}" Aspect="AspectFill" />
-                                </StackLayout>
+                                    <StackLayout Grid.Column="0" Padding="10">
+                                        <Image Source="{Binding SourcePath}" Aspect="AspectFill" />
+                                    </StackLayout>
                                 
-                                <StackLayout Grid.Column="1" Padding="10">
+                                    <StackLayout Grid.Column="1" Padding="10">
                                     
-                                    <StackLayout VerticalOptions="FillAndExpand">
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="Nº Foto: " FontAttributes="Bold" HorizontalOptions="Start" />
-                                            <Label Text="{Binding NumeroFoto}" HorizontalOptions="StartAndExpand"/>
-                                            <Ellipse x:Name="iconSyncStatus" Fill="{Binding SyncStatusColor, Converter={StaticResource ColorConverter}}" HorizontalOptions="EndAndExpand" WidthRequest="10" HeightRequest="10"/>                                            
+                                        <StackLayout VerticalOptions="FillAndExpand">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Nº Foto: " FontAttributes="Bold" HorizontalOptions="Start" />
+                                                <Label Text="{Binding NumeroFoto}" HorizontalOptions="StartAndExpand"/>
+                                                <Ellipse x:Name="iconSyncStatus" Fill="{Binding SyncStatusColor, Converter={StaticResource ColorConverter}}" HorizontalOptions="EndAndExpand" WidthRequest="10" HeightRequest="10"/>                                            
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Id: " FontAttributes="Bold" />
+                                                <Label Text="{Binding Identificador}" />
+                                            </StackLayout>                                         
                                         </StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="Id: " FontAttributes="Bold" />
-                                            <Label Text="{Binding Identificador}" />
-                                        </StackLayout>                                         
-                                    </StackLayout>
 
-                                    <StackLayout VerticalOptions="End">
-                                        <Button x:Name="BtnRemover" CommandParameter="{Binding FotoId}" Text="Remover" Style="{StaticResource CustomButtonPage}" Clicked="BtnRemover_Clicked"/>
-                                    </StackLayout>
+                                        <StackLayout VerticalOptions="End">
+                                            <Button x:Name="BtnRemover" CommandParameter="{Binding FotoId}" Text="Remover" Style="{StaticResource CustomButtonPage}" Clicked="BtnRemover_Clicked"/>
+                                        </StackLayout>
                                     
-                                </StackLayout>
+                                    </StackLayout>
                                 
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
 
-        <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
-            <Button Text="Voltar" x:Name="btnGoToLaudo" Style="{StaticResource CustomButtonPage}" Clicked="BtnGoToLaudo_Clicked"/>
-            <Button Text="Capturar" x:Name="btnCapturar" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Style="{StaticResource CustomButtonPage}" Clicked="BtnCapturar_Clicked" />
-            <Button Text="Sync" x:Name="btnSync" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Style="{StaticResource CustomButtonPage}" Clicked="BtnSync_Clicked" />
-        </StackLayout>
+            <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
+                <Button Text="Voltar" x:Name="btnGoToLaudo" Style="{StaticResource CustomButtonPage}" Clicked="BtnGoToLaudo_Clicked"/>
+                <Button Text="Capturar" x:Name="btnCapturar" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Style="{StaticResource CustomButtonPage}" Clicked="BtnCapturar_Clicked" />
+                <Button Text="Sync" x:Name="btnSync" CommandParameter="{Binding laudo.Veiculo.VeiculoId}" Style="{StaticResource CustomButtonPage}" Clicked="BtnSync_Clicked" />
+            </StackLayout>
 
-    </StackLayout>
+        </StackLayout>
     
 </ContentPage>

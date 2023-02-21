@@ -1,3 +1,4 @@
+using Android.Media;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Storage;
 using Plugin.Media.Abstractions;
@@ -59,7 +60,7 @@ public partial class PageFotos : ContentPage
 
                     // Define o diretório completo do arquivo, e salva o arquivo no diretório local
                     string localFilePath = Path.Combine(_diretorioLocal, fileResult.FileName);
-                    using Stream sourceStream = await fileResult.OpenReadAsync();
+                    using System.IO.Stream sourceStream = await fileResult.OpenReadAsync();
                     using FileStream localFileStream = File.OpenWrite(localFilePath);
                     await sourceStream.CopyToAsync(localFileStream);
 
@@ -157,15 +158,31 @@ public partial class PageFotos : ContentPage
         // Lista somente as fotos que não foram sincronizadas
         var listaFotos = _laudoApp.ListarFotos(veiculoId).Where(x => x.SyncStatus == 0);
 
-        foreach (var foto in listaFotos) 
-        {
-            string nomeFoto = foto.Identificador + foto.Extensao;
-            string localFilePath = Path.Combine(_diretorioLocal, nomeFoto);
+        var qtdFotos = listaFotos.Count();
 
-            if (File.Exists(localFilePath))
+        if (qtdFotos > 0)
+        {
+            var alert = qtdFotos == 1 ? "Existe " + qtdFotos + " foto para ser sincronizada." : "Existem " + qtdFotos + " fotos para serem sincronizadas.";
+
+            var confirm = await DisplayAlert("Atenção", alert + " Desejar prosseguir ?", "SIM", "NÃO");
+
+            if (confirm)
             {
-                await SendImageToAPI(foto, localFilePath);
+                foreach (var foto in listaFotos)
+                {
+                    string nomeFoto = foto.Identificador + foto.Extensao;
+                    string localFilePath = Path.Combine(_diretorioLocal, nomeFoto);
+
+                    if (File.Exists(localFilePath))
+                    {
+                        await SendImageToAPI(foto, localFilePath);
+                    }
+                }
             }
+        }
+        else
+        {
+            await DisplayAlert("Atenção", "Não existem fotos para serem sincronizadas", "OK");
         }
     }
 
