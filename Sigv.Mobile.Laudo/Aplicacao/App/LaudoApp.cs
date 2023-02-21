@@ -98,6 +98,40 @@ namespace Sigv.Mobile.Laudo.Aplicacao.App
             }
         }
 
+        public List<Veiculo> ListarVeiculos(int statusId)
+        {
+            try
+            {
+                var lista = new List<Veiculo>();
+
+                using (var srv = new HttpService<List<Veiculo>>())
+                {
+
+                    lista = srv.ReturnService("api/veiculo/listar-veiculos-status-laudo?statusId=" + statusId);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string RetornarTituloLista(int statusId)
+        {
+            switch (statusId)
+            {
+                case 0:
+                    return "Laudos pendentes";
+                case 1:
+                    return "Laudos abertos";
+                case 2:
+                    return "Laudos finalizados";
+                default:
+                    return "Laudos";
+            }
+        }
 
 
 
@@ -184,6 +218,7 @@ namespace Sigv.Mobile.Laudo.Aplicacao.App
                 throw ex;
             }
         }
+
 
 
         // --------- Opcionais ---------- //

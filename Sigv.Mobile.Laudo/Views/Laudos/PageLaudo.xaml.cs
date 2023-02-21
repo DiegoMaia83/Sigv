@@ -67,7 +67,7 @@ public partial class PageLaudo : ContentPage
                 await DisplayAlert("Laudo finalizado", "Laudo finalizado com sucesso!", "OK");
 
                 FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
-                page.Detail = new NavigationPage(new PageHome());
+                page.Detail = new NavigationPage(new PageHome(2));
             }
             else
             {

@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sigv.Mobile.Laudo.Views.PageHome"
-             Title="PageHome">    
-    
-    <StackLayout>
+             x:Class="Sigv.Mobile.Laudo.Views.PageHome">
 
-        <ListView x:Name="listViewVeiculos" HasUnevenRows="True" ItemSelected="listViewVeiculos_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame Style="{StaticResource HomeListItem}">
-                            <StackLayout>
+    <AbsoluteLayout>
+
+        <StackLayout x:Name="mainLayout" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+            <Frame HasShadow="False" Margin="20" Padding="10" CornerRadius="2" BorderColor="{StaticResource Primary-Light}">
+                <StackLayout Orientation="Horizontal">
+                    <Label x:Name="lbTitleLaudo" Text="" FontSize="16" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"  TextColor="{StaticResource Tertiary}" />
+                </StackLayout>
+            </Frame>
+
+            <ListView x:Name="listViewVeiculos" HasUnevenRows="True" ItemSelected="listViewVeiculos_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>                            
+                            <StackLayout Padding="20,15">
                                 <StackLayout Orientation="Horizontal">
                                     <Label x:Name="lbPlaca" Text="{Binding Placa}" FontSize="16" FontAttributes="Bold" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Gray600}" />
-                                    <Frame Padding="5, 2" CornerRadius="3" BorderColor="Transparent" BackgroundColor="Gray" HorizontalOptions="End" >
+                                    <Frame Padding="5, 2" CornerRadius="3" BorderColor="Transparent" BackgroundColor="{StaticResource Primary-Light}" HorizontalOptions="End" >
                                         <Label Text="{Binding VeiculoId, StringFormat='{}{0:000000}'}" TextColor="White"  />                                        
                                     </Frame>
                                 </StackLayout>
@@ -27,25 +33,27 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                            </StackLayout>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                            </StackLayout>                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <StackLayout VerticalOptions="End" x:Name="loadingOverlay" IsVisible="false" HorizontalOptions="CenterAndExpand">
-            <StackLayout Orientation="Horizontal">
-                <ActivityIndicator IsRunning="true" WidthRequest="20" VerticalOptions="Center" />
-                <Label Text="Aguarde..." VerticalOptions="Center" Margin="10,0" />                
+            <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
+                <Button x:Name="listarLaudosPendentes" CommandParameter="0" Text="Pendentes" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>
+                <Button x:Name="listarLaudosAbertos" CommandParameter="1" Text="Abertos" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>
+                <Button x:Name="listarLaudosFinalizados" CommandParameter="2" Text="Finalizados" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>            
+            </StackLayout>
+
+        </StackLayout>
+
+        <StackLayout x:Name="loadingOverlay" IsVisible="false" BackgroundColor="#C00E6D8F" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal" Padding="20,10">
+                <ActivityIndicator IsRunning="true" WidthRequest="20" VerticalOptions="Center" Color="{StaticResource Secondary-Light}" />
+                <Label Text="Aguarde..." VerticalOptions="Center" Margin="10,0" TextColor="{StaticResource Secondary-Light}" />
             </StackLayout>
         </StackLayout>
 
-        <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="16">
-            <Button x:Name="listarLaudosPendentes" CommandParameter="0" Text="Pendentes" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>
-            <Button x:Name="listarLaudosAbertos" CommandParameter="1" Text="Abertos" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>
-            <Button x:Name="listarLaudosFinalizados" CommandParameter="2" Text="Finalizados" Style="{StaticResource CustomButtonPage}" Clicked="ListarVeiculosLaudos_Clicked"/>            
-        </StackLayout>
-
-    </StackLayout>
+    </AbsoluteLayout>
+    
 </ContentPage>

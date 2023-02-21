@@ -7,13 +7,13 @@ public partial class PageMenu : FlyoutPage
 	{
 		InitializeComponent();
 
-        this.Detail = new NavigationPage(new PageHome());
+        this.Detail = new NavigationPage(new PageHome(0));
         IsPresented = false;
     }
 
     private void btHome_Clicked(object sender, EventArgs e)
     {
-        this.Detail = new NavigationPage(new PageHome());
+        this.Detail = new NavigationPage(new PageHome(0));
         IsPresented = false;
     }
 
