@@ -167,6 +167,21 @@ public partial class PageFotos : ContentPage
 
             if (confirm)
             {
+                var log = new Log
+                {
+                    CodReferencia = veiculoId,
+                    Processo = "Veiculo",
+                    UsuarioId = Convert.ToInt32(UserPreferences.Logado.UsuarioId),
+                    Ip = UserPreferences.Logado.Ip,
+                    DataLog = DateTime.Now,
+                    Descricao = "Executou a sincronização das fotos do laudo do veículo."
+                };
+
+                using (var conn = new HttpService<Log>())
+                {
+                    conn.ExecuteService(log, "api/log/salvar");
+                };
+
                 foreach (var foto in listaFotos)
                 {
                     string nomeFoto = foto.Identificador + foto.Extensao;

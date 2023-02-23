@@ -50,6 +50,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Views\Comum\**" />
+	  <Compile Remove="Views\Comum\**" />
+	  <EmbeddedResource Remove="Views\Comum\**" />
+	  <MauiCss Remove="Views\Comum\**" />
+	  <MauiXaml Remove="Views\Comum\**" />
+	  <None Remove="Views\Comum\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\fa-regular-400.ttf" />
 	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
 	</ItemGroup>
@@ -66,9 +75,6 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Resources\Styles\StylesCustom.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Comum\LoadingOverlay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Laudos\PageAvarias.xaml">

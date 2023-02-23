@@ -64,6 +64,21 @@ public partial class PageLaudo : ContentPage
 
             if (result != null)
             {
+                var log = new Log
+                {
+                    CodReferencia = result.VeiculoId,
+                    Processo = "Veiculo",
+                    UsuarioId = Convert.ToInt32(UserPreferences.Logado.UsuarioId),
+                    Ip = UserPreferences.Logado.Ip,
+                    DataLog = DateTime.Now,
+                    Descricao = "Finalizou o laudo id [ " + result.LaudoId + " ]"
+                };
+
+                using (var conn = new HttpService<Log>())
+                {
+                    conn.ExecuteService(log, "api/log/salvar");
+                };
+
                 await DisplayAlert("Laudo finalizado", "Laudo finalizado com sucesso!", "OK");
 
                 FlyoutPage page = (FlyoutPage)Application.Current.MainPage;

@@ -2,7 +2,6 @@ using Sigv.Domain;
 using Sigv.Mobile.Laudo.Aplicacao;
 using Sigv.Mobile.Laudo.Aplicacao.App;
 using Sigv.Mobile.Laudo.Services;
-using Sigv.Mobile.Laudo.Views.Comum;
 using Sigv.Mobile.Laudo.Views.Laudos;
 
 namespace Sigv.Mobile.Laudo.Views;
@@ -73,6 +72,21 @@ public partial class PageHome : ContentPage
                     {
                         var laudo = _laudoApp.RetornarLaudo(result.LaudoId);
 
+                        var log = new Log
+                        {
+                            CodReferencia = laudo.VeiculoId,
+                            Processo = "Veiculo",
+                            UsuarioId = Convert.ToInt32(UserPreferences.Logado.UsuarioId),
+                            Ip = UserPreferences.Logado.Ip,
+                            DataLog = DateTime.Now,
+                            Descricao = "Iniciou o laudo id [ " + laudo.LaudoId + " ]"
+                        };
+
+                        using (var conn = new HttpService<Log>())
+                        {
+                            conn.ExecuteService(log, "api/log/salvar");
+                        };
+
                         FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
                         page.Detail = new NavigationPage(new PageLaudo(laudo));
                     }
@@ -101,6 +115,21 @@ public partial class PageHome : ContentPage
                     if (result != null)
                     {
                         var laudo = _laudoApp.RetornarLaudo(result.LaudoId);
+
+                        var log = new Log
+                        {
+                            CodReferencia = laudo.VeiculoId,
+                            Processo = "Veiculo",
+                            UsuarioId = Convert.ToInt32(UserPreferences.Logado.UsuarioId),
+                            Ip = UserPreferences.Logado.Ip,
+                            DataLog = DateTime.Now,
+                            Descricao = "Reabriu o laudo id [ " + laudo.LaudoId + " ]"
+                        };
+
+                        using (var conn = new HttpService<Log>())
+                        {
+                            conn.ExecuteService(log, "api/log/salvar");
+                        };
 
                         FlyoutPage page = (FlyoutPage)Application.Current.MainPage;
                         page.Detail = new NavigationPage(new PageLaudo(laudo));
