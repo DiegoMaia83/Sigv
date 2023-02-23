@@ -21,6 +21,7 @@
         <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" @(veiculoId == 0 ? "disabled" : "") id="btn-veiculo-logs"><i class="fa fa-history"></i><br />Logs</button>
         <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" @(veiculoId == 0 ? "disabled" : "") id="btn-veiculo-ocorrencias"><i class="fa-solid fa-flag"></i><br />Ocorr.</button>
         <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" @(veiculoId == 0 ? "disabled" : "") id="btn-veiculo-fotos"><i class="fa-solid fa-camera"></i><br />Fotos</button>
+        <button class="btn btn-primary btn-menu-veiculo btn-sm mb-2" @(veiculoId == 0 ? "disabled" : "") id="btn-veiculo-laudo"><i class="fa-solid fa-pen-to-square"></i><br />Laudo</button>
     </div>
 
     <div class="col-sm-11">
@@ -59,6 +60,9 @@
             retornarVeiculoFotos(veiculoId);
         });
 
+        $("#btn-veiculo-laudo").click(function () {
+            retornarVeiculoLaudo(veiculoId);
+        });
 
         $(".btn-menu-veiculo").click(function () {
 
@@ -141,6 +145,25 @@
             error: function (xhr, textStatus, error) {
                 errorMessage($('#divVeiculo'), "Houve um erro ao processar a rotina! " + error);
             }
+        });
+
+    };
+
+    var retornarVeiculoLaudo = function (veiculoId) {
+
+        $.ajax({
+            url: "/Veiculo/RetornarVeiculoLaudo?veiculoId=" + veiculoId,
+            method: "get",
+            beforeSend: function () {
+                loading($('#divVeiculo'), "Aguarde ...")
+            },
+            success: function (data) {
+                $("#divVeiculo").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                errorMessage($('#divVeiculo'), "Houve um erro ao processar a rotina! " + error);
+            }
+
         });
 
     };

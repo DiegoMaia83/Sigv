@@ -27,6 +27,21 @@ namespace Sigv.Application
             }
         }
 
+        public LaudoVeiculo RetornarPorVeiculoId(int veiculoId)
+        {
+            try
+            {
+                using (var laudos = new LaudoRepositorio())
+                {
+                    return laudos.GetAll().Where(x => x.VeiculoId == veiculoId).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IEnumerable<LaudoVeiculo> Listar()
         {
             try

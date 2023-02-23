@@ -30,6 +30,21 @@ namespace Sigv.ApiFullOwin.Controllers
 
         [Authorize]
         [HttpGet]
+        [Route("api/laudo/retornar-por-veiculoId")]
+        public LaudoVeiculo RetornarPorVeiculoId(int veiculoId)
+        {
+            try
+            {
+                return _laudoApp.RetornarPorVeiculoId(veiculoId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
         [Route("api/laudo/listar")]
         public IEnumerable<LaudoVeiculo> Listar()
         {

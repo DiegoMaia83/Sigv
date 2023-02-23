@@ -1,0 +1,21 @@
+﻿@model Sigv.Domain.LaudoVeiculo
+
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    if (Model.StatusId == 2)
+    {
+        
+    }
+    else if (Model.StatusId == 1)
+    {
+        <span>Existe um laudo em andamento para esse veículo.</span>
+    }
+}
+else
+{
+    <span>Ainda não existe um laudo iniciado para esse veículo</span>
+}

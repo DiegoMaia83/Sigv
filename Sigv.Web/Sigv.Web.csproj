@@ -160,6 +160,7 @@
     <Content Include="Views\Home\_ListarLogs.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Veiculo\_RetornarVeiculo_Laudo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

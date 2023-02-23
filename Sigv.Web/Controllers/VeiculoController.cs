@@ -442,6 +442,30 @@ namespace Sigv.Web.Controllers
         }
 
 
+        // ----- Veículo Laudo ----- //
+
+        [HttpGet]
+        [Authorize]
+        [Filtro(Roles = "24")]
+        public ActionResult RetornarVeiculoLaudo(int veiculoId)
+        {
+            try
+            {
+                LaudoVeiculo laudo = null;
+
+                using (var srv = new HttpService<LaudoVeiculo>())
+                {
+                    laudo = srv.ReturnService("api/laudo/retornar-por-veiculoId?veiculoId=" + veiculoId);
+                }
+
+                return View("_RetornarVeiculo_Laudo", laudo);
+            }
+            catch (Exception ex)
+            {
+                return Json(new MensagemRetorno { Sucesso = false, Mensagem = "Houve um erro ao processar a rotina!", Erro = ex.Message });
+            }
+        }
+
 
         [HttpGet]
         public JsonResult ListarCondicoes()
