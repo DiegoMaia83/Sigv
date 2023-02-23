@@ -9,15 +9,17 @@ public partial class PageLogin : ContentPage
 	public PageLogin()
 	{
 		InitializeComponent();
-        
+
+        ApiEntry.Text = Preferences.Get("Api", "") == "" ? "http://api.devmaia.com.br" : Preferences.Get("Api", "");
+
         //Api em Produção Servidor
-        Preferences.Set("Api", "http://api.devmaia.com.br");
+        //Preferences.Set("Api", "http://api.devmaia.com.br");
 
         //Api em Produção Local
         //Preferences.Set("Api", "http://192.168.1.108:8000");
 
-        UsernameEntry.Text = "willie";
-        PasswordEntry.Text = "abc.123";
+        UsernameEntry.Text = Preferences.Get("Username", "");
+        PasswordEntry.Text = Preferences.Get("Password", "");
 
     }
 
@@ -25,6 +27,10 @@ public partial class PageLogin : ContentPage
     {
         var userName = UsernameEntry.Text;
         var password = PasswordEntry.Text;
+
+        Preferences.Set("Username", UsernameEntry.Text);
+        Preferences.Set("Password", PasswordEntry.Text);
+        Preferences.Set("Api", ApiEntry.Text);        
 
         try
         {
@@ -61,6 +67,18 @@ public partial class PageLogin : ContentPage
         catch (Exception ex)
         {
             DisplayAlert("Resultado da operação", "Houve um erro ao processar a rotina", "OK");
+        }
+    }
+
+    private void btShowApi_Clicked(object sender, TappedEventArgs e)
+    {
+        if (ApiEntryContent.IsVisible == false)
+        {
+            ApiEntryContent.IsVisible = true;
+        }
+        else
+        {
+            ApiEntryContent.IsVisible = false;
         }
     }
 }

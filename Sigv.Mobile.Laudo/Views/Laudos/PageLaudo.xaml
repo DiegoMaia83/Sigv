@@ -11,15 +11,12 @@
             <Label x:Name="lbAno" Text=""/>
         </StackLayout>  
         
-        <StackLayout Orientation="Horizontal" Padding="20,0,20,0" >
+        <StackLayout Orientation="Horizontal" Padding="20,0,20,0" HeightRequest="75" >
             <Button Text="Avarias" Style="{StaticResource CustomButtonPage}" Clicked="BtnAvarias_Clicked"/>
-            <Button Text="Opcionais" Style="{StaticResource CustomButtonPage}" Clicked="BtnOpcionais_Clicked"/>            
-        </StackLayout>
-
-        <StackLayout Orientation="Horizontal" Padding="20,0,20,0" >
-            <Button Text="Avaliação" Style="{StaticResource CustomButtonPage}"/>
+            <Button Text="Opcionais" Style="{StaticResource CustomButtonPage}" Clicked="BtnOpcionais_Clicked"/>
             <Button Text="Fotos" Style="{StaticResource CustomButtonPage}" Clicked="BtnFotos_Clicked"/>
         </StackLayout>
+
 
         <StackLayout Padding="20">
 

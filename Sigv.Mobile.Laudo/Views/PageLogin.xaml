@@ -15,7 +15,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -26,16 +26,28 @@
 
             <Frame Grid.Row="1" BorderColor="{StaticResource Secondary}" CornerRadius="2" BackgroundColor="{StaticResource White}">
                 <StackLayout>
-                    <Label Text="Usuário" TextColor="{StaticResource Primary}" />
-                    <Entry x:Name="UsernameEntry" />
-                    <Label Text="Senha" TextColor="{StaticResource Primary}" />
-                    <Entry x:Name="PasswordEntry" IsPassword="False" />
-                    <Button x:Name="LoginButton" Text="Entrar" 
-                            BackgroundColor="{StaticResource Tertiary}"
-                            TextColor="{StaticResource Secondary}"
-                            Clicked="LoginButton_Clicked"/>
-                </StackLayout>            
-            </Frame>
+                    <StackLayout>
+                        <Label Text="Usuário" TextColor="{StaticResource Primary}" />
+                        <Entry x:Name="UsernameEntry" />
+                        <Label Text="Senha" TextColor="{StaticResource Primary}" />
+                        <Entry x:Name="PasswordEntry" IsPassword="True" />
+                        <Button x:Name="LoginButton" Text="Entrar" 
+                                BackgroundColor="{StaticResource Tertiary}"
+                                TextColor="{StaticResource Secondary}"
+                                Clicked="LoginButton_Clicked"/>                    
+                    </StackLayout>
+                    <StackLayout Margin="0,20,0,0">
+                        <Label Text="Configuar API" HorizontalOptions="Center" TextColor="{StaticResource Tertiary}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="btShowApi_Clicked" NumberOfTapsRequired="1"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <StackLayout x:Name="ApiEntryContent" IsVisible="false">                        
+                        <Entry x:Name="ApiEntry" Text="" />
+                    </StackLayout>                
+                </StackLayout>
+        </Frame>
 
         <StackLayout Grid.Row="2">
             

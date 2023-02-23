@@ -1,4 +1,3 @@
-using Android.Media;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Storage;
 using Plugin.Media.Abstractions;

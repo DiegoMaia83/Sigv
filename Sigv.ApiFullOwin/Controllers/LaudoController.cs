@@ -3,9 +3,7 @@ using Sigv.Domain;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -15,6 +13,7 @@ namespace Sigv.ApiFullOwin.Controllers
     {
         private readonly LaudoApp _laudoApp = new LaudoApp();
 
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/retornar")]
         public LaudoVeiculo Retornar(int laudoId)
@@ -29,6 +28,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/listar")]
         public IEnumerable<LaudoVeiculo> Listar()
@@ -43,6 +43,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/listar-por-status")]
         public IEnumerable<LaudoVeiculo> Listar(int statusId)
@@ -57,6 +58,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/inserir")]
         public LaudoVeiculo InserirLaudo(LaudoVeiculo laudo)
@@ -71,6 +73,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/finalizar")]
         public LaudoVeiculo FinalizarLaudo(LaudoVeiculo laudo)
@@ -85,6 +88,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/reabrir")]
         public LaudoVeiculo ReabrirLaudo(LaudoVeiculo laudo)
@@ -100,7 +104,7 @@ namespace Sigv.ApiFullOwin.Controllers
         }
 
 
-
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/listar-avarias")]
         public IEnumerable<LaudoAvaria> ListarAvarias()
@@ -115,6 +119,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/listar-avarias-apontamentos")]
         public IEnumerable<LaudoAvariaApontamento> ListarAvariasApontamentos(int laudoId)
@@ -129,6 +134,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/inserir-avaria-apontamento")]
         public LaudoAvariaApontamento InserirAvariaApontamento(LaudoAvariaApontamento apontamento)
@@ -143,6 +149,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/remover-avaria-apontamento")]
         public LaudoAvariaApontamento RemoverAvariaApontamento(LaudoAvariaApontamento apontamento)
@@ -157,6 +164,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/retornar-avarias-resumo")]
         public string RetornarResumoAvarias(int laudoId)
@@ -171,7 +179,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/listar-opcionais")]
         public IEnumerable<LaudoOpcional> ListarOpcionais()
@@ -186,6 +194,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/listar-opcionais-apontamentos")]
         public IEnumerable<LaudoOpcionalApontamento> ListarOpcionaisApontamentos(int laudoId)
@@ -200,6 +209,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/inserir-opcional-apontamento")]
         public LaudoOpcionalApontamento InserirOpcionalApontamento(LaudoOpcionalApontamento apontamento)
@@ -214,6 +224,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/remover-opcional-apontamento")]
         public LaudoOpcionalApontamento RemoverOpcionalApontamento(LaudoOpcionalApontamento apontamento)
@@ -228,6 +239,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/laudo/retornar-opcionais-resumo")]
         public string RetornarResumoOpcionais(int laudoId)
@@ -242,7 +254,7 @@ namespace Sigv.ApiFullOwin.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("api/laudo/alterar-sync-status-foto")]
         public bool AlterarSyncStatusFoto(VeiculoFoto foto)
@@ -256,7 +268,6 @@ namespace Sigv.ApiFullOwin.Controllers
                 throw ex;
             }
         }
-
 
         [HttpPost]
         [Route("api/fotos/sync")]

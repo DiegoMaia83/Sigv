@@ -8,7 +8,7 @@
 
         <Frame HasShadow="False" Margin="20" Padding="10" CornerRadius="2" BorderColor="{StaticResource Primary-Light}">
             <StackLayout Orientation="Horizontal">
-                <Label Text="OPCIONAIS" FontSize="16" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"  TextColor="{StaticResource Tertiary}" />
+                <Label Text="Opcionais" FontSize="16" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"  TextColor="{StaticResource Tertiary}" />
             </StackLayout>
         </Frame>
 
