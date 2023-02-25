@@ -17,35 +17,46 @@
     if (Model.StatusId == 2)
     {
         <div class="row">
-            <div class="col-sm-4" style="display: flex; flex-direction: column;">
+            <div class="col-sm-4">
                 <h5>Avarias</h5>
-                @foreach (var item in listaAvarias)
-                {
-                    <div>
-                        <input type="checkbox" @(arrayAvariasApontamentos.Contains(item.AvariaId) ? "checked" : "") />
-                        <span>@item.Descricao</span>                        
-                    </div>
-                }
+                <hr />
+                <div style="display: flex; flex-direction: column;">
+                    @foreach (var item in listaAvarias)
+                    {
+                        <div>
+                            <input type="checkbox" class="form-check-input no-clicked" @(arrayAvariasApontamentos.Contains(item.AvariaId) ? "checked" : "") />
+                            <span>@item.Descricao</span>
+                        </div>
+                    }
+                </div>
             </div>
-            <div class="col-sm-4" style="display: flex; flex-direction: column;">
+            <div class="col-sm-4">
                 <h5>Opcionais</h5>
-                @foreach (var item in listaOpcionais)
-                {
-                    <div>
-                        <input type="checkbox" @(arrayOpcionaisApontamentos.Contains(item.OpcionalId) ? "checked" : "") />
-                        <span>@item.Descricao</span>
-                    </div>
-                }
+                <hr />
+                <div style="display: flex; flex-direction: column;">
+                    @foreach (var item in listaOpcionais)
+                    {
+                        <div>
+                            <input type="checkbox" class="form-check-input no-clicked" @(arrayOpcionaisApontamentos.Contains(item.OpcionalId) ? "checked" : "") />
+                            <span>@item.Descricao</span>
+                        </div>
+                    }
+                </div>
+
             </div>
-            <div class="col-sm-4" style="display: flex; flex-direction: column;">
+            <div class="col-sm-4">
                 <h5>Fotos</h5>
-                @foreach (var foto in listaFotos)
-                {
-                    var arquivo = foto.Tipo + foto.VeiculoId.ToString("000000") + "_" + foto.NumeroFoto.ToString("00") + foto.Extensao;
-                    <div>                        
-                        <img src="~/Content/Imagens/@foto.VeiculoId.ToString("000000")/@arquivo" />
-                    </div>
-                }
+                <hr />
+                <div style="display: flex; flex-wrap: wrap;">
+                    @foreach (var foto in listaFotos)
+                    {
+                        var arquivo = foto.Tipo + foto.VeiculoId.ToString("000000") + "_" + foto.NumeroFoto.ToString("00") + foto.Extensao;
+                        <div style="width: 50%; padding: 10px;">
+                            <img src="~/Content/Imagens/@foto.VeiculoId.ToString("000000")/@arquivo" style="width: 100%;" />
+                        </div>
+                    }
+                </div>
+
             </div>
         </div>
     }
@@ -58,3 +69,16 @@ else
 {
     <span>Ainda não existe um laudo iniciado para esse veículo</span>
 }
+
+
+<script>
+
+    let checkbox = document.querySelectorAll(".no-clicked");
+
+    for (let i = 0; i < checkbox.length; i++) {
+        checkbox[i].addEventListener("click", function (event) {
+            event.preventDefault();
+        });
+    }
+
+</script>
