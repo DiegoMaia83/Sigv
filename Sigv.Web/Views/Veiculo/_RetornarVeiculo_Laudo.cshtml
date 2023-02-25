@@ -2,13 +2,52 @@
 
 @{
     Layout = null;
+
+    IEnumerable<Sigv.Domain.LaudoAvaria> listaAvarias = ViewBag.ListaAvarias;
+    int[] arrayAvariasApontamentos = ViewBag.ListaAvariasApontamentos;
+
+    IEnumerable<Sigv.Domain.LaudoOpcional> listaOpcionais = ViewBag.ListaOpcionais;
+    int[] arrayOpcionaisApontamentos = ViewBag.ListaOpcionaisApontamentos;
+
+    IEnumerable<Sigv.Domain.VeiculoFoto> listaFotos = ViewBag.ListaFotos;
 }
 
 @if (Model != null)
 {
     if (Model.StatusId == 2)
     {
-        
+        <div class="row">
+            <div class="col-sm-4" style="display: flex; flex-direction: column;">
+                <h5>Avarias</h5>
+                @foreach (var item in listaAvarias)
+                {
+                    <div>
+                        <input type="checkbox" @(arrayAvariasApontamentos.Contains(item.AvariaId) ? "checked" : "") />
+                        <span>@item.Descricao</span>                        
+                    </div>
+                }
+            </div>
+            <div class="col-sm-4" style="display: flex; flex-direction: column;">
+                <h5>Opcionais</h5>
+                @foreach (var item in listaOpcionais)
+                {
+                    <div>
+                        <input type="checkbox" @(arrayOpcionaisApontamentos.Contains(item.OpcionalId) ? "checked" : "") />
+                        <span>@item.Descricao</span>
+                    </div>
+                }
+            </div>
+            <div class="col-sm-4" style="display: flex; flex-direction: column;">
+                <h5>Fotos</h5>
+                @foreach (var foto in listaFotos)
+                {
+                    var arquivo = foto.Tipo + foto.VeiculoId.ToString("000000") + "_" + foto.NumeroFoto.ToString("00") + foto.Extensao;
+                    <div>                        
+                        <img src="~/Content/Imagens/@foto.VeiculoId.ToString("000000")/@arquivo" />
+                    </div>
+                }
+            </div>
+        </div>
     }
     else if (Model.StatusId == 1)
     {

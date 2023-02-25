@@ -4,6 +4,7 @@ using Sigv.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -456,7 +457,41 @@ namespace Sigv.Web.Controllers
                 using (var srv = new HttpService<LaudoVeiculo>())
                 {
                     laudo = srv.ReturnService("api/laudo/retornar-por-veiculoId?veiculoId=" + veiculoId);
-                }
+
+                    if (laudo != null)
+                    {
+                        // Retorna a lista de avarias e os apontamentos
+                        using (var srv2 = new HttpService<List<LaudoAvaria>>())
+                        {
+                            ViewBag.ListaAvarias = srv2.ReturnService("api/laudo/listar-avarias");
+                        }
+
+                        using (var srv2 = new HttpService<List<LaudoAvariaApontamento>>())
+                        {
+                            var listaApontamentos = srv2.ReturnService("api/laudo/listar-avarias-apontamentos?laudoId=" + laudo.LaudoId);
+                            var array = listaApontamentos.Select(x => x.AvariaId).ToArray();
+                            ViewBag.ListaAvariasApontamentos = listaApontamentos.Select(x => x.AvariaId).ToArray();
+                        }
+
+                        // Retorna a lista de opcionais e os apontamentos
+                        using (var srv2 = new HttpService<List<LaudoOpcional>>())
+                        {
+                            ViewBag.ListaOpcionais = srv2.ReturnService("api/laudo/listar-opcionais");
+                        }
+
+                        using (var srv2 = new HttpService<List<LaudoOpcionalApontamento>>())
+                        {
+                            var listaApontamentos = srv2.ReturnService("api/laudo/listar-opcionais-apontamentos?laudoId=" + laudo.LaudoId);
+                            var array = listaApontamentos.Select(x => x.OpcionalId).ToArray();
+                            ViewBag.ListaOpcionaisApontamentos = listaApontamentos.Select(x => x.OpcionalId).ToArray();
+                        }
+
+                        using (var srv2 = new HttpService<List<VeiculoFoto>>())
+                        {
+                            ViewBag.ListaFotos = srv2.ReturnService("api/veiculo-foto/listar-por-tipo?veiculoId=" + veiculoId + "&tipo=LAU");
+                        }
+                    }
+                }                
 
                 return View("_RetornarVeiculo_Laudo", laudo);
             }
