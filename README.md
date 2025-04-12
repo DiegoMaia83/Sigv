@@ -1,7 +1,7 @@
 # 🚗 SIGV – Sistema Integrado de Gestão de Veículos
 
-O **SIGV** é uma solução completa para a **gestão de veículos** utilizada por empresas que controlam frotas, manutenções, vistorias e movimentações.  
-O sistema é acessado via **plataforma web**, com suporte a funcionalidades específicas via **aplicativo mobile**, que realiza **vistorias e inspeções** com sincronização automática ao banco de dados central.
+O **SIGV** é uma solução inicial para a **gestão de veículos**.  
+O sistema é acessado via **plataforma web**, com suporte a funcionalidades específicas via **aplicativo mobile**, que realiza **laudos** com sincronização automática ao banco de dados.
 
 ---
 
@@ -9,18 +9,17 @@ O sistema é acessado via **plataforma web**, com suporte a funcionalidades espe
 
 A plataforma web é o núcleo principal do sistema, onde é possível:
 
-- Gerenciar veículos, motoristas e movimentações
-- Controlar manutenções, abastecimentos e histórico
-- Emitir relatórios gerenciais
-- Visualizar registros de vistorias feitas via app
+- Gerenciar o cadastro, logs, fotos, ocorrências dos veículos
+- Gerenciar usuários e permissões ao sistema
+- Visualizar registros de laudos feitas via app
 
 ---
 
-## 📱 Aplicativo de Vistoria
+## 📱 Aplicativo de Laudo
 
 O aplicativo mobile é responsável por:
 
-- Realizar vistorias dos veículos (checklist, fotos, observações)
+- Realizar laudos dos veículos (avarias, opcionais, fotos, observações)
 - Trabalhar offline e sincronizar com o servidor quando conectado
 - Garantir rastreabilidade das inspeções realizadas
 
@@ -30,9 +29,9 @@ O aplicativo mobile é responsável por:
 
 ### Backend
 - C#
-- .NET Framework / .NET Core
+- .NET Framework
 - ASP.NET
-- JSON / XML
+- JSON
 
 ### Frontend
 - HTML, CSS, Bootstrap
@@ -40,16 +39,11 @@ O aplicativo mobile é responsável por:
 
 ### Mobile
 - Xamarin
-- .NET MAUI (em migração)
+- .NET MAUI (migrado)
 
 ### Banco de Dados
-- SQL Server
+- MySql
 
 ### Outros
 - Hospedagem Web (IIS)
 - Sincronização de dados entre app e servidor
-
----
-
-## 📁 Estrutura do Projeto
-
