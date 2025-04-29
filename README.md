@@ -1,11 +1,11 @@
-# 🚗 SIGV – Sistema Integrado de Gestão de Veículos
+# SIGV – Sistema Integrado de Gestão de Veículos
 
 O **SIGV** é uma solução inicial para a **gestão de veículos**.  
 O sistema é acessado via **plataforma web**, com suporte a funcionalidades específicas via **aplicativo mobile**, que realiza **laudos** com sincronização automática ao banco de dados.
 
 ---
 
-## 🌐 Plataforma Web
+## Plataforma Web
 
 A plataforma web é o núcleo principal do sistema, onde é possível:
 
@@ -15,7 +15,7 @@ A plataforma web é o núcleo principal do sistema, onde é possível:
 
 ---
 
-## 📱 Aplicativo de Laudo
+## Aplicativo de Laudo
 
 O aplicativo mobile é responsável por:
 
@@ -25,7 +25,7 @@ O aplicativo mobile é responsável por:
 
 ---
 
-## ⚙️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend
 - C#
